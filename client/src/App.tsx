@@ -1,5 +1,7 @@
+import LeftSidebar from './components/sidebar/LeftSidebar';
+
 function App() {
-  return <h1>hi!</h1>;
+  return <LeftSidebar />;
 }
 
 export default App;
