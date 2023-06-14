@@ -3,13 +3,14 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
-      fontSize: {
-        '13p': '13px',
-        '11p': '11px',
+      boxShadow: {
+        btn: '0px 1px 0px 0px inset #ffffff66',
       },
       colors: {
         inactive: '#525960',
         acitve: '#0c0D0E',
+        main: '#F48225',
+        label: '#6a737c',
       },
     },
   },
