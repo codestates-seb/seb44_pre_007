@@ -52,7 +52,7 @@ function SummaryDiv({ question }: { question: Question }) {
           </div>
           <div className="flex gap-2 justify-end text-[12px]">
             <div className="text-nickname text-[12px]">{questionUserNickname}</div>
-            <div className="text-blacklight">{question_created}</div>
+            <div className="text-blacklight">asked {question_created}</div>
           </div>
         </div>
       </section>
