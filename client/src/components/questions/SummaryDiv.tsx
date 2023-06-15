@@ -47,7 +47,7 @@ function SummaryDiv({ question }: { question: Question }) {
         <div>
           <div className="flex gap-1">
             {question_tag.map((tag) => (
-              <Tag content={tag} />
+              <Tag key={tag} content={tag} />
             ))}
           </div>
           <div className="flex gap-2 justify-end text-[12px]">

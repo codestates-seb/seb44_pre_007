@@ -7,6 +7,7 @@ import Btn from '../ui/Btn';
 import addCommasToNumber from '../utils/addCommasToNumber';
 import { Question } from '../types/types';
 import SummaryDiv from '../components/questions/SummaryDiv';
+import { FetchQuestions } from '../api/api';
 
 const AskBtn = tw.button`
 flex justify-center items-center text-[13px] rounded-[3px] text-white 
@@ -17,12 +18,15 @@ function Questions() {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [questionsCount, setQuestionsCount] = useState<string>('');
 
+  const fetchData = async () => {
+    const res = await FetchQuestions(10);
+    setQuestions(res.data);
+    const dataLength = addCommasToNumber(res.data.length);
+    setQuestionsCount(dataLength);
+  };
+
   useEffect(() => {
-    axios.get('http://localhost:5000/questions?_limit=10').then((res) => {
-      setQuestions(res.data);
-      const dataLength = addCommasToNumber(res.data.length);
-      setQuestionsCount(dataLength);
-    });
+    fetchData();
   }, []);
 
   const navigate = useNavigate();
