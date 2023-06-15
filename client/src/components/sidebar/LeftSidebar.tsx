@@ -1,37 +1,15 @@
 import { ImEarth } from 'react-icons/im';
 import { AiFillInfoCircle } from 'react-icons/ai';
 import { TiStarburst } from 'react-icons/ti';
-import { NavLink } from 'react-router-dom';
-import { styled } from 'styled-components';
-// eslint-disable-next-line object-curly-newline
-import { LiNavDisable, Liml8mt16, Lip8pr6, FlexDiv, LiBtn } from '../../styles/style';
-
-const NavActive = styled(NavLink)`
-  display: block;
-  padding: 8px;
-  padding-left: 6px;
-  font-size: 13px;
-  cursor: pointer;
-  color: #525960;
-
-  &.active {
-    background-color: rgb(241, 242, 243);
-    font-weight: bold;
-    color: #0c0d0e;
-    border-right: 3px solid orange;
-  }
-`;
-
-const HomeNav = styled(NavLink)`
-  display: flex;
-  align-items: center;
-  &.active {
-    background-color: rgb(241, 242, 243);
-    font-weight: bold;
-    color: #0c0d0e;
-    border-right: 3px solid orange;
-  }
-`;
+import {
+  LiNavDisable,
+  Liml8mt16,
+  Lip8pr6,
+  LiBtn,
+  NavActive,
+  HomeNav,
+} from '../../styles/sidebarstyle';
+import { FlexDiv } from '../../styles/styles';
 
 function LeftSidebar() {
   return (
