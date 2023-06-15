@@ -82,13 +82,16 @@ export const CollectName = tw.h1`
   text-label text-[15px]
 `;
 
-export const CollectContent = styled.p`
-  height: 34px;
-  font-size: 12px;
-  color: #3b4045;
+export const Ellipsis = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+`;
+
+export const CollectContent = styled(Ellipsis)`
+  height: 34px;
+  font-size: 12px;
+  color: #3b4045;
 `;
