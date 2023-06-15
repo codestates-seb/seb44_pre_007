@@ -45,3 +45,50 @@ export const HomeNav = styled(NavLink)`
     border-right: 3px solid orange;
   }
 `;
+
+export const Div = styled.div`
+  width: 298px;
+  height: fit-content;
+  height: auto;
+  border-radius: 3px;
+  margin-bottom: 16px;
+`;
+
+export const ContentLi = tw.li`
+flex justify-center items-start my-3 px-4 text-[13px] gap-2 text-[#232629] break-words
+`;
+
+export const TitleLi = styled.li`
+  padding: 12px 15px;
+  font-size: 12px;
+`;
+
+export const WhiteDiv = styled(Div)`
+  background-color: white;
+  border: 1px solid rgb(214, 217, 220);
+  border-top: none;
+  border-bottom: none;
+`;
+
+export const WhiteTitle = styled(TitleLi)`
+  font-size: 15px;
+  background-color: rgb(248, 249, 249);
+  border-top: rgb(214, 217, 220) solid 1px;
+  border-bottom: rgb(214, 217, 220) solid 1px;
+  color: rgb(82, 89, 96);
+`;
+
+export const CollectName = tw.h1`
+  text-label text-[15px]
+`;
+
+export const CollectContent = styled.p`
+  height: 34px;
+  font-size: 12px;
+  color: #3b4045;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+`;

@@ -17,6 +17,7 @@ module.exports = {
   },
   plugins: ['react-refresh'],
   rules: {
+    'react/jsx-one-expression-per-line': 'off',
     'react-refresh/only-export-components': 'warn',
     'react/react-in-jsx-scope': 'off',
     'react/jsx-uses-react': 'off',

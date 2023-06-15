@@ -11,6 +11,7 @@ export default {
         acitve: '#0c0D0E',
         main: '#F48225',
         label: '#6a737c',
+        black300: '#9FA6AD',
       },
     },
   },
