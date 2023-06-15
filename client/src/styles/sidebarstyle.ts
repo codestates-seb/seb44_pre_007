@@ -1,7 +1,7 @@
 import tw from 'tailwind-styled-components';
 import { styled } from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import { LiText13px } from './styles';
+import { Ellipsis, LiText13px } from './styles';
 
 export const LiNavDisable = tw(LiText13px)`
 p-1 pl-[30px] text-black600 cursor-pointer
@@ -55,7 +55,7 @@ export const Div = styled.div`
 `;
 
 export const ContentLi = tw.li`
-flex justify-center items-start my-3 px-4 text-[13px] gap-2 text-[#232629] break-words
+flex justify-center items-start my-3 px-4 text-[13px] gap-2 text-blackDark break-words
 `;
 
 export const TitleLi = styled.li`
@@ -80,14 +80,6 @@ export const WhiteTitle = styled(TitleLi)`
 
 export const CollectName = tw.h1`
   text-label text-[15px]
-`;
-
-export const Ellipsis = styled.p`
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
 `;
 
 export const CollectContent = styled(Ellipsis)`

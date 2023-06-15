@@ -7,6 +7,7 @@ export default {
         btn: '0px 1px 0px 0px inset #ffffff66',
       },
       colors: {
+        blackDark: '#232629',
         blacklight: '#6a737c',
         black300: '#9FA6AD',
         black600: '#525960',

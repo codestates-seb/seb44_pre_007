@@ -18,7 +18,7 @@ function Questions() {
   const [questionsCount, setQuestionsCount] = useState<string>('');
 
   useEffect(() => {
-    axios.get('http://localhost:5000/questions').then((res) => {
+    axios.get('http://localhost:5000/questions?_limit=10').then((res) => {
       setQuestions(res.data);
       const dataLength = addCommasToNumber(res.data.length);
       setQuestionsCount(dataLength);
@@ -33,10 +33,10 @@ function Questions() {
     <div className="w-[751px]">
       <section className="mb-3">
         <div className="flex justify-between items-center h-[50px] mb-3">
-          <h1 className="mr-3 mb-3 text-[27px]">All Questions</h1>
+          <h1 className="mr-3 mb-3 text-[27px] text-blackDark">All Questions</h1>
           <AskBtn onClick={goToAsk}>Ask Questions</AskBtn>
         </div>
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center text-blackDark">
           <div className="text-[17px] w-[268px] mr-3">
             {questionsCount} questions with no upvoted or accepted answers
           </div>
