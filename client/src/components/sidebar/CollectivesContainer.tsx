@@ -7,7 +7,7 @@ function CollectivesContainer() {
       <ul>
         <WhiteTitle className="flex justify-between items-center">
           <span className="text-inactive">Collectives</span>
-          <span className="text-blue-600 text-[11px]">see all</span>
+          <span className="text-blue-600 text-[11px] cursor-pointer">see all</span>
         </WhiteTitle>
         <CollectivesContent
           name="AWS"

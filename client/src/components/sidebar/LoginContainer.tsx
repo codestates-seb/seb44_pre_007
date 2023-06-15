@@ -8,7 +8,9 @@ function LoginContainer() {
           <WhiteTitle className="flex justify-between items-center">
             <span className="text-inactive">Custom Filters</span>
           </WhiteTitle>
-          <ContentLi className="justify-start text-blue-600">Create a custom filter</ContentLi>
+          <ContentLi className="justify-start text-blue-600">
+            <a href="/">Create a custom filter</a>
+          </ContentLi>
         </ul>
       </WhiteDiv>
       <WhiteDiv>

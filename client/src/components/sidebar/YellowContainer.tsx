@@ -5,6 +5,7 @@ import { styled } from 'styled-components';
 import { TitleLi, Div, ContentLi } from '../../styles/sidebarstyle';
 
 const YelloTitle = styled(TitleLi)`
+  color: #525960;
   font-weight: bold;
   background-color: #fbf3d5;
   border-top: rgb(241, 229, 188) solid 1px;
