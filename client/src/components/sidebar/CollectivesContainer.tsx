@@ -6,7 +6,7 @@ function CollectivesContainer() {
     <WhiteDiv>
       <ul>
         <WhiteTitle className="flex justify-between items-center">
-          <span className="text-inactive">Collectives</span>
+          <span className="text-black600">Collectives</span>
           <span className="text-blue-600 text-[11px] cursor-pointer">see all</span>
         </WhiteTitle>
         <CollectivesContent
