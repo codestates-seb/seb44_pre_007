@@ -85,7 +85,7 @@ function YellowContainer() {
           </p>
         </ContentLi>
         <ContentLi>
-          <BsStackOverflow size={14} className="mt-1" />a
+          <BsStackOverflow size={14} className="mt-1" />
           <p className="w-[244px]">
             <a
               href="https://meta.stackoverflow.com/questions/421831/temporary-policy-chatgpt-is-banned?cb=1"
