@@ -14,7 +14,7 @@ import { FlexDiv } from '../../styles/styles';
 function LeftSidebar() {
   return (
     <ol className="w-[164px] h-[595px] m-3 list-none">
-      <HomeNav to="/" className="h-[26px] pl-2 text-[13px] text-inactive cursor-pointer">
+      <HomeNav to="/" className="h-[26px] pl-2 text-[13px] text-black600 cursor-pointer">
         Home
       </HomeNav>
       <ol>
@@ -47,7 +47,7 @@ function LeftSidebar() {
         <Liml8mt16 className="mb-2">TEAMS</Liml8mt16>
         <div className="border p-3 pb-1.5 rounded-[3px]">
           <strong>Stack Overflow for Teams</strong>
-          <span className="text-[13px] text-inactive">
+          <span className="text-[13px] text-600">
             {' '}
             - Start collaborating and sharing organizational knowledge.
           </span>
@@ -59,7 +59,7 @@ function LeftSidebar() {
           <LiBtn className="text-white bg-main shadow-btn border-main border border-solid">
             Create a free Team
           </LiBtn>
-          <LiBtn className="text-label hover:bg-[#f8f9f9]">Why Teams?</LiBtn>
+          <LiBtn className="text-blacklight hover:bg-[#f8f9f9]">Why Teams?</LiBtn>
         </div>
       </li>
     </ol>

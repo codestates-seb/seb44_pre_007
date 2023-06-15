@@ -58,14 +58,14 @@ function YellowContainer() {
         </ContentLi>
         <YelloTitle>Hot Meta Posts</YelloTitle>
         <ContentLi>
-          <p className="text-inactive">19</p>
+          <p className="text-600">19</p>
           <p className="w-[244px]">
             {' '}
             Should curators be allowed to save questions with mostly code?
           </p>
         </ContentLi>
         <ContentLi>
-          <p className="text-inactive">9</p>
+          <p className="text-600">9</p>
           <p className="w-[244px]">
             {' '}
             Can I ask a question for explanations of specific blocks of code, instead of...

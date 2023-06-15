@@ -4,15 +4,15 @@ import { NavLink } from 'react-router-dom';
 import { LiText13px } from './styles';
 
 export const LiNavDisable = tw(LiText13px)`
-p-1 pl-[30px] text-inactive cursor-pointer
+p-1 pl-[30px] text-black600 cursor-pointer
 `;
 
 export const Liml8mt16 = tw.li`
-ml-2 mt-4 text-label text-[11px]
+ml-2 mt-4 text-blacklight text-[11px]
 `;
 
 export const Lip8pr6 = tw(LiText13px)`
-p-2 pr-1.5 text-inactive cursor-pointer
+p-2 pr-1.5 text-black600 cursor-pointer
 `;
 
 export const LiBtn = tw.li`
