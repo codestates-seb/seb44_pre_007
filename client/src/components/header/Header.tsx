@@ -2,13 +2,7 @@ import tw from 'tailwind-styled-components';
 import SearchBox from './SearchBox';
 import NavBar from './NavBar';
 import MainLogo from './MainLogo';
-/** 로고 라우팅
- * 서치바 박스섀도우
- * 서치바 로고
- * 서치바 미디어쿼리
- * 유저 정보 받아오기
- * 호버시 색 진해지도록
- */
+
 export default function Header() {
   const StyledHeader = tw.header`
   sticky flex justify-center items-center w-full border-b
