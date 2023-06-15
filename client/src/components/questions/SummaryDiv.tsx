@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { styled } from 'styled-components';
 import tw from 'tailwind-styled-components';
+import { useNavigate } from 'react-router-dom';
 import { Ellipsis } from '../../styles/styles';
 import { Question } from '../../types/types';
 import AnswerCountSpan from './AnswerCountSpan';
@@ -15,7 +16,9 @@ const Content = styled(Ellipsis)`
 `;
 
 function SummaryDiv({ question }: { question: Question }) {
+  const navigate = useNavigate();
   const {
+    id,
     questionUserNickname,
     question_title,
     question_content,
@@ -23,13 +26,23 @@ function SummaryDiv({ question }: { question: Question }) {
     question_created,
     answerCount,
   } = question;
+
+  const goToQuestion = () => {
+    navigate(`/questions/${id}`);
+  };
   return (
     <Summarydiv>
       <section className="w-[108px] flex gap-2 items-start justify-end mr-4 mb-1">
         <AnswerCountSpan answerCount={answerCount} />
       </section>
       <section className="w-[595px]">
-        <h3 className="pr-6 text-[17px] text-[#0063BF]">{question_title}</h3>
+        <h3
+          role="presentation"
+          className="pr-6 text-[17px] text-[#0063BF] cursor-pointer"
+          onClick={goToQuestion}
+        >
+          {question_title}
+        </h3>
         <Content className="mb-2 text-[13px] text-[#3B4045]">{question_content}</Content>
         <div>
           <div className="flex gap-1">
