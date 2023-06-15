@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+    box-sizing: border-box;
+    margin:0;
+    padding: 0;
+}
+
+header{
+    height: 56px;
+}
+
+input{
+    outline: none
+}
 body {
   width: 100%;
   display: flex;
