@@ -6,7 +6,8 @@ export const LiText13px = tw.li`text-[13px]`;
 export const FlexDiv = tw.div`
 flex items-center`;
 
-export const TagDiv = styled.div`
+export const TagSpan = styled.span`
+  display: inline-block;
   height: 24px;
   border: 1px solid rgba(0, 0, 0, 0);
   border-radius: 3px;
