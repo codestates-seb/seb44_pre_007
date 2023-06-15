@@ -2,183 +2,213 @@
   "questions": [
     {
       "id": 1,
-      "user_id": 1,
+      "questionUserNickname": "닉네임입니다",
       "question_title": "std::vector have push_front function?",
       "question_content": "When I run code through that play button in VS Code, it just keeps running and there's no output. It just says, [Running] cd 'c:UsersdiyadOneDriveDesktopcc++' && gcc sum.c -o sum && 'c:UsersdiyadOneDriveDesktopcc++'sum However, when I run it by typing ./file_name' in the terminal, it works perfectly fine.",
       "question_tag": [],
       "question_created": "Jun 6, 2017 at 18:54",
-      "question_updated": "Jun 6, 2017 at 18:54"
+      "question_updated": "Jun 6, 2017 at 18:54",
+      "answerCount": 5
     },
     {
       "id": 2,
-      "user_id": 2,
+      "questionUserNickname": "닉네임입니다2",
       "question_title": "How can I create a sim shaped box with custom styling in React Native?",
       "question_content": "I'm working on a React Native project and I need to create a custom box with specific styling. I have attempted to achieve this, but I'm facing some difficulties. Could someone please guide me or provide suggestions on how to achieve the following? I have tried using the BorderRightRadius styling in React Native, but I'm not able to achieve the desired result.Can anyone help me out?",
       "question_tag": ["react", "js", "react-native", "shapes"],
       "question_created": "Feb 5, 2018 at 18:54",
-      "question_updated": "Feb 5, 2018 at 18:54"
+      "question_updated": "Feb 5, 2018 at 18:54",
+      "answerCount": 1
     },
     {
       "id": 3,
-      "user_id": 3,
+      "questionUserNickname": "닉네임입니다3",
       "question_title": "How to dynamically identify weather an element is a variable or a cordinate",
       "question_content": "In my app, I am developing an app that has a small scripting feature My app mainly deals with 2D cordinates In the scripting feature, I want to make use of dynamic variables",
-      "question_tag": "",
+      "question_tag": [],
       "question_created": "Feb 5, 2022 at 13:54",
-      "question_updated": "Feb 5, 2023 at 11:54"
+      "question_updated": "Feb 5, 2023 at 11:54",
+      "answerCount": 2
+
     },
     {
       "id": 4,
-      "user_id": 4,
+      "questionUserNickname": "닉네임입니다4",
       "question_title": "Mkdocs: On blog-style site, how do I make Next button go to chronologically next topic?",
       "question_content": "I've set up an mkdocs site using the Material theme where my topics are in reverse chronological order - that is, the most recent is at the top of the nav set. Unfortunately this means my Next and Prev buttons take you to the prev-in-time and next-in-time topics. What's the quickest way to resolve is? I tried making some changes to footer.html but while I could get the buttons to change I couldn't get the formatting right.",
       "question_tag": ["mkdocs", "mkdocs-material"],
       "question_created": "Feb 5, 2018 at 18:54",
-      "question_updated": "Feb 5, 2018 at 18:54"
+      "question_updated": "Feb 5, 2018 at 18:54",
+      "answerCount": 3
     },
     {
       "id": 5,
-      "user_id": 1,
+      "questionUserNickname": "닉네임입니다5",
       "question_title": "iOS Extension lifecycle",
       "question_content": "Is it mandatory to adopt to 'NSExtensionRequestHandling' protocol in the app extension and call the 'completeRequest(returningItems: [Any]?)' once we are done with processing? Note: The extension I am using is DeviceActivityMonitor. If it's mandatory and we didn't call completeRequest, will there be issues?",
-      "question_tag": "",
+      "question_tag": [],
       "question_created": "Feb 5, 2018 at 18:54",
-      "question_updated": "Feb 5, 2018 at 18:54"
+      "question_updated": "Feb 5, 2018 at 18:54",
+      "answerCount": 2
     },
     {
       "id": 6,
-      "user_id": 1,
+      "questionUserNickname": "닉네임입니다6",
       "question_title": "666666 How to dynamically identify weather an element is a variable or a cordinate",
       "question_content": "66666 my app, I am developing an app that has a small scripting feature My app mainly deals with 2D cordinates In the scripting feature, I want to make use of dynamic variables",
-      "question_tag": "",
+      "question_tag": [],
       "question_created": "Feb 5, 2018 at 18:54",
-      "question_updated": "Feb 5, 2018 at 18:54"
+      "question_updated": "Feb 5, 2018 at 18:54",
+      "answerCount": 0
+
     },
     {
       "id": 7,
-      "user_id": 7,
+      "questionUserNickname": "닉네임입니다7",
       "question_title": "77777How to dynamically identify weather an element is a variable or a cordinate",
       "question_content": "77777In my app, I am developing an app that has a small scripting feature My app mainly deals with 2D cordinates In the scripting feature, I want to make use of dynamic variables",
-      "question_tag": "",
+      "question_tag": [],
       "question_created": "Feb 5, 2018 at 18:54",
-      "question_updated": "Feb 5, 2018 at 18:54"
+      "question_updated": "Feb 5, 2018 at 18:54",
+      "answerCount": 5
     },
     {
       "id": 8,
-      "user_id": 8,
+      "questionUserNickname": "닉네임입니다8",
       "question_title": "888How to dynamically identify weather an element is a variable or a cordinate",
       "question_content": "8888In my app, I am developing an app that has a small scripting feature My app mainly deals with 2D cordinates In the scripting feature, I want to make use of dynamic variables",
-      "question_tag": "",
+      "question_tag": [],
       "question_created": "Feb 5, 2018 at 18:54",
-      "question_updated": "Feb 5, 2018 at 18:54"
+      "question_updated": "Feb 5, 2018 at 18:54",
+      "answerCount": 1
     },
     {
       "id": 9,
-      "user_id": 9,
+      "questionUserNickname": "닉네임입니다9",
       "question_title": "999How to dynamically identify weather an element is a variable or a cordinate",
       "question_content": "9999In my app, I am developing an app that has a small scripting feature My app mainly deals with 2D cordinates In the scripting feature, I want to make use of dynamic variables",
-      "question_tag": "",
+      "question_tag": [],
       "question_created": "Feb 5, 2018 at 18:54",
-      "question_updated": "Feb 5, 2018 at 18:54"
+      "question_updated": "Feb 5, 2018 at 18:54",
+      "answerCount": 5
     },
     {
       "id": 10,
-      "user_id": 10,
+      "questionUserNickname": "닉네임입니다10",
       "question_title": "100101010How to dynamically identify weather an element is a variable or a cordinate",
       "question_content": "10101010In my app, I am developing an app that has a small scripting feature My app mainly deals with 2D cordinates In the scripting feature, I want to make use of dynamic variables",
-      "question_tag": "",
+      "question_tag": [],
       "question_created": "Feb 5, 2018 at 18:54",
-      "question_updated": "Feb 5, 2018 at 18:54"
+      "question_updated": "Feb 5, 2018 at 18:54",
+      "answerCount": 5
     },
     {
       "id": 11,
-      "user_id": 11,
+      "questionUserNickname": "닉네임입니다11",
       "question_title": "11111111How to dynamically identify weather an element is a variable or a cordinate",
       "question_content": "1111111In my app, I am developing an app that has a small scripting feature My app mainly deals with 2D cordinates In the scripting feature, I want to make use of dynamic variables",
-      "question_tag": "",
+      "question_tag": [],
       "question_created": "Feb 5, 2018 at 18:54",
-      "question_updated": "Feb 5, 2018 at 18:54"
+      "question_updated": "Feb 5, 2018 at 18:54",
+      "answerCount": 5
     },
     {
       "id": 12,
-      "user_id": 12,
+      "questionUserNickname": "닉네임입니다12",
       "question_title": "1112222How to dynamically identify weather an element is a variable or a cordinate",
       "question_content": "1112222In my app, I am developing an app that has a small scripting feature My app mainly deals with 2D cordinates In the scripting feature, I want to make use of dynamic variables",
-      "question_tag": "",
+      "question_tag": [],
       "question_created": "Feb 5, 2018 at 18:54",
-      "question_updated": "Feb 5, 2018 at 18:54"
+      "question_updated": "Feb 5, 2018 at 18:54",
+      "answerCount": 5
     },
     {
       "id": 13,
-      "user_id": 13,
+      "questionUserNickname": "닉네임입니다13",
       "question_title": "1113333How to dynamically identify weather an element is a variable or a cordinate",
       "question_content": "1113333In my app, I am developing an app that has a small scripting feature My app mainly deals with 2D cordinates In the scripting feature, I want to make use of dynamic variables",
-      "question_tag": "",
+      "question_tag": [],
       "question_created": "Feb 5, 2018 at 18:54",
-      "question_updated": "Feb 5, 2018 at 18:54"
+      "question_updated": "Feb 5, 2018 at 18:54",
+      "answerCount": 5
+
     },
     {
       "id": 14,
-      "user_id": 14,
+      "questionUserNickname": "닉네임입니다14",
       "question_title": "111444How to dynamically identify weather an element is a variable or a cordinate",
       "question_content": "114444In my app, I am developing an app that has a small scripting feature My app mainly deals with 2D cordinates In the scripting feature, I want to make use of dynamic variables",
-      "question_tag": "",
+      "question_tag": [],
       "question_created": "Feb 5, 2018 at 18:54",
-      "question_updated": "Feb 5, 2018 at 18:54"
+      "question_updated": "Feb 5, 2018 at 18:54",
+      "answerCount": 5
+
     },
     {
       "id": 15,
-      "user_id": 15,
+      "questionUserNickname": "닉네임입니다15",
       "question_title": "1555111How to dynamically identify weather an element is a variable or a cordinate",
       "question_content": "1115555In my app, I am developing an app that has a small scripting feature My app mainly deals with 2D cordinates In the scripting feature, I want to make use of dynamic variables",
-      "question_tag": "",
+      "question_tag": [],
       "question_created": "Feb 5, 2018 at 18:54",
-      "question_updated": "Feb 5, 2018 at 18:54"
+      "question_updated": "Feb 5, 2018 at 18:54",
+      "answerCount": 5
+
     },
     {
       "id": 16,
-      "user_id": 16,
+      "questionUserNickname": "닉네임입니다16",
       "question_title": "166How to dynamically identify weather an element is a variable or a cordinate",
       "question_content": "1116666666In my app, I am developing an app that has a small scripting feature My app mainly deals with 2D cordinates In the scripting feature, I want to make use of dynamic variables",
-      "question_tag": "",
+      "question_tag": [],
       "question_created": "Feb 5, 2018 at 18:54",
-      "question_updated": "Feb 5, 2018 at 18:54"
+      "question_updated": "Feb 5, 2018 at 18:54",
+      "answerCount": 5
+
     },
     {
       "id": 17,
-      "user_id": 17,
+      "questionUserNickname": "닉네임입니다17",
       "question_title": "1111777How to dynamically identify weather an element is a variable or a cordinate",
       "question_content": "111777In my app, I am developing an app that has a small scripting feature My app mainly deals with 2D cordinates In the scripting feature, I want to make use of dynamic variables",
-      "question_tag": "",
+      "question_tag": [],
       "question_created": "Feb 5, 2018 at 18:54",
-      "question_updated": "Feb 5, 2018 at 18:54"
+      "question_updated": "Feb 5, 2018 at 18:54",
+      "answerCount": 5
+
     },
     {
       "id": 18,
-      "user_id": 18,
+      "questionUserNickname": "닉네임입니다18",
       "question_title": "188888How to dynamically identify weather an element is a variable or a cordinate",
       "question_content": "222888In my app, I am developing an app that has a small scripting feature My app mainly deals with 2D cordinates In the scripting feature, I want to make use of dynamic variables",
-      "question_tag": "",
+      "question_tag": [],
       "question_created": "Feb 5, 2018 at 18:54",
-      "question_updated": "Feb 5, 2018 at 18:54"
+      "question_updated": "Feb 5, 2018 at 18:54",
+      "answerCount": 5
+
     },
     {
       "id": 19,
-      "user_id": 19,
+      "questionUserNickname": "닉네임입니다19",
       "question_title": "19991How to dynamically identify weather an element is a variable or a cordinate",
       "question_content": "19991In my app, I am developing an app that has a small scripting feature My app mainly deals with 2D cordinates In the scripting feature, I want to make use of dynamic variables",
-      "question_tag": "",
+      "question_tag": [],
       "question_created": "Feb 5, 2018 at 18:54",
-      "question_updated": "Feb 5, 2018 at 18:54"
+      "question_updated": "Feb 5, 2018 at 18:54",
+      "answerCount": 5
+
     },
     {
       "id": 20,
-      "user_id": 20,
+      "questionUserNickname": "닉네임입니다20",
       "question_title": "22220000How to dynamically identify weather an element is a variable or a cordinate",
       "question_content": "2222000In my app, I am developing an app that has a small scripting feature My app mainly deals with 2D cordinates In the scripting feature, I want to make use of dynamic variables",
-      "question_tag": "",
+      "question_tag": [],
       "question_created": "Feb 5, 2018 at 18:54",
-      "question_updated": "Feb 5, 2018 at 18:54"
+      "question_updated": "Feb 5, 2018 at 18:54",
+      "answerCount": 5
+
     }
   ]
 }

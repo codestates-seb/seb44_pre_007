@@ -15,17 +15,17 @@ const Content = styled(Ellipsis)`
 function SummaryDiv({ question }: { question: Question }) {
   const {
     id,
-    user_id,
-    question_content,
-    question_created,
-    question_tag,
+    questionUserNickname,
     question_title,
-    question_updated,
+    question_content,
+    question_tag,
+    question_created,
+    answerCount,
   } = question;
   return (
     <Summarydiv>
       <div className="w-[108px] flex gap-2 items-start justify-end mr-4 mb-1">
-        <span className="text-blacklight text-[13px]">0</span>
+        <span className="text-blacklight text-[13px]">{answerCount}</span>
         <span className="text-blacklight text-[13px]">answers</span>
       </div>
       <div className="w-[595px]">
@@ -34,7 +34,7 @@ function SummaryDiv({ question }: { question: Question }) {
         <div>
           <div>{question_tag}</div>
           <div className="flex gap-2 justify-end text-[12px]">
-            <div>{user_id}</div>
+            <div className="text-nickname text-[12px]">{questionUserNickname}</div>
             <div className="text-blacklight">{question_created}</div>
           </div>
         </div>

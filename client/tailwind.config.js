@@ -14,6 +14,7 @@ export default {
         brgray: '#e3e6e8',
         main: '#F48225',
         bubg: '#0A95FF',
+        nickname: '#0074cc',
       },
     },
   },
