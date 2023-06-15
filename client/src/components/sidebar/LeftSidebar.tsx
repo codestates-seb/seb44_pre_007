@@ -3,13 +3,8 @@ import { AiFillInfoCircle } from 'react-icons/ai';
 import { TiStarburst } from 'react-icons/ti';
 import { NavLink } from 'react-router-dom';
 import { styled } from 'styled-components';
-import {
-  LiNavDisable,
-  Liml8mt16,
-  Lip8pr6,
-  FlexDiv,
-  LiBtn,
-} from '../../styles/style';
+// eslint-disable-next-line object-curly-newline
+import { LiNavDisable, Liml8mt16, Lip8pr6, FlexDiv, LiBtn } from '../../styles/style';
 
 const NavActive = styled(NavLink)`
   display: block;
@@ -41,10 +36,7 @@ const HomeNav = styled(NavLink)`
 function LeftSidebar() {
   return (
     <ol className="w-[164px] h-[595px] m-3 list-none">
-      <HomeNav
-        to="/"
-        className="h-[26px] pl-2 text-[13px] text-inactive cursor-pointer"
-      >
+      <HomeNav to="/" className="h-[26px] pl-2 text-[13px] text-inactive cursor-pointer">
         Home
       </HomeNav>
       <ol>
