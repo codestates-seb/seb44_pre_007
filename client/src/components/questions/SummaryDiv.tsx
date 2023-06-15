@@ -3,6 +3,7 @@ import { styled } from 'styled-components';
 import tw from 'tailwind-styled-components';
 import { Ellipsis } from '../../styles/sidebarstyle';
 import { Question } from '../../types/types';
+import AnswerCountSpan from './AnswerCountSpan';
 
 const Summarydiv = tw.div`
 p-4 flex border-b border-brgray
@@ -25,8 +26,7 @@ function SummaryDiv({ question }: { question: Question }) {
   return (
     <Summarydiv>
       <div className="w-[108px] flex gap-2 items-start justify-end mr-4 mb-1">
-        <span className="text-blacklight text-[13px]">{answerCount}</span>
-        <span className="text-blacklight text-[13px]">answers</span>
+        <AnswerCountSpan answerCount={answerCount} />
       </div>
       <div className="w-[595px]">
         <h3 className="pr-6 text-[17px] text-[#0063BF]">{question_title}</h3>
