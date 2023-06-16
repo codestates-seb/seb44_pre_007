@@ -2,13 +2,14 @@ import useMovePage from '../../hooks/useMovePage';
 import { QueT, TagT } from '../../types/types';
 import Tag from '../../ui/Tag';
 
-function Question({ data }: { data: QueT }) {
+function QuestionContainer({ data }: { data: QueT }) {
   const {
     id,
-    question_content: Content,
+    question_content: contetn,
     question_tag: QTag,
-    question_updated: Updated,
-    questionUserNickname: NickName,
+    question_updated: updated,
+    question_created: created,
+    questionUserNickname: nickName,
   } = data;
 
   const goToEdit = useMovePage(`/questions/${id}/edit`);
@@ -18,7 +19,7 @@ function Question({ data }: { data: QueT }) {
         {!data && <p>Loading...</p>}
         {!!data && (
           <>
-            <div className="text-[15px] text-blackDark">{Content}</div>
+            <div className="text-[15px] text-blackDark">{contetn}</div>
             <div className="flex gap-2 mt-4 mb-3">
               {QTag.map((tag: TagT) => (
                 <Tag key={tag.tagId} content={tag.tagName} />
@@ -43,8 +44,8 @@ function Question({ data }: { data: QueT }) {
                 </span>
               </div>
               {/* Todo 날짜 가공 함수 구현해야함 */}
-              <span className="text-Link">edited {Updated}</span>
-              <span className="text-Link">{NickName}</span>
+              {updated !== created && <span className="text-Link">edited {updated}</span>}
+              <span className="text-Link">{nickName}</span>
             </div>
           </>
         )}
@@ -53,4 +54,4 @@ function Question({ data }: { data: QueT }) {
   );
 }
 
-export default Question;
+export default QuestionContainer;

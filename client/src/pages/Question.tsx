@@ -1,12 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Question from '../components/question/QuestionContainer';
+import tw from 'tailwind-styled-components';
+import QuestionContainer from '../components/question/QuestionContainer';
 import RightSidebar from '../components/sidebar/RightSidebar';
 import useMovePage from '../hooks/useMovePage';
 import { AskBtn } from '../styles/styles';
 import { FetchQuestion } from '../api/api';
 import { QueT } from '../types/types';
 import scrollToTop from '../utils/scrollToTop';
+import AnswerContainer from '../components/question/AnswerContainer';
+
+const DateDiv = tw.div`
+text-blacklight text-[13px] pb-2
+`;
 
 function QuestionPage() {
   const { id } = useParams();
@@ -37,15 +43,18 @@ function QuestionPage() {
         <div className="flex gap-4 pb-2 mb-4 border-b border-brgray">
           {!!data && (
             <>
-              <div className="text-blacklight text-[13px] pb-2">Asked {data.question_created} </div>
-              <div className="text-blacklight text-[13px] pb-2">
-                Modified {data.question_updated}
-              </div>
+              <DateDiv>Asked {data.question_created} </DateDiv>
+              <DateDiv>Modified {data.question_updated}</DateDiv>
             </>
           )}
         </div>
         <div className="flex justify-between">
-          {!!data && <Question data={data} />}
+          <div className="flex flex-col">
+            {!!data && <QuestionContainer data={data} />}
+            {!!data && data.answerCount > 0 && (
+              <AnswerContainer datas={data.answers} id={data.id} answerCnt={data.answerCount} />
+            )}
+          </div>
           <RightSidebar />
         </div>
       </main>

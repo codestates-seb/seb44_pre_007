@@ -1,55 +1,23 @@
-import useMovePage from '../../hooks/useMovePage';
-import { QueT, TagT } from '../../types/types';
-import Tag from '../../ui/Tag';
+import { AnswerT } from '../../types/types';
+import Answer from './Answer';
 
-function Question({ data }: { data: QueT }) {
-  const {
-    id,
-    question_content: Content,
-    question_tag: QTag,
-    question_updated: Updated,
-    questionUserNickname: NickName,
-  } = data;
-
-  const goToEdit = useMovePage(`/questions/${id}/edit`);
+function AnswerContainer({
+  id,
+  datas,
+  answerCnt,
+}: {
+  id: number;
+  datas: AnswerT[];
+  answerCnt: number;
+}) {
   return (
-    <div className="w-[727px] flex justify-end">
-      <div className="w-[654px]">
-        {!data && <p>Loading...</p>}
-        {!!data && (
-          <>
-            <div className="text-[15px] text-blackDark">{Content}</div>
-            <div className="flex gap-2 mt-4 mb-3">
-              {QTag.map((tag: TagT) => (
-                <Tag key={tag.tagId} content={tag.tagName} />
-              ))}
-            </div>
-            <div className="flex justify-between text-[13px] my-4 pt-1">
-              <div className="flex gap-2">
-                <span
-                  className="text-blacklight cursor-pointer"
-                  onClick={goToEdit}
-                  role="presentation"
-                >
-                  Edit
-                </span>
-                {/* Todo 작성자일 경우에만 버튼 보이도록 해야함 */}
-                <span
-                  className="text-blacklight cursor-pointer"
-                  // delete onClick 기능 추가
-                  role="presentation"
-                >
-                  Delete
-                </span>
-              </div>
-              <span className="text-Link">edited {Updated}</span>
-              <span className="text-Link">{NickName}</span>
-            </div>
-          </>
-        )}
+    <div className="w-[727px] flex flex-col">
+      <h2 className="mt-3 mb-2 text-blackDark text-[19px]">{answerCnt} Answers</h2>
+      <div className="flex flex-col items-end">
+        {!!datas && datas.map((data) => <Answer key={data.answerId} id={id} data={data} />)}
       </div>
     </div>
   );
 }
 
-export default Question;
+export default AnswerContainer;
