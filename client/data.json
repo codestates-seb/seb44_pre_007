@@ -8,7 +8,8 @@
       "question_tag": [],
       "question_created": "Jun 6, 2017 at 18:54",
       "question_updated": "Jun 6, 2017 at 18:54",
-      "answerCount": 0
+      "answerCount": 0,
+      "answers": []
     },
     {
       "id": 2,
@@ -30,7 +31,8 @@
       }],
       "question_created": "Feb 5, 2018 at 18:54",
       "question_updated": "Feb 5, 2018 at 18:54",
-      "answerCount": 1
+      "answerCount": 0,
+      "answers": []
     },
     {
       "id": 3,
@@ -40,7 +42,23 @@
       "question_tag": [],
       "question_created": "Feb 5, 2022 at 13:54",
       "question_updated": "Feb 5, 2023 at 11:54",
-      "answerCount": 2
+      "answerCount": 2,
+      "answers": [
+        {
+          "answerId": 1,
+          "answerUserNickName": "내공냠냠0",
+          "answerContent": "Within... reason. Above all, the goal should be asking questions in such a way that we can leave a useful Q&A pair that is likely to be useful to users in the future (and not just users who've read a given book.) With that in mind, the question should be focused on a particular concept or misunderstanding, rather than 'here's a bunch of code, what does it do.'",
+          "answerCreated": "Jun 6, 2018 at 18:54",
+          "answerUpdated": "Jun 6, 2018 at 20:54"
+        },
+        {
+          "answerId": 2,
+          "answerUserNickName": "내공냠냠01",
+          "answerContent": "No, this is not a useful question to ask on Stack Overflow. The purpose of SO is to create a library of questions and answers so that other people can search find useful answers in the future. 'How does <hunk of code that I wrote> work?'' is not a question that anyone else is ever going to have unless, for some strange reason, they wrote the identical code. If you have a question about a certain construct, or a certain function, that confused you with its behavior while you were writing code, and you can single out that construct and elucidate your confusion in English, that might make a valid question. But a question that is just a block of code plus",
+          "answerCreated": "Jun 6, 2018 at 18:54",
+          "answerUpdated": "Jun 6, 2018 at 20:54"
+        }
+      ]
 
     },
     {
@@ -57,7 +75,8 @@
       }],
       "question_created": "Feb 5, 2018 at 18:54",
       "question_updated": "Feb 5, 2018 at 18:54",
-      "answerCount": 3
+      "answerCount": 0,
+      "answers": []
     },
     {
       "id": 5,
@@ -67,7 +86,23 @@
       "question_tag": [],
       "question_created": "Feb 5, 2018 at 18:54",
       "question_updated": "Feb 5, 2018 at 18:54",
-      "answerCount": 2
+      "answerCount": 2,
+      "answers": [
+        {
+          "answerId": 3,
+          "answerUserNickName": "내공냠냠05",
+          "answerContent": "You could take all of the inner objects and use their day properties to rebuild the overall object from scratch:",
+          "answerCreated": "Jun 6, 2018 at 18:54",
+          "answerUpdated": "Jun 6, 2018 at 20:54"
+        },
+        {
+          "answerId": 4,
+          "answerUserNickName": "내공냠냠052",
+          "answerContent": "The navigation action should be moved into the success state of the action: This makes sure that the navigation occurs after the successful addition of the dish. The backend should return a successful response when fully processing a new dish and it will be available straight afterwards.",
+          "answerCreated": "Jun 6, 2018 at 18:54",
+          "answerUpdated": "Jun 6, 2018 at 20:54"
+        }
+      ]
     },
     {
       "id": 6,
@@ -77,8 +112,8 @@
       "question_tag": [],
       "question_created": "Feb 5, 2018 at 18:54",
       "question_updated": "Feb 5, 2018 at 18:54",
-      "answerCount": 0
-
+      "answerCount": 0,
+      "answers": []
     },
     {
       "id": 7,
@@ -88,7 +123,30 @@
       "question_tag": [],
       "question_created": "Feb 5, 2018 at 18:54",
       "question_updated": "Feb 5, 2018 at 18:54",
-      "answerCount": 5
+      "answerCount": 3,
+      "answers": [
+        {
+          "answerId": 5,
+          "answerUserNickName": "내공냠냠07",
+          "answerContent": "The navigation action should be moved into the success state of the action: This makes sure that the navigation occurs after the successful addition of the dish. The backend should return a successful response when fully processing a new dish and it will be available straight afterwards.",
+          "answerCreated": "Jun 6, 2018 at 18:54",
+          "answerUpdated": "Jun 6, 2018 at 20:54"
+        },
+        {
+          "answerId": 6,
+          "answerUserNickName": "내공냠냠077",
+          "answerContent": "When the user navigates to Dishes immediately after handleSubmit is called, Dishes.js fetches the list but the new dish is not there yet. If the user moves to the other tab and comes back then fetchDishes brings the updated data.I guess the HTTP response has not yet arrived the first time but I would think the async await in addDish would take care of that.",
+          "answerCreated": "Jun 6, 2018 at 18:54",
+          "answerUpdated": "Jun 6, 2018 at 20:54"
+        },
+        {
+          "answerId": 7,
+          "answerUserNickName": "내공냠냠7770",
+          "answerContent": "77777When the user navigates to Dishes immediately after handleSubmit is called, Dishes.js fetches the list but the new dish is not there yet. If the user moves to the other tab and comes back then fetchDishes brings the updated data.I guess the HTTP response has not yet arrived the first time but I would think the async await in addDish would take care of that.",
+          "answerCreated": "Jun 6, 2018 at 18:54",
+          "answerUpdated": "Jun 6, 2018 at 20:54"
+        }
+      ]
     },
     {
       "id": 8,
@@ -98,7 +156,16 @@
       "question_tag": [],
       "question_created": "Feb 5, 2018 at 18:54",
       "question_updated": "Feb 5, 2018 at 18:54",
-      "answerCount": 1
+      "answerCount": 1,
+      "answers": [
+        {
+          "answerId": 8,
+          "answerUserNickName": "내공냠냠80",
+          "answerContent": "How do I make sure that the new added dish is fetched once the user navigates from the screen in which they add the dish to the screen that loads the list of dishes?",
+          "answerCreated": "Jun 6, 2018 at 18:54",
+          "answerUpdated": "Jun 6, 2018 at 20:54"
+        }
+      ]
     },
     {
       "id": 9,
@@ -108,7 +175,8 @@
       "question_tag": [],
       "question_created": "Feb 5, 2018 at 18:54",
       "question_updated": "Feb 5, 2018 at 18:54",
-      "answerCount": 5
+      "answerCount": 0,
+      "answers": []
     },
     {
       "id": 10,
@@ -118,7 +186,8 @@
       "question_tag": [],
       "question_created": "Feb 5, 2018 at 18:54",
       "question_updated": "Feb 5, 2018 at 18:54",
-      "answerCount": 5
+      "answerCount": 0,
+      "answers": []
     },
     {
       "id": 11,
@@ -128,7 +197,16 @@
       "question_tag": [],
       "question_created": "Feb 5, 2018 at 18:54",
       "question_updated": "Feb 5, 2018 at 18:54",
-      "answerCount": 5
+      "answerCount": 1,
+      "answers": [
+        {
+          "answerId": 9,
+          "answerUserNickName": "내공냠냠11",
+          "answerContent": "How do I make sure that the new added dish is fetched once the user navigates from the screen in which they add the dish to the screen that loads the list of dishes?",
+          "answerCreated": "Jun 6, 2018 at 18:54",
+          "answerUpdated": "Jun 6, 2018 at 20:54"
+        }
+      ]
     },
     {
       "id": 12,
@@ -138,7 +216,8 @@
       "question_tag": [],
       "question_created": "Feb 5, 2018 at 18:54",
       "question_updated": "Feb 5, 2018 at 18:54",
-      "answerCount": 5
+      "answerCount": 0,
+      "answers": []
     },
     {
       "id": 13,
@@ -148,7 +227,8 @@
       "question_tag": [],
       "question_created": "Feb 5, 2018 at 18:54",
       "question_updated": "Feb 5, 2018 at 18:54",
-      "answerCount": 5
+      "answerCount": 0,
+      "answers": []
 
     },
     {
@@ -159,7 +239,16 @@
       "question_tag": [],
       "question_created": "Feb 5, 2018 at 18:54",
       "question_updated": "Feb 5, 2018 at 18:54",
-      "answerCount": 5
+      "answerCount": 1,
+      "answers": [
+        {
+          "answerId": 14,
+          "answerUserNickName": "내공냠냠1414",
+          "answerContent": "How do I make sure that the new added dish is fetched once the user navigates from the screen in which they add the dish to the screen that loads the list of dishes?",
+          "answerCreated": "Jun 6, 2018 at 18:54",
+          "answerUpdated": "Jun 6, 2018 at 20:54"
+        }
+      ]
 
     },
     {
@@ -170,7 +259,8 @@
       "question_tag": [],
       "question_created": "Feb 5, 2018 at 18:54",
       "question_updated": "Feb 5, 2018 at 18:54",
-      "answerCount": 5
+      "answerCount": 0,
+      "answers": []
 
     },
     {
@@ -181,8 +271,8 @@
       "question_tag": [],
       "question_created": "Feb 5, 2018 at 18:54",
       "question_updated": "Feb 5, 2018 at 18:54",
-      "answerCount": 5
-
+      "answerCount": 0,
+      "answers": []
     },
     {
       "id": 17,
@@ -192,8 +282,8 @@
       "question_tag": [],
       "question_created": "Feb 5, 2018 at 18:54",
       "question_updated": "Feb 5, 2018 at 18:54",
-      "answerCount": 5
-
+      "answerCount": 0,
+      "answers": []
     },
     {
       "id": 18,
@@ -203,8 +293,8 @@
       "question_tag": [],
       "question_created": "Feb 5, 2018 at 18:54",
       "question_updated": "Feb 5, 2018 at 18:54",
-      "answerCount": 5
-
+      "answerCount": 0,
+      "answers": []
     },
     {
       "id": 19,
@@ -214,7 +304,16 @@
       "question_tag": [],
       "question_created": "Feb 5, 2018 at 18:54",
       "question_updated": "Feb 5, 2018 at 18:54",
-      "answerCount": 5
+      "answerCount": 1,
+      "answers": [
+        {
+          "answerId": 19,
+          "answerUserNickName": "내공냠냠1919",
+          "answerContent": "How do I make sure that the new added dish is fetched once the user navigates from the screen in which they add the dish to the screen that loads the list of dishes?",
+          "answerCreated": "Jun 6, 2018 at 18:54",
+          "answerUpdated": "Jun 6, 2018 at 20:54"
+        }
+      ]
 
     },
     {
@@ -225,8 +324,14 @@
       "question_tag": [],
       "question_created": "Feb 5, 2018 at 18:54",
       "question_updated": "Feb 5, 2018 at 18:54",
-      "answerCount": 5
-
+      "answerCount": 0,
+      "answers": []
     }
-  ]
+  ],
+  "pageInfo" : {
+    "page": 0,
+    "limit": 10,
+    "totalElements": 20,
+    "totalPages": 2
+  }
 }
