@@ -1,5 +1,4 @@
 /* eslint-disable operator-linebreak */
-import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Btn from '../ui/Btn';
 import addCommasToNumber from '../utils/addCommasToNumber';

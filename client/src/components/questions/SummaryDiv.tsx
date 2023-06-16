@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { styled } from 'styled-components';
 import tw from 'tailwind-styled-components';
-import { useNavigate } from 'react-router-dom';
 import { Ellipsis } from '../../styles/styles';
 import { Question, TagT } from '../../types/types';
 import AnswerCountSpan from './AnswerCountSpan';
