@@ -13,11 +13,11 @@ import { FlexDiv } from '../../styles/styles';
 
 function LeftSidebar() {
   return (
-    <ol className="w-[164px] h-[595px] m-3 list-none">
-      <HomeNav to="/" className="h-[26px] pl-2 text-[13px] text-black600 cursor-pointer">
+    <ol className="w-[164px] h-[595px] mb-3 list-none">
+      <HomeNav to="/" className="w-[164px] h-[26px] pl-2 text-[13px] text-black600 cursor-pointer">
         Home
       </HomeNav>
-      <ol>
+      <ol className="w-[164px]">
         <Liml8mt16 className="mb-1">PUBLIC</Liml8mt16>
         <NavActive to="/questions" end>
           <FlexDiv className="gap-1">
@@ -45,7 +45,7 @@ function LeftSidebar() {
       </ol>
       <li>
         <Liml8mt16 className="mb-2">TEAMS</Liml8mt16>
-        <div className="border p-3 pb-1.5 rounded-[3px]">
+        <div className="border p-3 pb-1.5 rounded-[3px] border-r-0">
           <strong>Stack Overflow for Teams</strong>
           <span className="text-[13px] text-black600">
             {' '}
