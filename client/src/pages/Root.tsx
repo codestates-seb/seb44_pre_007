@@ -8,11 +8,11 @@ function Root() {
       {/* Nav bar */}
       {/* Todo 로그인 상태에 따라 아래 다르게 렌더링 */}
       <Header />
-      <main>
+      <div className="flex justify-center">
         <Sidebar>
           <Outlet />
         </Sidebar>
-      </main>
+      </div>
     </>
   );
 }
