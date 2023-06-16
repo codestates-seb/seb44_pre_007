@@ -6,6 +6,7 @@ import { QueListT } from '../types/types';
 import SummaryDiv from '../components/questions/SummaryDiv';
 import { FetchQuestions } from '../api/api';
 import RightSidebar from '../components/sidebar/RightSidebar';
+import { LIMIT } from '../constant/constantValue';
 import AskQuestionBtn from '../components/AskQuestionBtn';
 
 // todo 페이지네이션, fetch 리액트쿼리 사용하기
@@ -14,7 +15,7 @@ function Questions() {
   const [questionsCount, setQuestionsCount] = useState<string>('');
 
   const fetchData = async () => {
-    const res = await FetchQuestions(10);
+    const res = await FetchQuestions(LIMIT);
     setQuestions(res.data);
     const dataLength = addCommasToNumber(res.data.length);
     setQuestionsCount(dataLength);
