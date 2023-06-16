@@ -19,7 +19,7 @@ function LeftSidebar() {
       </HomeNav>
       <ol className="w-[164px]">
         <Liml8mt16 className="mb-1">PUBLIC</Liml8mt16>
-        <NavActive to="/questions" end>
+        <NavActive to="/questions">
           <FlexDiv className="gap-1">
             <ImEarth size={16} />
             <span>Questions</span>
