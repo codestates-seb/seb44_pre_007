@@ -2,6 +2,8 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Root from './pages/Root';
 import Questions from './pages/Questions';
+import SignUp from './pages/SignUp';
+import Users from './pages/Users';
 
 const router = createBrowserRouter([
   {
@@ -11,6 +13,16 @@ const router = createBrowserRouter([
       {
         path: 'questions',
         element: <Questions />,
+      },
+    ],
+  },
+  {
+    path: 'users',
+    element: <Users />,
+    children: [
+      {
+        path: 'signup',
+        element: <SignUp />,
       },
     ],
   },
