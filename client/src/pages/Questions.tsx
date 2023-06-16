@@ -7,6 +7,7 @@ import SummaryDiv from '../components/questions/SummaryDiv';
 import { FetchQuestions } from '../api/api';
 import { AskBtn } from '../styles/styles';
 import useMovePage from '../hooks/useMovePage';
+import RightSidebar from '../components/sidebar/RightSidebar';
 
 // todo 페이지네이션, fetch 리액트쿼리 사용하기
 function Questions() {
@@ -27,7 +28,7 @@ function Questions() {
   const goToAsk = useMovePage('/questions/ask');
 
   return (
-    <div className="w-[751px]">
+    <div className="w-[727px]">
       <section className="mb-3">
         <div className="flex justify-between items-center h-[50px] mb-3">
           <h1 className="mr-3 mb-3 text-[27px] text-blackDark">All Questions</h1>
@@ -50,4 +51,13 @@ function Questions() {
   );
 }
 
-export default Questions;
+function QuestionsPage() {
+  return (
+    <div className="flex w-[1100px] border-l p-6">
+      <Questions />
+      <RightSidebar />
+    </div>
+  );
+}
+
+export default QuestionsPage;
