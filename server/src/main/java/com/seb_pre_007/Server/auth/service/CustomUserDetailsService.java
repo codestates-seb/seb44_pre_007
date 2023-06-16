@@ -40,7 +40,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         CustomUserDetails(User user) {
             setUserId(user.getUserId());
             setUserEmail(user.getUserEmail());
-            setUserPassword(user.getUserPassword());
+            setUserPassword(passwordEncoder.encode(user.getUserPassword()));
             setRoles(user.getRoles());
             setUserNickname(user.getUserNickname());
 

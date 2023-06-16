@@ -31,8 +31,7 @@ public class UserService {
         verifyExistEmail(user.getUserEmail());
 
         // (3) 추가: Password 암호화
-        String encryptedPassword = passwordEncoder.encode(user.getUserPassword());
-        user.setUserPassword(encryptedPassword);
+        user.setUserPassword(user.getUserPassword());
 
         // (4) 추가: DB에 User Role 저장
         List<String> roles = customAuthorityUtils.createRoles(user.getUserEmail());
