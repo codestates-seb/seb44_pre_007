@@ -13,7 +13,7 @@ import { FlexDiv } from '../../styles/styles';
 
 function LeftSidebar() {
   return (
-    <ol className="w-[164px] h-[595px] m-3 list-none">
+    <ol className="w-[164px] h-[595px] mb-3 list-none">
       <HomeNav to="/" className="h-[26px] pl-2 text-[13px] text-black600 cursor-pointer">
         Home
       </HomeNav>
