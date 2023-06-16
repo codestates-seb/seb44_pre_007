@@ -2,7 +2,7 @@
 import { styled } from 'styled-components';
 import tw from 'tailwind-styled-components';
 import { Ellipsis } from '../../styles/styles';
-import { Question, TagT } from '../../types/types';
+import { QueListT, TagT } from '../../types/types';
 import AnswerCountSpan from './AnswerCountSpan';
 import Tag from '../../ui/Tag';
 import useMovePage from '../../hooks/useMovePage';
@@ -15,7 +15,7 @@ const Content = styled(Ellipsis)`
   font-size: 13px;
 `;
 
-function SummaryDiv({ question }: { question: Question }) {
+function SummaryDiv({ question }: { question: QueListT }) {
   const {
     id,
     questionUserNickname,
@@ -49,7 +49,7 @@ function SummaryDiv({ question }: { question: Question }) {
             ))}
           </div>
           <div className="flex gap-2 justify-end text-[12px]">
-            <div className="text-nickname text-[12px]">{questionUserNickname}</div>
+            <div className="text-Link text-[12px]">{questionUserNickname}</div>
             <div className="text-blacklight">asked {question_created}</div>
           </div>
         </div>

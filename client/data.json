@@ -7,7 +7,7 @@
       "question_content": "When I run code through that play button in VS Code, it just keeps running and there's no output. It just says, [Running] cd 'c:UsersdiyadOneDriveDesktopcc++' && gcc sum.c -o sum && 'c:UsersdiyadOneDriveDesktopcc++'sum However, when I run it by typing ./file_name' in the terminal, it works perfectly fine.",
       "question_tag": [],
       "question_created": "Jun 6, 2017 at 18:54",
-      "question_updated": "Jun 6, 2017 at 18:54",
+      "question_updated": "Jun 6, 2018 at 20:54",
       "answerCount": 0,
       "answers": []
     },
@@ -26,7 +26,7 @@
         "tagId": 9,
         "tagName": "react-native"
       }, {
-        "tagId": 9,
+        "tagId": 10,
         "tagName": "shapes"
       }],
       "question_created": "Feb 5, 2018 at 18:54",

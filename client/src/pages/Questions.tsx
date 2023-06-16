@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import Btn from '../ui/Btn';
 import addCommasToNumber from '../utils/addCommasToNumber';
-import { Question } from '../types/types';
+import { QueListT } from '../types/types';
 import SummaryDiv from '../components/questions/SummaryDiv';
 import { FetchQuestions } from '../api/api';
 import { AskBtn } from '../styles/styles';
@@ -11,7 +11,7 @@ import RightSidebar from '../components/sidebar/RightSidebar';
 
 // todo 페이지네이션, fetch 리액트쿼리 사용하기
 function Questions() {
-  const [questions, setQuestions] = useState<Question[]>([]);
+  const [questions, setQuestions] = useState<QueListT[]>([]);
   const [questionsCount, setQuestionsCount] = useState<string>('');
 
   const fetchData = async () => {
@@ -32,7 +32,7 @@ function Questions() {
       <section className="mb-3">
         <div className="flex justify-between items-center h-[50px] mb-3">
           <h1 className="mr-3 mb-3 text-[27px] text-blackDark">All Questions</h1>
-          <AskBtn onClick={goToAsk}>Ask Questions</AskBtn>
+          <AskBtn onClick={goToAsk}>Ask Question</AskBtn>
         </div>
         <div className="flex justify-between items-center text-blackDark">
           <div className="text-[17px] w-[268px] mr-3">
@@ -43,7 +43,7 @@ function Questions() {
       </section>
       <main className="w-full border-t border-brgray">
         {!!questions.length &&
-          questions.map((question: Question) => (
+          questions.map((question: QueListT) => (
             <SummaryDiv key={question.id} question={question} />
           ))}
       </main>
