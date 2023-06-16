@@ -5,9 +5,8 @@ import addCommasToNumber from '../utils/addCommasToNumber';
 import { QueListT } from '../types/types';
 import SummaryDiv from '../components/questions/SummaryDiv';
 import { FetchQuestions } from '../api/api';
-import { AskBtn } from '../styles/styles';
-import useMovePage from '../hooks/useMovePage';
 import RightSidebar from '../components/sidebar/RightSidebar';
+import AskQuestionBtn from '../components/AskQuestionBtn';
 
 // todo 페이지네이션, fetch 리액트쿼리 사용하기
 function Questions() {
@@ -25,14 +24,12 @@ function Questions() {
     fetchData();
   }, []);
 
-  const goToAsk = useMovePage('/questions/ask');
-
   return (
     <div className="w-[727px]">
       <section className="mb-3">
         <div className="flex justify-between items-center h-[50px] mb-3">
           <h1 className="mr-3 mb-3 text-[27px] text-blackDark">All Questions</h1>
-          <AskBtn onClick={goToAsk}>Ask Question</AskBtn>
+          <AskQuestionBtn />
         </div>
         <div className="flex justify-between items-center text-blackDark">
           <div className="text-[17px] w-[268px] mr-3">

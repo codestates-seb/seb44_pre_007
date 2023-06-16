@@ -3,12 +3,11 @@ import { useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 import QuestionContainer from '../components/question/QuestionContainer';
 import RightSidebar from '../components/sidebar/RightSidebar';
-import useMovePage from '../hooks/useMovePage';
-import { AskBtn } from '../styles/styles';
 import { FetchQuestion } from '../api/api';
 import { QueT } from '../types/types';
 import scrollToTop from '../utils/scrollToTop';
 import AnswerContainer from '../components/question/AnswerContainer';
+import AskQuestionBtn from '../components/AskQuestionBtn';
 
 const DateDiv = tw.div`
 text-blacklight text-[13px] pb-2
@@ -16,7 +15,6 @@ text-blacklight text-[13px] pb-2
 
 function QuestionPage() {
   const { id } = useParams();
-  const goToAsk = useMovePage('/questions/ask');
   const [data, setData] = useState<QueT>();
 
   const fetchQuestion = async () => {
@@ -36,9 +34,7 @@ function QuestionPage() {
           {!!data && (
             <h1 className="mr-3 mb-3 text-[27px] text-blackDark">{data.question_title}</h1>
           )}
-          <AskBtn className="w-[110px] h-[38px] text-[13px]" onClick={goToAsk}>
-            Ask Question
-          </AskBtn>
+          <AskQuestionBtn />
         </div>
         <div className="flex gap-4 pb-2 mb-4 border-b border-brgray">
           {!!data && (
