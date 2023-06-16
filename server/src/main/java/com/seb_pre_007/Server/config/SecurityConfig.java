@@ -1,6 +1,8 @@
 package com.seb_pre_007.Server.config;
 
 import com.seb_pre_007.Server.auth.filter.JwtAuthenticationFilter;
+import com.seb_pre_007.Server.auth.handler.UserAuthenticationFailureHandler;
+import com.seb_pre_007.Server.auth.handler.UserAuthenticationSuccessHandler;
 import com.seb_pre_007.Server.auth.jwt.JwtTokenizer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -72,6 +74,8 @@ public class SecurityConfig  {
             JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtTokenizer);  // (2-4)
             jwtAuthenticationFilter.setFilterProcessesUrl("/login");          // (2-5)
 
+            jwtAuthenticationFilter.setAuthenticationSuccessHandler(new UserAuthenticationSuccessHandler());  // (3) 추가
+            jwtAuthenticationFilter.setAuthenticationFailureHandler(new UserAuthenticationFailureHandler());  // (4) 추가
             builder.addFilter(jwtAuthenticationFilter);  // (2-6)
         }
     }
