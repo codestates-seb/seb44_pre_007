@@ -1,17 +1,13 @@
 /* eslint-disable operator-linebreak */
 import { useNavigate } from 'react-router-dom';
-import tw from 'tailwind-styled-components';
 import { useEffect, useState } from 'react';
 import Btn from '../ui/Btn';
 import addCommasToNumber from '../utils/addCommasToNumber';
 import { Question } from '../types/types';
 import SummaryDiv from '../components/questions/SummaryDiv';
 import { FetchQuestions } from '../api/api';
-
-const AskBtn = tw.button`
-flex justify-center items-center text-[13px] rounded-[3px] text-white 
-bg-bubg shadow-btn border-bubg border border-solid p-[10.4px]
-`;
+import { AskBtn } from '../styles/styles';
+import useMovePage from '../hooks/useMovePage';
 
 // todo 페이지네이션, fetch 리액트쿼리 사용하기
 function Questions() {
@@ -29,10 +25,7 @@ function Questions() {
     fetchData();
   }, []);
 
-  const navigate = useNavigate();
-  const goToAsk = () => {
-    navigate('/questions/ask');
-  };
+  const goToAsk = useMovePage('/questions/ask');
 
   return (
     <div className="w-[751px]">

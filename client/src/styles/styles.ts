@@ -24,3 +24,8 @@ export const TagSpan = styled.span`
   color: rgb(44, 88, 119);
   cursor: pointer;
 `;
+
+export const AskBtn = tw.button`
+flex justify-center items-center text-[13px] rounded-[3px] text-white 
+bg-bubg shadow-btn border-bubg border border-solid p-[10.4px]
+`;

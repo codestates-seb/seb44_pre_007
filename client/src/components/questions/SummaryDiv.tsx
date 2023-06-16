@@ -6,6 +6,7 @@ import { Ellipsis } from '../../styles/styles';
 import { Question, TagT } from '../../types/types';
 import AnswerCountSpan from './AnswerCountSpan';
 import Tag from '../../ui/Tag';
+import useMovePage from '../../hooks/useMovePage';
 
 const Summarydiv = tw.div`
 p-4 flex border-b border-brgray
@@ -16,7 +17,6 @@ const Content = styled(Ellipsis)`
 `;
 
 function SummaryDiv({ question }: { question: Question }) {
-  const navigate = useNavigate();
   const {
     id,
     questionUserNickname,
@@ -27,9 +27,8 @@ function SummaryDiv({ question }: { question: Question }) {
     answerCount,
   } = question;
 
-  const goToQuestion = () => {
-    navigate(`/questions/${id}`);
-  };
+  const goToQuestion = useMovePage(`/questions/${id}`);
+
   return (
     <Summarydiv>
       <section className="w-[108px] flex gap-2 items-start justify-end mr-4 mb-1">
