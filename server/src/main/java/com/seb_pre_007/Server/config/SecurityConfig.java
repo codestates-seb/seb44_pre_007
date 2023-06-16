@@ -2,8 +2,8 @@ package com.seb_pre_007.Server.config;
 
 import com.seb_pre_007.Server.auth.filter.JwtAuthenticationFilter;
 import com.seb_pre_007.Server.auth.filter.JwtVerificationFilter;
-import com.seb_pre_007.Server.auth.handler.MemberAccessDeniedHandler;
-import com.seb_pre_007.Server.auth.handler.MemberAuthenticationEntryPoint;
+import com.seb_pre_007.Server.auth.handler.UserAccessDeniedHandler;
+import com.seb_pre_007.Server.auth.handler.UserAuthenticationEntryPoint;
 import com.seb_pre_007.Server.auth.handler.UserAuthenticationFailureHandler;
 import com.seb_pre_007.Server.auth.handler.UserAuthenticationSuccessHandler;
 import com.seb_pre_007.Server.auth.jwt.JwtTokenizer;
@@ -49,8 +49,8 @@ public class SecurityConfig  {
                 .formLogin().disable()   // (4)
                 .httpBasic().disable()   // (5)
                 .exceptionHandling()
-                .authenticationEntryPoint(new MemberAuthenticationEntryPoint())  // (1) 추가
-                .accessDeniedHandler(new MemberAccessDeniedHandler())
+                .authenticationEntryPoint(new UserAuthenticationEntryPoint())  // (1) 추가
+                .accessDeniedHandler(new UserAccessDeniedHandler())
                 .and()// (2) 추가
                 .apply(new CustomFilterConfigurer())   // (1)
                 .and()
