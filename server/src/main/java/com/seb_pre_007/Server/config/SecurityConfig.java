@@ -1,5 +1,6 @@
 package com.seb_pre_007.Server.config;
 
+import com.seb_pre_007.Server.OAuth2.handler.OAuth2UserSuccessHandler;
 import com.seb_pre_007.Server.auth.filter.JwtAuthenticationFilter;
 import com.seb_pre_007.Server.auth.filter.JwtVerificationFilter;
 import com.seb_pre_007.Server.auth.handler.UserAccessDeniedHandler;
@@ -8,6 +9,7 @@ import com.seb_pre_007.Server.auth.handler.UserAuthenticationFailureHandler;
 import com.seb_pre_007.Server.auth.handler.UserAuthenticationSuccessHandler;
 import com.seb_pre_007.Server.auth.jwt.JwtTokenizer;
 import com.seb_pre_007.Server.auth.utils.CustomAuthorityUtils;
+import com.seb_pre_007.Server.user.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -17,6 +19,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -31,10 +34,12 @@ public class SecurityConfig  {
 
     private final JwtTokenizer jwtTokenizer;
     private final CustomAuthorityUtils authorityUtils;
+    private final UserService userService;
 
-    public SecurityConfig(JwtTokenizer jwtTokenizer, CustomAuthorityUtils authorityUtils) {
+    public SecurityConfig(JwtTokenizer jwtTokenizer, CustomAuthorityUtils authorityUtils, UserService userService) {
         this.jwtTokenizer = jwtTokenizer;
         this.authorityUtils = authorityUtils;
+        this.userService = userService;
     }
 
     @Bean
@@ -62,12 +67,15 @@ public class SecurityConfig  {
                         .antMatchers(HttpMethod.DELETE, "/questions/**").hasAnyRole("USER","ADMIN")
                         .antMatchers(HttpMethod.GET, "/questions/**").permitAll()
                         .anyRequest().permitAll()
+                )
+                .oauth2Login(oauth2 -> oauth2
+                        .successHandler(new OAuth2UserSuccessHandler(jwtTokenizer, authorityUtils, userService))  // (1)
                 );
         return http.build();
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public static PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
@@ -82,7 +90,7 @@ public class SecurityConfig  {
         return source;
     }
 
-    public class CustomFilterConfigurer extends AbstractHttpConfigurer<CustomFilterConfigurer, HttpSecurity> {  // (2-1)
+    public class CustomFilterConfigurer extends AbstractHttpConfigurer<CustomFilterConfigurer, HttpSecurity> { // (2-1)
         @Override
         public void configure(HttpSecurity builder) throws Exception {  // (2-2)
             AuthenticationManager authenticationManager = builder.getSharedObject(AuthenticationManager.class);  // (2-3)
@@ -94,7 +102,9 @@ public class SecurityConfig  {
             jwtAuthenticationFilter.setAuthenticationFailureHandler(new UserAuthenticationFailureHandler());
             JwtVerificationFilter jwtVerificationFilter = new JwtVerificationFilter(jwtTokenizer, authorityUtils); // (4) 추가
             builder.addFilter(jwtAuthenticationFilter)
-                    .addFilterAfter(jwtVerificationFilter, JwtAuthenticationFilter.class);  ;  // (2-6)
+                    .addFilterAfter(jwtVerificationFilter, JwtAuthenticationFilter.class);
+            builder.addFilter(jwtAuthenticationFilter)
+                    .addFilterAfter(jwtVerificationFilter, OAuth2LoginAuthenticationFilter.class);  // (2-6)
         }
     }
 

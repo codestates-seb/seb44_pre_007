@@ -37,7 +37,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     private final class CustomUserDetails extends User implements org.springframework.security.core.userdetails.UserDetails {
         // (1)
-        CustomUserDetails(User user) {
+        CustomUserDetails(User user){
             setUserId(user.getUserId());
             setUserEmail(user.getUserEmail());
             setUserPassword(passwordEncoder.encode(user.getUserPassword()));
