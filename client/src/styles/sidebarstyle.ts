@@ -79,7 +79,7 @@ export const WhiteTitle = styled(TitleLi)`
 `;
 
 export const CollectName = tw.h1`
-  text-label text-[15px]
+  text-blacklight text-[15px]
 `;
 
 export const CollectContent = styled(Ellipsis)`

@@ -47,7 +47,7 @@ function LeftSidebar() {
         <Liml8mt16 className="mb-2">TEAMS</Liml8mt16>
         <div className="border p-3 pb-1.5 rounded-[3px]">
           <strong>Stack Overflow for Teams</strong>
-          <span className="text-[13px] text-600">
+          <span className="text-[13px] text-black600">
             {' '}
             - Start collaborating and sharing organizational knowledge.
           </span>
