@@ -7,8 +7,13 @@ export type Question = {
   questionUserNickname: string;
   question_title: string;
   question_content: string;
-  question_tag: string[];
+  question_tag: TagT[];
   question_created: string;
   question_updated: string;
   answerCount: number;
+};
+
+export type TagT = {
+  tagId: number;
+  tagName: string;
 };

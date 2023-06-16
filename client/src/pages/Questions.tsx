@@ -2,7 +2,6 @@
 import { useNavigate } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import Btn from '../ui/Btn';
 import addCommasToNumber from '../utils/addCommasToNumber';
 import { Question } from '../types/types';
@@ -14,6 +13,7 @@ flex justify-center items-center text-[13px] rounded-[3px] text-white
 bg-bubg shadow-btn border-bubg border border-solid p-[10.4px]
 `;
 
+// todo 페이지네이션, fetch 리액트쿼리 사용하기
 function Questions() {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [questionsCount, setQuestionsCount] = useState<string>('');
@@ -33,6 +33,7 @@ function Questions() {
   const goToAsk = () => {
     navigate('/questions/ask');
   };
+
   return (
     <div className="w-[751px]">
       <section className="mb-3">

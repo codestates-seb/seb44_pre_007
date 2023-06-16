@@ -15,7 +15,19 @@
       "questionUserNickname": "닉네임입니다2",
       "question_title": "How can I create a sim shaped box with custom styling in React Native?",
       "question_content": "I'm working on a React Native project and I need to create a custom box with specific styling. I have attempted to achieve this, but I'm facing some difficulties. Could someone please guide me or provide suggestions on how to achieve the following? I have tried using the BorderRightRadius styling in React Native, but I'm not able to achieve the desired result.Can anyone help me out?",
-      "question_tag": ["react", "js", "react-native", "shapes"],
+      "question_tag": [{
+        "tagId": 8,
+        "tagName": "react"
+      },{
+        "tagId": 7,
+        "tagName": "js"
+      }, {
+        "tagId": 9,
+        "tagName": "react-native"
+      }, {
+        "tagId": 9,
+        "tagName": "shapes"
+      }],
       "question_created": "Feb 5, 2018 at 18:54",
       "question_updated": "Feb 5, 2018 at 18:54",
       "answerCount": 1
@@ -36,7 +48,13 @@
       "questionUserNickname": "닉네임입니다4",
       "question_title": "Mkdocs: On blog-style site, how do I make Next button go to chronologically next topic?",
       "question_content": "I've set up an mkdocs site using the Material theme where my topics are in reverse chronological order - that is, the most recent is at the top of the nav set. Unfortunately this means my Next and Prev buttons take you to the prev-in-time and next-in-time topics. What's the quickest way to resolve is? I tried making some changes to footer.html but while I could get the buttons to change I couldn't get the formatting right.",
-      "question_tag": ["mkdocs", "mkdocs-material"],
+      "question_tag": [{
+        "tagId": 1,
+        "tagName": "mkdocs"
+      },{
+        "tagId": 2,
+        "tagName": "mkdocs-material"
+      }],
       "question_created": "Feb 5, 2018 at 18:54",
       "question_updated": "Feb 5, 2018 at 18:54",
       "answerCount": 3

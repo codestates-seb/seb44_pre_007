@@ -3,7 +3,7 @@ import { styled } from 'styled-components';
 import tw from 'tailwind-styled-components';
 import { useNavigate } from 'react-router-dom';
 import { Ellipsis } from '../../styles/styles';
-import { Question } from '../../types/types';
+import { Question, TagT } from '../../types/types';
 import AnswerCountSpan from './AnswerCountSpan';
 import Tag from '../../ui/Tag';
 
@@ -46,8 +46,8 @@ function SummaryDiv({ question }: { question: Question }) {
         <Content className="mb-2 text-[13px] text-[#3B4045]">{question_content}</Content>
         <div>
           <div className="flex gap-1">
-            {question_tag.map((tag) => (
-              <Tag key={tag} content={tag} />
+            {question_tag.map((tag: TagT) => (
+              <Tag key={tag.tagId} content={tag.tagName} />
             ))}
           </div>
           <div className="flex gap-2 justify-end text-[12px]">
