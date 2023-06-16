@@ -42,6 +42,7 @@ function Question({ data }: { data: QueT }) {
                   Delete
                 </span>
               </div>
+              {/* Todo 날짜 가공 함수 구현해야함 */}
               <span className="text-Link">edited {Updated}</span>
               <span className="text-Link">{NickName}</span>
             </div>

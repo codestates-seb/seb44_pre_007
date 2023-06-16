@@ -6,6 +6,7 @@ import useMovePage from '../hooks/useMovePage';
 import { AskBtn } from '../styles/styles';
 import { FetchQuestion } from '../api/api';
 import { QueT } from '../types/types';
+import scrollToTop from '../utils/scrollToTop';
 
 function QuestionPage() {
   const { id } = useParams();
@@ -19,6 +20,7 @@ function QuestionPage() {
 
   useEffect(() => {
     fetchQuestion();
+    scrollToTop();
   }, []);
 
   return (
