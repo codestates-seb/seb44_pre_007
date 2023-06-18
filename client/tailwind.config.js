@@ -11,6 +11,7 @@ export default {
       boxShadow: {
         btn: '0px 1px 0px 0px inset #ffffff66',
         input: '0px 0px 0px 4px #E1ECF8',
+        error: '0px 0px 0px 4px #F7E4E4',
       },
       colors: {
         blacklight: '#6a737c',

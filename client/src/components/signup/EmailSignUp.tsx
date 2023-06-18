@@ -9,16 +9,16 @@ const StyledForm = tw.form`
 flex flex-col rounded-md
 `;
 const StyledLabel = tw.label`
-font-semibold mt-3
+font-semibold mt-3 bp1:text-sm
 `;
 const StyledInput = tw.input<{ $error: string | null }>`
-focus:shadow-input focus:border-sky-400 rounded border border-gray-400 w-[270px] h-[30px] bp1:w-[220px] px-2 py-4 text-sm font-light
-${(props) => (props.$error ? 'border-red-500' : '')}
+focus:shadow-input focus:border-sky-400 rounded border border-gray-400 w-[270px] h-[30px] bp1:w-[220px] px-2 py-4 text-sm font-light mt-1
+${(props) => (props.$error ? 'border-red-500 focus:border-red-500 focus:shadow-error' : '')}
 `;
 const StyledError = tw.p`
 text-red-500 text-[13px] w-[270px] bp1:w-[220px] mt-1
 `;
-const Button = styled.button`
+const Button = styled.button`https://developers.google.com/identity/sign-in/web/troubleshooting?hl=ko
   height: 40px;
   padding: 9.6px;
   border: 1px solid rgb(55, 159, 239);
@@ -67,7 +67,7 @@ export default function EmailSignUp() {
     const emailRegexp = /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 
     if (!userEmail) {
-      setUserEmailError('Email cannot be empty');
+      setUserEmailError('Email cannot be empty.');
       return false;
     }
     if (!emailRegexp.test(userEmail)) {
@@ -82,12 +82,12 @@ export default function EmailSignUp() {
     const userPasswordRegexp = /^(?=.*[A-Za-z])(?=.*\d)[a-zA-Z\\d`~!@#$%^&*()-_=+]{8,}$/;
 
     if (!userPassword) {
-      setUserPasswordError('userPassword cannot be empty.');
+      setUserPasswordError('Password cannot be empty.');
       return false;
     }
     if (!userPasswordRegexp.test(userPassword)) {
       setUserPasswordError(
-        'userPasswords must contain at least eight characters, including at least 1 letter and 1 number.'
+        'Passwords must contain at least eight characters, including at least 1 letter and 1 number.'
       );
       return false;
     }
@@ -122,7 +122,7 @@ export default function EmailSignUp() {
       <StyledLabel htmlFor="email">Email</StyledLabel>
       <StyledInput $error={userEmailError} type="text" id="email" onChange={handleEmail} />
       {userEmailError && <StyledError>{userEmailError}</StyledError>}
-      <StyledLabel htmlFor="password">userPassword</StyledLabel>
+      <StyledLabel htmlFor="password">Password</StyledLabel>
       <StyledInput
         $error={userPasswordError}
         type="password"
