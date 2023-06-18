@@ -1,5 +1,5 @@
 import tw from 'tailwind-styled-components';
-import EmailSignUp from './emailSignUp';
+import EmailSignUp from './EmailSignUp';
 import Policy from './Policy';
 import AddtionalInfo from './AdditionalInfo';
 
