@@ -1,6 +1,9 @@
 import tw from 'tailwind-styled-components';
 import { styled } from 'styled-components';
 import { useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
+import { UserInfo } from '../../types/types';
 
 const StyledForm = tw.form`
 flex flex-col rounded-md
@@ -33,85 +36,100 @@ const Button = styled.button`
 `;
 
 export default function EmailSignUp() {
-  const [username, setUsername] = useState<string | null>(null);
-  const [email, setEmail] = useState<string | null>(null);
-  const [password, setPassword] = useState<string | null>(null);
+  const [userNickname, setUserNickname] = useState<string | null>(null);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [userPassword, setUserPassword] = useState<string | null>(null);
 
-  const [usernameError, setUsernameError] = useState<string | null>(null);
-  const [emailError, setEmailError] = useState<string | null>(null);
-  const [passwordError, setPasswordError] = useState<string | null>(null);
+  const [userNicknameError, setUserNicknameError] = useState<string | null>(null);
+  const [userEmailError, setUserEmailError] = useState<string | null>(null);
+  const [userPasswordError, setUserPasswordError] = useState<string | null>(null);
 
-  const handleUserName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(e.target.value);
+  const handleuserNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserNickname(e.target.value);
   };
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
+    setUserEmail(e.target.value);
   };
-  const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
+  const handleuserPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserPassword(e.target.value);
   };
 
-  function checkUsername() {
-    if (!username) {
-      setUsernameError('Display name cannot be empty.');
+  function checkuserNickname() {
+    if (!userNickname) {
+      setUserNicknameError('Display name cannot be empty.');
       return false;
     }
-    setUsernameError(null);
+    setUserNicknameError(null);
     return true;
   }
 
   function checkEmail() {
     const emailRegexp = /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 
-    if (!email) {
-      setEmailError('Email cannot be empty');
+    if (!userEmail) {
+      setUserEmailError('Email cannot be empty');
       return false;
     }
-    if (!emailRegexp.test(email)) {
-      setEmailError(`${email} is not a valid email address.`);
+    if (!emailRegexp.test(userEmail)) {
+      setUserEmailError(`${userEmail} is not a valid userEmail address.`);
       return false;
     }
-    setEmailError(null);
+    setUserEmailError(null);
     return true;
   }
 
-  function checkPassword() {
-    const passwordRegexp = /^(?=.*[A-Za-z])(?=.*\d)[a-zA-Z\\d`~!@#$%^&*()-_=+]{8,}$/;
+  function checkuserPassword() {
+    const userPasswordRegexp = /^(?=.*[A-Za-z])(?=.*\d)[a-zA-Z\\d`~!@#$%^&*()-_=+]{8,}$/;
 
-    if (!password) {
-      setPasswordError('Password cannot be empty.');
+    if (!userPassword) {
+      setUserPasswordError('userPassword cannot be empty.');
       return false;
     }
-    if (!passwordRegexp.test(password)) {
-      setPasswordError(
-        'Passwords must contain at least eight characters, including at least 1 letter and 1 number.'
+    if (!userPasswordRegexp.test(userPassword)) {
+      setUserPasswordError(
+        'userPasswords must contain at least eight characters, including at least 1 letter and 1 number.'
       );
       return false;
     }
-    setPasswordError(null);
+    setUserPasswordError(null);
     return true;
   }
 
   function validate() {
-    return checkUsername() && checkEmail() && checkPassword();
+    return checkuserNickname() && checkEmail() && checkuserPassword();
   }
+  const mutation = useMutation({
+    mutationFn: (newUser: UserInfo) => axios.post('http://localhost:3000/users', newUser),
+  });
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    validate();
+    if (validate()) {
+      mutation.mutate({ userNickname, userEmail, userPassword });
+    }
   };
 
   return (
     <StyledForm onSubmit={submitHandler}>
       <StyledLabel htmlFor="display-name">Display name</StyledLabel>
-      <StyledInput $error={usernameError} type="text" onChange={handleUserName} />
-      {usernameError && <StyledError>{usernameError}</StyledError>}
+      <StyledInput
+        $error={userNicknameError}
+        type="text"
+        id="display-name"
+        onChange={handleuserNickname}
+      />
+      {userNicknameError && <StyledError>{userNicknameError}</StyledError>}
       <StyledLabel htmlFor="email">Email</StyledLabel>
-      <StyledInput $error={emailError} type="text" onChange={handleEmail} />
-      {emailError && <StyledError>{emailError}</StyledError>}
-      <StyledLabel htmlFor="password">Password</StyledLabel>
-      <StyledInput $error={passwordError} type="password" onChange={handlePassword} />
-      {passwordError && <StyledError>{passwordError}</StyledError>}
+      <StyledInput $error={userEmailError} type="text" id="email" onChange={handleEmail} />
+      {userEmailError && <StyledError>{userEmailError}</StyledError>}
+      <StyledLabel htmlFor="password">userPassword</StyledLabel>
+      <StyledInput
+        $error={userPasswordError}
+        type="password"
+        id="password"
+        onChange={handleuserPassword}
+      />
+      {userPasswordError && <StyledError>{userPasswordError}</StyledError>}
       <Button type="submit">Sign up</Button>
     </StyledForm>
   );

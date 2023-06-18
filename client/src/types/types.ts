@@ -9,3 +9,9 @@ export interface IconStyle {
   height: string;
   color: string;
 }
+
+export interface UserInfo {
+  userNickname: string | null;
+  userEmail: string | null;
+  userPassword: string | null;
+}
