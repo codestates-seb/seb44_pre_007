@@ -14,7 +14,7 @@ flex flex-col items-center
 const StyledFormContainer = tw.div`
 bg-white rounded-md shadow-md py-10 px-6 flex flex-col justify-center items-center
 `;
-const clientId = '308793703590-5qm4tlbltgn8uumir14dkko81ebjtm8h.apps.googleusercontent.com';
+const clientId = import.meta.env.VITE_CLIENT_ID;
 
 export default function SignUpForm() {
   return (

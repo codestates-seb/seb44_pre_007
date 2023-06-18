@@ -6,9 +6,9 @@ import GoogleIcon from '../../public/Icons/GoogleIcon';
 
 export default function GoogleLoginButton() {
   const mutation = useMutation({
-    mutationFn: (newUser: Omit<TokenResponse, 'error' | 'error_description' | 'error_uri'>) =>
+    mutationFn: (tokenResponse: Omit<TokenResponse, 'error' | 'error_description' | 'error_uri'>) =>
       // eslint-disable-next-line implicit-arrow-linebreak
-      axios.post('http://localhost:3000/users', newUser),
+      axios.post(import.meta.env.VITE_URL, tokenResponse),
   });
 
   const login = useGoogleLogin({
