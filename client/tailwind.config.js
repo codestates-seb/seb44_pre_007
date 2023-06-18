@@ -12,6 +12,7 @@ export default {
         btn: '0px 1px 0px 0px inset #ffffff66',
         input: '0px 0px 0px 4px #E1ECF8',
         error: '0px 0px 0px 4px #F7E4E4',
+        btnActive: '0px 0px 0px 4px #DEE0E0',
       },
       colors: {
         blacklight: '#6a737c',
@@ -22,6 +23,8 @@ export default {
         users000: '#F1F2F3',
         primaryBlue: '#0995FF',
         darkBlue: '#0074CC',
+        buttonHover: '#F8F9F9',
+        buttonBorer: 'rgb(214, 217, 220)',
       },
     },
   },

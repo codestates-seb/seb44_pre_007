@@ -1,34 +1,29 @@
 import tw from 'tailwind-styled-components';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import EmailSignUp from './EmailSignUp';
 import Policy from './Policy';
 import AddtionalInfo from './AdditionalInfo';
+import GoogleLoginButton from './GoogleLoginButton';
 
+const StyledOAuthDiv = tw.div`
+mb-4 w-full
+`;
 const StyledWrapper = tw.div`
 flex flex-col items-center
 `;
 const StyledFormContainer = tw.div`
 bg-white rounded-md shadow-md py-10 px-6 flex flex-col justify-center items-center
 `;
+const clientId = '308793703590-5qm4tlbltgn8uumir14dkko81ebjtm8h.apps.googleusercontent.com';
 
 export default function SignUpForm() {
   return (
     <StyledWrapper>
-      <script src="https://accounts.google.com/gsi/client" async defer />
-      <div
-        id="g_id_onload"
-        data-client_id="YOUR_GOOGLE_CLIENT_ID"
-        data-login_uri="https://your.domain/your_login_endpoint"
-        data-auto_prompt="false"
-      />
-      <div
-        className="g_id_signin"
-        data-type="standard"
-        data-size="large"
-        data-theme="outline"
-        data-text="sign_in_with"
-        data-shape="rectangular"
-        data-logo_alignment="left"
-      />
+      <StyledOAuthDiv>
+        <GoogleOAuthProvider clientId={clientId}>
+          <GoogleLoginButton />
+        </GoogleOAuthProvider>
+      </StyledOAuthDiv>
       <StyledFormContainer>
         <EmailSignUp />
         <Policy />
