@@ -1,7 +1,7 @@
 export type Props = {
   children: string | JSX.Element | JSX.Element[];
-  primaryColor: string;
-  hoverColor: string;
+  primaryColor?: string;
+  hoverColor?: string;
 };
 
 export type Question = {
