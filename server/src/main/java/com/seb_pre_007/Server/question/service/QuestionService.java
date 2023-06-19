@@ -77,7 +77,9 @@ public class QuestionService {
         findQuestion.setQuestionTagList(new ArrayList<>());
 
         // 입력받은 태그리스트
-        List<String> inputTags = questionPatchDto.getQuestionTag();
+        List<String> inputTags = questionPatchDto.getQuestionTag().stream()
+                .map(inputTag -> inputTag.toUpperCase())
+                .collect(Collectors.toList());
 
         // 태그 정보 조회 및 연관관계 설정
         for (int i = 0; i < inputTags.size(); i++) {
