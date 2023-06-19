@@ -104,7 +104,6 @@ public class OAuth2UserSuccessHandler extends SimpleUrlAuthenticationSuccessHand
                 .scheme("http")
                 .host("localhost")
 //                .port(80)
-                .path("/receive-token.html")
                 .queryParams(queryParams)
                 .build()
                 .toUri();
