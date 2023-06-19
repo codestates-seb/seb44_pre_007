@@ -5,10 +5,10 @@ import Tag from '../../ui/Tag';
 function QuestionContainer({ data }: { data: QueT }) {
   const {
     id,
-    question_content: contetn,
-    question_tag: QTag,
-    question_updated: updated,
-    question_created: created,
+    questionContent: contetn,
+    tagList: QTag,
+    questionUpdated: updated,
+    questionCreated: created,
     questionUserNickname: nickName,
   } = data;
 

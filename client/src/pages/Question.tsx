@@ -31,16 +31,16 @@ function QuestionPage() {
     <div className="p-6 border-l border-brgray">
       <main className="w-[1051px]">
         <div className="flex justify-between items-start mb-3">
-          {!!data && (
-            <h1 className="mr-3 mb-3 text-[27px] text-blackDark">{data.question_title}</h1>
-          )}
+          {!!data && <h1 className="mr-3 mb-3 text-[27px] text-blackDark">{data.questionTitle}</h1>}
           <AskQuestionBtn />
         </div>
         <div className="flex gap-4 pb-2 mb-4 border-b border-brgray">
           {!!data && (
             <>
-              <DateDiv>Asked {data.question_created} </DateDiv>
-              <DateDiv>Modified {data.question_updated}</DateDiv>
+              <DateDiv>Asked {data.questionCreated} </DateDiv>
+              {data.questionCreated !== data.questionUpdated && (
+                <DateDiv>Modified {data.questionUpdated}</DateDiv>
+              )}
             </>
           )}
         </div>

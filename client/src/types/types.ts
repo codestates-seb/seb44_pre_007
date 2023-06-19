@@ -24,6 +24,7 @@ export type AnswerT = {
 };
 
 export type QueT = Question & {
+  id: number;
   answers: AnswerT[];
 };
 
