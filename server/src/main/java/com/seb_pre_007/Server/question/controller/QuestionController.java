@@ -2,6 +2,7 @@ package com.seb_pre_007.Server.question.controller;
 
 import com.seb_pre_007.Server.question.dto.QuestionData;
 import com.seb_pre_007.Server.question.dto.QuestionPatchDto;
+import com.seb_pre_007.Server.question.dto.QuestionPostDto;
 import com.seb_pre_007.Server.question.dto.QuestionResponseDto;
 import com.seb_pre_007.Server.question.entity.Question;
 import com.seb_pre_007.Server.question.entity.QuestionTag;
@@ -83,5 +84,30 @@ public class QuestionController {
         headers.setLocation(URI.create("/questions/" + questionId));
         return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
     }
+
+    @PostMapping("/ask")
+    public ResponseEntity postQuestion(@Valid  @RequestBody QuestionPostDto questionPostDto, Authentication authentication) {
+
+        String userEmail = authentication.getPrincipal().toString();
+
+        Question createdQuestion = questionService.createQuestion(questionPostDto, userEmail);
+
+       HttpHeaders headers = new HttpHeaders();
+       headers.setLocation(URI.create("/questions/" + createdQuestion.getQuestionId()));
+       return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
+ // redirect 미구현시     return ResponseEntity.status(HttpStatus.CREATED).body(null);
+    }
+
+
+    @DeleteMapping("/{question-id}")
+    public ResponseEntity deleteQuestion(@PathVariable("question-id") long questionId, Authentication authentication){
+
+        String userEmail = authentication.getPrincipal().toString();
+
+        questionService.deleteQuestion(questionId, userEmail);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 
 }
