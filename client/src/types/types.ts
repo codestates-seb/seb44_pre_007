@@ -3,13 +3,13 @@ export type Props = {
 };
 
 export type Question = {
-  id: number;
+  questionId: number;
   questionUserNickname: string;
-  question_title: string;
-  question_content: string;
-  question_tag: TagT[];
-  question_created: string;
-  question_updated: string;
+  questionTitle: string;
+  questionContent: string;
+  tagList: TagT[];
+  questionCreated: string;
+  questionUpdated: string;
   answerCount: number;
 };
 

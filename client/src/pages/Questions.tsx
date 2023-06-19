@@ -11,13 +11,14 @@ import AskQuestionBtn from '../components/AskQuestionBtn';
 
 // todo 페이지네이션, fetch 리액트쿼리 사용하기
 function Questions() {
+  const [currentpage, SetCurrentpage] = useState(1);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [questionsCount, setQuestionsCount] = useState<string>('');
 
   const fetchData = async () => {
-    const res = await FetchQuestions(LIMIT);
-    setQuestions(res.data);
-    const dataLength = addCommasToNumber(res.data.length);
+    const res = await FetchQuestions(currentpage, LIMIT);
+    setQuestions(res.data.data);
+    const dataLength = addCommasToNumber(res.data.pageInfo.totalElement);
     setQuestionsCount(dataLength);
   };
 
@@ -42,7 +43,7 @@ function Questions() {
       <main className="w-full border-t border-brgray">
         {!!questions.length &&
           questions.map((question: Question) => (
-            <SummaryDiv key={question.id} question={question} />
+            <SummaryDiv key={question.questionId} question={question} />
           ))}
       </main>
     </div>

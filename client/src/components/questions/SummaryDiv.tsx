@@ -17,16 +17,16 @@ const Content = styled(Ellipsis)`
 
 function SummaryDiv({ question }: { question: Question }) {
   const {
-    id,
+    questionId,
     questionUserNickname,
-    question_title,
-    question_content,
-    question_tag,
-    question_created,
+    questionTitle,
+    questionContent,
+    tagList,
+    questionCreated,
     answerCount,
   } = question;
 
-  const goToQuestion = useMovePage(`/questions/${id}`);
+  const goToQuestion = useMovePage(`/questions/${questionId}`);
 
   return (
     <Summarydiv>
@@ -39,18 +39,18 @@ function SummaryDiv({ question }: { question: Question }) {
           className="pr-6 text-[17px] text-[#0063BF] cursor-pointer"
           onClick={goToQuestion}
         >
-          {question_title}
+          {questionTitle}
         </h3>
-        <Content className="mb-2 text-[13px] text-[#3B4045]">{question_content}</Content>
+        <Content className="mb-2 text-[13px] text-[#3B4045]">{questionContent}</Content>
         <div>
           <div className="flex gap-1">
-            {question_tag.map((tag: TagT) => (
+            {tagList.map((tag: TagT) => (
               <Tag key={tag.tagId} content={tag.tagName} />
             ))}
           </div>
           <div className="flex gap-2 justify-end text-[12px]">
             <div className="text-nickname text-[12px]">{questionUserNickname}</div>
-            <div className="text-blacklight">asked {question_created}</div>
+            <div className="text-blacklight">asked {questionCreated}</div>
           </div>
         </div>
       </section>
