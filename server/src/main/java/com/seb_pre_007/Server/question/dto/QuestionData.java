@@ -17,7 +17,6 @@ public class QuestionData {
     private String questionContent;
     private LocalDateTime questionCreated;
     private LocalDateTime questionUpdated;
-    private int answerCount;
     private int questionCount;
     private List<TagDto> tagList;
 

@@ -1,5 +1,6 @@
 package com.seb_pre_007.Server.question.controller;
 
+import com.seb_pre_007.Server.question.dto.QuestionDetailResponseDto;
 import com.seb_pre_007.Server.question.dto.QuestionResponseDto;
 import com.seb_pre_007.Server.question.entity.Question;
 import com.seb_pre_007.Server.question.entity.QuestionTag;
@@ -56,6 +57,21 @@ public class QuestionController {
                 new QuestionResponseDto(questionMapper.questionsToQuestionDatas(questions),pageQuestions),
                 HttpStatus.OK);
 
+
+
+    }
+
+    @GetMapping("/{question-id}")
+    public ResponseEntity getQuestion(@PathVariable("question-id") @Positive long questionId){
+
+
+        Question question= questionService.findeQuestion(questionId);
+
+        QuestionDetailResponseDto questionResponseDto= questionMapper.qeustionToResponseDto(question);
+
+         questionService.updateViewQuestions(questionId);
+
+         return new ResponseEntity(questionResponseDto, HttpStatus.OK);
 
 
     }

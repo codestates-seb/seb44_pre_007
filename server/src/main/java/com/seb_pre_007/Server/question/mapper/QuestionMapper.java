@@ -1,6 +1,8 @@
 package com.seb_pre_007.Server.question.mapper;
 
 import com.seb_pre_007.Server.question.dto.QuestionData;
+import com.seb_pre_007.Server.question.dto.QuestionDetailResponseDto;
+import com.seb_pre_007.Server.question.dto.QuestionResponseDto;
 import com.seb_pre_007.Server.question.entity.Question;
 import com.seb_pre_007.Server.tag.dto.TagDto;
 import com.seb_pre_007.Server.tag.entity.Tag;
@@ -27,7 +29,7 @@ public interface QuestionMapper {
                 .questionCreated(question.getQuestionCreated())
                 .questionUpdated(question.getQuestionUpdated())
                 .questionCount(question.getQuestionCount())
-                .answerCount(question.getAnswerCount())
+                //.answerCount(question.getAnswerCount())
                 .tagList(question.getQuestionTagList().stream()
                         .map(questionTag -> new TagDto(questionTag.getTag().getTagId(), questionTag.getTag().getTagName()))
                         .collect(Collectors.toList())
@@ -35,4 +37,5 @@ public interface QuestionMapper {
     }
     List<QuestionData> questionsToQuestionDatas(List<Question> questions);
 
+    QuestionDetailResponseDto qeustionToResponseDto(Question question);
 }

@@ -7,9 +7,9 @@ import com.seb_pre_007.Server.tag.entity.Tag;
 import com.seb_pre_007.Server.tag.service.TagService;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.Positive;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -59,4 +59,26 @@ public class QuestionService {
         return  questionPage;
 
     }
+
+    public Question findeQuestion(long questionId) {
+
+        updateViewQuestions(questionId);
+
+        return questionRepository.findByQuestionId(questionId);
+    }
+
+    @Transactional
+    public void updateViewQuestions(long questionId) {
+
+        int questionCount = 0;
+        Question byQuestionId = questionRepository.findByQuestionId(questionId);
+
+        byQuestionId.setQuestionCount(questionCount);
+
+        questionCount++;
+
+
+
+    }
+
 }
