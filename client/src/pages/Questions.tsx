@@ -9,21 +9,22 @@ import { FetchQuestions } from '../api/api';
 import RightSidebar from '../components/sidebar/RightSidebar';
 import { LIMIT } from '../constant/constantValue';
 import AskQuestionBtn from '../components/AskQuestionBtn';
+import scrollToTop from '../utils/scrollToTop';
 
-const PageBtn = styled.button`
+const PageBtn = styled.button<{ $nowpage?: string }>`
   height: 25px;
-  background-color: ${(props) => (props.nowPage ? '#F48225' : 'white')};
-  color: ${(props) => (props.nowPage ? 'white' : 'color')};
+  background-color: ${(props) => (props.$nowpage === 'true' ? '#F48225' : 'white')};
+  color: ${(props) => (props.$nowpage === 'true' ? 'white' : '#3B4045')};
   padding-left: 8px;
   padding-right: 8px;
   border: 1px solid;
-  border-color: ${(props) => (props.nowPage ? 'rgba(0, 0, 0, 0)' : 'rgba(186, 191, 196)')};
+  border-color: ${(props) => (props.$nowpage === 'true' ? 'none' : 'rgba(186, 191, 196)')};
   border-radius: 3px;
   font-size: 13px;
   font-weight: 400;
 `;
 
-// todo 페이지네이션, fetch 리액트쿼리 사용하기
+// todo fetch 리액트쿼리 사용하기
 function Questions() {
   const [currentpage, SetCurrentpage] = useState(1);
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -40,6 +41,7 @@ function Questions() {
 
   useEffect(() => {
     fetchData();
+    scrollToTop();
   }, [currentpage]);
 
   const handleMoveToNextPage = () => {
@@ -54,19 +56,113 @@ function Questions() {
   };
 
   const pageBtn = () => {
+    const centerBtn = currentpage;
+    const lastPage = pageData?.totalPages ?? 1;
     const btn = [];
-    for (let index = 1; index <= pageData!.totalPages; index += 1) {
+    if (currentpage < 5) {
+      const last = lastPage < 5 ? lastPage : 5;
+      for (let index = 1; index <= last; index += 1) {
+        btn.push(
+          <PageBtn
+            type="button"
+            $nowpage={(currentpage === index).toString()}
+            key={index}
+            onClick={() => {
+              handleMoveToPage(index);
+            }}
+          >
+            {index}
+          </PageBtn>
+        );
+      }
+    } else if (currentpage > lastPage - 4) {
+      for (let index = lastPage - 4; index <= lastPage; index += 1) {
+        btn.push(
+          <PageBtn
+            type="button"
+            $nowpage={(currentpage === index).toString()}
+            key={index}
+            onClick={() => {
+              handleMoveToPage(index);
+            }}
+          >
+            {index}
+          </PageBtn>
+        );
+      }
+    } else {
       btn.push(
         <PageBtn
           type="button"
-          nowPage={currentpage === index}
-          key={index}
+          $nowpage="true"
+          key={centerBtn}
           onClick={() => {
-            handleMoveToPage(index);
+            handleMoveToPage(centerBtn);
           }}
         >
-          {index}
+          {centerBtn}
         </PageBtn>
+      );
+
+      for (let index = 1; index < 3; index += 1) {
+        if (centerBtn + index <= lastPage) {
+          btn.push(
+            <PageBtn
+              type="button"
+              key={centerBtn + index}
+              onClick={() => {
+                handleMoveToPage(centerBtn + index);
+              }}
+            >
+              {centerBtn + index}
+            </PageBtn>
+          );
+        }
+        if (centerBtn - index > 0) {
+          btn.unshift(
+            <PageBtn
+              type="button"
+              key={centerBtn - index}
+              onClick={() => {
+                handleMoveToPage(centerBtn - index);
+              }}
+            >
+              {centerBtn - index}
+            </PageBtn>
+          );
+        }
+      }
+    }
+
+    if (centerBtn - 2 > 1 && centerBtn > 4) {
+      btn.unshift(
+        <div className="flex" key={1}>
+          <PageBtn
+            type="button"
+            onClick={() => {
+              handleMoveToPage(1);
+            }}
+          >
+            {1}
+          </PageBtn>
+          <p className="mx-2"> ... </p>
+        </div>
+      );
+    }
+
+    if (centerBtn + 2 < lastPage && centerBtn < lastPage - 3) {
+      btn.push(
+        <div className="flex" key={pageData?.totalPages}>
+          <p className="mx-2"> ... </p>
+          <PageBtn
+            type="button"
+            onClick={() => {
+              handleMoveToPage(lastPage);
+            }}
+          >
+            {lastPage}
+          </PageBtn>
+        </div>
       );
     }
     return btn;
@@ -100,7 +196,7 @@ function Questions() {
             </PageBtn>
           )}
           {pageBtn()}
-          {pageData.totalPages > 1 && (
+          {pageData.totalPages > 1 && currentpage !== pageData.totalPages && (
             <PageBtn type="button" onClick={handleMoveToNextPage}>
               Next
             </PageBtn>

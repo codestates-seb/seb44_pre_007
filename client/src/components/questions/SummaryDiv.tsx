@@ -37,7 +37,7 @@ function SummaryDiv({ question }: { question: Question }) {
     } else {
       setFormatedDate(`asked ${formateDate}`);
     }
-  }, [question]);
+  }, [questionUpdated, questionCreated]);
 
   const goToQuestion = useMovePage(`/questions/${questionId}`);
   return (
