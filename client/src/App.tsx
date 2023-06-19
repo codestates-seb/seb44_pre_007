@@ -3,6 +3,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Root from './pages/Root';
 import QuestionsPage from './pages/Questions';
 import QuestionPage from './pages/Question';
+import SignUp from './pages/SignUp';
+import Users from './pages/Users';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +18,16 @@ const router = createBrowserRouter([
       {
         path: 'questions/:id',
         element: <QuestionPage />,
+      },
+    ],
+  },
+  {
+    path: 'users',
+    element: <Users />,
+    children: [
+      {
+        path: 'signup',
+        element: <SignUp />,
       },
     ],
   },

@@ -1,17 +1,19 @@
 export type Props = {
   children: string | JSX.Element | JSX.Element[];
+  primaryColor?: string;
+  hoverColor?: string;
 };
 
-export interface QueListT {
-  id: number;
+export type Question = {
+  questionId: number;
   questionUserNickname: string;
-  question_title: string;
-  question_content: string;
-  question_tag: TagT[];
-  question_created: string;
-  question_updated: string;
+  questionTitle: string;
+  questionContent: string;
+  tagList: TagT[];
+  questionCreated: string;
+  questionUpdated: string;
   answerCount: number;
-}
+};
 
 export type AnswerT = {
   answerId: number;
@@ -21,11 +23,30 @@ export type AnswerT = {
   answerUpdated: string;
 };
 
-export type QueT = QueListT & {
+export type QueT = Question & {
   answers: AnswerT[];
+};
+
+export type PageT = {
+  limit: number;
+  page: number;
+  totalElement: number;
+  totalPages: number;
 };
 
 export type TagT = {
   tagId: number;
   tagName: string;
 };
+
+export interface IconStyle {
+  width: string;
+  height: string;
+  color: string;
+}
+
+export interface UserInfo {
+  userNickname: string | null;
+  userEmail: string | null;
+  userPassword: string | null;
+}

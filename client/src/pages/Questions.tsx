@@ -2,28 +2,38 @@
 import { useEffect, useState } from 'react';
 import Btn from '../ui/Btn';
 import addCommasToNumber from '../utils/addCommasToNumber';
-import { QueListT } from '../types/types';
+import { PageT, Question } from '../types/types';
 import SummaryDiv from '../components/questions/SummaryDiv';
 import { FetchQuestions } from '../api/api';
 import RightSidebar from '../components/sidebar/RightSidebar';
 import { LIMIT } from '../constant/constantValue';
 import AskQuestionBtn from '../components/AskQuestionBtn';
+import scrollToTop from '../utils/scrollToTop';
+import PageBtnDiv from '../components/questions/PageBtnDiv';
 
-// todo 페이지네이션, fetch 리액트쿼리 사용하기
+// todo fetch 리액트쿼리 사용하기
 function Questions() {
-  const [questions, setQuestions] = useState<QueListT[]>([]);
+  const [currentpage, SetCurrentpage] = useState(1);
+  const [questions, setQuestions] = useState<Question[]>([]);
+  const [pageData, setPageData] = useState<PageT>();
   const [questionsCount, setQuestionsCount] = useState<string>('');
 
   const fetchData = async () => {
-    const res = await FetchQuestions(LIMIT);
-    setQuestions(res.data);
-    const dataLength = addCommasToNumber(res.data.length);
+    const res = await FetchQuestions(currentpage, LIMIT);
+    setQuestions(res.data.data);
+    setPageData(res.data.pageInfo);
+    const dataLength = addCommasToNumber(res.data.pageInfo.totalElement);
     setQuestionsCount(dataLength);
+  };
+
+  const handleCurrentPage = (page: number) => {
+    SetCurrentpage(page);
   };
 
   useEffect(() => {
     fetchData();
-  }, []);
+    scrollToTop();
+  }, [currentpage]);
 
   return (
     <div className="w-[727px]">
@@ -41,10 +51,17 @@ function Questions() {
       </section>
       <main className="w-full border-t border-brgray">
         {!!questions.length &&
-          questions.map((question: QueListT) => (
-            <SummaryDiv key={question.id} question={question} />
+          questions.map((question: Question) => (
+            <SummaryDiv key={question.questionId} question={question} />
           ))}
       </main>
+      {pageData && (
+        <PageBtnDiv
+          handleCurrentPage={handleCurrentPage}
+          currentpage={currentpage}
+          LastPage={pageData.totalPages}
+        />
+      )}
     </div>
   );
 }

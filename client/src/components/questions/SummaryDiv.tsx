@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { styled } from 'styled-components';
 import tw from 'tailwind-styled-components';
+import { useEffect, useState } from 'react';
 import { Ellipsis } from '../../styles/styles';
-import { QueListT, TagT } from '../../types/types';
+import { Question, TagT } from '../../types/types';
 import AnswerCountSpan from './AnswerCountSpan';
 import Tag from '../../ui/Tag';
 import useMovePage from '../../hooks/useMovePage';
+import formatingDate from '../../utils/formatingDate';
 
 const Summarydiv = tw.div`
 p-4 flex border-b border-brgray
@@ -15,19 +17,29 @@ const Content = styled(Ellipsis)`
   font-size: 13px;
 `;
 
-function SummaryDiv({ question }: { question: QueListT }) {
+function SummaryDiv({ question }: { question: Question }) {
   const {
-    id,
+    questionId,
     questionUserNickname,
-    question_title,
-    question_content,
-    question_tag,
-    question_created,
+    questionTitle,
+    questionContent,
+    tagList,
+    questionCreated,
+    questionUpdated,
     answerCount,
   } = question;
 
-  const goToQuestion = useMovePage(`/questions/${id}`);
+  const [formateeDate, setFormatedDate] = useState('');
+  useEffect(() => {
+    const formateDate = formatingDate(questionUpdated);
+    if (questionCreated !== questionUpdated) {
+      setFormatedDate(`modified ${formateDate}`);
+    } else {
+      setFormatedDate(`asked ${formateDate}`);
+    }
+  }, [questionUpdated, questionCreated]);
 
+  const goToQuestion = useMovePage(`/questions/${questionId}`);
   return (
     <Summarydiv>
       <section className="w-[108px] flex gap-2 items-start justify-end mr-4 mb-1">
@@ -39,18 +51,18 @@ function SummaryDiv({ question }: { question: QueListT }) {
           className="pr-6 text-[17px] text-[#0063BF] cursor-pointer"
           onClick={goToQuestion}
         >
-          {question_title}
+          {questionTitle}
         </h3>
-        <Content className="mb-2 text-[13px] text-[#3B4045]">{question_content}</Content>
-        <div>
+        <Content className="mb-2 text-[13px] text-[#3B4045]">{questionContent}</Content>
+        <div className="grid gap-1">
           <div className="flex gap-1">
-            {question_tag.map((tag: TagT) => (
+            {tagList.map((tag: TagT) => (
               <Tag key={tag.tagId} content={tag.tagName} />
             ))}
           </div>
-          <div className="flex gap-2 justify-end text-[12px]">
-            <div className="text-Link text-[12px]">{questionUserNickname}</div>
-            <div className="text-blacklight">asked {question_created}</div>
+          <div className="flex gap-2 text-[12px] justify-self-end">
+            <div className="text-nickname text-[12px]">{questionUserNickname}</div>
+            <div className="text-blacklight">{formateeDate}</div>
           </div>
         </div>
       </section>
