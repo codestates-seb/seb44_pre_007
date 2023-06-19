@@ -71,7 +71,7 @@ export default function EmailSignUp() {
       return false;
     }
     if (!emailRegexp.test(userEmail)) {
-      setUserEmailError(`${userEmail} is not a valid userEmail address.`);
+      setUserEmailError(`${userEmail} is not a valid email address.`);
       return false;
     }
     setUserEmailError(null);

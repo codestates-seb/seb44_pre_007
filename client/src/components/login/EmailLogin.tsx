@@ -75,10 +75,6 @@ export default function EmailLogin() {
     return checkEmail() && checkuserPassword();
   }
   const defaultHeader = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type, Accept',
-    'Access-Control-Max-Age': 10,
     'Content-Type': 'Application/json',
   };
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
@@ -89,7 +85,6 @@ export default function EmailLogin() {
           import.meta.env.VITE_LOGIN_URL,
           { username, password },
           {
-            withCredentials: true,
             headers: defaultHeader,
           }
         )
@@ -97,9 +92,9 @@ export default function EmailLogin() {
         .catch((error) => {
           if (error.response && error.response.status === 401) {
             setLoginError('No user found with matching data');
-            console.error('에러: 인증이 실패했습니다.');
+            console.error('error: Authentication failed.');
           } else {
-            console.error('에러:', error);
+            console.error('error:', error);
           }
         });
     }
