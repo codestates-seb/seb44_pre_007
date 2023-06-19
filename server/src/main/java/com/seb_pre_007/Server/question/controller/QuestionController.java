@@ -14,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.util.MultiValueMap;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -70,10 +71,13 @@ public class QuestionController {
 
     @PatchMapping("/{question-id}/edit")
     public ResponseEntity patchQuestion(@Positive @PathVariable("question-id") long questionId,
-                                        @Valid @RequestBody QuestionPatchDto questionPatchDto) {
+                                        @Valid @RequestBody QuestionPatchDto questionPatchDto,
+                                        Authentication authentication) {
+
+        String userEmail = authentication.getPrincipal().toString();
 
         questionPatchDto.setQuestionId(questionId);
-        Question question = questionService.updateQuestion(questionPatchDto);
+        Question question = questionService.updateQuestion(questionPatchDto, userEmail);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(URI.create("/questions/" + questionId));
