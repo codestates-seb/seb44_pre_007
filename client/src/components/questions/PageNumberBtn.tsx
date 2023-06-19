@@ -24,7 +24,6 @@ function PageBtn({ currentpage, index, callback }: BtnT) {
     <PageButton
       type="button"
       $nowpage={(currentpage === index).toString()}
-      key={index}
       onClick={() => {
         callback(index);
       }}

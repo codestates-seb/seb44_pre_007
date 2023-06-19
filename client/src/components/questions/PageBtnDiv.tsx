@@ -26,18 +26,40 @@ function PageBtnDiv({ currentpage, LastPage, handleCurrentPage }: PageBtnPropT) 
     if (currentpage < 5) {
       const last = lastPage < 5 ? lastPage : 5;
       for (let index = 1; index <= last; index += 1) {
-        btn.push(<PageBtn currentpage={currentpage} index={index} callback={handleMoveToPage} />);
+        btn.push(
+          <PageBtn
+            key={index}
+            currentpage={currentpage}
+            index={index}
+            callback={handleMoveToPage}
+          />
+        );
       }
     } else if (currentpage > lastPage - 4) {
       for (let index = lastPage - 4; index <= lastPage; index += 1) {
-        btn.push(<PageBtn currentpage={currentpage} index={index} callback={handleMoveToPage} />);
+        btn.push(
+          <PageBtn
+            key={index}
+            currentpage={currentpage}
+            index={index}
+            callback={handleMoveToPage}
+          />
+        );
       }
     } else {
-      btn.push(<PageBtn currentpage={currentpage} index={centerBtn} callback={handleMoveToPage} />);
+      btn.push(
+        <PageBtn
+          key={centerBtn}
+          currentpage={currentpage}
+          index={centerBtn}
+          callback={handleMoveToPage}
+        />
+      );
       for (let index = 1; index < 3; index += 1) {
         if (centerBtn + index <= lastPage) {
           btn.push(
             <PageBtn
+              key={centerBtn + index}
               currentpage={currentpage}
               index={centerBtn + index}
               callback={handleMoveToPage}
@@ -47,6 +69,7 @@ function PageBtnDiv({ currentpage, LastPage, handleCurrentPage }: PageBtnPropT) 
         if (centerBtn - index > 0) {
           btn.unshift(
             <PageBtn
+              key={centerBtn - index}
               currentpage={currentpage}
               index={centerBtn - index}
               callback={handleMoveToPage}
@@ -59,7 +82,7 @@ function PageBtnDiv({ currentpage, LastPage, handleCurrentPage }: PageBtnPropT) 
     if (centerBtn - 2 > 1 && centerBtn > 4) {
       btn.unshift(
         <div className="flex" key={1}>
-          <PageBtn currentpage={currentpage} index={1} callback={handleMoveToPage} />
+          <PageBtn key={1} currentpage={currentpage} index={1} callback={handleMoveToPage} />
           <p className="mx-2"> ... </p>
         </div>
       );
@@ -69,7 +92,12 @@ function PageBtnDiv({ currentpage, LastPage, handleCurrentPage }: PageBtnPropT) 
       btn.push(
         <div className="flex" key={lastPage}>
           <p className="mx-2"> ... </p>
-          <PageBtn currentpage={currentpage} index={lastPage} callback={handleMoveToPage} />
+          <PageBtn
+            key={lastPage}
+            currentpage={currentpage}
+            index={lastPage}
+            callback={handleMoveToPage}
+          />
         </div>
       );
     }
