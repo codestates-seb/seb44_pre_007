@@ -3,19 +3,19 @@ package com.seb_pre_007.Server.question.service;
 import com.seb_pre_007.Server.exception.BusinessLogicException;
 import com.seb_pre_007.Server.exception.ExceptionCode;
 import com.seb_pre_007.Server.question.dto.QuestionPatchDto;
+import com.seb_pre_007.Server.question.dto.QuestionPostDto;
 import com.seb_pre_007.Server.question.entity.Question;
 import com.seb_pre_007.Server.question.entity.QuestionTag;
 import com.seb_pre_007.Server.question.repository.QuestionRepository;
 import com.seb_pre_007.Server.tag.entity.Tag;
 import com.seb_pre_007.Server.tag.service.TagService;
+import com.seb_pre_007.Server.user.entity.User;
 import com.seb_pre_007.Server.user.service.UserService;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.constraints.Positive;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -104,4 +104,36 @@ public class QuestionService {
 
         return quesiton.orElseThrow(() -> new BusinessLogicException(ExceptionCode.QUESTION_NOT_FOUND));
     }
+
+
+
+    @Transactional
+    public Question createQuestion(QuestionPostDto questionPostDto, String userEmail) {
+
+       User findUser = userService.getUser(userEmail);
+
+        Question question = new Question();
+        question.setUser(findUser);
+        question.setQuestionTitle(questionPostDto.getQuestionTitle());
+        question.setQuestionContent(questionPostDto.getQuestionContent());
+
+        List<String> inputTags = questionPostDto.getQuestionTag().stream().map(inputTag -> inputTag.toUpperCase()).collect(Collectors.toList());
+
+        // 태그 정보 조회 및 연관관계 설정
+        for (int i = 0; i < inputTags.size(); i++) {
+            Tag findTag = tagService.findByTagName(inputTags.get(i));
+            if (findTag == null) findTag = tagService.createTag(inputTags.get(i));
+            question.addQuestionTag(new QuestionTag(findTag));
+        }
+
+        return questionRepository.save(question);
+    }
+
+//    public void deleteQuestion(long questionId, String userEmail){
+//        Question findQuestion = findVerifiedQuestion(questionId);
+//        verifyUser(userEmail, findQuestion);
+//
+//        questionRepository.delete(findQuestion);
+//
+//    }
 }

@@ -1,6 +1,7 @@
 package com.seb_pre_007.Server.question.mapper;
 
 import com.seb_pre_007.Server.question.dto.QuestionData;
+import com.seb_pre_007.Server.question.dto.QuestionPostDto;
 import com.seb_pre_007.Server.question.entity.Question;
 import com.seb_pre_007.Server.tag.dto.TagDto;
 import com.seb_pre_007.Server.tag.entity.Tag;
@@ -33,5 +34,13 @@ public interface QuestionMapper {
                 ).build();
     }
     List<QuestionData> questionsToQuestionDatas(List<Question> questions);
+
+
+    Question questionPostDtoToQuestion(QuestionPostDto questionPostDto);
+
+    QuestionPostDto questionToQuestionResponse(Question question);
+
+
+
 
 }
