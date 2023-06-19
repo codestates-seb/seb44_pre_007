@@ -99,15 +99,15 @@ public class QuestionController {
     }
 
 
-//    @DeleteMapping("/{question-id}")
-//    public ResponseEntity deleteQuestion(@PathVariable("question-id") long questionId, Authentication authentication){
-//
-//        String userEmail = authentication.getPrincipal().toString();
-//
-//        questionService.deleteQuestion(questionId, userEmail);
-//
-//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//    }
+    @DeleteMapping("/{question-id}")
+    public ResponseEntity deleteQuestion(@PathVariable("question-id") long questionId, Authentication authentication){
+
+        String userEmail = authentication.getPrincipal().toString();
+
+        questionService.deleteQuestion(questionId, userEmail);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
 
 }

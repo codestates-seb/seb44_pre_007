@@ -131,11 +131,12 @@ public class QuestionService {
         return questionRepository.save(question);
     }
 
-//    public void deleteQuestion(long questionId, String userEmail){
-//        Question findQuestion = findVerifiedQuestion(questionId);
-//        verifyUser(userEmail, findQuestion);
-//
-//        questionRepository.delete(findQuestion);
-//
-//    }
+    @Transactional
+    public void deleteQuestion(long questionId, String userEmail){
+        Question findQuestion = findVerifiedQuestion(questionId);
+        verifyUser(userEmail, findQuestion);
+
+        questionRepository.delete(findQuestion);
+
+    }
 }
