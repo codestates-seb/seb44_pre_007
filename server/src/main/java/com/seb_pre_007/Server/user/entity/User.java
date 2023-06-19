@@ -29,11 +29,15 @@ public class User {
     @Column(nullable = false)
     private String userNickname;
 
+    @Column
+    private String imgURL;
+
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<>();
 
-    public User(String email, String nickname) {
+    public User(String email, String nickname, String imgURL) {
         this.userEmail = email;
         this.userNickname = nickname;
+        this.imgURL = imgURL;
     }
 }
