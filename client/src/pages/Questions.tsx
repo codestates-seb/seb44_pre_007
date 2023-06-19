@@ -1,30 +1,76 @@
 /* eslint-disable operator-linebreak */
 import { useEffect, useState } from 'react';
+import { styled } from 'styled-components';
 import Btn from '../ui/Btn';
 import addCommasToNumber from '../utils/addCommasToNumber';
-import { Question } from '../types/types';
+import { PageT, Question } from '../types/types';
 import SummaryDiv from '../components/questions/SummaryDiv';
 import { FetchQuestions } from '../api/api';
 import RightSidebar from '../components/sidebar/RightSidebar';
 import { LIMIT } from '../constant/constantValue';
 import AskQuestionBtn from '../components/AskQuestionBtn';
 
+const PageBtn = styled.button`
+  height: 25px;
+  background-color: ${(props) => (props.nowPage ? '#F48225' : 'white')};
+  color: ${(props) => (props.nowPage ? 'white' : 'color')};
+  padding-left: 8px;
+  padding-right: 8px;
+  border: 1px solid;
+  border-color: ${(props) => (props.nowPage ? 'rgba(0, 0, 0, 0)' : 'rgba(186, 191, 196)')};
+  border-radius: 3px;
+  font-size: 13px;
+  font-weight: 400;
+`;
+
 // todo 페이지네이션, fetch 리액트쿼리 사용하기
 function Questions() {
   const [currentpage, SetCurrentpage] = useState(1);
   const [questions, setQuestions] = useState<Question[]>([]);
+  const [pageData, setPageData] = useState<PageT>();
   const [questionsCount, setQuestionsCount] = useState<string>('');
 
   const fetchData = async () => {
     const res = await FetchQuestions(currentpage, LIMIT);
     setQuestions(res.data.data);
+    setPageData(res.data.pageInfo);
     const dataLength = addCommasToNumber(res.data.pageInfo.totalElement);
     setQuestionsCount(dataLength);
   };
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [currentpage]);
+
+  const handleMoveToNextPage = () => {
+    if (currentpage === pageData?.totalPages) return;
+    SetCurrentpage(currentpage + 1);
+  };
+  const handleMoveToPrevPage = () => {
+    SetCurrentpage(currentpage - 1);
+  };
+  const handleMoveToPage = (pageNumber: number) => {
+    SetCurrentpage(pageNumber);
+  };
+
+  const pageBtn = () => {
+    const btn = [];
+    for (let index = 1; index <= pageData!.totalPages; index += 1) {
+      btn.push(
+        <PageBtn
+          type="button"
+          nowPage={currentpage === index}
+          key={index}
+          onClick={() => {
+            handleMoveToPage(index);
+          }}
+        >
+          {index}
+        </PageBtn>
+      );
+    }
+    return btn;
+  };
 
   return (
     <div className="w-[727px]">
@@ -46,6 +92,21 @@ function Questions() {
             <SummaryDiv key={question.questionId} question={question} />
           ))}
       </main>
+      {pageData && (
+        <div className="flex gap-1 my-5">
+          {currentpage > 1 && (
+            <PageBtn type="button" onClick={handleMoveToPrevPage}>
+              Prev
+            </PageBtn>
+          )}
+          {pageBtn()}
+          {pageData.totalPages > 1 && (
+            <PageBtn type="button" onClick={handleMoveToNextPage}>
+              Next
+            </PageBtn>
+          )}
+        </div>
+      )}
     </div>
   );
 }

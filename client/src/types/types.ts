@@ -13,6 +13,13 @@ export type Question = {
   answerCount: number;
 };
 
+export type PageT = {
+  limit: number;
+  page: number;
+  totalElement: number;
+  totalPages: number;
+};
+
 export type TagT = {
   tagId: number;
   tagName: string;
