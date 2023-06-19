@@ -6,6 +6,7 @@ public enum ExceptionCode {
     USER_NOT_FOUND(404,"User not found"),
     USER_EXISTS(409,"User exists"),
     USER_NO_HAVE_AUTHORIZATION(401,"User no have authorization"),
+    USERS_NOT_VALID(409, "등록되지 않은 사용자입니다."),
     INVALID_USER_STATUS(400,"Invalid User status"),
     USER_DOES_NOT_MATCH(403,"User does not match"),
     QUESTION_NOT_FOUND(404,"Question not found"),
