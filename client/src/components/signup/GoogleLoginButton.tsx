@@ -1,19 +1,12 @@
-import { useGoogleLogin, TokenResponse } from '@react-oauth/google';
+import { useGoogleLogin } from '@react-oauth/google';
 import tw from 'tailwind-styled-components';
-import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import GoogleIcon from '../../public/Icons/GoogleIcon';
 
 export default function GoogleLoginButton() {
-  const mutation = useMutation({
-    mutationFn: (tokenResponse: Omit<TokenResponse, 'error' | 'error_description' | 'error_uri'>) =>
-      // eslint-disable-next-line implicit-arrow-linebreak
-      axios.post(import.meta.env.VITE_URL, tokenResponse),
-  });
-
   const login = useGoogleLogin({
     onSuccess: (tokenResponse) => {
-      mutation.mutate(tokenResponse);
+      axios.post(import.meta.env.VITE_URL, tokenResponse.access_token);
     },
   });
   const StyledButton = tw.button`
