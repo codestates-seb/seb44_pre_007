@@ -109,5 +109,9 @@ public class QuestionController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @GetMapping("/{question-id}")
+    public String hello(@PathVariable("question-id") long questionId) {
+        return questionId + "번 질문글 상세페이지입니다. ";}
+
 
 }
