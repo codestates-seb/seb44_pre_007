@@ -12,7 +12,6 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,8 +38,9 @@ public class OAuth2UserSuccessHandler extends SimpleUrlAuthenticationSuccessHand
         String email = String.valueOf(oAuth2User.getAttributes().get("email"));
         String nickname = String.valueOf(oAuth2User.getAttributes().get("given_name"));// (3)
         List<String> authorities = authorityUtils.createRoles(email);           // (4)
+        String imgURL = String.valueOf(oAuth2User.getAttributes().get("picture"));
 
-        googleSavedUser(email, nickname);  // (5)
+        googleSavedUser(email, nickname, imgURL);  // (5)
         redirect(request, response, email, authorities);  // (6)
     }
 
@@ -49,8 +49,8 @@ public class OAuth2UserSuccessHandler extends SimpleUrlAuthenticationSuccessHand
 //        userService.createUser(user);
 //    }
 
-    private void googleSavedUser(String userEmail, String nikname){
-        User user = new User(userEmail, nikname);
+    private void googleSavedUser(String userEmail, String nikname, String imgURL){
+        User user = new User(userEmail, nikname, imgURL);
         userService.createGoogleUser(user);
     }
 
