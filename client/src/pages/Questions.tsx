@@ -1,6 +1,5 @@
 /* eslint-disable operator-linebreak */
 import { useEffect, useState } from 'react';
-import { styled } from 'styled-components';
 import Btn from '../ui/Btn';
 import addCommasToNumber from '../utils/addCommasToNumber';
 import { PageT, Question } from '../types/types';
@@ -10,19 +9,7 @@ import RightSidebar from '../components/sidebar/RightSidebar';
 import { LIMIT } from '../constant/constantValue';
 import AskQuestionBtn from '../components/AskQuestionBtn';
 import scrollToTop from '../utils/scrollToTop';
-
-const PageBtn = styled.button<{ $nowpage?: string }>`
-  height: 25px;
-  background-color: ${(props) => (props.$nowpage === 'true' ? '#F48225' : 'white')};
-  color: ${(props) => (props.$nowpage === 'true' ? 'white' : '#3B4045')};
-  padding-left: 8px;
-  padding-right: 8px;
-  border: 1px solid;
-  border-color: ${(props) => (props.$nowpage === 'true' ? 'none' : 'rgba(186, 191, 196)')};
-  border-radius: 3px;
-  font-size: 13px;
-  font-weight: 400;
-`;
+import PageBtnDiv from '../components/questions/PageBtnDiv';
 
 // todo fetch 리액트쿼리 사용하기
 function Questions() {
@@ -39,134 +26,14 @@ function Questions() {
     setQuestionsCount(dataLength);
   };
 
+  const handleCurrentPage = (page: number) => {
+    SetCurrentpage(page);
+  };
+
   useEffect(() => {
     fetchData();
     scrollToTop();
   }, [currentpage]);
-
-  const handleMoveToNextPage = () => {
-    if (currentpage === pageData?.totalPages) return;
-    SetCurrentpage(currentpage + 1);
-  };
-  const handleMoveToPrevPage = () => {
-    SetCurrentpage(currentpage - 1);
-  };
-  const handleMoveToPage = (pageNumber: number) => {
-    SetCurrentpage(pageNumber);
-  };
-
-  const pageBtn = () => {
-    const centerBtn = currentpage;
-    const lastPage = pageData?.totalPages ?? 1;
-    const btn = [];
-    if (currentpage < 5) {
-      const last = lastPage < 5 ? lastPage : 5;
-      for (let index = 1; index <= last; index += 1) {
-        btn.push(
-          <PageBtn
-            type="button"
-            $nowpage={(currentpage === index).toString()}
-            key={index}
-            onClick={() => {
-              handleMoveToPage(index);
-            }}
-          >
-            {index}
-          </PageBtn>
-        );
-      }
-    } else if (currentpage > lastPage - 4) {
-      for (let index = lastPage - 4; index <= lastPage; index += 1) {
-        btn.push(
-          <PageBtn
-            type="button"
-            $nowpage={(currentpage === index).toString()}
-            key={index}
-            onClick={() => {
-              handleMoveToPage(index);
-            }}
-          >
-            {index}
-          </PageBtn>
-        );
-      }
-    } else {
-      btn.push(
-        <PageBtn
-          type="button"
-          $nowpage="true"
-          key={centerBtn}
-          onClick={() => {
-            handleMoveToPage(centerBtn);
-          }}
-        >
-          {centerBtn}
-        </PageBtn>
-      );
-
-      for (let index = 1; index < 3; index += 1) {
-        if (centerBtn + index <= lastPage) {
-          btn.push(
-            <PageBtn
-              type="button"
-              key={centerBtn + index}
-              onClick={() => {
-                handleMoveToPage(centerBtn + index);
-              }}
-            >
-              {centerBtn + index}
-            </PageBtn>
-          );
-        }
-        if (centerBtn - index > 0) {
-          btn.unshift(
-            <PageBtn
-              type="button"
-              key={centerBtn - index}
-              onClick={() => {
-                handleMoveToPage(centerBtn - index);
-              }}
-            >
-              {centerBtn - index}
-            </PageBtn>
-          );
-        }
-      }
-    }
-
-    if (centerBtn - 2 > 1 && centerBtn > 4) {
-      btn.unshift(
-        <div className="flex" key={1}>
-          <PageBtn
-            type="button"
-            onClick={() => {
-              handleMoveToPage(1);
-            }}
-          >
-            {1}
-          </PageBtn>
-          <p className="mx-2"> ... </p>
-        </div>
-      );
-    }
-
-    if (centerBtn + 2 < lastPage && centerBtn < lastPage - 3) {
-      btn.push(
-        <div className="flex" key={pageData?.totalPages}>
-          <p className="mx-2"> ... </p>
-          <PageBtn
-            type="button"
-            onClick={() => {
-              handleMoveToPage(lastPage);
-            }}
-          >
-            {lastPage}
-          </PageBtn>
-        </div>
-      );
-    }
-    return btn;
-  };
 
   return (
     <div className="w-[727px]">
@@ -189,19 +56,11 @@ function Questions() {
           ))}
       </main>
       {pageData && (
-        <div className="flex gap-1 my-5">
-          {currentpage > 1 && (
-            <PageBtn type="button" onClick={handleMoveToPrevPage}>
-              Prev
-            </PageBtn>
-          )}
-          {pageBtn()}
-          {pageData.totalPages > 1 && currentpage !== pageData.totalPages && (
-            <PageBtn type="button" onClick={handleMoveToNextPage}>
-              Next
-            </PageBtn>
-          )}
-        </div>
+        <PageBtnDiv
+          handleCurrentPage={handleCurrentPage}
+          currentpage={currentpage}
+          LastPage={pageData.totalPages}
+        />
       )}
     </div>
   );
