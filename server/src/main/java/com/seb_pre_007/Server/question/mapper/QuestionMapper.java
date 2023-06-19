@@ -5,7 +5,6 @@ import com.seb_pre_007.Server.question.entity.Question;
 import com.seb_pre_007.Server.tag.dto.TagDto;
 import com.seb_pre_007.Server.tag.entity.Tag;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 
 import java.util.List;
