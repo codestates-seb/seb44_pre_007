@@ -2,6 +2,8 @@ package com.seb_pre_007.Server.user.service;
 
 
 import com.seb_pre_007.Server.auth.utils.CustomAuthorityUtils;
+import com.seb_pre_007.Server.exception.BusinessLogicException;
+import com.seb_pre_007.Server.exception.ExceptionCode;
 import com.seb_pre_007.Server.user.entity.User;
 import com.seb_pre_007.Server.user.repository.UserRepository;
 import org.springframework.context.ApplicationEventPublisher;
@@ -63,5 +65,12 @@ public class UserService {
         Optional<User> user= userRepository.findByUserEmail(userEmail);
 
         return user.isPresent();
+    }
+
+
+    //유저 정보조회
+    public User getUser(String userEmail){
+        Optional<User> optional = userRepository.findByUserEmail(userEmail);
+        return optional.orElseThrow(() -> new BusinessLogicException(ExceptionCode.USERS_NOT_VALID));
     }
 }
