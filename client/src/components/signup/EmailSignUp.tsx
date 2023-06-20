@@ -18,7 +18,7 @@ ${(props) => (props.$error ? 'border-red-500 focus:border-red-500 focus:shadow-e
 const StyledError = tw.p`
 text-red-500 text-[13px] w-[270px] bp1:w-[220px] mt-1
 `;
-const Button = styled.button`https://developers.google.com/identity/sign-in/web/troubleshooting?hl=ko
+const Button = styled.button`
   height: 40px;
   padding: 9.6px;
   border: 1px solid rgb(55, 159, 239);
@@ -71,7 +71,7 @@ export default function EmailSignUp() {
       return false;
     }
     if (!emailRegexp.test(userEmail)) {
-      setUserEmailError(`${userEmail} is not a valid userEmail address.`);
+      setUserEmailError(`${userEmail} is not a valid email address.`);
       return false;
     }
     setUserEmailError(null);

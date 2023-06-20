@@ -1,6 +1,7 @@
 package com.seb_pre_007.Server.response;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.seb_pre_007.Server.exception.ExceptionCode;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
@@ -11,9 +12,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@JsonInclude(JsonInclude.Include.NON_NULL) // JSON 변환 시 null 인 필드 제외
 @Getter
 public class ErrorResponse {
-    private int status;
+    private Integer status;
     private String message;
     private List<FieldError> fieldErrors;
     private List<ConstraintViolationError> violationErrors;

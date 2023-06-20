@@ -13,6 +13,8 @@ public class UserPostDto {
     @Email
     private String userEmail;
 
+    @NotBlank
+    private String imgURL;
 
     @NotSpace
     private String userPassword;
