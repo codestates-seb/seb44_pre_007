@@ -1,20 +1,18 @@
-package com.seb_pre_007.Server.answer;
+package com.seb_pre_007.Server.answer.service;
 
 
+import com.seb_pre_007.Server.answer.dto.AnswerPatchDto;
+import com.seb_pre_007.Server.answer.dto.AnswerPostDto;
+import com.seb_pre_007.Server.answer.entity.Answer;
+import com.seb_pre_007.Server.answer.repository.AnswerRepository;
 import com.seb_pre_007.Server.exception.BusinessLogicException;
 import com.seb_pre_007.Server.exception.ExceptionCode;
 import com.seb_pre_007.Server.question.entity.Question;
-import com.seb_pre_007.Server.question.repository.QuestionRepository;
-import com.seb_pre_007.Server.question.service.QuestionTagService;
-import com.seb_pre_007.Server.tag.service.TagService;
 import com.seb_pre_007.Server.user.entity.User;
 import com.seb_pre_007.Server.user.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
-import java.util.List;
 import java.util.Optional;
 
 @Service

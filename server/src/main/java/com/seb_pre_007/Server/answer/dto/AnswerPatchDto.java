@@ -1,4 +1,4 @@
-package com.seb_pre_007.Server.answer;
+package com.seb_pre_007.Server.answer.dto;
 
 import lombok.Data;
 
