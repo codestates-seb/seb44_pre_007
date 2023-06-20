@@ -22,6 +22,7 @@ function Questions() {
   const { isLoading, data, error } = useQuery({
     queryKey: ['questions', { currentpage, LIMIT }],
     queryFn: () => FetchQuestions(currentpage, LIMIT),
+    refetchOnWindowFocus: false,
   });
 
   useEffect(() => {
