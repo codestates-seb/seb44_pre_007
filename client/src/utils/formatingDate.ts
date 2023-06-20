@@ -1,4 +1,5 @@
 const formatingDate = (date: string) => {
+  if (!date) return 'no value';
   const months = [
     'Jan',
     'Feb',

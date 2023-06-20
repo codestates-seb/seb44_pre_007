@@ -38,4 +38,3 @@ export interface UserInfo {
   userEmail: string | null;
   userPassword: string | null;
 }
-
