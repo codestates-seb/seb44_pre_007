@@ -29,3 +29,23 @@ export const AskBtn = tw.button`
 flex justify-center items-center text-[13px] rounded-[3px] text-white 
 bg-bubg shadow-btn border-bubg border border-solid p-[10.4px]
 `;
+
+export const SubTitle = tw.h2`
+mt-3 mb-2 text-blackDark text-[19px]
+`;
+
+export const PreviewDiv = styled.div`
+  font-size: 15px;
+  h1 {
+    font-size: 26px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  a {
+    color: blue;
+    border-bottom: 1px solid blue;
+  }
+`;

@@ -1,5 +1,6 @@
 import { AnswerT } from '../../types/types';
 import useMovePage from '../../hooks/useMovePage';
+import AnswerEditor from './AnswerEditor';
 
 function Answer({ id, data }: { id: number; data: AnswerT }) {
   const {

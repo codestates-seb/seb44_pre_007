@@ -5,7 +5,7 @@ import Tag from '../../ui/Tag';
 function QuestionContainer({ data }: { data: QueT }) {
   const {
     id,
-    questionContent: contetn,
+    questionContent: content,
     tagList: QTag,
     questionUpdated: updated,
     questionCreated: created,
@@ -19,7 +19,7 @@ function QuestionContainer({ data }: { data: QueT }) {
         {!data && <p>Loading...</p>}
         {!!data && (
           <>
-            <div className="text-[15px] text-blackDark">{contetn}</div>
+            <div className="text-[15px] text-blackDark">{content}</div>
             <div className="flex gap-2 mt-4 mb-3">
               {QTag.map((tag: TagT) => (
                 <Tag key={tag.tagId} content={tag.tagName} />

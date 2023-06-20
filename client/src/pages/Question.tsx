@@ -8,6 +8,7 @@ import { QueT } from '../types/types';
 import scrollToTop from '../utils/scrollToTop';
 import AnswerContainer from '../components/question/AnswerContainer';
 import AskQuestionBtn from '../components/AskQuestionBtn';
+import AnswerEditor from '../components/question/AnswerEditor';
 
 const DateDiv = tw.div`
 text-blacklight text-[13px] pb-2
@@ -50,6 +51,7 @@ function QuestionPage() {
             {!!data && data.answerCount > 0 && (
               <AnswerContainer datas={data.answers} id={data.id} answerCnt={data.answerCount} />
             )}
+            <AnswerEditor />
           </div>
           <RightSidebar />
         </div>
