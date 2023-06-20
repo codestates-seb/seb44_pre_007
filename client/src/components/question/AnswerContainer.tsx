@@ -1,3 +1,4 @@
+import { SubTitle } from '../../styles/styles';
 import { AnswerT } from '../../types/types';
 import Answer from './Answer';
 
@@ -12,7 +13,7 @@ function AnswerContainer({
 }) {
   return (
     <div className="w-[727px] flex flex-col">
-      <h2 className="mt-3 mb-2 text-blackDark text-[19px]">{answerCnt} Answers</h2>
+      <SubTitle>{answerCnt} Answers</SubTitle>
       <div className="flex flex-col items-end">
         {!!datas && datas.map((data) => <Answer key={data.answerId} id={id} data={data} />)}
       </div>
