@@ -15,6 +15,7 @@ import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.Positive;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -63,6 +64,32 @@ public class QuestionService {
         return  questionPage;
 
     }
+
+    public Question findeQuestion(long questionId) {
+
+
+        Question findQuestion = questionRepository.findByQuestionId(questionId);
+
+        updateViewQuestions(findQuestion);
+
+        return findQuestion;
+
+
+    }
+
+    @Transactional
+    public void updateViewQuestions(Question findQuestion) {
+
+
+        int questionCount= findQuestion.getQuestionCount();
+
+        findQuestion.setQuestionCount(questionCount+1);
+
+        questionRepository.save(findQuestion);
+
+
+    }
+
 
     @Transactional
     public Question updateQuestion(QuestionPatchDto questionPatchDto, String userEmail) {
@@ -146,4 +173,5 @@ public class QuestionService {
         questionRepository.delete(findQuestion);
 
     }
+
 }

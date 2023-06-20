@@ -1,5 +1,6 @@
 package com.seb_pre_007.Server.question.entity;
 
+import com.seb_pre_007.Server.answer.entity.Answer;
 import com.seb_pre_007.Server.user.entity.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -51,6 +52,9 @@ public class Question {
     @BatchSize(size = 50)
     private List<QuestionTag> questionTagList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "question")
+    private List<Answer> answerList= new ArrayList<>();
+
     public void addQuestionTag(QuestionTag questionTag) {
         if (!this.getQuestionTagList().contains(questionTag)) {
             this.getQuestionTagList().add(questionTag);
@@ -59,6 +63,7 @@ public class Question {
             questionTag.setQuestion(this);
         }
     }
+
 
 
 }
