@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import Header from '../components/header/Header';
 import LeftSidebar from '../components/sidebar/LeftSidebar';
+import Footer from '../components/footer/Footer';
 
 function Root() {
   return (
@@ -12,6 +13,7 @@ function Root() {
         <LeftSidebar />
         <Outlet />
       </div>
+      <Footer />
     </>
   );
 }
