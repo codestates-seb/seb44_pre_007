@@ -8,7 +8,7 @@ const StyledFooter = tw.footer`
 `;
 
 const FooterContainer = tw.div`
-  flex flex-row max-w-[1240px] px-3 pb-3 pt-8 border-b
+  flex flex-row w-full max-w-7xl h-full px-3 pb-3 pt-8 border-b
 `;
 
 const FooterNav = tw.nav`
