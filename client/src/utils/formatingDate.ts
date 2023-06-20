@@ -1,4 +1,5 @@
 const formatingDate = (date: string) => {
+  if (!date) return 'no value';
   const months = [
     'Jan',
     'Feb',
@@ -13,7 +14,6 @@ const formatingDate = (date: string) => {
     'Nov',
     'Dec',
   ];
-  if (!date) return 'no value';
   const dateArr = date.split(/[^0-9]/);
 
   const year = dateArr[0];
