@@ -74,9 +74,6 @@ export default function EmailLogin() {
   function validate() {
     return checkEmail() && checkuserPassword();
   }
-  const defaultHeader = {
-    'Content-Type': 'Application/json',
-  };
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (validate()) {
@@ -85,10 +82,17 @@ export default function EmailLogin() {
           import.meta.env.VITE_LOGIN_URL,
           { username, password },
           {
-            headers: defaultHeader,
+            headers: { 'Content-Type': 'Application/json' },
           }
         )
-        .then((res) => console.log(res))
+        .then((res) => {
+          if (res.status === 200) {
+            const token = res.headers.authorization;
+            if (token) {
+              localStorage.setItem('token', token);
+            }
+          }
+        })
         .catch((error) => {
           if (error.response && error.response.status === 401) {
             setLoginError('No user found with matching data');
