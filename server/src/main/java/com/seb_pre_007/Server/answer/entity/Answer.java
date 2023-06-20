@@ -1,4 +1,4 @@
-package com.seb_pre_007.Server.answer;
+package com.seb_pre_007.Server.answer.entity;
 
 import com.seb_pre_007.Server.question.entity.Question;
 import com.seb_pre_007.Server.user.entity.User;
