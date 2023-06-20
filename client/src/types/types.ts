@@ -15,6 +15,19 @@ export type Question = {
   answerCount: number;
 };
 
+export type AnswerT = {
+  answerId: number;
+  answerUserNickName: string;
+  answerContent: string;
+  answerCreated: string;
+  answerUpdated: string;
+};
+
+export type QueT = Question & {
+  id: number;
+  answers: AnswerT[];
+};
+
 export type PageT = {
   limit: number;
   page: number;
