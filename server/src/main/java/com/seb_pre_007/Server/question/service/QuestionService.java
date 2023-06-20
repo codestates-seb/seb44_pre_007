@@ -45,7 +45,7 @@ public class QuestionService {
         Tag findTagName = tagService.findByTagName(questionTag);
 
         if(findTagName==null){
-            return null;
+            return new PageImpl<>(new ArrayList<>());
         }
 
         List<QuestionTag> questionTagList = questionTagService.questionTags(findTagName);
@@ -66,19 +66,17 @@ public class QuestionService {
 
     @Transactional
     public Question updateQuestion(QuestionPatchDto questionPatchDto, String userEmail) {
-        // 존재하는 질문 여부 검증
-        Question findQuestion = findVerifiedQuestion(questionPatchDto.getQuestionId());
 
-        // 현재 로그인한 유저가 해당 질문의 작성자인지 검증
-        verifyUser(userEmail, findQuestion);
+        Question findQuestion = findVerifiedQuestion(questionPatchDto.getQuestionId()); // 질문글 확인
+        verifyUser(userEmail, findQuestion); // 작성자 여부 확인
 
-        // 기존 태그-질문 정보 삭제 (전달받은 태그 정보로 다시 등록해야 하므로)
+        // 기존 태그-질문 정보 삭제
         questionTagService.deleteQuestionTags(findQuestion);
         findQuestion.setQuestionTagList(new ArrayList<>());
 
-        // 입력받은 태그리스트
+        // 입력받은 태그리스트 (대문자 변환)
         List<String> inputTags = questionPatchDto.getQuestionTag().stream()
-                .map(inputTag -> inputTag.toUpperCase())
+                .map(String::toUpperCase)
                 .collect(Collectors.toList());
 
         // 태그 정보 조회 및 연관관계 설정
@@ -88,9 +86,9 @@ public class QuestionService {
             findQuestion.addQuestionTag(new QuestionTag(findTag));
         }
 
-        // 입력받은 title, content로 재설정
-        findQuestion.setQuestionTitle(questionPatchDto.getQuestionTitle());
-        findQuestion.setQuestionContent(questionPatchDto.getQuestionContent());
+        // title, content 재설정
+        Optional.ofNullable(questionPatchDto.getQuestionTitle()).ifPresent(findQuestion::setQuestionTitle);
+        Optional.ofNullable(questionPatchDto.getQuestionContent()).ifPresent(findQuestion::setQuestionContent);
 
         return questionRepository.save(findQuestion);
     }
@@ -106,8 +104,6 @@ public class QuestionService {
 
         return quesiton.orElseThrow(() -> new BusinessLogicException(ExceptionCode.QUESTION_NOT_FOUND));
     }
-
-
 
     @Transactional
     public Question createQuestion(QuestionPostDto questionPostDto, String userEmail) {
