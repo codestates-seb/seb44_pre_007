@@ -11,14 +11,10 @@ import java.util.List;
 public class QuestionPatchDto {
 
     private Long questionId;
-
     @NotSpace
     private String questionTitle;
-
     @NotSpace
     private String questionContent;
-
-    @NotSpace
     private List<String> questionTag;
 
 }
