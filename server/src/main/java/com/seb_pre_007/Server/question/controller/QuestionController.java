@@ -1,5 +1,6 @@
 package com.seb_pre_007.Server.question.controller;
 
+import com.seb_pre_007.Server.answer.dto.AnswerResponseDto;
 import com.seb_pre_007.Server.question.dto.QuestionData;
 import com.seb_pre_007.Server.question.dto.QuestionDetailResponseDto;
 import com.seb_pre_007.Server.question.dto.QuestionPatchDto;
@@ -22,7 +23,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -72,21 +76,25 @@ public class QuestionController {
 
 
     @GetMapping("/{question-id}")
-    public ResponseEntity getQuestion(@PathVariable("question-id") @Positive long questionId){
+    public ResponseEntity getQuestion(@PathVariable("question-id") @Positive long questionId) {
 
 
-        Question question= questionService.findeQuestion(questionId);
+        Question question = questionService.findeQuestion(questionId);
 
-        QuestionData questionData= questionMapper.qeustionToQuestionData(question);
+        QuestionData questionData = questionMapper.qeustionToQuestionData(question);
 
-        QuestionDetailResponseDto questionResponseDto= questionMapper.qeustionToResponseDto(question);
+        QuestionDetailResponseDto questionResponseDto = questionMapper.qeustionToResponseDto(question);
 
         questionResponseDto.setQuestionUserNickname(questionData.getQuestionUserNickname());
         questionResponseDto.setTagList(questionData.getTagList());
 
-        System.out.println("유저 닉네임"+question.getAnswerList());
+        List<AnswerResponseDto> sortedList= questionResponseDto.getAnswerList().stream()
+                .sorted(Comparator.comparing(AnswerResponseDto::getAnswerUpdated).reversed())
+                .collect(Collectors.toList());
 
-         return new ResponseEntity(questionResponseDto, HttpStatus.OK);
+         questionResponseDto.setAnswerList(sortedList);
+
+        return new ResponseEntity(questionResponseDto, HttpStatus.OK);
 
 
     }
@@ -110,21 +118,21 @@ public class QuestionController {
 
     // 질문 생성
     @PostMapping("/ask")
-    public ResponseEntity postQuestion(@Valid  @RequestBody QuestionPostDto questionPostDto, Authentication authentication) {
+    public ResponseEntity postQuestion(@Valid @RequestBody QuestionPostDto questionPostDto, Authentication authentication) {
 
         String userEmail = authentication.getPrincipal().toString();
 
         Question createdQuestion = questionService.createQuestion(questionPostDto, userEmail);
 
-       HttpHeaders headers = new HttpHeaders();
-       headers.setLocation(URI.create("/questions/" + createdQuestion.getQuestionId()));
-       return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
- // redirect 미구현시     return ResponseEntity.status(HttpStatus.CREATED).body(null);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(URI.create("/questions/" + createdQuestion.getQuestionId()));
+        return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
+        // redirect 미구현시     return ResponseEntity.status(HttpStatus.CREATED).body(null);
     }
 
     // 질문 삭제
     @DeleteMapping("/{question-id}")
-    public ResponseEntity deleteQuestion(@PathVariable("question-id") @Positive long questionId, Authentication authentication){
+    public ResponseEntity deleteQuestion(@PathVariable("question-id") @Positive long questionId, Authentication authentication) {
 
         String userEmail = authentication.getPrincipal().toString();
 
@@ -132,11 +140,6 @@ public class QuestionController {
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-    // 임시 API
-    @GetMapping("/{question-id}")
-    public String hello(@PathVariable("question-id") @Positive long questionId) {
-        return questionId + "번 질문글 상세페이지입니다. ";}
 
 
 }

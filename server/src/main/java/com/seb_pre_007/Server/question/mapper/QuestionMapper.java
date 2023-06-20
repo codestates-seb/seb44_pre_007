@@ -10,6 +10,7 @@ import com.seb_pre_007.Server.question.entity.Question;
 import com.seb_pre_007.Server.tag.dto.TagDto;
 import com.seb_pre_007.Server.tag.entity.Tag;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public interface QuestionMapper {
                 .questionCreated(question.getQuestionCreated())
                 .questionUpdated(question.getQuestionUpdated())
                 .questionCount(question.getQuestionCount())
-                //.answerCount(question.getAnswerCount())
+                .answerCount(question.getAnswerCount())
                 .tagList(question.getQuestionTagList().stream()
                         .map(questionTag -> new TagDto(questionTag.getTag().getTagId(), questionTag.getTag().getTagName()))
                         .collect(Collectors.toList())
@@ -42,10 +43,11 @@ public interface QuestionMapper {
 
     QuestionDetailResponseDto qeustionToResponseDto(Question question);
 
-    //@Mapping(source = "user.userNickname", target = "answerUserNickname")
+    @Mapping(source = "user.userNickname", target = "answerUserNickname")
     AnswerResponseDto  answerToResponseDto(Answer answer);
 
     List<AnswerResponseDto> answerListToResponseDto(List<Answer> answerList);
+
 
 
     Question questionPostDtoToQuestion(QuestionPostDto questionPostDto);

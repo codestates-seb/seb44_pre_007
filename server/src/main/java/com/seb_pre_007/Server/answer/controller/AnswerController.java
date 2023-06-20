@@ -37,8 +37,9 @@ public class AnswerController {
                                      @Valid @RequestBody AnswerPostDto answerPostDto, Authentication authentication){
 
         String userEmail = authentication.getPrincipal().toString();
-
         Question targetQuestion = questionRepository.findByQuestionId(questionId);
+        targetQuestion.setAnswerCount(targetQuestion.getAnswerCount()+1);
+        questionRepository.save(targetQuestion);
         Answer answer = answerService.createAnswer(targetQuestion, answerPostDto, userEmail);
 
         HttpHeaders headers = new HttpHeaders();
