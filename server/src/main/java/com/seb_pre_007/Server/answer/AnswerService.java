@@ -27,14 +27,17 @@ public class AnswerService {
         this.userService = userService;
     }
 
-    public Answer createAnswer(Question targetQuestion, Answer answer){
+    public Answer createAnswer(Question targetQuestion, AnswerPostDto answerPostDto, String userEmail){
         //answer는 바디, userid만 가지고 있음
-        answer.setQuestion(targetQuestion);
-        answer.setAnswerContent(answer.getAnswerContent());
-        answer.setUser(answer.getUser());
-        answerRepository.save(answer);
 
-        return answer;
+        User findUser = userService.getUser(userEmail);
+
+        Answer answer = new Answer();
+        answer.setAnswerContent(answerPostDto.getAnswerContent());
+        answer.setUser(findUser);
+        answer.setQuestion(targetQuestion);
+
+        return answerRepository.save(answer);
     }
 
 }

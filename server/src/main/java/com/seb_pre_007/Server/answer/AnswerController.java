@@ -5,6 +5,7 @@ import com.seb_pre_007.Server.question.repository.QuestionRepository;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -12,7 +13,7 @@ import javax.validation.constraints.Positive;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/question")
+@RequestMapping("/questions")
 public class AnswerController {
 
     private final AnswerService answerService;
@@ -28,14 +29,17 @@ public class AnswerController {
 
     @PostMapping("/{question-id}")
     public ResponseEntity postAnswer(@PathVariable("question-id") @Positive long questionId,
-                                     @Valid @RequestBody AnswerPostDto answerPostDto){
-        Question targetQuestion = questionRepository.findByQuestionId(questionId);
-        Answer answer = answerService.createAnswer(targetQuestion, answerMapper.answerPostToAnswer(answerPostDto));
+                                     @Valid @RequestBody AnswerPostDto answerPostDto, Authentication authentication){
 
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setLocation(URI.create("/questions/" + questionId));
-//        return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        String userEmail = authentication.getPrincipal().toString();
+
+        Question targetQuestion = questionRepository.findByQuestionId(questionId);
+        Answer answer = answerService.createAnswer(targetQuestion, answerPostDto, userEmail);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(URI.create("/questions/" + questionId));
+        return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
+//        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 }
