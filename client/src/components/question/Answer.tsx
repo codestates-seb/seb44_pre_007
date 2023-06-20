@@ -1,5 +1,6 @@
 import { AnswerT } from '../../types/types';
 import useMovePage from '../../hooks/useMovePage';
+import { ContentDiv } from '../../styles/styles';
 
 function Answer({ id, data }: { id: number; data: AnswerT }) {
   const {
@@ -13,7 +14,7 @@ function Answer({ id, data }: { id: number; data: AnswerT }) {
 
   return (
     <div className="w-[654px] flex flex-col py-4 border-b border-brgray">
-      <p className="text-[15px] text-blackDark">{content}</p>
+      <ContentDiv dangerouslySetInnerHTML={{ __html: content }} />
       <div className="flex justify-between text-[13px] my-4 pt-1">
         <div className="flex gap-2">
           <span className="text-blacklight cursor-pointer" onClick={goToEdit} role="presentation">

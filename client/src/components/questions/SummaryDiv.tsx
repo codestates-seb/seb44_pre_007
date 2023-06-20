@@ -8,6 +8,7 @@ import AnswerCountSpan from './AnswerCountSpan';
 import Tag from '../../ui/Tag';
 import useMovePage from '../../hooks/useMovePage';
 import formatingDate from '../../utils/formatingDate';
+import htmlTagIgnore from '../../utils/htmlTagIgnore';
 
 const Summarydiv = tw.div`
 p-4 flex border-b border-brgray
@@ -54,7 +55,9 @@ function SummaryDiv({ question }: { question: Question }) {
         >
           {questionTitle}
         </h3>
-        <Content className="mb-2 text-[13px] text-[#3B4045]">{questionContent}</Content>
+        <Content className="mb-2 text-[13px] text-[#3B4045]">
+          {htmlTagIgnore(questionContent)}
+        </Content>
         <div className="grid gap-1">
           <div className="flex gap-1">
             {tagList.map((tag: TagT) => (
