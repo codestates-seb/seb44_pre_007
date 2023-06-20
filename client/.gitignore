@@ -25,3 +25,4 @@ dist-ssr
 .github
 data.json
 .env
+src/setupProxy.ts
