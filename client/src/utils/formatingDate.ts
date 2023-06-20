@@ -13,6 +13,7 @@ const formatingDate = (date: string) => {
     'Nov',
     'Dec',
   ];
+  if (!date) return 'undefined';
   const dateArr = date.split(/[^0-9]/);
 
   const year = dateArr[0];

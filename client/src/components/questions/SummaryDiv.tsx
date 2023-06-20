@@ -30,6 +30,7 @@ function SummaryDiv({ question }: { question: Question }) {
   } = question;
 
   const [formateeDate, setFormatedDate] = useState('');
+
   useEffect(() => {
     const formateDate = formatingDate(questionUpdated);
     if (questionCreated !== questionUpdated) {
