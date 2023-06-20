@@ -1,5 +1,6 @@
 /* eslint-disable operator-linebreak */
 import { useCallback, useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import Btn from '../ui/Btn';
 import addCommasToNumber from '../utils/addCommasToNumber';
 import { PageT, Question } from '../types/types';
@@ -18,22 +19,31 @@ function Questions() {
   const [pageData, setPageData] = useState<PageT>();
   const [questionsCount, setQuestionsCount] = useState<string>('');
 
-  const fetchData = useCallback(async () => {
-    const res = await FetchQuestions(currentpage, LIMIT);
-    setQuestions(res.data.data);
-    setPageData(res.data.pageInfo);
-    const dataLength = addCommasToNumber(res.data.pageInfo.totalElement);
-    setQuestionsCount(dataLength);
-  }, [currentpage]);
+  const { isLoading, data, error } = useQuery({
+    queryKey: ['questions', { currentpage, LIMIT }],
+    queryFn: () => FetchQuestions(currentpage, LIMIT),
+    refetchOnWindowFocus: false,
+  });
+
+  useEffect(() => {
+    if (data) {
+      setQuestions(data.data.data);
+      setPageData(data.data.pageInfo);
+      const dataLength = addCommasToNumber(data.data.pageInfo.totalElement);
+      setQuestionsCount(dataLength);
+    }
+  }, [data]);
 
   const handleCurrentPage = (page: number) => {
     SetCurrentpage(page);
   };
 
   useEffect(() => {
-    fetchData();
     scrollToTop();
-  }, [currentpage, fetchData]);
+  }, [currentpage]);
+
+  if (isLoading) return <p>Loading ...</p>;
+  if (error instanceof Error) return <p>`error has ocurred: {error.message}</p>;
 
   return (
     <div className="w-[727px]">
