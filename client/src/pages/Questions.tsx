@@ -1,5 +1,5 @@
 /* eslint-disable operator-linebreak */
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Btn from '../ui/Btn';
 import addCommasToNumber from '../utils/addCommasToNumber';
 import { PageT, Question } from '../types/types';
@@ -18,13 +18,13 @@ function Questions() {
   const [pageData, setPageData] = useState<PageT>();
   const [questionsCount, setQuestionsCount] = useState<string>('');
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     const res = await FetchQuestions(currentpage, LIMIT);
     setQuestions(res.data.data);
     setPageData(res.data.pageInfo);
     const dataLength = addCommasToNumber(res.data.pageInfo.totalElement);
     setQuestionsCount(dataLength);
-  };
+  }, [currentpage]);
 
   const handleCurrentPage = (page: number) => {
     SetCurrentpage(page);
@@ -33,7 +33,7 @@ function Questions() {
   useEffect(() => {
     fetchData();
     scrollToTop();
-  }, [currentpage]);
+  }, [currentpage, fetchData]);
 
   return (
     <div className="w-[727px]">

@@ -23,6 +23,7 @@ export default {
         brgray: '#e3e6e8',
         main: '#F48225',
         bubg: '#0A95FF',
+        Link: '#0074cc',
         nickname: '#0074cc',
         users000: '#F1F2F3',
         primaryBlue: '#0995FF',
