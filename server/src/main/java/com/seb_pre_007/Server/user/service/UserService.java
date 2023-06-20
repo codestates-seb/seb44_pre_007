@@ -9,6 +9,7 @@ import com.seb_pre_007.Server.user.repository.UserRepository;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.Null;
 import java.util.List;
@@ -72,4 +73,13 @@ public class UserService {
         Optional<User> optional = userRepository.findByUserEmail(userEmail);
         return optional.orElseThrow(() -> new BusinessLogicException(ExceptionCode.USERS_NOT_VALID));
     }
+
+
+//    //id로 유저정보 조회
+//    @Transactional(readOnly = true)
+//    public User findVerifiedUser(long userId) {
+//        Optional<User> user = userRepository.findById(userId);
+//        return user.orElseThrow(() ->
+//                new BusinessLogicException(ExceptionCode.USER_NOT_FOUND));
+//    }
 }
