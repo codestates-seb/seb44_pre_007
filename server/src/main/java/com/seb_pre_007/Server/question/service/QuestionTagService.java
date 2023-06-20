@@ -1,6 +1,7 @@
 package com.seb_pre_007.Server.question.service;
 
 
+import com.seb_pre_007.Server.question.entity.Question;
 import com.seb_pre_007.Server.question.entity.QuestionTag;
 import com.seb_pre_007.Server.question.repository.QuestionTagRepository;
 import com.seb_pre_007.Server.tag.entity.Tag;
@@ -21,4 +22,15 @@ public class QuestionTagService {
 
         return  questionTagRepository.findByTag(tag);
     }
+
+    public void deleteQuestionTags(Question question) {
+        questionTagRepository.deleteAllByQuestion(question);
+    }
+
+
+
+
+
+
+
 }

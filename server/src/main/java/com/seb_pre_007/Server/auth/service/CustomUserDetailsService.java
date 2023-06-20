@@ -1,8 +1,11 @@
 package com.seb_pre_007.Server.auth.service;
 
 import com.seb_pre_007.Server.auth.utils.CustomAuthorityUtils;
+import com.seb_pre_007.Server.exception.BusinessLogicException;
+import com.seb_pre_007.Server.exception.ExceptionCode;
 import com.seb_pre_007.Server.user.entity.User;
 import com.seb_pre_007.Server.user.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -30,12 +33,14 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> optionalUser = userRepository.findByUserEmail(username);
-        User findUser = optionalUser.orElseThrow(() -> new RuntimeException("error!!!!!"));
+        User findUser = optionalUser.orElseThrow(() -> new BusinessLogicException(ExceptionCode.USER_NO_HAVE_AUTHORIZATION));
 
         return new CustomUserDetails(findUser);
     }
 
-    private final class CustomUserDetails extends User implements org.springframework.security.core.userdetails.UserDetails {
+
+
+    public final class CustomUserDetails extends User implements org.springframework.security.core.userdetails.UserDetails {
         // (1)
         CustomUserDetails(User user){
             setUserId(user.getUserId());
@@ -56,7 +61,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 
             return getUserPassword();
         }
-
         @Override
         public String getUsername() {
             return getUserEmail();

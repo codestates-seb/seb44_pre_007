@@ -5,11 +5,11 @@ import com.seb_pre_007.Server.answer.entity.Answer;
 import com.seb_pre_007.Server.question.dto.QuestionData;
 import com.seb_pre_007.Server.question.dto.QuestionDetailResponseDto;
 import com.seb_pre_007.Server.question.dto.QuestionResponseDto;
+import com.seb_pre_007.Server.question.dto.QuestionPostDto;
 import com.seb_pre_007.Server.question.entity.Question;
 import com.seb_pre_007.Server.tag.dto.TagDto;
 import com.seb_pre_007.Server.tag.entity.Tag;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 
 import java.util.List;
@@ -39,10 +39,20 @@ public interface QuestionMapper {
     }
     List<QuestionData> questionsToQuestionDatas(List<Question> questions);
 
+
     QuestionDetailResponseDto qeustionToResponseDto(Question question);
 
     //@Mapping(source = "user.userNickname", target = "answerUserNickname")
     AnswerResponseDto  answerToResponseDto(Answer answer);
 
     List<AnswerResponseDto> answerListToResponseDto(List<Answer> answerList);
+
+
+    Question questionPostDtoToQuestion(QuestionPostDto questionPostDto);
+
+    QuestionPostDto questionToQuestionResponse(Question question);
+
+
+
+
 }

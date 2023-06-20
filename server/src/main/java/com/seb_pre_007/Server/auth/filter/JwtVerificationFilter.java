@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+
 public class JwtVerificationFilter extends OncePerRequestFilter {
 
 
@@ -68,4 +69,5 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
         Authentication authentication = new UsernamePasswordAuthenticationToken(username, null, authorities);  // (4-3)
         SecurityContextHolder.getContext().setAuthentication(authentication); // (4-4)
     }
+
 }

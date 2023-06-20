@@ -48,10 +48,22 @@ public class Question {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     @BatchSize(size = 50)
     private List<QuestionTag> questionTagList = new ArrayList<>();
 
     @OneToMany(mappedBy = "question")
     private List<Answer> answerList= new ArrayList<>();
+
+    public void addQuestionTag(QuestionTag questionTag) {
+        if (!this.getQuestionTagList().contains(questionTag)) {
+            this.getQuestionTagList().add(questionTag);
+        }
+        if (questionTag.getQuestion() != this) {
+            questionTag.setQuestion(this);
+        }
+    }
+
+
+
 }

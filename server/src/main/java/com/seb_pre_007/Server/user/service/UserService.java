@@ -2,11 +2,14 @@ package com.seb_pre_007.Server.user.service;
 
 
 import com.seb_pre_007.Server.auth.utils.CustomAuthorityUtils;
+import com.seb_pre_007.Server.exception.BusinessLogicException;
+import com.seb_pre_007.Server.exception.ExceptionCode;
 import com.seb_pre_007.Server.user.entity.User;
 import com.seb_pre_007.Server.user.repository.UserRepository;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.Null;
 import java.util.List;
@@ -28,9 +31,8 @@ public class UserService {
     }
 
     public User createUser(User user){
-
         if(verifyExistEmail(user.getUserEmail())){
-            throw new RuntimeException("이메일이 존재합니다!");
+            throw new BusinessLogicException(ExceptionCode.USER_EXISTS);
         }
         user.setUserPassword(user.getUserPassword());
 
@@ -64,4 +66,20 @@ public class UserService {
 
         return user.isPresent();
     }
+
+
+    //유저 정보조회
+    public User getUser(String userEmail){
+        Optional<User> optional = userRepository.findByUserEmail(userEmail);
+        return optional.orElseThrow(() -> new BusinessLogicException(ExceptionCode.USERS_NOT_VALID));
+    }
+
+
+//    //id로 유저정보 조회
+//    @Transactional(readOnly = true)
+//    public User findVerifiedUser(long userId) {
+//        Optional<User> user = userRepository.findById(userId);
+//        return user.orElseThrow(() ->
+//                new BusinessLogicException(ExceptionCode.USER_NOT_FOUND));
+//    }
 }
