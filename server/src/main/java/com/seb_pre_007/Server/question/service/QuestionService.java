@@ -62,21 +62,25 @@ public class QuestionService {
 
     public Question findeQuestion(long questionId) {
 
-        updateViewQuestions(questionId);
 
-        return questionRepository.findByQuestionId(questionId);
+        Question findQuestion = questionRepository.findByQuestionId(questionId);
+
+        updateViewQuestions(findQuestion);
+
+        return findQuestion;
+
+
     }
 
     @Transactional
-    public void updateViewQuestions(long questionId) {
+    public void updateViewQuestions(Question findQuestion) {
 
-        int questionCount = 0;
-        Question byQuestionId = questionRepository.findByQuestionId(questionId);
 
-        byQuestionId.setQuestionCount(questionCount);
+        int questionCount= findQuestion.getQuestionCount();
 
-        questionCount++;
+        findQuestion.setQuestionCount(questionCount+1);
 
+        questionRepository.save(findQuestion);
 
 
     }
