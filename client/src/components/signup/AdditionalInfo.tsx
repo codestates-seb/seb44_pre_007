@@ -1,5 +1,5 @@
 import tw from 'tailwind-styled-components';
-import { TbExternalLink } from 'react-icons/Tb';
+import { TbExternalLink } from 'react-icons/tb';
 import { StyledA } from './Policy';
 
 const StyledDiv = tw.div`

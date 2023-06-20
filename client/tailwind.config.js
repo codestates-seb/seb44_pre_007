@@ -29,6 +29,8 @@ export default {
         darkBlue: '#0074CC',
         buttonHover: '#F8F9F9',
         buttonBorer: 'rgb(214, 217, 220)',
+        footerTitle: '#BABFC4',
+        footerText: '#9199A1',
       },
     },
   },
