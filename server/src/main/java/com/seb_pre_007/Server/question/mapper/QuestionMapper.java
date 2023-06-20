@@ -1,5 +1,7 @@
 package com.seb_pre_007.Server.question.mapper;
 
+import com.seb_pre_007.Server.answer.dto.AnswerResponseDto;
+import com.seb_pre_007.Server.answer.entity.Answer;
 import com.seb_pre_007.Server.question.dto.QuestionData;
 import com.seb_pre_007.Server.question.dto.QuestionDetailResponseDto;
 import com.seb_pre_007.Server.question.dto.QuestionResponseDto;
@@ -38,4 +40,9 @@ public interface QuestionMapper {
     List<QuestionData> questionsToQuestionDatas(List<Question> questions);
 
     QuestionDetailResponseDto qeustionToResponseDto(Question question);
+
+    //@Mapping(source = "user.userNickname", target = "answerUserNickname")
+    AnswerResponseDto  answerToResponseDto(Answer answer);
+
+    List<AnswerResponseDto> answerListToResponseDto(List<Answer> answerList);
 }

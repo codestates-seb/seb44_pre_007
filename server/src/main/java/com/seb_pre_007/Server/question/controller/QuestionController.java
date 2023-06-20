@@ -1,5 +1,6 @@
 package com.seb_pre_007.Server.question.controller;
 
+import com.seb_pre_007.Server.answer.dto.AnswerResponseDto;
 import com.seb_pre_007.Server.question.dto.QuestionData;
 import com.seb_pre_007.Server.question.dto.QuestionDetailResponseDto;
 import com.seb_pre_007.Server.question.dto.QuestionResponseDto;
@@ -17,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Positive;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -77,6 +79,7 @@ public class QuestionController {
         questionResponseDto.setQuestionUserNickname(questionData.getQuestionUserNickname());
         questionResponseDto.setTagList(questionData.getTagList());
 
+        System.out.println("유저 닉네임"+question.getAnswerList());
 
          return new ResponseEntity(questionResponseDto, HttpStatus.OK);
 

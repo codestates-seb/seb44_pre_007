@@ -27,6 +27,7 @@ package com.seb_pre_007.Server.question.dto;
 }
 * */
 
+import com.seb_pre_007.Server.answer.dto.AnswerResponseDto;
 import com.seb_pre_007.Server.answer.entity.Answer;
 import com.seb_pre_007.Server.question.entity.QuestionTag;
 import com.seb_pre_007.Server.tag.dto.TagDto;
@@ -62,7 +63,7 @@ public class QuestionDetailResponseDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd/HH:mm:ss")
     private LocalDateTime questionUpdated;
 
-    private List<Answer> answerList;
+    private List<AnswerResponseDto> answerList;
 
 
 
