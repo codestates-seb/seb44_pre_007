@@ -70,27 +70,36 @@ public class QuestionService {
         Question findQuestion = findVerifiedQuestion(questionPatchDto.getQuestionId()); // 질문글 확인
         verifyUser(userEmail, findQuestion); // 작성자 여부 확인
 
-        // 기존 태그-질문 정보 삭제
-        questionTagService.deleteQuestionTags(findQuestion);
-        findQuestion.setQuestionTagList(new ArrayList<>());
+        // 입력된 태그 값이 있을 때만 수정
+        if (questionPatchDto.getQuestionTag() != null) {
 
-        // 입력받은 태그리스트 (대문자 변환)
+            // 기존 태그-질문 정보 삭제
+            questionTagService.deleteQuestionTags(findQuestion);
+            findQuestion.setQuestionTagList(new ArrayList<>());
+
+            // 입력된 태그가 null 이 아니고  태그 연관관계 세팅
+            if (!questionPatchDto.getQuestionTag().isEmpty()) {
+                setTagListToFindQuestion(questionPatchDto, findQuestion);
+            }
+        }
+
+        Optional.ofNullable(questionPatchDto.getQuestionTitle()).ifPresent(findQuestion::setQuestionTitle);
+        Optional.ofNullable(questionPatchDto.getQuestionContent()).ifPresent(findQuestion::setQuestionContent);
+
+        return questionRepository.save(findQuestion);
+    }
+
+    // 태그-질문 연관관계 세팅
+    private void setTagListToFindQuestion(QuestionPatchDto questionPatchDto, Question findQuestion) {
         List<String> inputTags = questionPatchDto.getQuestionTag().stream()
                 .map(String::toUpperCase)
                 .collect(Collectors.toList());
 
-        // 태그 정보 조회 및 연관관계 설정
         for (int i = 0; i < inputTags.size(); i++) {
             Tag findTag = tagService.findByTagName(inputTags.get(i));
             if (findTag == null) findTag = tagService.createTag(inputTags.get(i));
             findQuestion.addQuestionTag(new QuestionTag(findTag));
         }
-
-        // title, content 재설정
-        Optional.ofNullable(questionPatchDto.getQuestionTitle()).ifPresent(findQuestion::setQuestionTitle);
-        Optional.ofNullable(questionPatchDto.getQuestionContent()).ifPresent(findQuestion::setQuestionContent);
-
-        return questionRepository.save(findQuestion);
     }
 
     private void verifyUser(String userEmail, Question findQuestion) {
@@ -115,13 +124,15 @@ public class QuestionService {
         question.setQuestionTitle(questionPostDto.getQuestionTitle());
         question.setQuestionContent(questionPostDto.getQuestionContent());
 
-        List<String> inputTags = questionPostDto.getQuestionTag().stream().map(inputTag -> inputTag.toUpperCase()).collect(Collectors.toList());
+        if (questionPostDto.getQuestionTag() != null) {
+            List<String> inputTags = questionPostDto.getQuestionTag().stream().map(inputTag -> inputTag.toUpperCase()).collect(Collectors.toList());
 
-        // 태그 정보 조회 및 연관관계 설정
-        for (int i = 0; i < inputTags.size(); i++) {
-            Tag findTag = tagService.findByTagName(inputTags.get(i));
-            if (findTag == null) findTag = tagService.createTag(inputTags.get(i));
-            question.addQuestionTag(new QuestionTag(findTag));
+            // 태그 정보 조회 및 연관관계 설정
+            for (int i = 0; i < inputTags.size(); i++) {
+                Tag findTag = tagService.findByTagName(inputTags.get(i));
+                if (findTag == null) findTag = tagService.createTag(inputTags.get(i));
+                question.addQuestionTag(new QuestionTag(findTag));
+            }
         }
 
         return questionRepository.save(question);
