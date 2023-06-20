@@ -11,9 +11,9 @@ import com.seb_pre_007.Server.user.entity.User;
 import com.seb_pre_007.Server.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,4 +40,32 @@ public class AnswerService {
         return answerRepository.save(answer);
     }
 
+    public Answer updateAnswer(Question targetQuestion, AnswerPatchDto answerPatchDto, String userEmail){
+        Answer findAnswer = findVerifiedAnswer(answerPatchDto.getAnswerId());
+        verifyUser(userEmail, findAnswer);
+
+        Optional.ofNullable(answerPatchDto.getAnswerContent()).ifPresent(findAnswer::setAnswerContent);
+
+        return answerRepository.save(findAnswer);
+    }
+
+    private void verifyUser(String userEmail, Answer findAnswer) {
+        if (!findAnswer.getUser().getUserEmail().equals(userEmail)) {
+            throw new BusinessLogicException(ExceptionCode.USER_DOES_NOT_MATCH);
+        }
+    }
+
+    private Answer findVerifiedAnswer(Long answerId) {
+        Optional<Answer> answer = answerRepository.findById(answerId);
+        return answer.orElseThrow(() -> new BusinessLogicException(ExceptionCode.ANSWER_NOT_FOUND));
+    }
+
+    @Transactional
+    public void deleteAnswer(long answerId, String userEmail){
+        Answer findanswer = findVerifiedAnswer(answerId);
+        verifyUser(userEmail, findanswer);
+
+        answerRepository.delete(findanswer);
+
+    }
 }

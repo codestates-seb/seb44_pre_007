@@ -42,4 +42,29 @@ public class AnswerController {
 //        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @PatchMapping("/{answer-id}/edit_answer")
+    public ResponseEntity patchAnswer(@Positive @PathVariable("answer-id") long answerId,
+                                      @Valid @RequestBody AnswerPatchDto answerPatchDto, Authentication authentication){
+
+        String userEmail = authentication.getPrincipal().toString();
+
+        answerPatchDto.setAnswerId(answerId);
+        Question targetQuestion = questionRepository.findByQuestionId(answerId);
+        Answer answer = answerService.updateAnswer(targetQuestion, answerPatchDto, userEmail);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(URI.create("/questions/" + targetQuestion.getQuestionId()));
+        return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
+    }
+
+    @DeleteMapping("/{answer-id}/edit_answer")
+    public ResponseEntity deleteAnswer(@Positive @PathVariable("answer-id") long answerId, Authentication authentication){
+
+        String userEmail = authentication.getPrincipal().toString();
+
+        answerService.deleteAnswer(answerId, userEmail);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 }
