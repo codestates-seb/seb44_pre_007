@@ -4,7 +4,7 @@ export default function MiniLogo({ style }: { style: IconStyle }) {
   return (
     <svg
       aria-hidden="true"
-      className="native svg-icon iconLogoGlyphMd mb-6"
+      className={style.margin}
       width={style.width}
       height={style.height}
       viewBox="0 0 32 37"

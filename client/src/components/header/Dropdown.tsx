@@ -2,7 +2,7 @@ import tw from 'tailwind-styled-components';
 import MiniLogo from '../../public/Icons/MiniLogo';
 
 const StyledDropdown = tw.div`
-w-[360px] absolute translate-y-[55px] -translate-x-1/2 bg-white border shadow-md text-[12px] text-darkBlue
+z-50 w-[360px] absolute top-0 translate-y-[55px] -translate-x-1/2 bg-white border shadow-md text-[12px] text-darkBlue bp1:inset-x-0 bp1:translate-x-0 bp1:w-full
 `;
 const StyledTitle = tw.div`
 bg-gray-200 font-bold px-2 py-1

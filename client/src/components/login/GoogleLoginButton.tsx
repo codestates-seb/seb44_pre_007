@@ -11,7 +11,7 @@ export default function GoogleLoginButton() {
 
   return (
     <StyledButton type="button" onClick={() => handleLogin()}>
-      <GoogleIcon /> Sign up with Google
+      <GoogleIcon /> Log in with Google
     </StyledButton>
   );
 }

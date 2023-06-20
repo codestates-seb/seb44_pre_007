@@ -44,6 +44,7 @@ export interface IconStyle {
   width: string;
   height: string;
   color?: string;
+  margin?: string;
 }
 
 export interface UserInfo {
