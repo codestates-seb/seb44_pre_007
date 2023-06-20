@@ -31,7 +31,7 @@ public class UserService {
 
     public User createUser(User user){
         if(verifyExistEmail(user.getUserEmail())){
-            throw new RuntimeException("이메일이 존재합니다!");
+            throw new BusinessLogicException(ExceptionCode.USER_EXISTS);
         }
         user.setUserPassword(user.getUserPassword());
 
