@@ -1,6 +1,5 @@
 import { AnswerT } from '../../types/types';
 import useMovePage from '../../hooks/useMovePage';
-import AnswerEditor from './AnswerEditor';
 import { ContentDiv } from '../../styles/styles';
 
 function Answer({ id, data }: { id: number; data: AnswerT }) {
