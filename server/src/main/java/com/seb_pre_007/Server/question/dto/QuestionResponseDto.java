@@ -5,10 +5,12 @@ import lombok.Data;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.parameters.P;
 
+import javax.persistence.Column;
 import java.util.List;
 
 @Data
 public class QuestionResponseDto {
+
 
     private List<QuestionData> data;
     private PageInfo pageInfo;

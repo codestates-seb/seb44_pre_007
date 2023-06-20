@@ -22,16 +22,13 @@ export default {
         black900: '#0c0D0E',
         brgray: '#e3e6e8',
         main: '#F48225',
-<<<<<<< HEAD
         bubg: '#0A95FF',
         nickname: '#0074cc',
-=======
         users000: '#F1F2F3',
         primaryBlue: '#0995FF',
         darkBlue: '#0074CC',
         buttonHover: '#F8F9F9',
         buttonBorer: 'rgb(214, 217, 220)',
->>>>>>> 03d4ca568ac02159b2d596bec4f7a31ecd2984a4
       },
     },
   },

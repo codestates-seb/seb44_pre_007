@@ -22,4 +22,8 @@ public class TagService {
 
         return  findTagName.orElse(null);
      }
+
+    public Tag createTag(String tagName) {
+        return tagRepository.save(new Tag(tagName));
+    }
 }
