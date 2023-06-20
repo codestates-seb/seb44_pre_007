@@ -56,5 +56,7 @@ export const ContentDiv = styled.div`
     padding: 10px;
     border-radius: 3px;
     font-size: 13px;
+    margin-top: 5px;
+    margin-bottom: 5px;
   }
 `;

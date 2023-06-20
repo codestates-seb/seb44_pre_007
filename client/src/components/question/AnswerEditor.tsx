@@ -39,6 +39,7 @@ function AnswerEditor() {
     'align',
     'color',
     'background',
+    'link',
     'code-block',
   ];
 
