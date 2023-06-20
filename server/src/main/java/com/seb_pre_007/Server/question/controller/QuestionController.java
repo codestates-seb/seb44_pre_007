@@ -16,6 +16,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.parameters.P;
 import org.springframework.util.MultiValueMap;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +37,7 @@ public class QuestionController {
     private final QuestionService questionService;
     private final QuestionMapper questionMapper;
 
+    // 질문 리스트 조회
     @GetMapping
     public ResponseEntity getQuestions(@Positive @RequestParam int page,
                                        @Positive @RequestParam int limit) {
@@ -50,9 +52,9 @@ public class QuestionController {
 
     //tag로 일반검색
     @GetMapping("/tagged/{question-tag}")
-    public ResponseEntity getQuestionsSearch(@PathVariable("question-tag") @Positive String questionTag,
-                                             @RequestParam(required = false) Integer page,
-                                             @RequestParam(required = false) Integer limit) {
+    public ResponseEntity getQuestionsSearch(@PathVariable("question-tag") String questionTag,
+                                             @RequestParam(required = false) @Positive Integer page,
+                                             @RequestParam(required = false) @Positive Integer limit) {
 
         System.out.println("페이지값:" + page);
 
@@ -70,6 +72,7 @@ public class QuestionController {
                 HttpStatus.OK);
     }
 
+    // 질문 수정
     @PatchMapping("/{question-id}/edit")
     public ResponseEntity patchQuestion(@Positive @PathVariable("question-id") long questionId,
                                         @Valid @RequestBody QuestionPatchDto questionPatchDto,
@@ -85,6 +88,7 @@ public class QuestionController {
         return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
     }
 
+    // 질문 생성
     @PostMapping("/ask")
     public ResponseEntity postQuestion(@Valid  @RequestBody QuestionPostDto questionPostDto, Authentication authentication) {
 
@@ -98,9 +102,9 @@ public class QuestionController {
  // redirect 미구현시     return ResponseEntity.status(HttpStatus.CREATED).body(null);
     }
 
-
+    // 질문 삭제
     @DeleteMapping("/{question-id}")
-    public ResponseEntity deleteQuestion(@PathVariable("question-id") long questionId, Authentication authentication){
+    public ResponseEntity deleteQuestion(@PathVariable("question-id") @Positive long questionId, Authentication authentication){
 
         String userEmail = authentication.getPrincipal().toString();
 
@@ -109,8 +113,9 @@ public class QuestionController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    // 임시 API
     @GetMapping("/{question-id}")
-    public String hello(@PathVariable("question-id") long questionId) {
+    public String hello(@PathVariable("question-id") @Positive long questionId) {
         return questionId + "번 질문글 상세페이지입니다. ";}
 
 
