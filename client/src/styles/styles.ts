@@ -34,8 +34,10 @@ export const SubTitle = tw.h2`
 mt-3 mb-2 text-blackDark text-[19px]
 `;
 
-export const PreviewDiv = styled.div`
+export const ContentDiv = styled.div`
   font-size: 15px;
+  color: rgb(35, 38, 41);
+
   h1 {
     font-size: 26px;
   }
@@ -47,5 +49,12 @@ export const PreviewDiv = styled.div`
   a {
     color: blue;
     border-bottom: 1px solid blue;
+  }
+
+  pre {
+    background-color: lightgray;
+    padding: 10px;
+    border-radius: 3px;
+    font-size: 13px;
   }
 `;

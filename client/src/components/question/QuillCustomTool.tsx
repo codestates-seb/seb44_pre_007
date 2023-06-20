@@ -17,6 +17,7 @@ function CustomToolbar() {
         <option label="color_black" />
       </select>
       <button aria-label="Save" type="button" className="ql-link" />
+      <button aria-label="Save" type="button" className="ql-code-block" />
     </div>
   );
 }

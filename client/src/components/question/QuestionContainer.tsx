@@ -1,4 +1,5 @@
 import useMovePage from '../../hooks/useMovePage';
+import { ContentDiv } from '../../styles/styles';
 import { QueT, TagT } from '../../types/types';
 import Tag from '../../ui/Tag';
 
@@ -13,13 +14,14 @@ function QuestionContainer({ data }: { data: QueT }) {
   } = data;
 
   const goToEdit = useMovePage(`/questions/${id}/edit`);
+
   return (
     <div className="w-[727px] flex justify-end">
       <div className="w-[654px]">
         {!data && <p>Loading...</p>}
         {!!data && (
           <>
-            <div className="text-[15px] text-blackDark">{content}</div>
+            <ContentDiv dangerouslySetInnerHTML={{ __html: content }} />
             <div className="flex gap-2 mt-4 mb-3">
               {QTag.map((tag: TagT) => (
                 <Tag key={tag.tagId} content={tag.tagName} />
@@ -37,7 +39,7 @@ function QuestionContainer({ data }: { data: QueT }) {
                 {/* Todo 작성자일 경우에만 버튼 보이도록 해야함 */}
                 <span
                   className="text-blacklight cursor-pointer"
-                  // delete onClick 기능 추가
+                  // Todo delete onClick 기능 추가
                   role="presentation"
                 >
                   Delete

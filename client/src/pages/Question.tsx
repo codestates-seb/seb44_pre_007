@@ -51,6 +51,7 @@ function QuestionPage() {
             {!!data && data.answerCount > 0 && (
               <AnswerContainer datas={data.answers} id={data.id} answerCnt={data.answerCount} />
             )}
+            {/* //Todo 로그인했을 때만 답변 달 수 있도록 */}
             <AnswerEditor />
           </div>
           <RightSidebar />
