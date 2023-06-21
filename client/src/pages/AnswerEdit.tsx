@@ -7,8 +7,8 @@ import { FetchQuestion } from '../api/api';
 import { AskBtn, ContentDiv } from '../styles/styles';
 import AnswerEditor from '../components/question/AnswerEditor';
 import { AnswerT } from '../types/types';
-import CancelBtn from '../components/edit/answer/CancelBtn';
 import scrollToTop from '../utils/scrollToTop';
+import useMovePage from '../hooks/useMovePage';
 
 const H2 = tw.h2`
 mt-4 mb-[19px] text-[19px]
@@ -39,9 +39,13 @@ function AnswerEdit() {
   }, [data]);
 
   // Todo patch
-  const HandlePatchAnswer = () => {};
+  const HandlePatchAnswer = () => {
+    console.log(PreviewRef.current?.innerText);
+  };
   // Todo delete
   const HandleDeleteAnswer = () => {};
+  // Todo ux를 위해 돌아간다는 경고 모달 띄우면 좋음
+  const HandleCancelAnswer = useMovePage(`/questions/${id}`);
 
   if (isLoading) return <p>Loading ...</p>;
   if (error instanceof Error) return <p>`error has ocurred: {error.message}</p>;
@@ -51,7 +55,9 @@ function AnswerEdit() {
       <div className="w-[662px]">
         {!!data && (
           <>
-            <H2 className="text-Link cursor-pointer">{data.data.questionTitle}</H2>
+            <H2 className="text-Link cursor-pointer" onClick={HandleCancelAnswer}>
+              {data.data.questionTitle}
+            </H2>
             <ContentDiv dangerouslySetInnerHTML={{ __html: data.data.questionContent }} />
             <H2 className="text-blackDark">Answer</H2>
             <AnswerEditor text={text} setText={setText} />
@@ -66,7 +72,13 @@ function AnswerEdit() {
               >
                 Delete Answer
               </AskBtn>
-              <CancelBtn url={`/questions/${id}`} />
+              <AskBtn
+                className="bg-white text-bubg border-none"
+                type="submit"
+                onClick={HandleCancelAnswer}
+              >
+                Cancel
+              </AskBtn>
             </div>
             <section>
               <ContentDiv ref={PreviewRef} dangerouslySetInnerHTML={{ __html: text }} />
