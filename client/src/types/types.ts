@@ -51,3 +51,8 @@ export interface UserInfo {
   userEmail: string | null;
   userPassword: string | null;
 }
+
+export interface Tokens {
+  accessToken: string;
+  refreshToken: string;
+}
