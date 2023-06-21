@@ -121,6 +121,7 @@ function Home() {
       </h1>
       <span className="w-[63px] h-[8px] bg-blacklight rounded" />
       <div className="flex text-white">
+        {/* Todo 여기부터 이어서 진행 */}
         <div className="flex flex-col items-center">
           <h2>100+ million</h2>
           <p className="text-center">
