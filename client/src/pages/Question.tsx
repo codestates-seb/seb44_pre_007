@@ -8,7 +8,7 @@ import { FetchQuestion } from '../api/api';
 import scrollToTop from '../utils/scrollToTop';
 import AnswerContainer from '../components/question/AnswerContainer';
 import AskQuestionBtn from '../components/AskQuestionBtn';
-import AnswerEditor from '../components/question/AnswerEditor';
+import AnswerForm from '../components/question/AnswerForm';
 
 const DateDiv = tw.div`
 text-blacklight text-[13px] pb-2
@@ -17,7 +17,7 @@ text-blacklight text-[13px] pb-2
 function QuestionPage() {
   const { id } = useParams();
   const { isLoading, data, error } = useQuery({
-    queryKey: ['question'],
+    queryKey: ['question', id],
     queryFn: () => FetchQuestion(Number(id)),
   });
 
@@ -58,7 +58,7 @@ function QuestionPage() {
               />
             )}
             {/* //Todo 로그인했을 때만 답변 달 수 있도록 */}
-            <AnswerEditor />
+            <AnswerForm />
           </div>
           <RightSidebar />
         </div>

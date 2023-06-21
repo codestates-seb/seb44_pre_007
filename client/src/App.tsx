@@ -8,6 +8,7 @@ import QuestionPage from './pages/Question';
 import SignUp from './pages/SignUp';
 import Users from './pages/Users';
 import Login from './pages/Login';
+import AnswerEdit from './pages/AnswerEdit';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: 'questions/:id',
         element: <QuestionPage />,
+      },
+      {
+        path: 'questions/:id/:answerId/edit',
+        element: <AnswerEdit />,
       },
     ],
   },

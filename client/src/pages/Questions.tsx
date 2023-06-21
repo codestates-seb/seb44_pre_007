@@ -1,5 +1,5 @@
 /* eslint-disable operator-linebreak */
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import Btn from '../ui/Btn';
 import addCommasToNumber from '../utils/addCommasToNumber';
@@ -12,7 +12,6 @@ import AskQuestionBtn from '../components/AskQuestionBtn';
 import scrollToTop from '../utils/scrollToTop';
 import PageBtnDiv from '../components/questions/PageBtnDiv';
 
-// todo fetch 리액트쿼리 사용하기
 function Questions() {
   const [currentpage, SetCurrentpage] = useState(1);
   const [questions, setQuestions] = useState<Question[]>([]);
