@@ -11,7 +11,7 @@ absolute text-gray-600 ml-1 text-lg
 `;
 const StyledInput = tw.input<{ $primary: boolean; $show: boolean }>`
 border border-gray-400 rounded grow w-full h-full placeholder:text-sm px-6 focus:shadow-input focus:border-sky-400
-${(props) => (props.$primary ? '' : 'absolute translate-y-11 -translate-x-1/2 w-full h-8')}
+${(props) => (props.$primary ? '' : 'absolute translate-y-11 inset-x-0 w-full h-8')}
 ${(props) => (!props.$show && !props.$primary ? 'hidden' : '')}
   `;
 
