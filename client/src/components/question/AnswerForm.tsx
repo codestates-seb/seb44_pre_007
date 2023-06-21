@@ -7,7 +7,7 @@ import AnswerEditor from './AnswerEditor';
 import { PostData } from '../../api/api';
 
 function AnswerForm() {
-  const { id } = useParams();
+  const { id } = useParams() as { id: string };
   const PreviewRef = useRef<HTMLDivElement>(null);
   const [text, setText] = useState<string>('');
 

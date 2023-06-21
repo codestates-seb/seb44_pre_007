@@ -8,7 +8,7 @@ import Tag from '../../ui/Tag';
 import formatingDate from '../../utils/formatingDate';
 
 function QuestionContainer({ data }: { data: QueT }) {
-  const { id } = useParams();
+  const { id } = useParams() as { id: string };
   const {
     questionContent: content,
     tagList: QTag,
@@ -47,14 +47,12 @@ function QuestionContainer({ data }: { data: QueT }) {
                 {/* Todo 작성자일 경우에만 버튼 보이도록 해야함 */}
                 <span
                   className="text-blacklight cursor-pointer"
-                  // Todo delete onClick 기능 추가
                   role="presentation"
                   onClick={HandleDeleteQuestion}
                 >
                   Delete
                 </span>
               </div>
-              {/* Todo 날짜 가공 함수 구현해야함 */}
               {updated !== created && (
                 <span className="text-Link">edited {formatingDate(updated)}</span>
               )}

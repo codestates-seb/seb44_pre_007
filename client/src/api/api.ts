@@ -22,7 +22,7 @@ export const FetchQuestions = async (page: number, limit: number) =>
 export const FetchQuestion = async (question_id: number) =>
   instance.get(`/questions/${question_id}`);
 
-export const PostData = async ({ id, text }: { id: string | undefined; text: string }) =>
+export const PostData = async ({ id, text }: { id: string; text: string }) =>
   instance.post(`/questions/${id}`, { answerContent: text });
 
 export const PatchAnswerData = async ({
@@ -47,7 +47,4 @@ export const DelAnswerData = async ({ id, answerId }: { id: string; answerId: st
       window.alert('삭제에 실패했습니다.');
     });
 
-export const DelQueData = async ({ id }: { id: string | undefined }) => {
-  console.log(id);
-  return instance.delete(`/questions/${id}`);
-};
+export const DelQueData = async ({ id }: { id: string }) => instance.delete(`/questions/${id}`);
