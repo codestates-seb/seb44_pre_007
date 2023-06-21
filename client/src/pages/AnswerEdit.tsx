@@ -51,7 +51,7 @@ function AnswerEdit() {
   if (error instanceof Error) return <p>`error has ocurred: {error.message}</p>;
 
   return (
-    <div className="flex p-6">
+    <div className="flex p-6 border-l border-brgray">
       <div className="w-[662px]">
         {!!data && (
           <>
