@@ -1,8 +1,9 @@
+import { useParams } from 'react-router-dom';
 import { AnswerT } from '../../types/types';
 import useMovePage from '../../hooks/useMovePage';
 import { ContentDiv } from '../../styles/styles';
 
-function Answer({ id, data }: { id: number; data: AnswerT }) {
+function Answer({ data }: { data: AnswerT }) {
   const {
     answerId,
     answerContent: content,
@@ -10,6 +11,7 @@ function Answer({ id, data }: { id: number; data: AnswerT }) {
     answerCreated: created,
     answerUserNickName: nickName,
   } = data;
+  const { id } = useParams();
   const goToEdit = useMovePage(`/questions/${id}/${answerId}/edit`);
 
   return (

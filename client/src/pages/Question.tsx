@@ -53,11 +53,7 @@ function QuestionPage() {
           <div className="flex flex-col">
             {!!data && <QuestionContainer data={data.data} />}
             {!!data && data.data.answerList.length > 0 && (
-              <AnswerContainer
-                datas={data.data.answerList}
-                id={data.data.id}
-                answerCnt={data.data.answerCount}
-              />
+              <AnswerContainer datas={data.data.answerList} answerCnt={data.data.answerCount} />
             )}
             {isLoggedIn && <AnswerForm />}
           </div>
