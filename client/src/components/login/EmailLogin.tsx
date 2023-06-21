@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import tw from 'tailwind-styled-components';
 import { styled } from 'styled-components';
 import { useState } from 'react';
@@ -95,7 +96,7 @@ export default function EmailLogin() {
         })
         .catch((error) => {
           if (error.response && error.response.status === 401) {
-            setLoginError('No user found with matching data');
+            setLoginError('No user found with matching data.');
             console.error('error: Authentication failed.');
           } else {
             console.error('error:', error);

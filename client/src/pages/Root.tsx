@@ -1,9 +1,15 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useSearchParams } from 'react-router-dom';
 import Header from '../components/header/Header';
 import LeftSidebar from '../components/sidebar/LeftSidebar';
 import Footer from '../components/footer/Footer';
 
 function Root() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const token = searchParams.get('access_token');
+  if (token) {
+    localStorage.setItem('token', token);
+    window.location.href = 'http://localhost:5173/questions';
+  }
   return (
     <>
       {/* Nav bar */}
