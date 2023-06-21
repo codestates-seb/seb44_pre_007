@@ -48,14 +48,14 @@ public class AnswerController {
 //        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PatchMapping("/{answer-id}/edit_answer")
-    public ResponseEntity patchAnswer(@Positive @PathVariable("answer-id") long answerId,
+    @PatchMapping("/{question-id}/{answer-id}/edit")
+    public ResponseEntity patchAnswer(@Positive @PathVariable("question-id") long questionId,@Positive @PathVariable("answer-id") long answerId,
                                       @Valid @RequestBody AnswerPatchDto answerPatchDto, Authentication authentication){
 
         String userEmail = authentication.getPrincipal().toString();
 
         answerPatchDto.setAnswerId(answerId);
-        Question targetQuestion = questionRepository.findByQuestionId(answerId);
+        Question targetQuestion = questionRepository.findByQuestionId(questionId);
         Answer answer = answerService.updateAnswer(targetQuestion, answerPatchDto, userEmail);
 
         HttpHeaders headers = new HttpHeaders();
@@ -63,8 +63,8 @@ public class AnswerController {
         return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
     }
 
-    @DeleteMapping("/{answer-id}/edit_answer")
-    public ResponseEntity deleteAnswer(@Positive @PathVariable("answer-id") long answerId, Authentication authentication){
+    @DeleteMapping("/{question-id}/{answer-id}/edit")
+    public ResponseEntity deleteAnswer(@Positive @PathVariable("question-id") long questionId, @Positive @PathVariable("answer-id") long answerId, Authentication authentication){
 
         String userEmail = authentication.getPrincipal().toString();
 
