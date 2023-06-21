@@ -1,4 +1,4 @@
-import { Params, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import tw from 'tailwind-styled-components';
 import { useEffect, useRef, useState } from 'react';

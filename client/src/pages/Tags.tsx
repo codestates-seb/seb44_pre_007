@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
