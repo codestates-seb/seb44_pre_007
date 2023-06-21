@@ -22,6 +22,9 @@ export const FetchQuestions = async (page: number, limit: number) =>
 export const FetchQuestion = async (question_id: number) =>
   instance.get(`/questions/${question_id}`);
 
+export const FetchTags = async (questionTag: string) =>
+  instance.get(`/questions/tagged/${questionTag}`);
+
 export const PostData = async ({ id, text }: { id: string; text: string }) =>
   instance.post(`/questions/${id}`, { answerContent: text });
 
