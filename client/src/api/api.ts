@@ -16,6 +16,8 @@ export const instance = axios.create({
   },
 });
 
+export const GetUser = () => instance.get('/principal').then((res) => res.data.body.data);
+
 export const FetchQuestions = async (page: number, limit: number) =>
   instance.get(`/questions?page=${page}&limit=${limit}`);
 
