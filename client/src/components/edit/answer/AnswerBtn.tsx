@@ -1,30 +1,19 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { AskBtn } from '../../../styles/styles';
 import useMovePage from '../../../hooks/useMovePage';
-import { PatchData, instance } from '../../../api/api';
+import { DelAnswerData, PatchAnswerData } from '../../../api/api';
 
 function AnswerBtn({ id, answerId, text }: { id: string; answerId: string; text: string }) {
-  const queryClient = useQueryClient();
-  const mutation = useMutation(PatchData, {
-    onSuccess: () => queryClient.invalidateQueries(['question']),
-  });
+  const mutationPatch = useMutation(PatchAnswerData);
+  const mutationDel = useMutation(DelAnswerData);
 
-  // Todo patch
+  // Todo patch error 해결해야함
   const HandlePatchAnswer = () => {
-    mutation.mutate({ id, answerId, text });
+    mutationPatch.mutate({ id, answerId, text });
   };
 
   const HandleDeleteAnswer = () => {
-    instance
-      .delete(`/questions/${id}/${answerId}/edit`)
-      .then((res) => {
-        if (res.status === 204) {
-          window.alert('답변을 삭제했습니다.');
-        }
-      })
-      .catch(() => {
-        window.alert('삭제에 실패했습니다.');
-      });
+    mutationDel.mutate({ id, answerId });
   };
 
   const HandleCancelAnswer = useMovePage(`/questions/${id}`);
