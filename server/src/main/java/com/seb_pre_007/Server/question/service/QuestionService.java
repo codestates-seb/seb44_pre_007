@@ -67,8 +67,7 @@ public class QuestionService {
 
     public Question findeQuestion(long questionId) {
 
-
-        Question findQuestion = questionRepository.findByQuestionId(questionId);
+        Question findQuestion = findVerifiedQuestion(questionId);
 
         updateViewQuestions(findQuestion);
 
@@ -80,13 +79,11 @@ public class QuestionService {
     @Transactional
     public void updateViewQuestions(Question findQuestion) {
 
-
         int questionCount= findQuestion.getQuestionCount();
 
         findQuestion.setQuestionCount(questionCount+1);
 
         questionRepository.save(findQuestion);
-
 
     }
 
@@ -97,17 +94,16 @@ public class QuestionService {
         Question findQuestion = findVerifiedQuestion(questionPatchDto.getQuestionId()); // 질문글 확인
         verifyUser(userEmail, findQuestion); // 작성자 여부 확인
 
-        // 입력된 태그 값이 있을 때만 수정
+        // 입력된 태그 값이 null 이 아닐 때만 수정
         if (questionPatchDto.getQuestionTag() != null) {
 
             // 기존 태그-질문 정보 삭제
             questionTagService.deleteQuestionTags(findQuestion);
             findQuestion.setQuestionTagList(new ArrayList<>());
 
-            // 입력된 태그가 null 이 아니고  태그 연관관계 세팅
-            if (!questionPatchDto.getQuestionTag().isEmpty()) {
-                setTagListToFindQuestion(questionPatchDto, findQuestion);
-            }
+            // 태그 연관관계 세팅
+            setTagListToFindQuestion(questionPatchDto, findQuestion);
+
         }
 
         Optional.ofNullable(questionPatchDto.getQuestionTitle()).ifPresent(findQuestion::setQuestionTitle);
@@ -116,35 +112,10 @@ public class QuestionService {
         return questionRepository.save(findQuestion);
     }
 
-    // 태그-질문 연관관계 세팅
-    private void setTagListToFindQuestion(QuestionPatchDto questionPatchDto, Question findQuestion) {
-        List<String> inputTags = questionPatchDto.getQuestionTag().stream()
-                .map(String::toUpperCase)
-                .collect(Collectors.toList());
-
-        for (int i = 0; i < inputTags.size(); i++) {
-            Tag findTag = tagService.findByTagName(inputTags.get(i));
-            if (findTag == null) findTag = tagService.createTag(inputTags.get(i));
-            findQuestion.addQuestionTag(new QuestionTag(findTag));
-        }
-    }
-
-    private void verifyUser(String userEmail, Question findQuestion) {
-        if (!findQuestion.getUser().getUserEmail().equals(userEmail)) {
-            throw new BusinessLogicException(ExceptionCode.USER_DOES_NOT_MATCH);
-        }
-    }
-
-    private Question findVerifiedQuestion(Long questionId) {
-        Optional<Question> quesiton = questionRepository.findById(questionId);
-
-        return quesiton.orElseThrow(() -> new BusinessLogicException(ExceptionCode.QUESTION_NOT_FOUND));
-    }
-
     @Transactional
     public Question createQuestion(QuestionPostDto questionPostDto, String userEmail) {
 
-       User findUser = userService.getUser(userEmail);
+        User findUser = userService.getUser(userEmail);
 
         Question question = new Question();
         question.setUser(findUser);
@@ -152,14 +123,7 @@ public class QuestionService {
         question.setQuestionContent(questionPostDto.getQuestionContent());
 
         if (questionPostDto.getQuestionTag() != null) {
-            List<String> inputTags = questionPostDto.getQuestionTag().stream().map(inputTag -> inputTag.toUpperCase()).collect(Collectors.toList());
-
-            // 태그 정보 조회 및 연관관계 설정
-            for (int i = 0; i < inputTags.size(); i++) {
-                Tag findTag = tagService.findByTagName(inputTags.get(i));
-                if (findTag == null) findTag = tagService.createTag(inputTags.get(i));
-                question.addQuestionTag(new QuestionTag(findTag));
-            }
+            setTagListToFindQuestion(questionPostDto, question);
         }
 
         return questionRepository.save(question);
@@ -172,6 +136,47 @@ public class QuestionService {
 
         questionRepository.delete(findQuestion);
 
+    }
+
+
+    private void setTagListToFindQuestion(Object questionDto, Question findQuestion) {
+
+        List<String> inputTags = getInputTags(questionDto);
+
+        for (int i = 0; i < inputTags.size(); i++) {
+            Tag findTag = tagService.findByTagName(inputTags.get(i));
+            if (findTag == null) findTag = tagService.createTag(inputTags.get(i));
+            findQuestion.addQuestionTag(new QuestionTag(findTag));
+        }
+    }
+
+    private static List<String> getInputTags(Object questionDto) {
+        List<String> inputTags = new ArrayList<>();
+
+        if (questionDto instanceof QuestionPatchDto) {
+            inputTags = ((QuestionPatchDto) questionDto).getQuestionTag().stream()
+                    .map(String::toUpperCase)
+                    .collect(Collectors.toList());
+        }
+        if (questionDto instanceof QuestionPostDto) {
+            inputTags = ((QuestionPostDto) questionDto).getQuestionTag().stream()
+                    .map(String::toUpperCase)
+                    .collect(Collectors.toList());
+        }
+
+        return inputTags;
+    }
+
+    private void verifyUser(String userEmail, Question findQuestion) {
+        if (!findQuestion.getUser().getUserEmail().equals(userEmail)) {
+            throw new BusinessLogicException(ExceptionCode.USER_DOES_NOT_MATCH);
+        }
+    }
+
+    private Question findVerifiedQuestion(Long questionId) {
+        Optional<Question> question = questionRepository.findById(questionId);
+
+        return question.orElseThrow(() -> new BusinessLogicException(ExceptionCode.QUESTION_NOT_FOUND));
     }
 
 }
