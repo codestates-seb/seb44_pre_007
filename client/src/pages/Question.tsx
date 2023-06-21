@@ -52,9 +52,9 @@ function QuestionPage() {
         <div className="flex justify-between">
           <div className="flex flex-col">
             {!!data && <QuestionContainer data={data.data} />}
-            {!!data && data.data.answerCount > 0 && (
+            {!!data && data.data.answerList.length > 0 && (
               <AnswerContainer
-                datas={data.data.answers}
+                datas={data.data.answerList}
                 id={data.data.id}
                 answerCnt={data.data.answerCount}
               />
