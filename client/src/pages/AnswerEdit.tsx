@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import tw from 'tailwind-styled-components';
 import { useEffect, useRef, useState } from 'react';
+import axios from 'axios';
 import RightSidebar from '../components/sidebar/RightSidebar';
 import { FetchQuestion } from '../api/api';
 import { AskBtn, ContentDiv } from '../styles/styles';
@@ -42,8 +43,13 @@ function AnswerEdit() {
   const HandlePatchAnswer = () => {
     console.log(PreviewRef.current?.innerText);
   };
+
   // Todo delete
-  const HandleDeleteAnswer = () => {};
+  const HandleDeleteAnswer = () => {
+    axios.delete(`http://3.35.43.193:8080/questions/${id}/${answerId}/edit`).then((res) => {
+      console.log(res);
+    });
+  };
   // Todo ux를 위해 돌아간다는 경고 모달 띄우면 좋음
   const HandleCancelAnswer = useMovePage(`/questions/${id}`);
 

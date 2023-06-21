@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import 'react-quill/dist/quill.snow.css';
+import axios from 'axios';
 import { AskBtn, ContentDiv, SubTitle } from '../../styles/styles';
 import AnswerEditor from './AnswerEditor';
 
