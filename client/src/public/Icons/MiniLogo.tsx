@@ -1,10 +1,12 @@
-export default function MiniLogo() {
+import { IconStyle } from '../../types/types';
+
+export default function MiniLogo({ style }: { style: IconStyle }) {
   return (
     <svg
       aria-hidden="true"
       className="native svg-icon iconLogoGlyphMd mb-6"
-      width="32"
-      height="37"
+      width={style.width}
+      height={style.height}
       viewBox="0 0 32 37"
     >
       <path

@@ -17,7 +17,7 @@ bg-white rounded-md shadow-md py-10 px-6 flex flex-col justify-center items-cent
 export default function LoginForm() {
   return (
     <StyledWrapper>
-      <MiniLogo />
+      <MiniLogo style={{ width: '32px', height: '37px' }} />
       <StyledOAuthDiv>
         <GoogleLoginButton />
       </StyledOAuthDiv>

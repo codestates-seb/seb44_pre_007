@@ -43,7 +43,7 @@ export type TagT = {
 export interface IconStyle {
   width: string;
   height: string;
-  color: string;
+  color?: string;
 }
 
 export interface UserInfo {

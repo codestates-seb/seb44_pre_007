@@ -36,8 +36,9 @@ const navIconStyle: IconStyle = {
   height: '18',
   color: 'hsl(210,8%,35%)',
 };
-const StyledIcon = tw.span`
+const StyledIcon = tw.span<{ $drowdown?: boolean }>`
 hover:bg-gray-200 h-full flex items-center p-2 cursor-pointer
+${(props) => (props.$drowdown ? 'bg-gray-200' : '')}
 `;
 
 export default function NavBar() {
@@ -50,7 +51,10 @@ export default function NavBar() {
 
   // if (isLoading) return 'Loading...';
   // if (error) return `An error has occurred: ${error.message}`;
-
+  const [showDropdown, setShowDropdown] = useState(false);
+  const handleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
   return (
     <StyledNav>
       {isLoggedIn ? (
