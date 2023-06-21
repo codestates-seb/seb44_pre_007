@@ -1,4 +1,5 @@
 import tw from 'tailwind-styled-components';
+import axios from 'axios';
 import MiniLogo from '../../public/Icons/MiniLogo';
 
 const StyledDropdown = tw.div`
@@ -22,6 +23,18 @@ flex font-bold hover:text-primaryBlue cursor-pointer
 const StyledSubMenu = tw.span`
 mr-2 hover:text-primaryBlue cursor-pointer
 `;
+const handleLogout = () => {
+  axios
+    .post(import.meta.env.VITE_LOGOUT_URL)
+    .then((res) => localStorage.removeItem('token'))
+    .catch((error) => {
+      if (error.response && error.response.status === 401) {
+        console.error('error: Authentication failed.');
+      } else {
+        console.error('error:', error);
+      }
+    });
+};
 
 export default function Dropdown() {
   return (
@@ -40,7 +53,7 @@ export default function Dropdown() {
           <div>
             <StyledSubMenu>help</StyledSubMenu>
             <StyledSubMenu>chat</StyledSubMenu>
-            <StyledSubMenu>log out</StyledSubMenu>
+            <StyledSubMenu onClick={handleLogout}>log out</StyledSubMenu>
           </div>
         </StyledLi>
       </StyledUl>
