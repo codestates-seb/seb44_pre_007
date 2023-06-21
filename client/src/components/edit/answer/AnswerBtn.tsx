@@ -1,20 +1,17 @@
-import axios from 'axios';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AskBtn } from '../../../styles/styles';
 import useMovePage from '../../../hooks/useMovePage';
-import { instance } from '../../../api/api';
+import { PatchData, instance } from '../../../api/api';
 
-function AnswerBtn({
-  id,
-  answerId,
-  text,
-}: {
-  id: string | undefined;
-  answerId: string | undefined;
-  text: string | undefined;
-}) {
+function AnswerBtn({ id, answerId, text }: { id: string; answerId: string; text: string }) {
+  const queryClient = useQueryClient();
+  const mutation = useMutation(PatchData, {
+    onSuccess: () => queryClient.invalidateQueries(['question']),
+  });
+
   // Todo patch
   const HandlePatchAnswer = () => {
-    console.log(text);
+    mutation.mutate({ id, answerId, text });
   };
 
   const HandleDeleteAnswer = () => {

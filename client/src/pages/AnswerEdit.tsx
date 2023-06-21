@@ -58,7 +58,7 @@ function AnswerEdit() {
             <ContentDiv dangerouslySetInnerHTML={{ __html: data.data.questionContent }} />
             <H2 className="text-blackDark">Answer</H2>
             <AnswerEditor text={text} setText={setText} />
-            <AnswerBtn id={id} answerId={answerId} text={PreviewRef.current?.innerText} />
+            <AnswerBtn id={id} answerId={answerId} text={text} />
             <section>
               <ContentDiv ref={PreviewRef} dangerouslySetInnerHTML={{ __html: text }} />
             </section>
