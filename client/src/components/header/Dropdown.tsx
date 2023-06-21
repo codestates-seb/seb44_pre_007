@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import tw from 'tailwind-styled-components';
 import axios from 'axios';
 import MiniLogo from '../../public/Icons/MiniLogo';
@@ -12,7 +13,7 @@ const StyledUl = tw.ul`
 bg-lightBlue hover:bg-hoverBlue px-2 py-1
 `;
 const StyledLi = tw.li`
-flex justify-between my-0.5 
+flex justify-between my-0.5
 `;
 const StyledIconWrapper = tw.span`
 mr-1
@@ -23,10 +24,11 @@ flex font-bold hover:text-primaryBlue cursor-pointer
 const StyledSubMenu = tw.span`
 mr-2 hover:text-primaryBlue cursor-pointer
 `;
+/** api 미완으로 작동 안함. 로컬스토리지에서 토큰 직접 삭제하세요. */
 const handleLogout = () => {
   axios
     .post(import.meta.env.VITE_LOGOUT_URL)
-    .then((res) => localStorage.removeItem('token'))
+    .then(() => localStorage.removeItem('token'))
     .catch((error) => {
       if (error.response && error.response.status === 401) {
         console.error('error: Authentication failed.');
