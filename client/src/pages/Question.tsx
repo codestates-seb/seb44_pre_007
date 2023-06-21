@@ -9,12 +9,14 @@ import scrollToTop from '../utils/scrollToTop';
 import AnswerContainer from '../components/question/AnswerContainer';
 import AskQuestionBtn from '../components/AskQuestionBtn';
 import AnswerForm from '../components/question/AnswerForm';
+import useIsLoggedIn from '../hooks/useIsLoggedIn';
 
 const DateDiv = tw.div`
 text-blacklight text-[13px] pb-2
 `;
 
 function QuestionPage() {
+  const isLoggedIn = useIsLoggedIn();
   const { id } = useParams();
   const { isLoading, data, error } = useQuery({
     queryKey: ['question', id],
@@ -57,8 +59,7 @@ function QuestionPage() {
                 answerCnt={data.data.answerCount}
               />
             )}
-            {/* //Todo 로그인했을 때만 답변 달 수 있도록 */}
-            <AnswerForm />
+            {isLoggedIn && <AnswerForm />}
           </div>
           <RightSidebar />
         </div>

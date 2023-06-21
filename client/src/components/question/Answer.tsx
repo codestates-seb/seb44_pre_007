@@ -17,16 +17,9 @@ function Answer({ id, data }: { id: number; data: AnswerT }) {
       <ContentDiv dangerouslySetInnerHTML={{ __html: content }} />
       <div className="flex justify-between text-[13px] my-4 pt-1">
         <div className="flex gap-2">
+          {/* Todo 작성자일 경우에만 버튼 보이도록 해야함 */}
           <span className="text-blacklight cursor-pointer" onClick={goToEdit} role="presentation">
             Edit
-          </span>
-          {/* Todo 작성자일 경우에만 버튼 보이도록 해야함 */}
-          <span
-            className="text-blacklight cursor-pointer"
-            // delete onClick 기능 추가
-            role="presentation"
-          >
-            Delete
           </span>
         </div>
         {updated !== created && <span className="text-Link">edited {updated}</span>}
