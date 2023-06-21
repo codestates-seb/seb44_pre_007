@@ -4,6 +4,7 @@ package com.seb_pre_007.Server.user.service;
 import com.seb_pre_007.Server.auth.utils.CustomAuthorityUtils;
 import com.seb_pre_007.Server.exception.BusinessLogicException;
 import com.seb_pre_007.Server.exception.ExceptionCode;
+import com.seb_pre_007.Server.user.dto.UserPatchDto;
 import com.seb_pre_007.Server.user.entity.User;
 import com.seb_pre_007.Server.user.repository.UserRepository;
 import org.springframework.context.ApplicationEventPublisher;
@@ -75,11 +76,27 @@ public class UserService {
     }
 
 
-//    //id로 유저정보 조회
-//    @Transactional(readOnly = true)
-//    public User findVerifiedUser(long userId) {
-//        Optional<User> user = userRepository.findById(userId);
-//        return user.orElseThrow(() ->
-//                new BusinessLogicException(ExceptionCode.USER_NOT_FOUND));
-//    }
+    // 회원 정보 수정
+    @Transactional
+    public User updateUser(UserPatchDto userPatchDto) {
+        User findUser = findVerifiedUser(userPatchDto.getUserEmail());
+
+        Optional.ofNullable(userPatchDto.getUserNickname()).ifPresent(findUser::setUserNickname);
+
+        return userRepository.save(findUser);
+    }
+
+    // 회원 정보 삭제
+    @Transactional
+    public void deleteUser(String userEmail, long userId) {
+        User findUser = findVerifiedUser(userEmail);
+        userRepository.delete(findUser);
+    }
+
+
+    private User findVerifiedUser(String userEmail) {
+        User findUser = userRepository.findByUserEmail(userEmail)
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.USER_NO_HAVE_AUTHORIZATION));
+        return findUser;
+    }
 }
