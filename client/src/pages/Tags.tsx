@@ -37,7 +37,9 @@ function Tags() {
       <div className="w-[727px] max-h-[2000px]">
         <section className="mb-3">
           <div className="flex justify-between items-center h-[50px] mb-3">
-            <h1 className="mr-3 mb-3 text-[27px] text-blackDark">All Questions</h1>
+            <h1 className="mr-3 mb-3 text-[27px] text-blackDark">
+              Questions tagged [{questionTag}]
+            </h1>
             <AskQuestionBtn />
           </div>
           <div className="flex justify-between items-center text-blackDark">
