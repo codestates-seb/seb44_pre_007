@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { AskBtn } from '../../../styles/styles';
 import useMovePage from '../../../hooks/useMovePage';
+import { instance } from '../../../api/api';
 
 function AnswerBtn({
   id,
@@ -16,11 +17,17 @@ function AnswerBtn({
     console.log(text);
   };
 
-  // Todo delete
   const HandleDeleteAnswer = () => {
-    axios.delete(`http://3.35.43.193:8080/questions/${id}/${answerId}/edit`).then((res) => {
-      console.log(res);
-    });
+    instance
+      .delete(`/questions/${id}/${answerId}/edit`)
+      .then((res) => {
+        if (res.status === 204) {
+          window.alert('답변을 삭제했습니다.');
+        }
+      })
+      .catch(() => {
+        window.alert('삭제에 실패했습니다.');
+      });
   };
 
   const HandleCancelAnswer = useMovePage(`/questions/${id}`);
