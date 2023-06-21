@@ -99,7 +99,7 @@ export default function EmailSignUp() {
     return checkuserNickname() && checkEmail() && checkuserPassword();
   }
   const mutation = useMutation({
-    mutationFn: (newUser: UserInfo) => axios.post(import.meta.env.VITE_URL, newUser),
+    mutationFn: (newUser: UserInfo) => axios.post(import.meta.env.VITE_SIGNUP_URL, newUser),
   });
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
