@@ -1,8 +1,8 @@
 import tw from 'tailwind-styled-components';
-// import { useQuery } from '@tanstack/react-query';
-// import axios from 'axios';
 import { styled } from 'styled-components';
 import { useState } from 'react';
+import UserImg from './UserImg';
+
 import Inbox from '../../public/Icons/Inbox';
 import Achievement from '../../public/Icons/Achievement';
 import Help from '../../public/Icons/Help';
@@ -57,24 +57,28 @@ export default function NavBar() {
   const handleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
+
   return (
     <StyledNav>
       {isLoggedIn ? (
-        <StyledList>
-          <StyledIcon>
-            <Inbox style={navIconStyle} />
-          </StyledIcon>
-          <StyledIcon>
-            <Help style={navIconStyle} />
-          </StyledIcon>
-          <StyledIcon>
-            <Achievement style={navIconStyle} />
-          </StyledIcon>
-          <StyledIcon onClick={handleDropdown}>
-            <Switcher style={navIconStyle} />
-          </StyledIcon>
-          {showDropdown && <Dropdown />}
-        </StyledList>
+        <>
+          <UserImg />
+          <StyledList>
+            <StyledIcon>
+              <Inbox style={navIconStyle} />
+            </StyledIcon>
+            <StyledIcon>
+              <Help style={navIconStyle} />
+            </StyledIcon>
+            <StyledIcon>
+              <Achievement style={navIconStyle} />
+            </StyledIcon>
+            <StyledIcon onClick={handleDropdown}>
+              <Switcher style={navIconStyle} />
+            </StyledIcon>
+            {showDropdown && <Dropdown />}
+          </StyledList>
+        </>
       ) : (
         <>
           <StyledLink $primary href="/users/login">
