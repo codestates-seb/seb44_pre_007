@@ -1,17 +1,26 @@
 import { useRef, useState } from 'react';
 import 'react-quill/dist/quill.snow.css';
+import { useParams } from 'react-router-dom';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AskBtn, ContentDiv, SubTitle } from '../../styles/styles';
 import AnswerEditor from './AnswerEditor';
+import { PostData } from '../../api/api';
 
 function AnswerForm() {
+  const { id } = useParams();
   const PreviewRef = useRef<HTMLDivElement>(null);
   const [text, setText] = useState<string>('');
+
+  const queryClient = useQueryClient();
+  const mutation = useMutation(PostData, {
+    onSuccess: () => queryClient.invalidateQueries(['question']),
+  });
 
   const HandleSubmitAnswer = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (PreviewRef.current) {
       if (!PreviewRef.current.innerText.trim().length) return;
-      // Todo axios Post
+      mutation.mutate({ id, text });
       setText('');
     }
   };
