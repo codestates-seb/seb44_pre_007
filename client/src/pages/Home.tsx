@@ -80,10 +80,12 @@ function Home() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center bg-blackDark w-[1200px] px-8 pt-8 pb-32">
-      <div className="flex gap-3 mb-7">
+    <div className="flex flex-col items-center bg-blackDark w-[1200px] px-8 pt-8 pb-32 mx-15 mt-12 rounded">
+      <div className="flex gap-6 mb-7">
         <OrangeSpot className="bg-[#FEE3CD]">
-          <Search style={{ width: '40', height: '40' }} />
+          <div className="mb-4">
+            <Search style={{ width: '40', height: '40' }} />
+          </div>
           <h2 className="w-[315px] text-center text-blackDark mb-[19px]">
             Find the best answer to your technical question, help others answer theirs
           </h2>
@@ -95,11 +97,12 @@ function Home() {
             <p className="text-[13px] border-b border-blackDark">search content</p>
           </div>
         </OrangeSpot>
-
         <BlueSpot className="bg-[#cde9fe]">
-          <Lock style={{ width: '40', height: '40' }} />
+          <div className="mb-4">
+            <Lock style={{ width: '40', height: '40' }} />
+          </div>
           <h2 className="w-[315px] text-center text-blackDark mb-[19px]">
-            Find the best answer to your technical question, help others answer theirs
+            Want a secure, private space for your technical knowledge?
           </h2>
           <button className="text-white bg-blue-600 px-8 py-3 rounded-[3px]" type="button">
             Discover Teams
@@ -116,6 +119,15 @@ function Home() {
         </div>
         tab open to Stack Overflow
       </h1>
+      <span className="w-[63px] h-[8px] bg-blacklight rounded" />
+      <div className="flex text-white">
+        <div className="flex flex-col items-center">
+          <h2>100+ million</h2>
+          <p className="text-center">
+            monthly visitors to Stack <br /> Overflow & Stack Exchange
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
