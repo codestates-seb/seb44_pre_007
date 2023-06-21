@@ -10,6 +10,7 @@ import AnswerContainer from '../components/question/AnswerContainer';
 import AskQuestionBtn from '../components/AskQuestionBtn';
 import AnswerForm from '../components/question/AnswerForm';
 import useIsLoggedIn from '../hooks/useIsLoggedIn';
+import formatingDate from '../utils/formatingDate';
 
 const DateDiv = tw.div`
 text-blacklight text-[13px] pb-2
@@ -42,9 +43,9 @@ function QuestionPage() {
         <div className="flex gap-4 pb-2 mb-4 border-b border-brgray">
           {!!data && (
             <>
-              <DateDiv>Asked {data.data.questionCreated} </DateDiv>
+              <DateDiv>Asked {formatingDate(data.data.questionCreated)} </DateDiv>
               {data.data.questionCreated !== data.data.questionUpdated && (
-                <DateDiv>Modified {data.data.questionUpdated}</DateDiv>
+                <DateDiv>Modified {formatingDate(data.data.questionUpdated)}</DateDiv>
               )}
             </>
           )}

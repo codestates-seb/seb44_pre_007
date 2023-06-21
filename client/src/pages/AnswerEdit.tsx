@@ -1,11 +1,10 @@
-import { useParams } from 'react-router-dom';
+import { Params, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import tw from 'tailwind-styled-components';
 import { useEffect, useRef, useState } from 'react';
-import axios from 'axios';
 import RightSidebar from '../components/sidebar/RightSidebar';
 import { FetchQuestion } from '../api/api';
-import { AskBtn, ContentDiv } from '../styles/styles';
+import { ContentDiv } from '../styles/styles';
 import AnswerEditor from '../components/question/AnswerEditor';
 import { AnswerT } from '../types/types';
 import scrollToTop from '../utils/scrollToTop';
@@ -16,8 +15,13 @@ const H2 = tw.h2`
 mt-4 mb-[19px] text-[19px]
 `;
 
+type ParmT = {
+  id: string;
+  answerId: string;
+};
+
 function AnswerEdit() {
-  const param = useParams();
+  const param = useParams() as ParmT;
   const PreviewRef = useRef<HTMLDivElement>(null);
   const { id, answerId } = param;
   const [text, setText] = useState<string>('');
