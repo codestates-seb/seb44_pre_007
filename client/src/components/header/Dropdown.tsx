@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import tw from 'tailwind-styled-components';
-import axios from 'axios';
 import MiniLogo from '../../public/Icons/MiniLogo';
+import { instance } from '../../api/api';
 
 const StyledDropdown = tw.div`
 z-50 w-[360px] absolute top-0 translate-y-[55px] -translate-x-1/2 bg-white border shadow-md text-[12px] text-darkBlue bp1:inset-x-0 bp1:translate-x-0 bp1:w-full
@@ -26,8 +26,8 @@ mr-2 hover:text-primaryBlue cursor-pointer
 `;
 /** api 미완으로 작동 안함. 로컬스토리지에서 토큰 직접 삭제하세요. */
 const handleLogout = () => {
-  axios
-    .post(import.meta.env.VITE_LOGOUT_URL)
+  instance
+    .post('/logout')
     .then(() => localStorage.removeItem('token'))
     .catch((error) => {
       if (error.response && error.response.status === 401) {

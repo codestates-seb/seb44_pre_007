@@ -11,3 +11,12 @@ export const Login = async (username: string, password: string) => {
   const response = await axios.post('http://3.35.43.193:8080/login', { username, password });
   return response;
 };
+
+const accessToken = localStorage.getItem('token');
+export const instance = axios.create({
+  baseURL: 'http://3.35.43.193:8080/',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: accessToken,
+  },
+});
