@@ -28,6 +28,8 @@ export default {
         users000: '#F1F2F3',
         primaryBlue: '#0995FF',
         darkBlue: '#0074CC',
+        lightBlue: '#F4F8FB',
+        hoverBlue: '#E1ECF4',
         buttonHover: '#F8F9F9',
         buttonBorer: 'rgb(214, 217, 220)',
         footerTitle: '#BABFC4',
