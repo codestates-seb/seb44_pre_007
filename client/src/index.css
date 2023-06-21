@@ -34,6 +34,7 @@ body {
   }
   .lds-ellipsis div {
     position: absolute;
+    top: 25px;
     width: 6px;
     height: 6px;
     border-radius: 50%;
