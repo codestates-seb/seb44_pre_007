@@ -14,6 +14,7 @@ public class QuestionTagService {
 
     private final QuestionTagRepository questionTagRepository;
 
+
     public QuestionTagService(QuestionTagRepository questionTagRepository) {
         this.questionTagRepository = questionTagRepository;
     }
@@ -26,11 +27,6 @@ public class QuestionTagService {
     public void deleteQuestionTags(Question question) {
         questionTagRepository.deleteAllByQuestion(question);
     }
-
-
-
-
-
 
 
 }

@@ -8,18 +8,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
-/*
-* “answers”: [
-         {
-            “answerId”: Number(답변ID),
-            “answerUserNickname”: String(답변작성자닉네임),
-            “answerContent”: String(답변내용),
-            “answerCreated”: String(답변등록일자),
-            “answerUpdated”: String(답변수정일자)
-         }
-    ]
-*
-* */
 @Data
 @Builder
 public class AnswerResponseDto {
@@ -37,6 +25,5 @@ public class AnswerResponseDto {
     @CreatedDate
     @DateTimeFormat(pattern = "yyyy-MM-dd/HH:mm:ss")
     private LocalDateTime answerUpdated;
-
 
 }

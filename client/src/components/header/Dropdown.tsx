@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import tw from 'tailwind-styled-components';
 import MiniLogo from '../../public/Icons/MiniLogo';
+import useMovePage from '../../hooks/useMovePage';
 
 const StyledDropdown = tw.div`
 z-50 w-[360px] absolute top-0 translate-y-[55px] -translate-x-1/2 bg-white border shadow-md text-[12px] text-darkBlue bp1:inset-x-0 bp1:translate-x-0 bp1:w-full
@@ -24,12 +25,12 @@ const StyledSubMenu = tw.span`
 mr-2 hover:text-primaryBlue cursor-pointer
 `;
 
-const handleLogout = () => {
-  localStorage.removeItem('token');
-  window.location.href = 'http://localhost:5173/';
-};
-
 export default function Dropdown() {
+  const goToQuestion = useMovePage('/questions');
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    goToQuestion();
+  };
   return (
     <StyledDropdown>
       <StyledTitle>CURRENT COMMUNITY</StyledTitle>

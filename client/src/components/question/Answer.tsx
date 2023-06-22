@@ -10,7 +10,7 @@ function Answer({ data }: { data: AnswerT }) {
     answerContent: content,
     answerUpdated: updated,
     answerCreated: created,
-    answerUserNickName: nickName,
+    answerUserNickname: nickName,
   } = data;
   const { id } = useParams();
   const goToEdit = useMovePage(`/questions/${id}/${answerId}/edit`);
