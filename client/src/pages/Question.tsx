@@ -24,6 +24,10 @@ function QuestionPage() {
     queryFn: () => FetchQuestion(Number(id)),
   });
 
+  if (data) {
+    console.log(data);
+  }
+
   const { data: user } = useQuery({
     queryKey: ['getUser'],
     queryFn: GetUser,
@@ -63,7 +67,7 @@ function QuestionPage() {
               <AnswerContainer
                 user={user ? user.userNickname : ''}
                 datas={data.data.answerList}
-                answerCnt={data.data.answerCount}
+                answerCnt={data.data.answerList.length}
               />
             )}
             {isLoggedIn && <AnswerForm />}
