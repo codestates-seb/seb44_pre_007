@@ -58,10 +58,12 @@ function QuestionPage() {
         </div>
         <div className="flex justify-between">
           <div className="flex flex-col">
-            {!!data && <QuestionContainer user={user ? user.userNickname : ''} data={data.data} />}
+            {!!data && (
+              <QuestionContainer user={user ? user.userNickname : null} data={data.data} />
+            )}
             {!!data && data.data.answerList.length > 0 && (
               <AnswerContainer
-                user={user ? user.userNickname : ''}
+                user={user ? user.userNickname : null}
                 datas={data.data.answerList}
                 answerCnt={data.data.answerList.length}
               />

@@ -26,6 +26,11 @@ function QuestionContainer({ data: QuestionData, user }: { data: QueT; user: str
     },
   });
 
+  if (QuestionData) {
+    console.log('user', user);
+    console.log('nickName', nickName);
+  }
+
   const goToEdit = useMovePage(`/questions/${id}/edit`);
 
   const HandleDeleteQuestion = () => {
