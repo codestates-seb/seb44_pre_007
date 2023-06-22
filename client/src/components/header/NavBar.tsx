@@ -73,7 +73,7 @@ export default function NavBar() {
             <StyledIcon>
               <Achievement style={navIconStyle} />
             </StyledIcon>
-            <StyledIcon onClick={handleDropdown}>
+            <StyledIcon $drowdown={showDropdown} onClick={handleDropdown}>
               <Switcher style={navIconStyle} />
             </StyledIcon>
             {showDropdown && <Dropdown />}

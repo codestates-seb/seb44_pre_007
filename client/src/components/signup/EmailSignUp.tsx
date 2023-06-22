@@ -1,9 +1,10 @@
+/* eslint-disable no-console */
 /* eslint-disable implicit-arrow-linebreak */
 import tw from 'tailwind-styled-components';
 import { styled } from 'styled-components';
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { UserInfo } from '../../types/types';
 
@@ -45,6 +46,7 @@ export default function EmailSignUp() {
   const [userNicknameError, setUserNicknameError] = useState<string | null>(null);
   const [userEmailError, setUserEmailError] = useState<string | null>(null);
   const [userPasswordError, setUserPasswordError] = useState<string | null>(null);
+  const [signupError, setSignupError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const handleuserNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -101,21 +103,51 @@ export default function EmailSignUp() {
   function validate() {
     return checkuserNickname() && checkEmail() && checkuserPassword();
   }
+
+  const login = () => {
+    axios
+      .post(
+        `${import.meta.env.VITE_BASE_URL}login`,
+        { username: userEmail, password: userPassword },
+        {
+          headers: { 'Content-Type': 'Application/json' },
+        }
+      )
+      .then((res) => {
+        if (res.status === 200) {
+          const token = res.headers.authorization;
+          if (token) {
+            localStorage.setItem('token', token);
+            navigate('/questions');
+          }
+        }
+      })
+      .catch((error) => {
+        console.error('error:', error);
+      });
+  };
+
   const mutation = useMutation({
     mutationFn: (newUser: UserInfo) =>
       axios.post(`${import.meta.env.VITE_BASE_URL}signup`, newUser),
     onSuccess(data) {
       if (data.status === 201) {
-        navigate('/questions');
+        login();
       }
     },
-    onError(error) {
-      console.log(error);
+    onError(error: AxiosError) {
+      if (error.response && error.response.status === 409) {
+        setSignupError(' Email already in use. Please log in.');
+        console.error('error: User with same data already exist.');
+      } else {
+        console.error('error:', error);
+      }
     },
   });
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setSignupError(null);
     if (validate()) {
       mutation.mutate({ userNickname, userEmail, userPassword });
     }
@@ -143,6 +175,7 @@ export default function EmailSignUp() {
       />
       {userPasswordError && <StyledError>{userPasswordError}</StyledError>}
       <Button type="submit">Sign up</Button>
+      {signupError && <StyledError>{signupError}</StyledError>}
     </StyledForm>
   );
 }
