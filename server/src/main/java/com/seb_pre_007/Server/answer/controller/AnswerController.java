@@ -58,9 +58,9 @@ public class AnswerController {
         Question targetQuestion = questionRepository.findByQuestionId(questionId);
         Answer answer = answerService.updateAnswer(answerPatchDto, userEmail);
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(URI.create("/questions/" + questionId));
-        return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setLocation(URI.create("/questions/" + questionId));
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/{question-id}/{answer-id}/edit")
