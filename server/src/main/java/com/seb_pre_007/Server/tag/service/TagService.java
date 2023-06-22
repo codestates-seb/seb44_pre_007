@@ -10,19 +10,25 @@ import java.util.Optional;
 @Service
 public class TagService {
 
-    private  final TagRepository tagRepository;
+    private final TagRepository tagRepository;
 
     public TagService(TagRepository tagRepository) {
         this.tagRepository = tagRepository;
     }
 
-     public Tag findByTagName(String tagName){
+    /**
+     * 태그 이름으로 태그 조회 (결과가 없을 경우 null 리턴, 예외 X)
+     */
+    public Tag findByTagName(String tagName) {
 
-        Optional<Tag> findTagName= tagRepository.findByTagName(tagName);
+        Optional<Tag> findTagName = tagRepository.findByTagName(tagName);
 
-        return  findTagName.orElse(null);
-     }
+        return findTagName.orElse(null);
+    }
 
+    /**
+     * 태그 생성
+     */
     public Tag createTag(String tagName) {
         return tagRepository.save(new Tag(tagName));
     }
