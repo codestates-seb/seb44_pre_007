@@ -174,7 +174,21 @@ function Home() {
       </div>
       <Gradient>
         <StackOverflow style={{ width: '190', height: '37' }} />
+        <img
+          className="my-8"
+          src="https://cdn.sstatic.net/Img/home/illo-public.svg?v=14bd5a506009"
+          alt="earth"
+        />
+        <h2 className="mx-12 mb-3 text-center">
+          A public platform building the definitive collection of coding questions & answers
+        </h2>
+        <p className="mx-12 mb-8 text-blacklight text-[19px]">
+          A community-based space to find and contribute answers to technical challenges, and one of
+          the most popular websites in the world.
+        </p>
       </Gradient>
+
+      <div className="bg-white h-[750px] text-[27px] font-bold" />
     </div>
   );
 }
