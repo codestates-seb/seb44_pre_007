@@ -7,7 +7,7 @@ function Root() {
   const [searchParams, setSearchParams] = useSearchParams();
   const token = searchParams.get('access_token');
   if (token) {
-    localStorage.setItem('token', token);
+    localStorage.setItem('token', `Bearer ${token}`);
     window.location.href = 'http://localhost:5173/questions';
   }
   return (
