@@ -49,8 +49,10 @@ public class UserController {
 
     // 유저 본인 프로필 조회
     @GetMapping("/principal")
-    @PreAuthorize("isAuthenticated()")
     public ResponseEntity getPrincipal(Authentication authentication){
+        if (authentication == null) {
+            return ResponseEntity.ok().body(ApiResponse.ok("data", userMapper.userToUserResponse(new User())));
+        }
         String userEmail = authentication.getPrincipal().toString();
         User user = userService.getUser(userEmail);
         return ResponseEntity.ok().body(ApiResponse.ok("data", userMapper.userToUserResponse(user)));
