@@ -100,7 +100,7 @@ public class QuestionService {
     /**
      * 질문 상세 조회
      */
-    public Question findeQuestion(long questionId) {
+    public Question findQuestion(long questionId) {
 
         Question findQuestion = findVerifiedQuestion(questionId); // 입력된 questionId로 질문 조회
 
@@ -185,7 +185,7 @@ public class QuestionService {
         return inputTags;
     }
 
-    // DB에서 조회한 findQuestion의 유저 정보와 로그인된 유저 정보가 일치하는지 확인 (불일치할 경우 예외 발생)
+    // DB 에서 조회한 findQuestion 의 유저 정보와 로그인된 유저 정보가 일치하는지 확인 (불일치할 경우 예외 발생)
     private void verifyUser(String userEmail, Question findQuestion) {
         if (!findQuestion.getUser().getUserEmail().equals(userEmail)) {
             throw new BusinessLogicException(ExceptionCode.USER_DOES_NOT_MATCH);

@@ -7,6 +7,9 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * 질문리스트 응답 시 사용되는 Dto : Question -> QuestionData
+ */
 @Data
 @Builder
 public class QuestionData {

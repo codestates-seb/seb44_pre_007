@@ -7,6 +7,9 @@ import lombok.Data;
 
 import java.util.List;
 
+/**
+ * 질문 수정 요청 데이터 형식
+ */
 @Data
 public class QuestionPatchDto {
 

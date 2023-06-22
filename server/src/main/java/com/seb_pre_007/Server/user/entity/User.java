@@ -24,7 +24,7 @@ public class User {
     private String userEmail;
 
     @Column
-    private String userPassword;
+    private String userPassword; // 구글 로그인은 비밀번호를 입력받지 않기 때문에 nullable = true
 
     @Column(nullable = false)
     private String userNickname;
