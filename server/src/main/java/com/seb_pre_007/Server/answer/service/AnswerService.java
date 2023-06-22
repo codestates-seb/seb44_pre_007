@@ -38,9 +38,10 @@ public class AnswerService {
         return answerRepository.save(answer);
     }
 
-    public Answer updateAnswer(Question targetQuestion, AnswerPatchDto answerPatchDto, String userEmail){
+    public Answer updateAnswer(AnswerPatchDto answerPatchDto, String userEmail){
         Answer findAnswer = findVerifiedAnswer(answerPatchDto.getAnswerId());
         verifyUser(userEmail, findAnswer);
+
 
         Optional.ofNullable(answerPatchDto.getAnswerContent()).ifPresent(findAnswer::setAnswerContent);
 
@@ -59,9 +60,12 @@ public class AnswerService {
     }
 
     @Transactional
-    public void deleteAnswer(long answerId, String userEmail){
+    public void deleteAnswer(Question targetQuestion, long answerId, String userEmail){
         Answer findanswer = findVerifiedAnswer(answerId);
         verifyUser(userEmail, findanswer);
+
+        findanswer.setQuestion(targetQuestion);
+        answerRepository.save(findanswer);
 
         answerRepository.delete(findanswer);
 
