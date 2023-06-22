@@ -27,6 +27,7 @@ function QuestionPage() {
   const { data: user } = useQuery({
     queryKey: ['getUser'],
     queryFn: GetUser,
+    refetchOnWindowFocus: false,
   });
 
   useEffect(() => {
@@ -57,10 +58,10 @@ function QuestionPage() {
         </div>
         <div className="flex justify-between">
           <div className="flex flex-col">
-            {!!data && <QuestionContainer user={user.userNickname} data={data.data} />}
+            {!!data && <QuestionContainer user={user ? user.userNickname : ''} data={data.data} />}
             {!!data && data.data.answerList.length > 0 && (
               <AnswerContainer
-                user={user.userNickname}
+                user={user ? user.userNickname : ''}
                 datas={data.data.answerList}
                 answerCnt={data.data.answerCount}
               />
