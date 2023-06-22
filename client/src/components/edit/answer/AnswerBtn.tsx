@@ -4,11 +4,20 @@ import useMovePage from '../../../hooks/useMovePage';
 import { DelAnswerData, PatchAnswerData } from '../../../api/api';
 
 function AnswerBtn({ id, answerId, text }: { id: string; answerId: string; text: string }) {
-  const mutationPatch = useMutation(PatchAnswerData);
+  const goToQue = useMovePage(`/questions/${id}`);
+  const mutationPatch = useMutation(PatchAnswerData, {
+    onSuccess(data) {
+      if (data.status === 200) {
+        goToQue();
+      }
+    },
+  });
   const mutationDel = useMutation(DelAnswerData);
 
   // Todo patch error 해결해야함
   const HandlePatchAnswer = () => {
+    console.log('patch눌림');
+
     mutationPatch.mutate({ id, answerId, text });
   };
 

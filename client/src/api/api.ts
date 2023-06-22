@@ -1,5 +1,6 @@
 /* eslint-disable implicit-arrow-linebreak */
 import axios from 'axios';
+import useMovePage from '../hooks/useMovePage';
 
 const accessToken = localStorage.getItem('token');
 
@@ -46,6 +47,7 @@ export const DelAnswerData = async ({ id, answerId }: { id: string; answerId: st
     .then((res) => {
       if (res.status === 204) {
         window.alert('답변을 삭제했습니다.');
+        window.location.assign(`http://local:5173/questions/${id}`);
       }
     })
     .catch(() => {
