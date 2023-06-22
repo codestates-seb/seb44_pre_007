@@ -4,12 +4,13 @@ import tw from 'tailwind-styled-components';
 import { useQuery } from '@tanstack/react-query';
 import QuestionContainer from '../components/question/QuestionContainer';
 import RightSidebar from '../components/sidebar/RightSidebar';
-import { FetchQuestion } from '../api/api';
+import { FetchQuestion, GetUser } from '../api/api';
 import scrollToTop from '../utils/scrollToTop';
 import AnswerContainer from '../components/question/AnswerContainer';
 import AskQuestionBtn from '../components/AskQuestionBtn';
 import AnswerForm from '../components/question/AnswerForm';
 import useIsLoggedIn from '../hooks/useIsLoggedIn';
+import formatingDate from '../utils/formatingDate';
 
 const DateDiv = tw.div`
 text-blacklight text-[13px] pb-2
@@ -21,6 +22,12 @@ function QuestionPage() {
   const { isLoading, data, error } = useQuery({
     queryKey: ['question', id],
     queryFn: () => FetchQuestion(Number(id)),
+  });
+
+  const { data: user } = useQuery({
+    queryKey: ['getUser'],
+    queryFn: GetUser,
+    refetchOnWindowFocus: false,
   });
 
   useEffect(() => {
@@ -42,21 +49,21 @@ function QuestionPage() {
         <div className="flex gap-4 pb-2 mb-4 border-b border-brgray">
           {!!data && (
             <>
-              <DateDiv>Asked {data.data.questionCreated} </DateDiv>
+              <DateDiv>Asked {formatingDate(data.data.questionCreated)} </DateDiv>
               {data.data.questionCreated !== data.data.questionUpdated && (
-                <DateDiv>Modified {data.data.questionUpdated}</DateDiv>
+                <DateDiv>Modified {formatingDate(data.data.questionUpdated)}</DateDiv>
               )}
             </>
           )}
         </div>
         <div className="flex justify-between">
           <div className="flex flex-col">
-            {!!data && <QuestionContainer data={data.data} />}
-            {!!data && data.data.answerCount > 0 && (
+            {!!data && <QuestionContainer user={user ? user.userNickname : ''} data={data.data} />}
+            {!!data && data.data.answerList.length > 0 && (
               <AnswerContainer
-                datas={data.data.answers}
-                id={data.data.id}
-                answerCnt={data.data.answerCount}
+                user={user ? user.userNickname : ''}
+                datas={data.data.answerList}
+                answerCnt={data.data.answerList.length}
               />
             )}
             {isLoggedIn && <AnswerForm />}

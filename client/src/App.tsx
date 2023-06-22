@@ -9,6 +9,9 @@ import SignUp from './pages/SignUp';
 import Users from './pages/Users';
 import Login from './pages/Login';
 import AnswerEdit from './pages/AnswerEdit';
+import Tags from './pages/Tags';
+import Mypage from './pages/Mypage';
+import UserEdit from './pages/UserEdit';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +30,10 @@ const router = createBrowserRouter([
         path: 'questions/:id/:answerId/edit',
         element: <AnswerEdit />,
       },
+      {
+        path: 'questions/tagged/:questionTag',
+        element: <Tags />,
+      },
     ],
   },
   {
@@ -40,6 +47,14 @@ const router = createBrowserRouter([
       {
         path: 'login',
         element: <Login />,
+      },
+      {
+        path: 'mypage',
+        element: <Mypage />,
+      },
+      {
+        path: 'edit',
+        element: <UserEdit />,
       },
     ],
   },

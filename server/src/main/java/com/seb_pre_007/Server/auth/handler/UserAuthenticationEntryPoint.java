@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+
+//SecurityContext 에 Authentication 이 저장되지 않을 경우 AuthenticationException 을 호출해서 ErrorResponse 를 생성해주는 핸들러
 @Slf4j
 @Component
 public class UserAuthenticationEntryPoint implements AuthenticationEntryPoint {
@@ -22,7 +24,6 @@ public class UserAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
         logExceptionMessage(authException, exception);
     }
-
     private void logExceptionMessage(AuthenticationException authException, Exception exception) {
         String message = exception != null ? exception.getMessage() : authException.getMessage();
         log.warn("Unauthorized error happened: {}", message);

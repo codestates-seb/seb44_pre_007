@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+
+//인증에는 성공했지만 해당 리소스에 대한 권한이 없으면 호출되는 핸들러
 @Slf4j
 @Component
 public class UserAccessDeniedHandler implements AccessDeniedHandler {

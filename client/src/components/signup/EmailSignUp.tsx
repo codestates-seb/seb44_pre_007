@@ -1,8 +1,10 @@
+/* eslint-disable implicit-arrow-linebreak */
 import tw from 'tailwind-styled-components';
 import { styled } from 'styled-components';
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { UserInfo } from '../../types/types';
 
 const StyledForm = tw.form`
@@ -43,6 +45,7 @@ export default function EmailSignUp() {
   const [userNicknameError, setUserNicknameError] = useState<string | null>(null);
   const [userEmailError, setUserEmailError] = useState<string | null>(null);
   const [userPasswordError, setUserPasswordError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const handleuserNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserNickname(e.target.value);
@@ -99,7 +102,16 @@ export default function EmailSignUp() {
     return checkuserNickname() && checkEmail() && checkuserPassword();
   }
   const mutation = useMutation({
-    mutationFn: (newUser: UserInfo) => axios.post(import.meta.env.VITE_URL, newUser),
+    mutationFn: (newUser: UserInfo) =>
+      axios.post(`${import.meta.env.VITE_BASE_URL}signup`, newUser),
+    onSuccess(data) {
+      if (data.status === 201) {
+        navigate('/questions');
+      }
+    },
+    onError(error) {
+      console.log(error);
+    },
   });
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {

@@ -17,7 +17,7 @@ export type Question = {
 
 export type AnswerT = {
   answerId: number;
-  answerUserNickName: string;
+  answerUserNickname: string;
   answerContent: string;
   answerCreated: string;
   answerUpdated: string;
@@ -25,7 +25,7 @@ export type AnswerT = {
 
 export type QueT = Question & {
   id: number;
-  answers: AnswerT[];
+  answerList: AnswerT[];
 };
 
 export type PageT = {

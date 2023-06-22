@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useSearchParams } from 'react-router-dom';
 import Header from '../components/header/Header';
 import LeftSidebar from '../components/sidebar/LeftSidebar';
 import Footer from '../components/footer/Footer';
@@ -7,10 +7,15 @@ import Home from './Home';
 
 function Root() {
   const isLoggedIn = useIsLoggedIn();
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get('access_token');
+  if (token) {
+    localStorage.setItem('token', `Bearer ${token}`);
+    window.location.href = 'http://localhost:5173/questions';
+  }
   return (
     <>
-      <Header />
-
+      {/* Todo 로그인 상태에 따라 아래 다르게 렌더링 */} <Header />
       <div className="flex justify-center">
         {!isLoggedIn && <Home />}
         {isLoggedIn && (

@@ -22,6 +22,7 @@ public interface QuestionMapper {
     TagDto tagToTagDto(Tag tag);
     List<TagDto> tagsToTagDtos(List<Tag> tags);
 
+    // Question Entity -> 응답데이터 형식인 QuestionData 로 변환
     default QuestionData qeustionToQuestionData(Question question) {
 
         return QuestionData.builder()
@@ -38,23 +39,19 @@ public interface QuestionMapper {
                         .collect(Collectors.toList())
                 ).build();
     }
-    List<QuestionData> questionsToQuestionDatas(List<Question> questions);
 
+    List<QuestionData> questionsToQuestionDatas(List<Question> questions);
 
     QuestionDetailResponseDto qeustionToResponseDto(Question question);
 
+    // Answer.user.userNickname -> AnswerResponseDto.answerUserNickname
     @Mapping(source = "user.userNickname", target = "answerUserNickname")
     AnswerResponseDto  answerToResponseDto(Answer answer);
 
     List<AnswerResponseDto> answerListToResponseDto(List<Answer> answerList);
 
-
-
     Question questionPostDtoToQuestion(QuestionPostDto questionPostDto);
 
     QuestionPostDto questionToQuestionResponse(Question question);
-
-
-
 
 }

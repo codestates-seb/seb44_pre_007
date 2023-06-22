@@ -22,7 +22,7 @@ public class Answer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long answerId;
 
-    @Column
+    @Column(length = 1000)
     private String answerContent;
 
     @CreatedDate

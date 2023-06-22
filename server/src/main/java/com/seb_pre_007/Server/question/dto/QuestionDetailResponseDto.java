@@ -42,6 +42,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * 질문 상세 조회 시 사용되는 응답 데이터 : Question -> QuestionDetailResponseDto
+ */
 @Data
 @Builder
 public class QuestionDetailResponseDto {

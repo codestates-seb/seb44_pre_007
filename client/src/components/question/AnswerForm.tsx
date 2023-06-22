@@ -1,17 +1,26 @@
 import { useRef, useState } from 'react';
 import 'react-quill/dist/quill.snow.css';
+import { useParams } from 'react-router-dom';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AskBtn, ContentDiv, SubTitle } from '../../styles/styles';
 import AnswerEditor from './AnswerEditor';
+import { PostData } from '../../api/api';
 
 function AnswerForm() {
+  const { id } = useParams() as { id: string };
   const PreviewRef = useRef<HTMLDivElement>(null);
   const [text, setText] = useState<string>('');
+
+  const queryClient = useQueryClient();
+  const mutation = useMutation(PostData, {
+    onSuccess: () => queryClient.invalidateQueries(['question']),
+  });
 
   const HandleSubmitAnswer = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (PreviewRef.current) {
       if (!PreviewRef.current.innerText.trim().length) return;
-      // Todo axios Post
+      mutation.mutate({ id, text });
       setText('');
     }
   };
@@ -23,7 +32,7 @@ function AnswerForm() {
       <div className="pt-2.5 pb-[15px]">
         <AskBtn type="submit">Post Your Answer</AskBtn>
       </div>
-      <section>
+      <section className="break-words">
         <ContentDiv ref={PreviewRef} dangerouslySetInnerHTML={{ __html: text }} />
       </section>
     </form>

@@ -4,18 +4,24 @@ import tw from 'tailwind-styled-components';
 import { useEffect, useRef, useState } from 'react';
 import RightSidebar from '../components/sidebar/RightSidebar';
 import { FetchQuestion } from '../api/api';
-import { AskBtn, ContentDiv } from '../styles/styles';
+import { ContentDiv } from '../styles/styles';
 import AnswerEditor from '../components/question/AnswerEditor';
 import { AnswerT } from '../types/types';
 import scrollToTop from '../utils/scrollToTop';
 import useMovePage from '../hooks/useMovePage';
+import AnswerBtn from '../components/edit/answer/AnswerBtn';
 
 const H2 = tw.h2`
 mt-4 mb-[19px] text-[19px]
 `;
 
+type ParmT = {
+  id: string;
+  answerId: string;
+};
+
 function AnswerEdit() {
-  const param = useParams();
+  const param = useParams() as ParmT;
   const PreviewRef = useRef<HTMLDivElement>(null);
   const { id, answerId } = param;
   const [text, setText] = useState<string>('');
@@ -23,6 +29,7 @@ function AnswerEdit() {
   const { isLoading, data, error } = useQuery({
     queryKey: ['question', id, answerId],
     queryFn: () => FetchQuestion(Number(id)),
+    refetchOnWindowFocus: false,
   });
 
   useEffect(() => {
@@ -31,19 +38,13 @@ function AnswerEdit() {
 
   useEffect(() => {
     if (data) {
-      const filterAnswer = data.data.answers.filter(
+      const filterAnswer = data.data.answerList.filter(
         (answer: AnswerT) => answer.answerId === Number(answerId)
       );
       setText(filterAnswer[0].answerContent);
     }
   }, [data]);
 
-  // Todo patch
-  const HandlePatchAnswer = () => {
-    console.log(PreviewRef.current?.innerText);
-  };
-  // Todo delete
-  const HandleDeleteAnswer = () => {};
   // Todo ux를 위해 돌아간다는 경고 모달 띄우면 좋음
   const HandleCancelAnswer = useMovePage(`/questions/${id}`);
 
@@ -61,26 +62,8 @@ function AnswerEdit() {
             <ContentDiv dangerouslySetInnerHTML={{ __html: data.data.questionContent }} />
             <H2 className="text-blackDark">Answer</H2>
             <AnswerEditor text={text} setText={setText} />
-            <div className="flex pt-2.5 pb-[15px] gap-2">
-              <AskBtn type="submit" onClick={HandlePatchAnswer}>
-                Save edits
-              </AskBtn>
-              <AskBtn
-                className="bg-red-500 border-red-500"
-                type="submit"
-                onClick={HandleDeleteAnswer}
-              >
-                Delete Answer
-              </AskBtn>
-              <AskBtn
-                className="bg-white text-bubg border-none"
-                type="submit"
-                onClick={HandleCancelAnswer}
-              >
-                Cancel
-              </AskBtn>
-            </div>
-            <section>
+            <AnswerBtn id={id} answerId={answerId} text={text} />
+            <section className="break-words">
               <ContentDiv ref={PreviewRef} dangerouslySetInnerHTML={{ __html: text }} />
             </section>
           </>

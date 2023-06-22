@@ -27,7 +27,7 @@ public class Question {
     @Column
     private String questionTitle;
 
-    @Column
+    @Column(columnDefinition = "LONGTEXT")
     private String questionContent;
 
     @Column
@@ -55,15 +55,15 @@ public class Question {
     @OneToMany(mappedBy = "question")
     private List<Answer> answerList= new ArrayList<>();
 
+    // Question - QuestionTag 양방향 매핑 편의 메소드
     public void addQuestionTag(QuestionTag questionTag) {
+        // Question.questionTagList 에 파라미터로 전달받은 QuestionTag가 없을 경우에만 추가
         if (!this.getQuestionTagList().contains(questionTag)) {
             this.getQuestionTagList().add(questionTag);
         }
+        // 파라미터로 전달된 QuestionTag 에 Question 이 매핑되어 있지 않다면 연관관계 추가
         if (questionTag.getQuestion() != this) {
             questionTag.setQuestion(this);
         }
     }
-
-
-
 }

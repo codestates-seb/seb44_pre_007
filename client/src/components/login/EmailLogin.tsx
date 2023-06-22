@@ -1,7 +1,9 @@
+/* eslint-disable no-console */
 import tw from 'tailwind-styled-components';
 import { styled } from 'styled-components';
 import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const StyledForm = tw.form`
 flex flex-col rounded-md
@@ -40,6 +42,7 @@ export default function EmailLogin() {
   const [usernameError, setUsernameError] = useState<string | null>(null);
   const [passwordError, setPasswordError] = useState<string | null>(null);
   const [loginError, setLoginError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
@@ -79,7 +82,7 @@ export default function EmailLogin() {
     if (validate()) {
       axios
         .post(
-          import.meta.env.VITE_LOGIN_URL,
+          `${import.meta.env.VITE_BASE_URL}login`,
           { username, password },
           {
             headers: { 'Content-Type': 'Application/json' },
@@ -91,11 +94,12 @@ export default function EmailLogin() {
             if (token) {
               localStorage.setItem('token', token);
             }
+            navigate('/questions');
           }
         })
         .catch((error) => {
           if (error.response && error.response.status === 401) {
-            setLoginError('No user found with matching data');
+            setLoginError('No user found with matching data.');
             console.error('error: Authentication failed.');
           } else {
             console.error('error:', error);
