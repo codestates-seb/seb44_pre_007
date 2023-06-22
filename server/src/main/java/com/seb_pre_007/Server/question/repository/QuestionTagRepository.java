@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface QuestionTagRepository extends JpaRepository<QuestionTag,Long> {
-
        List<QuestionTag> findByTag(Tag tag);
 
        void deleteAllByQuestion(Question question);

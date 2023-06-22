@@ -38,12 +38,30 @@ public class QuestionController {
     private final QuestionService questionService;
     private final QuestionMapper questionMapper;
 
-    // 질문 리스트 조회
+
+    // 질문 생성
+    @PostMapping("/ask")
+    public ResponseEntity postQuestion(@Valid @RequestBody QuestionPostDto questionPostDto,
+                                       Authentication authentication) {
+
+        String userEmail = authentication.getPrincipal().toString(); // 로그인된 유저 정보 가져오기
+
+        Question createdQuestion = questionService.createQuestion(questionPostDto, userEmail); // 생성한 질문
+
+        // 응답 헤더에 리소스 위치 추가
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(URI.create("/questions/" + createdQuestion.getQuestionId()));
+
+        return new ResponseEntity<>(headers, HttpStatus.CREATED);
+    }
+
+    // 질문 전체 조회 (리스트 반환)
     @GetMapping
     public ResponseEntity getQuestions(@Positive @RequestParam int page,
                                        @Positive @RequestParam int limit) {
 
-        Page<Question> pageQuestions = questionService.findQuestions(page - 1, limit);
+        // DB 에서 Paging 처리해서 조회한 질문 리스트 가져오기
+        Page<Question> pageQuestions = questionService.findQuestions(page - 1, limit); // 페이지 인덱스 0부터 시작하므로 page - 1 전달
         List<Question> questions = pageQuestions.getContent();
 
         return new ResponseEntity<>(
@@ -51,23 +69,18 @@ public class QuestionController {
                 HttpStatus.OK);
     }
 
-    //tag로 일반검색
+    // tag로 질문 검색 (리스트 반환)
     @GetMapping("/tagged/{question-tag}")
     public ResponseEntity getQuestionsSearch(@PathVariable("question-tag") String questionTag,
                                              @RequestParam(required = false) @Positive Integer page,
                                              @RequestParam(required = false) @Positive Integer limit) {
-
-
-        System.out.println("페이지값:" + page);
-
+        // query parameter 가 옵션이므로 미입력시 default 값 지정
         if (page == null) page = 1;
         if (limit == null) limit = 10;
 
-        System.out.println("페이지값:" + page);
-
+        // DB 에서 Paging 처리해서 조회한 질문 리스트 가져오기
         Page<Question> pageQuestions = questionService.findQuestionSearch(questionTag, page - 1, limit);
         List<Question> questions = pageQuestions.getContent();
-
 
         return new ResponseEntity<>(
                 new QuestionResponseDto(questionMapper.questionsToQuestionDatas(questions), pageQuestions),
@@ -75,30 +88,28 @@ public class QuestionController {
     }
 
 
+    // 질문 상세 조회
     @GetMapping("/{question-id}")
     public ResponseEntity getQuestion(@PathVariable("question-id") @Positive long questionId) {
 
+        Question question = questionService.findeQuestion(questionId); // questionId를 통해 조회한 Question
 
-        Question question = questionService.findeQuestion(questionId);
-
+        // Question -> QuestionResponseDto 로 변환 (start)
         QuestionData questionData = questionMapper.qeustionToQuestionData(question);
-
         QuestionDetailResponseDto questionResponseDto = questionMapper.qeustionToResponseDto(question);
-
         questionResponseDto.setQuestionUserNickname(questionData.getQuestionUserNickname());
         questionResponseDto.setTagList(questionData.getTagList());
 
+        // 질문에 달린 답변의 최근 작성일 순서로 정렬
         List<AnswerResponseDto> sortedList= questionResponseDto.getAnswerList().stream()
                 .sorted(Comparator.comparing(AnswerResponseDto::getAnswerUpdated).reversed())
                 .collect(Collectors.toList());
 
          questionResponseDto.setAnswerList(sortedList);
+        // Question -> QuestionResponseDto 로 변환 (end)
 
         return new ResponseEntity(questionResponseDto, HttpStatus.OK);
-
-
     }
-
 
     // 질문 수정
     @PatchMapping("/{question-id}/edit")
@@ -106,35 +117,22 @@ public class QuestionController {
                                         @Valid @RequestBody QuestionPatchDto questionPatchDto,
                                         Authentication authentication) {
 
-        String userEmail = authentication.getPrincipal().toString();
+        String userEmail = authentication.getPrincipal().toString(); // 로그인된 유저 정보 가져오기
 
         questionPatchDto.setQuestionId(questionId);
-        Question question = questionService.updateQuestion(questionPatchDto, userEmail);
+        questionService.updateQuestion(questionPatchDto, userEmail); // Question 수정
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    // 질문 생성
-    @PostMapping("/ask")
-    public ResponseEntity postQuestion(@Valid @RequestBody QuestionPostDto questionPostDto, Authentication authentication) {
-
-        String userEmail = authentication.getPrincipal().toString();
-
-        Question createdQuestion = questionService.createQuestion(questionPostDto, userEmail);
-
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setLocation(URI.create("/questions/" + createdQuestion.getQuestionId()));
-//        return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
-             return ResponseEntity.status(HttpStatus.CREATED).body(null);
-    }
-
     // 질문 삭제
     @DeleteMapping("/{question-id}")
-    public ResponseEntity deleteQuestion(@PathVariable("question-id") @Positive long questionId, Authentication authentication) {
+    public ResponseEntity deleteQuestion(@PathVariable("question-id") @Positive long questionId,
+                                         Authentication authentication) {
 
-        String userEmail = authentication.getPrincipal().toString();
+        String userEmail = authentication.getPrincipal().toString(); // 로그인된 유저 정보 가져오기
 
-        questionService.deleteQuestion(questionId, userEmail);
+        questionService.deleteQuestion(questionId, userEmail); // Question 삭제
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

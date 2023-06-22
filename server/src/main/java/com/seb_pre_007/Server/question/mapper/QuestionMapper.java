@@ -48,8 +48,6 @@ public interface QuestionMapper {
 
     List<AnswerResponseDto> answerListToResponseDto(List<Answer> answerList);
 
-
-
     Question questionPostDtoToQuestion(QuestionPostDto questionPostDto);
 
     QuestionPostDto questionToQuestionResponse(Question question);
