@@ -1,16 +1,10 @@
 /* eslint-disable implicit-arrow-linebreak */
 import axios from 'axios';
-import useMovePage from '../hooks/useMovePage';
 
 const accessToken = localStorage.getItem('token');
 
-export const Login = async (username: string, password: string) => {
-  const response = await axios.post('http://3.35.43.193:8080/login', { username, password });
-  return response;
-};
-
 export const instance = axios.create({
-  baseURL: 'http://3.35.43.193:8080/',
+  baseURL: import.meta.env.VITE_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
     Authorization: accessToken,

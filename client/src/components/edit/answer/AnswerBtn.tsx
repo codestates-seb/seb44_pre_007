@@ -19,7 +19,7 @@ function AnswerBtn({ id, answerId, text }: { id: string; answerId: string; text:
         goToQue();
       }
     },
-    onError(error, variables, context) {
+    onError(error) {
       console.log(error);
     },
   });

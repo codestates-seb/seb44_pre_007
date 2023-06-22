@@ -1,3 +1,4 @@
+/* eslint-disable implicit-arrow-linebreak */
 import tw from 'tailwind-styled-components';
 import { styled } from 'styled-components';
 import { useState } from 'react';
@@ -101,14 +102,22 @@ export default function EmailSignUp() {
     return checkuserNickname() && checkEmail() && checkuserPassword();
   }
   const mutation = useMutation({
-    mutationFn: (newUser: UserInfo) => axios.post(import.meta.env.VITE_SIGNUP_URL, newUser),
+    mutationFn: (newUser: UserInfo) =>
+      axios.post(`${import.meta.env.VITE_BASE_URL}signup`, newUser),
+    onSuccess(data) {
+      if (data.status === 201) {
+        navigate('/questions');
+      }
+    },
+    onError(error) {
+      console.log(error);
+    },
   });
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (validate()) {
       mutation.mutate({ userNickname, userEmail, userPassword });
-      navigate('/questions');
     }
   };
 
