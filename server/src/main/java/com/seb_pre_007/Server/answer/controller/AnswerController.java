@@ -56,10 +56,10 @@ public class AnswerController {
 
         answerPatchDto.setAnswerId(answerId);
         Question targetQuestion = questionRepository.findByQuestionId(questionId);
-        Answer answer = answerService.updateAnswer(targetQuestion, answerPatchDto, userEmail);
+        Answer answer = answerService.updateAnswer(answerPatchDto, userEmail);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(URI.create("/questions/" + targetQuestion.getQuestionId()));
+        headers.setLocation(URI.create("/questions/" + questionId));
         return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
     }
 
@@ -68,7 +68,10 @@ public class AnswerController {
 
         String userEmail = authentication.getPrincipal().toString();
 
-        answerService.deleteAnswer(answerId, userEmail);
+        Question targetQuestion = questionRepository.findByQuestionId(questionId);
+        targetQuestion.setAnswerCount(targetQuestion.getAnswerCount()-1);
+        questionRepository.save(targetQuestion);
+        answerService.deleteAnswer(targetQuestion, answerId, userEmail);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
