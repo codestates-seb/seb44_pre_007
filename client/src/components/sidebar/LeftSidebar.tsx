@@ -1,22 +1,16 @@
+/* eslint-disable object-curly-newline */
 import { ImEarth } from 'react-icons/im';
 import { AiFillInfoCircle } from 'react-icons/ai';
 import { TiStarburst } from 'react-icons/ti';
-import {
-  LiNavDisable,
-  Liml8mt16,
-  Lip8pr6,
-  LiBtn,
-  NavActive,
-  HomeNav,
-} from '../../styles/sidebarstyle';
+import { LiNavDisable, Liml8mt16, Lip8pr6, LiBtn, NavActive } from '../../styles/sidebarstyle';
 import { FlexDiv } from '../../styles/styles';
 
 function LeftSidebar() {
   return (
     <ol className="w-[164px] h-[595px] mb-3 list-none">
-      <HomeNav to="/" className="w-[164px] h-[26px] pl-2 text-[13px] text-black600 cursor-pointer">
+      <LiNavDisable className="w-[164px] h-[26px] pl-2 text-[13px] text-black600 cursor-pointer">
         Home
-      </HomeNav>
+      </LiNavDisable>
       <ol className="w-[164px]">
         <Liml8mt16 className="mb-1">PUBLIC</Liml8mt16>
         <NavActive to="/questions">
