@@ -122,10 +122,10 @@ public class QuestionController {
 
         Question createdQuestion = questionService.createQuestion(questionPostDto, userEmail);
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(URI.create("/questions/" + createdQuestion.getQuestionId()));
-        return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
-        // redirect 미구현시     return ResponseEntity.status(HttpStatus.CREATED).body(null);
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setLocation(URI.create("/questions/" + createdQuestion.getQuestionId()));
+//        return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
+             return ResponseEntity.status(HttpStatus.CREATED).body(null);
     }
 
     // 질문 삭제
