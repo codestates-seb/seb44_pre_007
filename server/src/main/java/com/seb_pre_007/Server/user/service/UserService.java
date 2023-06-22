@@ -88,7 +88,7 @@ public class UserService {
 
     // 회원 정보 삭제
     @Transactional
-    public void deleteUser(String userEmail, long userId) {
+    public void deleteUser(String userEmail) {
         User findUser = findVerifiedUser(userEmail);
         userRepository.delete(findUser);
     }
