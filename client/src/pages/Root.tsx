@@ -8,7 +8,7 @@ function Root() {
   const token = searchParams.get('access_token');
   if (token) {
     localStorage.setItem('token', `Bearer ${token}`);
-    window.location.href = 'http://localhost:5173/questions';
+    window.location.href = `${import.meta.env.VITE_URL}questions`;
   }
   return (
     <>
