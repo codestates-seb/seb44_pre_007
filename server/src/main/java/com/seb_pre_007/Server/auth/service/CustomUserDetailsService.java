@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import java.util.Collection;
 import java.util.Optional;
 
+//데이터베이스에서 사용자의 크리덴셜을 조회한 후, 조회한 크리덴셜을 AuthenticationManager 에게 전달해주는 서비스
 @Component
 public class CustomUserDetailsService implements UserDetailsService {
 
@@ -28,6 +29,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         this.authorityUtils = authorityUtils;
         this.passwordEncoder = passwordEncoder;
     }
+
 
 
     @Override
