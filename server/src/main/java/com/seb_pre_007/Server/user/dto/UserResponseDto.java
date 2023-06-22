@@ -13,7 +13,6 @@ public class UserResponseDto {
     @Email
     private String userEmail;
 
-
     @NotSpace
     private String userPassword;
 

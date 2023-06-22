@@ -31,25 +31,23 @@ import java.net.URI;
 public class UserController {
 
     private final UserService userService;
-
     private final UserMapper userMapper;
-
 
     public UserController(UserService userService, UserMapper userMapper) {
         this.userService = userService;
         this.userMapper = userMapper;
     }
 
-
+    // 일반 회원 가입
     @PostMapping("/signup")
     public ResponseEntity postMember(@Valid @RequestBody UserPostDto userPostDto){
 
         User user= userService.createUser(userMapper.userPostDtoToUser(userPostDto));
 
         return new ResponseEntity<>(HttpStatus.CREATED);
-
     }
 
+    // 유저 본인 프로필 조회
     @GetMapping("/principal")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity getPrincipal(Authentication authentication){
@@ -58,19 +56,19 @@ public class UserController {
         return ResponseEntity.ok().body(ApiResponse.ok("data", userMapper.userToUserResponse(user)));
     }
 
-
+    // 유저 정보 수정
     @PatchMapping("/users/edit")
     public ResponseEntity patchUser(Authentication authentication,
                                     @Valid @RequestBody UserPatchDto userPatchDto) {
 
         String userEmail = authentication.getPrincipal().toString();
         userPatchDto.setUserEmail(userEmail);
-
         User updatedUser = userService.updateUser(userPatchDto);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    // 회원 탈퇴
     @DeleteMapping("/users/delete")
     public ResponseEntity deleteUser(Authentication authentication) {
 
