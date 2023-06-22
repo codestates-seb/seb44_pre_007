@@ -16,7 +16,7 @@ function Tags() {
   const [questionsCount, setQuestionsCount] = useState<string>('');
 
   const { isLoading, data, error } = useQuery({
-    queryKey: ['tag'],
+    queryKey: ['tag', questionTag],
     queryFn: () => FetchTags(questionTag),
     refetchOnWindowFocus: false,
   });

@@ -4,7 +4,7 @@ import tw from 'tailwind-styled-components';
 import { useQuery } from '@tanstack/react-query';
 import QuestionContainer from '../components/question/QuestionContainer';
 import RightSidebar from '../components/sidebar/RightSidebar';
-import { FetchQuestion } from '../api/api';
+import { FetchQuestion, GetUser } from '../api/api';
 import scrollToTop from '../utils/scrollToTop';
 import AnswerContainer from '../components/question/AnswerContainer';
 import AskQuestionBtn from '../components/AskQuestionBtn';
@@ -22,6 +22,11 @@ function QuestionPage() {
   const { isLoading, data, error } = useQuery({
     queryKey: ['question', id],
     queryFn: () => FetchQuestion(Number(id)),
+  });
+
+  const { data: user } = useQuery({
+    queryKey: ['getUser'],
+    queryFn: GetUser,
   });
 
   useEffect(() => {
@@ -52,9 +57,13 @@ function QuestionPage() {
         </div>
         <div className="flex justify-between">
           <div className="flex flex-col">
-            {!!data && <QuestionContainer data={data.data} />}
+            {!!data && <QuestionContainer user={user.userNickname} data={data.data} />}
             {!!data && data.data.answerList.length > 0 && (
-              <AnswerContainer datas={data.data.answerList} answerCnt={data.data.answerCount} />
+              <AnswerContainer
+                user={user.userNickname}
+                datas={data.data.answerList}
+                answerCnt={data.data.answerCount}
+              />
             )}
             {isLoggedIn && <AnswerForm />}
           </div>

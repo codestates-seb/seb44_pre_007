@@ -24,7 +24,6 @@ function AnswerBtn({ id, answerId, text }: { id: string; answerId: string; text:
     },
   });
 
-  // Todo patch error 해결해야함
   const HandlePatchAnswer = () => {
     mutationPatch.mutate({ id, answerId, text });
   };
