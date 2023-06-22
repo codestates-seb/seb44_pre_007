@@ -56,7 +56,7 @@ const Gradient = styled.div`
   flex-direction: column;
   align-items: center;
   background: linear-gradient(0deg, rgb(254, 227, 205) 30%, white);
-  width: 360px;
+  width: 450px;
   height: 863px;
   border-radius: 3px;
   padding-top: 48px;
@@ -179,13 +179,19 @@ function Home() {
           src="https://cdn.sstatic.net/Img/home/illo-public.svg?v=14bd5a506009"
           alt="earth"
         />
-        <h2 className="mx-12 mb-3 text-center">
+        <h2 className="mx-12 mb-3 text-center text-[27px]">
           A public platform building the definitive collection of coding questions & answers
         </h2>
-        <p className="mx-12 mb-8 text-blacklight text-[19px]">
+        <p className="mx-12 mb-8 text-blacklight text-[19px] text-center">
           A community-based space to find and contribute answers to technical challenges, and one of
           the most popular websites in the world.
         </p>
+        <button
+          type="button"
+          className="bg-main text-white w-[210px] h-[40px] px-3 py-8 flex justify-center items-center rounded-[3px]"
+        >
+          Join the community
+        </button>
       </Gradient>
 
       <div className="bg-white h-[750px] text-[27px] font-bold" />
