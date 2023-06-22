@@ -68,31 +68,16 @@ public class UserController {
 
         User updatedUser = userService.updateUser(userPatchDto);
 
-        HttpHeaders headers = new HttpHeaders();
-
-        URI redirectUri = UriComponentsBuilder
-                .newInstance()
-                .scheme("http")
-                .host("localhost")
-                .port(5173)
-                .path("/users/mypage")
-                .build()
-                .toUri();
-
-        headers.setLocation(redirectUri);
-        return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping("/users/delete/{user-id}")
-    public ResponseEntity deleteUser(Authentication authentication,
-                                     @PathVariable("user-id") long userId) {
+    @DeleteMapping("/users/delete")
+    public ResponseEntity deleteUser(Authentication authentication) {
 
         String userEmail = authentication.getPrincipal().toString();
-        userService.deleteUser(userEmail, userId);
+        userService.deleteUser(userEmail);
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(URI.create("/questions?page=1&limit=10"));
-        return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

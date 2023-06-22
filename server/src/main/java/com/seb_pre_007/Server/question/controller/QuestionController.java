@@ -111,9 +111,7 @@ public class QuestionController {
         questionPatchDto.setQuestionId(questionId);
         Question question = questionService.updateQuestion(questionPatchDto, userEmail);
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(URI.create("/questions/" + questionId));
-        return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     // 질문 생성
