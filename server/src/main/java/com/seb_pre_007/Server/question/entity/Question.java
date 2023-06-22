@@ -27,7 +27,7 @@ public class Question {
     @Column
     private String questionTitle;
 
-    @Column
+    @Column(columnDefinition = "LONGTEXT")
     private String questionContent;
 
     @Column
