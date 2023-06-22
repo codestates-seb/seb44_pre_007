@@ -24,10 +24,6 @@ function QuestionPage() {
     queryFn: () => FetchQuestion(Number(id)),
   });
 
-  if (data) {
-    console.log(data);
-  }
-
   const { data: user } = useQuery({
     queryKey: ['getUser'],
     queryFn: GetUser,
