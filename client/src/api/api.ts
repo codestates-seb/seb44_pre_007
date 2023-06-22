@@ -1,5 +1,6 @@
 /* eslint-disable implicit-arrow-linebreak */
 import axios from 'axios';
+import useMovePage from '../hooks/useMovePage';
 
 const accessToken = localStorage.getItem('token');
 
@@ -41,15 +42,6 @@ export const PatchAnswerData = async ({
 }) => instance.patch(`/questions/${id}/${answerId}/edit`, { answerContent: text });
 
 export const DelAnswerData = async ({ id, answerId }: { id: string; answerId: string }) =>
-  instance
-    .delete(`/questions/${id}/${answerId}/edit`)
-    .then((res) => {
-      if (res.status === 204) {
-        window.alert('답변을 삭제했습니다.');
-      }
-    })
-    .catch(() => {
-      window.alert('삭제에 실패했습니다.');
-    });
+  instance.delete(`/questions/${id}/${answerId}/edit`);
 
 export const DelQueData = async ({ id }: { id: string }) => instance.delete(`/questions/${id}`);

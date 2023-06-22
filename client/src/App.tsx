@@ -10,6 +10,8 @@ import Users from './pages/Users';
 import Login from './pages/Login';
 import AnswerEdit from './pages/AnswerEdit';
 import Tags from './pages/Tags';
+import Mypage from './pages/Mypage';
+import UserEdit from './pages/UserEdit';
 
 const router = createBrowserRouter([
   {
@@ -45,6 +47,14 @@ const router = createBrowserRouter([
       {
         path: 'login',
         element: <Login />,
+      },
+      {
+        path: 'mypage',
+        element: <Mypage />,
+      },
+      {
+        path: 'edit',
+        element: <UserEdit />,
       },
     ],
   },

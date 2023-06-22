@@ -3,6 +3,7 @@ import tw from 'tailwind-styled-components';
 import { styled } from 'styled-components';
 import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const StyledForm = tw.form`
 flex flex-col rounded-md
@@ -41,6 +42,7 @@ export default function EmailLogin() {
   const [usernameError, setUsernameError] = useState<string | null>(null);
   const [passwordError, setPasswordError] = useState<string | null>(null);
   const [loginError, setLoginError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
@@ -92,6 +94,7 @@ export default function EmailLogin() {
             if (token) {
               localStorage.setItem('token', token);
             }
+            navigate('/questions');
           }
         })
         .catch((error) => {

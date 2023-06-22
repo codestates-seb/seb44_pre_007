@@ -20,11 +20,16 @@ export default function UserImg() {
         <div />
       </div>
     );
-  if (error instanceof Error) return <BiError className="text-2xl text-gray-500" />;
+  if (error instanceof Error)
+    return (
+      <a href="/users/mypage">
+        <BiError className="text-2xl text-gray-500" />
+      </a>
+    );
   return (
     <a href="/users/mypage">
       {data.imgURL ? (
-        <img src={data.imgURL} alt="user" />
+        <img src={data.imgURL} alt="user" className="w-[25px] h-[25px] rounded" />
       ) : (
         <FaUserCircle className="text-2xl text-main" />
       )}
