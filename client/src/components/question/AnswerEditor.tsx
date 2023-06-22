@@ -1,14 +1,14 @@
 import ReactQuill from 'react-quill';
 import CustomToolbar from './QuillCustomTool';
 
-function AnswerEditor({ text, setText }: { text: string; setText: (value: any) => void }) {
+function AnswerEditor({ text, setText }: { text: string; setText: (value: string) => void }) {
   const modules = {
     toolbar: {
       container: '#toolbar',
     },
   };
 
-  const handleText = (value: any) => {
+  const handleText = (value: string) => {
     setText(value);
   };
 

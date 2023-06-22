@@ -4,7 +4,7 @@ import useMovePage from '../../hooks/useMovePage';
 import { ContentDiv } from '../../styles/styles';
 import formatingDate from '../../utils/formatingDate';
 
-function Answer({ data }: { data: AnswerT }) {
+function Answer({ data, user }: { data: AnswerT; user: string }) {
   const {
     answerId,
     answerContent: content,
@@ -20,10 +20,11 @@ function Answer({ data }: { data: AnswerT }) {
       <ContentDiv dangerouslySetInnerHTML={{ __html: content }} />
       <div className="flex justify-between text-[13px] my-4 pt-1">
         <div className="flex gap-2">
-          {/* Todo 작성자일 경우에만 버튼 보이도록 해야함 */}
-          <span className="text-blacklight cursor-pointer" onClick={goToEdit} role="presentation">
-            Edit
-          </span>
+          {nickName === user && (
+            <span className="text-blacklight cursor-pointer" onClick={goToEdit} role="presentation">
+              Edit
+            </span>
+          )}
         </div>
         {updated !== created && <span className="text-Link">edited {formatingDate(updated)}</span>}
         <span className="text-Link">answered {formatingDate(created)}</span>
