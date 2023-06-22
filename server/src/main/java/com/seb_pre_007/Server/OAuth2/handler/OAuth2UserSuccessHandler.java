@@ -24,7 +24,8 @@ public class OAuth2UserSuccessHandler extends SimpleUrlAuthenticationSuccessHand
     private final CustomAuthorityUtils authorityUtils;
     private final UserService userService;
 
-    // (2)
+
+    //JwtTokenizer, CustomAuthorityUtils, UserService DI주입받음
     public OAuth2UserSuccessHandler(JwtTokenizer jwtTokenizer, CustomAuthorityUtils authorityUtils,
                                     UserService userService) {
         this.jwtTokenizer = jwtTokenizer;
@@ -32,6 +33,8 @@ public class OAuth2UserSuccessHandler extends SimpleUrlAuthenticationSuccessHand
         this.userService = userService;
     }
 
+
+    //소셜(구글)로그인 성공시 이메일, 닉네임, 프로필이미지 가져와서 DB에 저장 후 리다이렉트
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         var oAuth2User = (OAuth2User)authentication.getPrincipal();
@@ -44,30 +47,22 @@ public class OAuth2UserSuccessHandler extends SimpleUrlAuthenticationSuccessHand
         redirect(request, response, email, authorities);  // (6)
     }
 
-//    private void saveUser(String userEmail, String nickname) {
-//        User user = new User(userEmail, nickname);
-//        userService.createUser(user);
-//    }
-
+    //DB에 해당하는 사용자 정보 저장
     private void googleSavedUser(String userEmail, String nikname, String imgURL){
         User user = new User(userEmail, nikname, imgURL);
         userService.createGoogleUser(user);
     }
 
+    //URL에 accessToken과 refreshToken 담아서 전달
     private void redirect(HttpServletRequest request, HttpServletResponse response, String username, List<String> authorities) throws IOException {
-
-
         String accessToken = delegateAccessToken(username, authorities);  // (6-1)
         String refreshToken = delegateRefreshToken(username);
-
-        //헤더에 추가하는부분 일단 작동안함
-//        response.setHeader("Authorization", "Bearer " + accessToken);  // (4-4)
-//        response.setHeader("Refresh", refreshToken);// (6-2)
 
         String uri = createURI(accessToken, refreshToken).toString();   // (6-3)
         getRedirectStrategy().sendRedirect(request, response, uri);   // (6-4)
     }
 
+    //acessToekn 발급 메소드
     private String delegateAccessToken(String username, List<String> authorities) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("username", username);
@@ -83,6 +78,7 @@ public class OAuth2UserSuccessHandler extends SimpleUrlAuthenticationSuccessHand
         return accessToken;
     }
 
+    //refreshToken 발급 메소드
     private String delegateRefreshToken(String username) {
         String subject = username;
         Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getRefreshTokenExpirationMinutes());
@@ -93,6 +89,7 @@ public class OAuth2UserSuccessHandler extends SimpleUrlAuthenticationSuccessHand
         return refreshToken;
     }
 
+    //리다이렉트 URL생성(URL에 accessToken과 refreshToken담아서 전달)
     private URI createURI(String accessToken, String refreshToken) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
 
