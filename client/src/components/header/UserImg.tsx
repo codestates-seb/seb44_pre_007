@@ -5,7 +5,7 @@ import { FaUserCircle } from 'react-icons/fa';
 import { BiError } from 'react-icons/bi';
 import { GetUser } from '../../api/api';
 
-export default function UserImg() {
+export default function UserImg({ size }: { size: string }) {
   const { isLoading, data, error } = useQuery({
     queryKey: ['user'],
     queryFn: GetUser,
@@ -29,9 +29,9 @@ export default function UserImg() {
   return (
     <a href="/users/mypage">
       {data.imgURL ? (
-        <img src={data.imgURL} alt="user" className="w-[25px] h-[25px] rounded" />
+        <img src={data.imgURL} alt="user" className={`w-[${size}] h-[${size}] rounded`} />
       ) : (
-        <FaUserCircle className="text-2xl text-main" />
+        <FaUserCircle className={`text-[${size}] text-main`} />
       )}
     </a>
   );

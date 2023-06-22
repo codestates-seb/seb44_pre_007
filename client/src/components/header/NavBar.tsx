@@ -62,7 +62,7 @@ export default function NavBar() {
     <StyledNav>
       {isLoggedIn ? (
         <>
-          <UserImg />
+          <UserImg size="25px" />
           <StyledList>
             <StyledIcon>
               <Inbox style={navIconStyle} />
