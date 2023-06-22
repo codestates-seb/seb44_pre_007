@@ -12,12 +12,20 @@ function AnswerBtn({ id, answerId, text }: { id: string; answerId: string; text:
       }
     },
   });
-  const mutationDel = useMutation(DelAnswerData);
+
+  const mutationDel = useMutation(DelAnswerData, {
+    onSuccess(data) {
+      if (data.status === 204) {
+        goToQue();
+      }
+    },
+    onError(error, variables, context) {
+      console.log(error);
+    },
+  });
 
   // Todo patch error 해결해야함
   const HandlePatchAnswer = () => {
-    console.log('patch눌림');
-
     mutationPatch.mutate({ id, answerId, text });
   };
 
