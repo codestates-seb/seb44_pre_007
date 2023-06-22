@@ -5,6 +5,7 @@ import Search from '../public/Icons/SpotSearch';
 import 'animate.css';
 import StaticDiv from '../components/home/StaticDiv';
 import StackOverflow from '../public/Icons/StackOverflow';
+import ForTeams from '../public/Icons/ForTeams';
 
 const SpotDiv = styled.div`
   position: relative;
@@ -50,9 +51,6 @@ const OrangeSpot = styled(SpotDiv)`
 
 const Gradient = styled.div`
   display: flex;
-  position: absolute;
-  top: 99%;
-  left: 20%;
   flex-direction: column;
   align-items: center;
   background: linear-gradient(0deg, rgb(254, 227, 205) 30%, white);
@@ -61,6 +59,10 @@ const Gradient = styled.div`
   border-radius: 3px;
   padding-top: 48px;
   padding-bottom: 48px;
+`;
+
+const BlueGradient = styled(Gradient)`
+  background: linear-gradient(0deg, rgb(205, 233, 254) 30%, white);
 `;
 
 function Home() {
@@ -172,29 +174,58 @@ function Home() {
           ))}
         </div>
       </div>
-      <Gradient>
-        <StackOverflow style={{ width: '190', height: '37' }} />
-        <img
-          className="my-8"
-          src="https://cdn.sstatic.net/Img/home/illo-public.svg?v=14bd5a506009"
-          alt="earth"
-        />
-        <h2 className="mx-12 mb-3 text-center text-[27px]">
-          A public platform building the definitive collection of coding questions & answers
-        </h2>
-        <p className="mx-12 mb-8 text-blacklight text-[19px] text-center">
-          A community-based space to find and contribute answers to technical challenges, and one of
-          the most popular websites in the world.
-        </p>
-        <button
-          type="button"
-          className="bg-main text-white w-[210px] h-[40px] px-3 py-8 flex justify-center items-center rounded-[3px]"
-        >
-          Join the community
-        </button>
-      </Gradient>
-
-      <div className="bg-white h-[750px] text-[27px] font-bold" />
+      <div className="flex justify-center gap-7 mb-6">
+        <Gradient>
+          <StackOverflow style={{ width: '190', height: '37' }} />
+          <img
+            className="my-8"
+            src="https://cdn.sstatic.net/Img/home/illo-public.svg?v=14bd5a506009"
+            alt="earth"
+          />
+          <h2 className="mx-12 mb-3 text-center text-[27px]">
+            A public platform building the definitive collection of coding questions & answers
+          </h2>
+          <p className="mx-12 mb-8 text-blacklight text-[19px] text-center">
+            A community-based space to find and contribute answers to technical challenges, and one
+            of the most popular websites in the world.
+          </p>
+          <button
+            type="button"
+            className="bg-main text-white w-fit h-[40px] px-3 py-8 flex justify-center items-center rounded-[3px]"
+          >
+            Join the community
+          </button>
+        </Gradient>
+        <BlueGradient>
+          <ForTeams style={{ width: '190', height: '37' }} />
+          <img
+            className="my-8"
+            src="https://cdn.sstatic.net/Img/home/illo-teams.svg?v=7e543f14fcc0"
+            alt="earth"
+          />
+          <h2 className="mx-12 mb-3 text-center text-[27px]">
+            A private collaboration & knowledge sharing SaaS platform for companies
+          </h2>
+          <p className="mx-12 mb-8 text-blacklight text-[19px] text-center">
+            A web-based platform to increase productivity, decrease cycle times, accelerate time to
+            market, and protect institutional knowledge.
+          </p>
+          <div className="flex gap-2">
+            <button
+              type="button"
+              className="bg-bubg text-white w-fit h-[20px] px-3 py-8 flex justify-center items-center rounded-[3px]"
+            >
+              For large organizations
+            </button>
+            <button
+              type="button"
+              className="bg-bubg text-white w-fit h-[20px] px-3 py-8 flex justify-center items-center rounded-[3px]"
+            >
+              For small teams
+            </button>
+          </div>
+        </BlueGradient>
+      </div>
     </div>
   );
 }
