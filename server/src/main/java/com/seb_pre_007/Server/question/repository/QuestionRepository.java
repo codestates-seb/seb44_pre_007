@@ -8,15 +8,5 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface QuestionRepository extends JpaRepository<Question, Long> {
-
-
     Question findByQuestionId(long questionId);
-
-
-
-    @Modifying
-    @Transactional
-    @Query("UPDATE Question q SET q.questionCount = q.questionCount + 1 WHERE q.questionId=:questionId")
-    void updateViewCount(@Param("questionId") long questionId);
-
 }
