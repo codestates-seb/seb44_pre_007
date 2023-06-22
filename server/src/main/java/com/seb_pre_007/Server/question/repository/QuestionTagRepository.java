@@ -10,6 +10,5 @@ import java.util.List;
 
 public interface QuestionTagRepository extends JpaRepository<QuestionTag,Long> {
        List<QuestionTag> findByTag(Tag tag);
-
        void deleteAllByQuestion(Question question);
 }

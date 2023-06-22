@@ -92,7 +92,7 @@ public class QuestionController {
     @GetMapping("/{question-id}")
     public ResponseEntity getQuestion(@PathVariable("question-id") @Positive long questionId) {
 
-        Question question = questionService.findeQuestion(questionId); // questionId를 통해 조회한 Question
+        Question question = questionService.findQuestion(questionId); // questionId를 통해 조회한 Question
 
         // Question -> QuestionResponseDto 로 변환 (start)
         QuestionData questionData = questionMapper.qeustionToQuestionData(question);

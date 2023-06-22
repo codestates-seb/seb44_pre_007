@@ -19,11 +19,9 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final CustomAuthorityUtils customAuthorityUtils;
-
 
     public UserService(UserRepository userRepository,  PasswordEncoder passwordEncoder, CustomAuthorityUtils customAuthorityUtils) {
         this.userRepository = userRepository;
@@ -31,22 +29,24 @@ public class UserService {
         this.customAuthorityUtils = customAuthorityUtils;
     }
 
+    // 일반 회원 가입
     public User createUser(User user){
+        // 가입된 이메일 정보인지 검증 -> DB에 이메일이 존재하면 예외 발생
         if(verifyExistEmail(user.getUserEmail())){
             throw new BusinessLogicException(ExceptionCode.USER_EXISTS);
         }
-        user.setUserPassword(user.getUserPassword());
+        user.setUserPassword(user.getUserPassword()); // 필요한지?
 
-        // (4) 추가: DB에 User Role 저장
+        // DB에 User Role 저장
         List<String> roles = customAuthorityUtils.createRoles(user.getUserEmail());
         user.setRoles(roles);
 
         User savedUser= userRepository.save(user);
 
-
         return savedUser;
     }
 
+    // 구글 로그인 회원 가입
     public User createGoogleUser(User user){
         if(!verifyExistEmail(user.getUserEmail())){
             user.setUserPassword(user.getUserPassword());
@@ -60,43 +60,32 @@ public class UserService {
         return user;
     }
 
-    //이미 등록된 이메일인지 확인하는 검증 로직
-    private boolean verifyExistEmail(String userEmail) {
-
-        Optional<User> user= userRepository.findByUserEmail(userEmail);
-
-        return user.isPresent();
-    }
-
-
-    //유저 정보조회
+    // 회원 정보 조회
     public User getUser(String userEmail){
         Optional<User> optional = userRepository.findByUserEmail(userEmail);
         return optional.orElseThrow(() -> new BusinessLogicException(ExceptionCode.USERS_NOT_VALID));
     }
 
-
     // 회원 정보 수정
     @Transactional
     public User updateUser(UserPatchDto userPatchDto) {
-        User findUser = findVerifiedUser(userPatchDto.getUserEmail());
-
+        User findUser = getUser(userPatchDto.getUserEmail());
         Optional.ofNullable(userPatchDto.getUserNickname()).ifPresent(findUser::setUserNickname);
-
         return userRepository.save(findUser);
     }
 
     // 회원 정보 삭제
     @Transactional
     public void deleteUser(String userEmail) {
-        User findUser = findVerifiedUser(userEmail);
+        User findUser = getUser(userEmail);
         userRepository.delete(findUser);
     }
 
 
-    private User findVerifiedUser(String userEmail) {
-        User findUser = userRepository.findByUserEmail(userEmail)
-                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.USER_NO_HAVE_AUTHORIZATION));
-        return findUser;
+    // 이미 등록된 이메일 여부 확인 -> boolean 타입 반환
+    private boolean verifyExistEmail(String userEmail) {
+
+        Optional<User> user= userRepository.findByUserEmail(userEmail);
+        return user.isPresent();
     }
 }
