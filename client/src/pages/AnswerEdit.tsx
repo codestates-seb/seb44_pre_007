@@ -63,7 +63,7 @@ function AnswerEdit() {
             <H2 className="text-blackDark">Answer</H2>
             <AnswerEditor text={text} setText={setText} />
             <AnswerBtn id={id} answerId={answerId} text={text} />
-            <section>
+            <section className="break-words">
               <ContentDiv ref={PreviewRef} dangerouslySetInnerHTML={{ __html: text }} />
             </section>
           </>

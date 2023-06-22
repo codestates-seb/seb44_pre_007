@@ -32,7 +32,7 @@ function AnswerForm() {
       <div className="pt-2.5 pb-[15px]">
         <AskBtn type="submit">Post Your Answer</AskBtn>
       </div>
-      <section>
+      <section className="break-words">
         <ContentDiv ref={PreviewRef} dangerouslySetInnerHTML={{ __html: text }} />
       </section>
     </form>
