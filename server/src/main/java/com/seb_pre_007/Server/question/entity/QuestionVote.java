@@ -1,6 +1,7 @@
 package com.seb_pre_007.Server.question.entity;
 
 import com.seb_pre_007.Server.user.entity.User;
+import lombok.Getter;
 
 import javax.persistence.*;
 
@@ -18,4 +19,10 @@ public class QuestionVote {
     @JoinColumn(name = "user_id")
     private User user;
 
+    private VoteType voteType;
+
+    @Getter
+    enum VoteType {
+        LIKE, DISLIKE;
+    }
 }
