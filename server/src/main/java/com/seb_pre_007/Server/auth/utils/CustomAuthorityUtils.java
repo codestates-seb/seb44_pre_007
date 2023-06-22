@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.stream.Collectors;
 
+//유저에게 알맞는 권한을 생성해주고 위임시켜주는 클래스
 @Component
 public class CustomAuthorityUtils {
 
@@ -19,7 +20,7 @@ public class CustomAuthorityUtils {
     private final List<String> ADMIN_ROLES_STRING = List.of("ADMIN", "USER");
     private final List<String> USER_ROLES_STRING = List.of("ADMIN","USER");
 
-    // 메모리 상의 Role을 기반으로 권한 정보 생성.
+    // 메모리 상의 Role 을 기반으로 권한 정보 생성.
     public List<GrantedAuthority> createAuthorities(String email) {
         if (email.equals(adminMailAddress)) {
             return ADMIN_ROLES;
@@ -35,7 +36,7 @@ public class CustomAuthorityUtils {
         return authorities;
     }
 
-    // DB 저장 용
+    // 어드민 이메일과 일치하면 어드민 Role 을 주고 아니면 일반 유저 Role 을 생성해주는 메서드
     public List<String> createRoles(String email) {
         if (email.equals(adminMailAddress)) {
             return ADMIN_ROLES_STRING;

@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-//클라이언트 측에서 전송된 request header 에 포함된 JWT에 대해 검증 작업을 수행하는 클래스
+//클라이언트 측에서 전송된 request header 에 포함된 JWT 에 대해 검증 작업을 수행하는 클래스
 public class JwtVerificationFilter extends OncePerRequestFilter {
 
 
@@ -59,19 +59,19 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
 
     //JWT 를 검증하는 데 사용되는 private 메서드
     private Map<String, Object> verifyJws(HttpServletRequest request) {
-        String jws = request.getHeader("Authorization").replace("Bearer ", ""); // (3-1)
-        String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey()); // (3-2)
-        Map<String, Object> claims = jwtTokenizer.getClaims(jws, base64EncodedSecretKey).getBody();   // (3-3)
+        String jws = request.getHeader("Authorization").replace("Bearer ", "");
+        String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
+        Map<String, Object> claims = jwtTokenizer.getClaims(jws, base64EncodedSecretKey).getBody();
 
         return claims;
     }
 
     //Authentication 객체를 SecurityContext 에 저장하기 위한 private 메서드
     private void setAuthenticationToContext(Map<String, Object> claims) {
-        String username = (String) claims.get("username");   // (4-1)
-        List<GrantedAuthority> authorities = authorityUtils.createAuthorities((List)claims.get("roles"));  // (4-2)
-        Authentication authentication = new UsernamePasswordAuthenticationToken(username, null, authorities);  // (4-3)
-        SecurityContextHolder.getContext().setAuthentication(authentication); // (4-4)
+        String username = (String) claims.get("username");
+        List<GrantedAuthority> authorities = authorityUtils.createAuthorities((List)claims.get("roles"));
+        Authentication authentication = new UsernamePasswordAuthenticationToken(username, null, authorities);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
 }

@@ -30,8 +30,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         this.passwordEncoder = passwordEncoder;
     }
 
-
-
+    // 유저를 조회해서 맞는 유저인지 검증하는 메서드
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> optionalUser = userRepository.findByUserEmail(username);
@@ -41,9 +40,9 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
 
-
+    //UserDetails 에 유저의 정보들을 입력해주는 메서드
     public final class CustomUserDetails extends User implements org.springframework.security.core.userdetails.UserDetails {
-        // (1)
+
         CustomUserDetails(User user){
             setUserId(user.getUserId());
             setUserEmail(user.getUserEmail());
@@ -54,7 +53,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
 
         @Override
-        public Collection<? extends GrantedAuthority> getAuthorities() {
+        public Collection<? extends GrantedAuthority> getAuthorities() { //유저에게 권한 정보를 생성해주는 메서드
             return authorityUtils.createAuthorities(this.getRoles());
         }
 

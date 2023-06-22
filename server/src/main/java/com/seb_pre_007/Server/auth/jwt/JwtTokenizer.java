@@ -97,9 +97,9 @@ public class JwtTokenizer {
     }
 
     // JWT 의 서명에 사용할 Secret Key 를 생성해주는 메서드
-    private Key getKeyFromBase64EncodedKey(String base64EncodedSecretKey) {
-        byte[] keyBytes = Decoders.BASE64.decode(base64EncodedSecretKey);
-        Key key = Keys.hmacShaKeyFor(keyBytes);
+    private Key getKeyFromBase64EncodedKey(String base64EncodedSecretKey) { //암호화 된 키를 가져와서
+        byte[] keyBytes = Decoders.BASE64.decode(base64EncodedSecretKey);   //복호화를 시킨뒤
+        Key key = Keys.hmacShaKeyFor(keyBytes);  // 적절한 HMAC 알고리즘을 적용한 Key 객체를 생성
 
         return key;
     }
