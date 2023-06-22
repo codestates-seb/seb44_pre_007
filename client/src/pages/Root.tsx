@@ -4,7 +4,7 @@ import LeftSidebar from '../components/sidebar/LeftSidebar';
 import Footer from '../components/footer/Footer';
 
 function Root() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const token = searchParams.get('access_token');
   if (token) {
     localStorage.setItem('token', `Bearer ${token}`);

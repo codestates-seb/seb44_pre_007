@@ -82,7 +82,7 @@ export default function EmailLogin() {
     if (validate()) {
       axios
         .post(
-          import.meta.env.VITE_LOGIN_URL,
+          `${import.meta.env.VITE_BASE_URL}login`,
           { username, password },
           {
             headers: { 'Content-Type': 'Application/json' },
