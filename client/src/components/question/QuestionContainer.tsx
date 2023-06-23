@@ -6,6 +6,8 @@ import { ContentDiv } from '../../styles/styles';
 import { QueT, TagT } from '../../types/types';
 import Tag from '../../ui/Tag';
 import formatingDate from '../../utils/formatingDate';
+import ActionSpan from '../edit/ActionSpan';
+import DateDiv from '../DateDiv';
 
 function QuestionContainer({ data: QuestionData, user }: { data: QueT; user: string }) {
   const { id } = useParams() as { id: string };
@@ -47,26 +49,12 @@ function QuestionContainer({ data: QuestionData, user }: { data: QueT; user: str
               <div className="flex gap-2">
                 {user === nickName && (
                   <>
-                    <span
-                      className="text-blacklight cursor-pointer"
-                      onClick={goToEdit}
-                      role="presentation"
-                    >
-                      Edit
-                    </span>
-                    <span
-                      className="text-blacklight cursor-pointer"
-                      role="presentation"
-                      onClick={HandleDeleteQuestion}
-                    >
-                      Delete
-                    </span>
+                    <ActionSpan callback={goToEdit} action="Edit" />
+                    <ActionSpan callback={HandleDeleteQuestion} action="Delete" />
                   </>
                 )}
               </div>
-              {updated !== created && (
-                <span className="text-Link">edited {formatingDate(updated)}</span>
-              )}
+              {updated !== created && <DateDiv content="edited" date={updated} />}
               <span className="text-Link">{nickName}</span>
             </div>
           </>

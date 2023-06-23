@@ -1,16 +1,17 @@
 /* eslint-disable operator-linebreak */
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import Btn from '../ui/Btn';
-import addCommasToNumber from '../utils/addCommasToNumber';
-import { PageT, Question } from '../types/types';
 import SummaryDiv from '../components/questions/SummaryDiv';
-import { FetchQuestions } from '../api/api';
 import RightSidebar from '../components/sidebar/RightSidebar';
-import { LIMIT } from '../constant/constantValue';
-import AskQuestionBtn from '../components/AskQuestionBtn';
-import scrollToTop from '../utils/scrollToTop';
 import PageBtnDiv from '../components/questions/PageBtnDiv';
+import AskQuestionBtn from '../components/AskQuestionBtn';
+import { FetchQuestions } from '../api/api';
+import { LIMIT } from '../constant/constantValue';
+import addCommasToNumber from '../utils/addCommasToNumber';
+import scrollToTop from '../utils/scrollToTop';
+import { PageT, Question } from '../types/types';
+import { MainWrapper } from '../styles/styles';
+import Btn from '../ui/Btn';
 
 function Questions() {
   const [currentpage, SetCurrentpage] = useState(1);
@@ -77,10 +78,10 @@ function Questions() {
 
 function QuestionsPage() {
   return (
-    <div className="flex w-[1100px] border-l p-6">
+    <MainWrapper className="flex w-[1100px]">
       <Questions />
       <RightSidebar />
-    </div>
+    </MainWrapper>
   );
 }
 

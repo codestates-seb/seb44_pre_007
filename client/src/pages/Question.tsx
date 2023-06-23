@@ -11,6 +11,7 @@ import AskQuestionBtn from '../components/AskQuestionBtn';
 import AnswerForm from '../components/question/AnswerForm';
 import useIsLoggedIn from '../hooks/useIsLoggedIn';
 import formatingDate from '../utils/formatingDate';
+import { FlexJustifyBetweenDiv, MainWrapper } from '../styles/styles';
 
 const DateDiv = tw.div`
 text-blacklight text-[13px] pb-2
@@ -37,15 +38,16 @@ function QuestionPage() {
   if (isLoading) return <p>Loading ...</p>;
   if (error instanceof Error) return <p>`error has ocurred: {error.message}</p>;
 
+  // Todo userNickname Email로 변경해야함
   return (
-    <div className="p-6 border-l border-brgray">
+    <MainWrapper>
       <main className="w-[1051px]">
-        <div className="flex justify-between items-start mb-3">
+        <FlexJustifyBetweenDiv className="items-start mb-3">
           {!!data && (
             <h1 className="mr-3 mb-3 text-[27px] text-blackDark">{data.data.questionTitle}</h1>
           )}
           <AskQuestionBtn />
-        </div>
+        </FlexJustifyBetweenDiv>
         <div className="flex gap-4 pb-2 mb-4 border-b border-brgray">
           {!!data && (
             <>
@@ -56,7 +58,7 @@ function QuestionPage() {
             </>
           )}
         </div>
-        <div className="flex justify-between">
+        <FlexJustifyBetweenDiv>
           <div className="flex flex-col">
             {!!data && (
               <QuestionContainer user={user ? user.userNickname : null} data={data.data} />
@@ -71,9 +73,9 @@ function QuestionPage() {
             {isLoggedIn && <AnswerForm />}
           </div>
           <RightSidebar />
-        </div>
+        </FlexJustifyBetweenDiv>
       </main>
-    </div>
+    </MainWrapper>
   );
 }
 

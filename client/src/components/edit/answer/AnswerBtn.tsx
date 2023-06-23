@@ -50,6 +50,8 @@ function AnswerBtn({
       if (window.confirm('수정한 기록이 있습니다. 이전 페이지로 돌아가시겠습니까?')) {
         goToQuePge();
       }
+    } else {
+      goToQue();
     }
   };
 

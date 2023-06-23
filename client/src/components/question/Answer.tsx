@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom';
 import { AnswerT } from '../../types/types';
 import useMovePage from '../../hooks/useMovePage';
-import { ContentDiv } from '../../styles/styles';
-import formatingDate from '../../utils/formatingDate';
-import EditSpan from '../edit/EditSpan';
+import { ContentDiv, FlexColJustifyEndDiv } from '../../styles/styles';
+import ActionSpan from '../edit/ActionSpan';
+import DateDiv from '../DateDiv';
 
 function Answer({ data, user }: { data: AnswerT; user: string }) {
   const {
@@ -20,9 +20,13 @@ function Answer({ data, user }: { data: AnswerT; user: string }) {
     <div className="w-[654px] flex flex-col py-4 border-b border-brgray">
       <ContentDiv dangerouslySetInnerHTML={{ __html: content }} />
       <div className="flex justify-between text-[13px] my-4 pt-1">
-        <div className="flex gap-2">{nickName === user && <EditSpan callback={goToEdit} />}</div>
-        {updated !== created && <div className="text-Link">edited {formatingDate(updated)}</div>}
-        <div className="text-Link">answered {formatingDate(created)}</div>
+        <div className="flex gap-2">
+          {nickName === user && <ActionSpan callback={goToEdit} action="Edit" />}
+        </div>
+        <FlexColJustifyEndDiv>
+          {updated !== created && <DateDiv content="edited" date={updated} />}
+          <DateDiv content="answered" date={created} />
+        </FlexColJustifyEndDiv>
       </div>
       <div className="text-Link text-[13px] text-right">{nickName}</div>
     </div>
