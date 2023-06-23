@@ -25,6 +25,14 @@ const Btn = tw.button`
 bg-bubg text-white w-fit h-fit p-3 flex justify-center items-center rounded-[3px]
 `;
 
+const H2 = tw.h2`
+mx-12 mb-3 text-center text-[27px]
+`;
+
+const P = tw.p`
+mx-12 mb-8 text-blacklight text-[19px] text-cente
+`;
+
 function GradientDiv() {
   return (
     <div className="absolute top-[90%] flex justify-center gap-7 mb-6 text-blackDark">
@@ -35,13 +43,11 @@ function GradientDiv() {
           src="https://cdn.sstatic.net/Img/home/illo-public.svg?v=14bd5a506009"
           alt="earth"
         />
-        <h2 className="mx-12 mb-3 text-center text-[27px]">
-          A public platform building the definitive collection of coding questions & answers
-        </h2>
-        <p className="mx-12 mb-8 text-blacklight text-[19px] text-center">
+        <H2>A public platform building the definitive collection of coding questions & answers</H2>
+        <P>
           A community-based space to find and contribute answers to technical challenges, and one of
           the most popular websites in the world.
-        </p>
+        </P>
         <Btn type="button" className="bg-main">
           Join the community
         </Btn>
@@ -52,15 +58,13 @@ function GradientDiv() {
         <img
           className="my-8"
           src="https://cdn.sstatic.net/Img/home/illo-teams.svg?v=7e543f14fcc0"
-          alt="earth"
+          alt="building"
         />
-        <h2 className="mx-12 mb-3 text-center text-[27px]">
-          A private collaboration & knowledge sharing SaaS platform for companies
-        </h2>
-        <p className="mx-12 mb-8 text-blacklight text-[19px] text-center">
+        <H2>A private collaboration & knowledge sharing SaaS platform for companies</H2>
+        <P>
           A web-based platform to increase productivity, decrease cycle times, accelerate time to
           market, and protect institutional knowledge.
-        </p>
+        </P>
         <div className="flex gap-2">
           <Btn type="button">For large organizations</Btn>
           <Btn type="button">For small teams</Btn>
