@@ -7,7 +7,7 @@ import { QueT, TagT } from '../../types/types';
 import Tag from '../../ui/Tag';
 import ActionSpan from '../edit/ActionSpan';
 import DateDiv from '../DateDiv';
-// Todo nickName Email로 바꿔야함
+
 function QuestionContainer({ data: QuestionData, user }: { data: QueT; user: string }) {
   const { id } = useParams() as { id: string };
 
@@ -28,10 +28,13 @@ function QuestionContainer({ data: QuestionData, user }: { data: QueT; user: str
       }
     },
   });
+
   const goToEdit = useMovePage(`/questions/${id}/edit`);
 
   const HandleDeleteQuestion = () => {
-    mutationDel.mutate({ id });
+    if (window.confirm('잘문을 삭제하시겠습니까?')) {
+      mutationDel.mutate({ id });
+    }
   };
   return (
     <div className="w-[727px] flex justify-end">
