@@ -55,11 +55,21 @@ export const PostQuestionData = async ({
   title: string;
   contents: string;
   tags: string[];
-}) => {
-  console.log(title, contents, tags);
-  return instance.post('/questions/ask', {
+}) =>
+  instance.post('/questions/ask', {
     questionTitle: title,
     questionContent: contents,
     questionTag: tags,
   });
-};
+
+export const PostQueVoteLike = async ({ id }: { id: string }) =>
+  instance.post(`/questions/${id}/like`);
+
+export const PostQueVoteDislike = async ({ id }: { id: string }) =>
+  instance.post(`/questions/${id}/dislike`);
+
+export const PostAnsVoteLike = async ({ answerId }: { answerId: number }) =>
+  instance.post(`/answers/${answerId}/like`);
+
+export const PostAnsDislike = async ({ answerId }: { answerId: number }) =>
+  instance.post(`/answers/${answerId}/dislike`);

@@ -14,6 +14,8 @@ export type Question = {
   questionCreated: string;
   questionUpdated: string;
   answerCount: number;
+  questionVoteCount: number;
+  questionVoteStatus: 'NONE' | 'LIKE' | 'DISLIKE';
 };
 
 export type AnswerT = {
@@ -23,6 +25,8 @@ export type AnswerT = {
   answerCreated: string;
   answerUpdated: string;
   answerUserEmail: string;
+  answerVoteCount: number;
+  answerVoteStatus: 'NONE' | 'LIKE' | 'DISLIKE';
 };
 
 export type QueT = Question & {
