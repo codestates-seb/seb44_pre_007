@@ -193,10 +193,15 @@ public class QuestionService {
     }
 
     // 입력된 questionId에 해당하는 Question 이 존재하는지 검증 (존재하지 않을 경우 예외 발생)
-    private Question findVerifiedQuestion(Long questionId) {
+    public Question findVerifiedQuestion(Long questionId) {
         Optional<Question> question = questionRepository.findById(questionId);
 
         return question.orElseThrow(() -> new BusinessLogicException(ExceptionCode.QUESTION_NOT_FOUND));
+    }
+
+    @Transactional
+    public Question saveQuestion(Question question) {
+        return questionRepository.save(question);
     }
 
 }

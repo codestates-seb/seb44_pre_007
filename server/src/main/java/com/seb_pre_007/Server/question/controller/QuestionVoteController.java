@@ -16,12 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class QuestionVoteController {
 
-    private QuestionVoteService questionVoteService;
+    private final QuestionVoteService questionVoteService;
 
     @PostMapping("/{question-id}/like")
     public ResponseEntity voteLike(Authentication authentication,
                                    @PathVariable("question-id") Long questionId) {
-        // 유저정보 가져오고,
         String userEmail = authentication.getPrincipal().toString();
         QuestionVoteResponseDto response = questionVoteService.voteLike(userEmail, questionId);
 
@@ -31,7 +30,6 @@ public class QuestionVoteController {
     @PostMapping("/{question-id}/dislike")
     public ResponseEntity voteDisLike(Authentication authentication,
                                    @PathVariable("question-id") Long questionId) {
-        // 유저정보 가져오고,
         String userEmail = authentication.getPrincipal().toString();
         QuestionVoteResponseDto response = questionVoteService.voteDisLike(userEmail, questionId);
 

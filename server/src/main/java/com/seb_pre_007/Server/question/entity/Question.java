@@ -27,7 +27,7 @@ public class Question {
     @Column
     private String questionTitle;
 
-    @Column(columnDefinition = "LONGTEXT")
+    @Column(columnDefinition = "TEXT")
     private String questionContent;
 
     @Column
@@ -35,6 +35,9 @@ public class Question {
 
     @Column
     private int answerCount;
+
+    @Column
+    private int questionVoteCount;
 
     @CreatedDate
     @DateTimeFormat(pattern = "yyyy-MM-dd/HH:mm:ss")
