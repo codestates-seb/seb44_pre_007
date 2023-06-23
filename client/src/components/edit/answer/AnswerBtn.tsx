@@ -29,7 +29,9 @@ function AnswerBtn({ id, answerId, text }: { id: string; answerId: string; text:
   };
 
   const HandleDeleteAnswer = () => {
-    mutationDel.mutate({ id, answerId });
+    if (window.confirm('답변을 삭제하시겠습니까?')) {
+      mutationDel.mutate({ id, answerId });
+    }
   };
 
   const HandleCancelAnswer = useMovePage(`/questions/${id}`);

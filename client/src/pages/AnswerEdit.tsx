@@ -45,8 +45,13 @@ function AnswerEdit() {
     }
   }, [data]);
 
+  const goToQuePage = useMovePage(`/questions/${id}`);
   // Todo ux를 위해 돌아간다는 경고 모달 띄우면 좋음
-  const HandleCancelAnswer = useMovePage(`/questions/${id}`);
+  const HandleCancelAnswer = () => {
+    if (window.confirm('이전 페이지로 돌아가시겠습니까?')) {
+      goToQuePage();
+    }
+  };
 
   if (isLoading) return <p>Loading ...</p>;
   if (error instanceof Error) return <p>`error has ocurred: {error.message}</p>;
