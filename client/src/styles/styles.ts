@@ -26,7 +26,7 @@ export const TagSpan = styled.span`
 `;
 
 export const AskBtn = tw.button`
-flex justify-center items-center text-[13px] rounded-[3px] text-white 
+flex justify-center items-center text-[13px] rounded-[3px] text-white
 bg-bubg shadow-btn border-bubg border border-solid p-[10.4px]
 `;
 
@@ -59,4 +59,19 @@ export const ContentDiv = styled.div`
     margin-top: 5px;
     margin-bottom: 5px;
   }
+`;
+
+export const FlexJustifyBetweenDiv = tw.div`
+flex justify-between`;
+
+export const FlexColJustifyEndDiv = tw.div`
+flex flex-col justify-end
+`;
+
+export const MainWrapper = tw.div`
+p-6 border-l border-brgray
+`;
+
+export const StaticSpan = tw.div`
+text-blacklight text-[13px] mt-1 w-fit"
 `;

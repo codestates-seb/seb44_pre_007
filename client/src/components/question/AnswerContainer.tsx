@@ -1,7 +1,7 @@
 /* eslint-disable operator-linebreak */
 import { SubTitle } from '../../styles/styles';
 import { AnswerT } from '../../types/types';
-import Answer from './Answer';
+import AnswerDiv from './AnswerDiv';
 
 function AnswerContainer({
   user,
@@ -16,7 +16,7 @@ function AnswerContainer({
     <div className="w-[727px] flex flex-col">
       <SubTitle>{answerCnt} Answers</SubTitle>
       <div className="flex flex-col items-end">
-        {!!datas && datas.map((data) => <Answer key={data.answerId} data={data} user={user} />)}
+        {!!datas && datas.map((data) => <AnswerDiv key={data.answerId} data={data} user={user} />)}
       </div>
     </div>
   );

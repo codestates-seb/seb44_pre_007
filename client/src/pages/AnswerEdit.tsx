@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import tw from 'tailwind-styled-components';
@@ -25,6 +26,7 @@ function AnswerEdit() {
   const PreviewRef = useRef<HTMLDivElement>(null);
   const { id, answerId } = param;
   const [text, setText] = useState<string>('');
+  const [originalText, setOriginalText] = useState<string>('');
 
   const { isLoading, data, error } = useQuery({
     queryKey: ['question', id, answerId],
@@ -42,11 +44,16 @@ function AnswerEdit() {
         (answer: AnswerT) => answer.answerId === Number(answerId)
       );
       setText(filterAnswer[0].answerContent);
+      setOriginalText(filterAnswer[0].answerContent);
     }
   }, [data]);
 
-  // Todo ux를 위해 돌아간다는 경고 모달 띄우면 좋음
-  const HandleCancelAnswer = useMovePage(`/questions/${id}`);
+  const goToQuePage = useMovePage(`/questions/${id}`);
+  const HandleCancelAnswer = () => {
+    if (window.confirm('이전 페이지로 돌아가시겠습니까?')) {
+      goToQuePage();
+    }
+  };
 
   if (isLoading) return <p>Loading ...</p>;
   if (error instanceof Error) return <p>`error has ocurred: {error.message}</p>;
@@ -62,7 +69,7 @@ function AnswerEdit() {
             <ContentDiv dangerouslySetInnerHTML={{ __html: data.data.questionContent }} />
             <H2 className="text-blackDark">Answer</H2>
             <AnswerEditor text={text} setText={setText} />
-            <AnswerBtn id={id} answerId={answerId} text={text} />
+            <AnswerBtn id={id} answerId={answerId} text={text} originalText={originalText} />
             <section className="break-words">
               <ContentDiv ref={PreviewRef} dangerouslySetInnerHTML={{ __html: text }} />
             </section>

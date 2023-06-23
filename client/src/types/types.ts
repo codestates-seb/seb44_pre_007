@@ -6,6 +6,7 @@ export type Props = {
 
 export type Question = {
   questionId: number;
+  questionCount: number;
   questionUserNickname: string;
   questionTitle: string;
   questionContent: string;
@@ -21,10 +22,12 @@ export type AnswerT = {
   answerContent: string;
   answerCreated: string;
   answerUpdated: string;
+  answerUserEmail: string;
 };
 
 export type QueT = Question & {
   id: number;
+  userEmail: string;
   answerList: AnswerT[];
 };
 

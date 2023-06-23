@@ -5,15 +5,18 @@ import useMovePage from '../../hooks/useMovePage';
 import { ContentDiv } from '../../styles/styles';
 import { QueT, TagT } from '../../types/types';
 import Tag from '../../ui/Tag';
-import formatingDate from '../../utils/formatingDate';
-
+import ActionSpan from '../edit/ActionSpan';
+import DateDiv from '../DateDiv';
+// Todo nickName Email로 바꿔야함
 function QuestionContainer({ data: QuestionData, user }: { data: QueT; user: string }) {
   const { id } = useParams() as { id: string };
+
   const {
     questionContent: content,
     tagList: QTag,
     questionUpdated: updated,
     questionCreated: created,
+    userEmail: email,
     questionUserNickname: nickName,
   } = QuestionData;
 
@@ -25,7 +28,6 @@ function QuestionContainer({ data: QuestionData, user }: { data: QueT; user: str
       }
     },
   });
-
   const goToEdit = useMovePage(`/questions/${id}/edit`);
 
   const HandleDeleteQuestion = () => {
@@ -45,29 +47,15 @@ function QuestionContainer({ data: QuestionData, user }: { data: QueT; user: str
             </div>
             <div className="flex justify-between text-[13px] my-4 pt-1">
               <div className="flex gap-2">
-                {user === nickName && (
+                {user === email && (
                   <>
-                    <span
-                      className="text-blacklight cursor-pointer"
-                      onClick={goToEdit}
-                      role="presentation"
-                    >
-                      Edit
-                    </span>
-                    <span
-                      className="text-blacklight cursor-pointer"
-                      role="presentation"
-                      onClick={HandleDeleteQuestion}
-                    >
-                      Delete
-                    </span>
+                    <ActionSpan callback={goToEdit} action="Edit" />
+                    <ActionSpan callback={HandleDeleteQuestion} action="Delete" />
                   </>
                 )}
               </div>
-              {updated !== created && (
-                <span className="text-Link">edited {formatingDate(updated)}</span>
-              )}
-              <span className="text-Link">{nickName}</span>
+              {updated !== created && <DateDiv content="edited" date={updated} />}
+              <span className="text-nickname">{nickName}</span>
             </div>
           </>
         )}
