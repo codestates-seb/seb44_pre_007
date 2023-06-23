@@ -1,10 +1,14 @@
 import tw from 'tailwind-styled-components';
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
+import {
+  TitleSection, ProblemSection, EffortSection, TagsSection, ReviewSection,
+} from '../styles/askstyles';
 import QuestionNotice from '../components/ask/QuestionNotice';
 import QuestionEditor from '../components/ask/QuestionEditor';
 import NextBtn from '../components/ask/NextBtn';
 import ReviewBtn from '../components/ask/ReviewBtn';
+import { PostQuestionData } from '../api/api';
 
 type QuestionData = {
   questionTitle: string;
@@ -12,33 +16,13 @@ type QuestionData = {
   questionTag: string[] | null;
 };
 
-// TODO: 디자인 파일 분리, input창 컴포넌트화?
+// input창 컴포넌트화?
 const PostForm = tw.form`
   flex flex-col mb-12
 `;
 
-const TitleSection = tw.div`
-  flex w-full
-`;
-
-const ProblemSection = tw.div`
-  flex w-full mt-3
-`;
-
-const EffortSection = tw.div`
-  flex w-full mt-3
-`;
-
-const TagsSection = tw.div`
-  flex w-full mt-3
-`;
-
-const ReviewSection = tw.div`
-  flex w-full mt-3
-`;
-
 function AskQuestion() {
-  const { id } = useParams() as { id: string };
+  // const { id } = useParams() as { id: string };
   const [title, setTitle] = useState('');
   const [problem, setProblem] = useState<string>('');
   const [effort, setEffort] = useState<string>('');
@@ -57,7 +41,7 @@ function AskQuestion() {
                 </div>
               </div>
               <div className="flex ps-relative">
-                <input id="title" name="title" type="text" maxLength={300} placeholder="e.g. Is there an R function for finding the index of and element in a vector?" className="border border-[#BABFC4] rounded-[3px] w-full my-[2px] p-2 text-[13px]" />
+                <input type="text" maxLength={300} placeholder="e.g. Is there an R function for finding the index of and element in a vector?" className="border border-[#BABFC4] rounded-[3px] w-full my-[2px] p-2 text-[13px]" />
               </div>
             </div>
             <NextBtn />
@@ -106,7 +90,7 @@ function AskQuestion() {
           </div>
         </TagsSection>
         <ReviewSection>
-          {/* 드롭다운 추가 */}
+          {/* Todo: 드롭다운 추가 */}
           <ReviewBtn />
         </ReviewSection>
       </PostForm>
