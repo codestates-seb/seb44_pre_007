@@ -64,6 +64,10 @@ export const ContentDiv = styled.div`
 export const FlexJustifyBetweenDiv = tw.div`
 flex justify-between`;
 
+export const FlexCol = tw.div`
+flex flex-col
+`;
+
 export const FlexColJustifyEndDiv = tw.div`
 flex flex-col justify-end
 `;
