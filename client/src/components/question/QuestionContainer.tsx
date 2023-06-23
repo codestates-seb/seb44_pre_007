@@ -78,7 +78,6 @@ function QuestionContainer({ data: QuestionData, user }: { data: QueT; user: str
         DisLikeCallback={HandlePostDislike}
       />
       <div className="w-[654px] pt-6">
-        {!QuestionData && <p>Loading...</p>}
         {!!QuestionData && (
           <>
             <ContentDiv dangerouslySetInnerHTML={{ __html: content }} />
