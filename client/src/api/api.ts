@@ -11,6 +11,13 @@ export const instance = axios.create({
   },
 });
 
+instance.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  // eslint-disable-next-line no-param-reassign
+  config.headers.Authorization = token || '';
+  return config;
+});
+
 export const GetUser = () => instance.get('/principal').then((res) => res.data.body.data);
 
 export const FetchQuestions = async (page: number, limit: number) =>
@@ -50,5 +57,9 @@ export const PostQuestionData = async ({
   tags: string[];
 }) => {
   console.log(title, contents, tags);
-  return instance.post('/questions/ask', { questionTitle: title, questionContent: contents, questionTag: tags });
+  return instance.post('/questions/ask', {
+    questionTitle: title,
+    questionContent: contents,
+    questionTag: tags,
+  });
 };
