@@ -1,22 +1,19 @@
 import { Outlet, useSearchParams } from 'react-router-dom';
-import Header from '../components/header/Header';
-import Footer from '../components/footer/Footer';
+import LeftSidebar from '../components/sidebar/LeftSidebar';
 
-function Root() {
+function QuestionsLayout() {
   const [searchParams] = useSearchParams();
   const token = searchParams.get('access_token');
-
   if (token) {
     localStorage.setItem('token', `Bearer ${token}`);
     window.location.href = `${import.meta.env.VITE_URL}questions`;
   }
   return (
-    <>
-      <Header />
+    <div className="flex justify-center">
+      <LeftSidebar />
       <Outlet />
-      <Footer />
-    </>
+    </div>
   );
 }
 
-export default Root;
+export default QuestionsLayout;

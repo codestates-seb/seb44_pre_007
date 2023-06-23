@@ -7,7 +7,7 @@ import { FlexDiv } from '../../styles/styles';
 
 function LeftSidebar() {
   return (
-    <ol className="w-[164px] h-[595px] mb-3 list-none">
+    <ol className="w-[164px] h-[595px] mb-3 list-none bg-white">
       <LiNavDisable className="w-[164px] h-[26px] pl-2 text-[13px] text-black600 cursor-pointer">
         Home
       </LiNavDisable>
@@ -39,7 +39,7 @@ function LeftSidebar() {
       </ol>
       <li>
         <Liml8mt16 className="mb-2">TEAMS</Liml8mt16>
-        <div className="border p-3 pb-1.5 rounded-[3px] border-r-0">
+        <div className="border p-3 pb-1.5 rounded-[3px] border-r-0 bg-white">
           <strong>Stack Overflow for Teams</strong>
           <span className="text-[13px] text-black600">
             {' '}

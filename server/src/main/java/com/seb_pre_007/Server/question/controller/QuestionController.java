@@ -96,17 +96,9 @@ public class QuestionController {
 
         // Question -> QuestionResponseDto 로 변환 (start)
         QuestionData questionData = questionMapper.qeustionToQuestionData(question);
-        QuestionDetailResponseDto questionResponseDto = questionMapper.qeustionToResponseDto(question);
+        QuestionDetailResponseDto questionResponseDto = questionMapper.questionToResponseDto(question);
         questionResponseDto.setQuestionUserNickname(questionData.getQuestionUserNickname());
         questionResponseDto.setTagList(questionData.getTagList());
-
-        // 질문에 달린 답변의 최근 작성일 순서로 정렬
-        List<AnswerResponseDto> sortedList= questionResponseDto.getAnswerList().stream()
-                .sorted(Comparator.comparing(AnswerResponseDto::getAnswerUpdated).reversed())
-                .collect(Collectors.toList());
-
-         questionResponseDto.setAnswerList(sortedList);
-        // Question -> QuestionResponseDto 로 변환 (end)
 
         return new ResponseEntity(questionResponseDto, HttpStatus.OK);
     }
