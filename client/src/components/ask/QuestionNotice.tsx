@@ -5,14 +5,14 @@ const NoitceBox = tw.div`
 `;
 
 const BlueBox = tw.div`
-  flex w-full p-6 border-solid border-[#A6CEED] bg-[#EBF4FB]
+  flex flex-col w-9/12 p-6 mb-4 border border-solid border-[#A6CEED] bg-[#EBF4FB]
 `;
 
 function QuestionNotice() {
   return (
     <NoitceBox>
       <div>
-        <h1>Ask a public question</h1>
+        <h1 className="font-bold text-[27px] my-6">Ask a public question</h1>
       </div>
       <div>
         <BlueBox>
