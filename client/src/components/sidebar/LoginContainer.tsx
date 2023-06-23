@@ -1,6 +1,10 @@
+import { useParams } from 'react-router-dom';
 import { WhiteDiv, WhiteTitle, ContentLi } from '../../styles/sidebarstyle';
+import Tag from '../../ui/Tag';
 
 function LoginContainer() {
+  const { questionTag } = useParams();
+
   return (
     <>
       <WhiteDiv>
@@ -19,7 +23,9 @@ function LoginContainer() {
             <span className="text-black600">Watched Tags</span>
             <span className="text-black600 cursor-pointer">edit</span>
           </WhiteTitle>
-          <ContentLi className="justify-start"> Tag 컴포넌트 추가 예정</ContentLi>
+          <ContentLi className="justify-start">
+            {questionTag ? <Tag content={questionTag} /> : '태그를 선택해주세요'}
+          </ContentLi>
         </ul>
       </WhiteDiv>
       <WhiteDiv>
