@@ -18,6 +18,8 @@ public class AnswerResponseDto {
 
     private String answerContent;
 
+    private String answerVoteCount;
+
     @CreatedDate
     @DateTimeFormat(pattern = "yyyy-MM-dd/HH:mm:ss")
     private LocalDateTime answerCreated;

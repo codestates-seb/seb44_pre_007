@@ -59,7 +59,7 @@ public class AnswerService {
     }
 
     //답변 id로 답변찾기
-    private Answer findVerifiedAnswer(Long answerId) {
+    public Answer findVerifiedAnswer(Long answerId) {
         Optional<Answer> answer = answerRepository.findById(answerId);
         return answer.orElseThrow(() -> new BusinessLogicException(ExceptionCode.ANSWER_NOT_FOUND));
     }
@@ -78,12 +78,6 @@ public class AnswerService {
         //삭제
         answerRepository.delete(findanswer);
 
-    }
-
-    public Answer findVerifiedAnswer(Long answerId) {
-        Optional<Answer> answer = answerRepository.findById(answerId);
-
-        return answer.orElseThrow(()->new BusinessLogicException(ExceptionCode.ANSWER_NOT_FOUND));
     }
 
     @Transactional

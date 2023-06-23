@@ -38,7 +38,7 @@ public class AnswerVoteService {
 
         if (findVote.isPresent()) {
             if(findVote.get().getVoteType().equals(AnswerVote.VoteType.LIKE)) voteCount--;
-            if(findVote.get().getVoteType().equals(AnswerVote.VoteType.DISLIKE)) voteCount--;
+            if(findVote.get().getVoteType().equals(AnswerVote.VoteType.DISLIKE)) voteCount++;
             answerVoteRepository.delete(findVote.get());
         }
 
@@ -68,13 +68,13 @@ public class AnswerVoteService {
 
         if (findVote.isPresent()) {
             if(findVote.get().getVoteType().equals(AnswerVote.VoteType.LIKE)) voteCount--;
-            if(findVote.get().getVoteType().equals(AnswerVote.VoteType.DISLIKE)) voteCount--;
+            if(findVote.get().getVoteType().equals(AnswerVote.VoteType.DISLIKE)) voteCount++;
             answerVoteRepository.delete(findVote.get());
         }
 
         if (findVote.isEmpty()) {
             answerVoteRepository.save(new AnswerVote(findAnswer, findUser, AnswerVote.VoteType.DISLIKE));
-            voteCount++;
+            voteCount--;
         }
         findAnswer.setAnswerVoteCount(voteCount);
         answerService.saveAnswer(findAnswer);

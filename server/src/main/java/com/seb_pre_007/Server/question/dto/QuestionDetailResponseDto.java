@@ -56,7 +56,7 @@ public class QuestionDetailResponseDto {
     private List<TagDto> tagList;
 
     private int questionCount;
-
+    private int questionVoteCount;
 
     @CreatedDate
     @DateTimeFormat(pattern = "yyyy-MM-dd/HH:mm:ss")
