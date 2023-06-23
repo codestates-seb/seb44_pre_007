@@ -96,7 +96,7 @@ public class QuestionController {
 
         // Question -> QuestionResponseDto 로 변환 (start)
         QuestionData questionData = questionMapper.qeustionToQuestionData(question);
-        QuestionDetailResponseDto questionResponseDto = questionMapper.qeustionToResponseDto(question);
+        QuestionDetailResponseDto questionResponseDto = questionMapper.questionToResponseDto(question);
         questionResponseDto.setQuestionUserNickname(questionData.getQuestionUserNickname());
         questionResponseDto.setTagList(questionData.getTagList());
 

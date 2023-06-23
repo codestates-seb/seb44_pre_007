@@ -49,6 +49,7 @@ import java.util.List;
 @Builder
 public class QuestionDetailResponseDto {
 
+    private String userEmail;
     private String questionUserNickname;
     private String questionTitle;
     private String questionContent;

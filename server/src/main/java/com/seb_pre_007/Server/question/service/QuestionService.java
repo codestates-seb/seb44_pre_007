@@ -22,7 +22,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional
 public class QuestionService {
 
     private final QuestionRepository questionRepository;
@@ -153,6 +153,7 @@ public class QuestionService {
 
         int questionCount= findQuestion.getQuestionCount();
         findQuestion.setQuestionCount(questionCount+1);
+        System.out.println("조회수 테스트중:"+questionCount);
         questionRepository.save(findQuestion);
     }
 
