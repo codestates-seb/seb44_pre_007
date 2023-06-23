@@ -12,6 +12,8 @@ import java.time.LocalDateTime;
 @Builder
 public class AnswerResponseDto {
 
+    private String answerUserEmail;
+
     private long answerId;
 
     private String answerUserNickname;

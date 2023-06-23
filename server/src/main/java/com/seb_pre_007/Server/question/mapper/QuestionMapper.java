@@ -47,6 +47,7 @@ public interface QuestionMapper {
 
     // Answer.user.userNickname -> AnswerResponseDto.answerUserNickname
     @Mapping(source = "user.userNickname", target = "answerUserNickname")
+    @Mapping(source = "user.userEmail", target = "answerUserEmail")
     AnswerResponseDto  answerToResponseDto(Answer answer);
 
     List<AnswerResponseDto> answerListToResponseDto(List<Answer> answerList);
