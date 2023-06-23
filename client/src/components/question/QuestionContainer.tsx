@@ -77,7 +77,7 @@ function QuestionContainer({ data: QuestionData, user }: { data: QueT; user: str
         LikeCallback={HandlePostLike}
         DisLikeCallback={HandlePostDislike}
       />
-      <div className="w-[654px]">
+      <div className="w-[654px] pt-6">
         {!QuestionData && <p>Loading...</p>}
         {!!QuestionData && (
           <>
