@@ -108,14 +108,18 @@ public class QuestionService {
 
         updateViewQuestions(findQuestion); // 질문 조회수 +1 업데이트
 
-        // 유저 정보 존재(로그인 상태)
-        if (userEmail != null) {
+        if (userEmail != null) { // 로그인 O
             User findUser = userService.getUser(userEmail);
-            // 해당 유저의 Question에 대한 voteStatus를 findQuestion 에 세팅 ("LIKE"/"DISLIKE"/"NONE")
-            setQuestionVoteStatus(findUser, findQuestion);
+
+            setQuestionVoteStatus(findUser, findQuestion); // 해당 유저의 Question에 대한 voteStatus를 findQuestion 에 세팅 ("LIKE"/"DISLIKE"/"NONE")
 
             for (Answer answer : findQuestion.getAnswerList()) {
                 setAnswerVoteStatus(findUser, answer);
+            }
+        } else { // 로그인 X
+            findQuestion.setQuestionVoteStatus(QuestionVote.VoteType.NONE.toString());
+            for (Answer answer : findQuestion.getAnswerList()) {
+                answer.setAnswerVoteStatus(AnswerVote.VoteType.NONE.toString());
             }
         }
 
@@ -238,7 +242,7 @@ public class QuestionService {
         if (findAnswerVote.isPresent()) { // findVote 가 있을 때
             answer.setAnswerVoteStatus(findAnswerVote.get().getVoteType().toString());
         } else { // findVote 가 없을 때
-            answer.setAnswerVoteStatus(QuestionVote.VoteType.NONE.toString());
+            answer.setAnswerVoteStatus(AnswerVote.VoteType.NONE.toString());
         }
     }
 

@@ -38,6 +38,6 @@ public class AnswerVote {
                 this.voteType = voteType;
         }
         public enum VoteType {
-            LIKE, DISLIKE;
+            LIKE, DISLIKE, NONE;
         }
     }
