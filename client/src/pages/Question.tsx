@@ -38,7 +38,6 @@ function QuestionPage() {
   if (isLoading) return <p>Loading ...</p>;
   if (error instanceof Error) return <p>`error has ocurred: {error.message}</p>;
 
-  // Todo userNickname Email로 변경해야함
   return (
     <MainWrapper>
       <main className="w-[1051px]">
@@ -60,12 +59,10 @@ function QuestionPage() {
         </div>
         <FlexJustifyBetweenDiv>
           <div className="flex flex-col">
-            {!!data && (
-              <QuestionContainer user={user ? user.userNickname : null} data={data.data} />
-            )}
+            {!!data && <QuestionContainer user={user ? user.userEmail : null} data={data.data} />}
             {!!data && data.data.answerList.length > 0 && (
               <AnswerContainer
-                user={user ? user.userNickname : null}
+                user={user ? user.userEmail : null}
                 datas={data.data.answerList}
                 answerCnt={data.data.answerList.length}
               />

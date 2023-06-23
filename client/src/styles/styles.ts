@@ -71,3 +71,7 @@ flex flex-col justify-end
 export const MainWrapper = tw.div`
 p-6 border-l border-brgray
 `;
+
+export const StaticSpan = tw.div`
+text-blacklight text-[13px] mt-1 w-fit"
+`;

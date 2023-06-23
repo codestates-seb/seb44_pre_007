@@ -5,7 +5,6 @@ import useMovePage from '../../hooks/useMovePage';
 import { ContentDiv } from '../../styles/styles';
 import { QueT, TagT } from '../../types/types';
 import Tag from '../../ui/Tag';
-import formatingDate from '../../utils/formatingDate';
 import ActionSpan from '../edit/ActionSpan';
 import DateDiv from '../DateDiv';
 

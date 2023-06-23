@@ -2,7 +2,7 @@
 import { styled } from 'styled-components';
 import tw from 'tailwind-styled-components';
 import { useEffect, useState } from 'react';
-import { Ellipsis } from '../../styles/styles';
+import { Ellipsis, StaticSpan } from '../../styles/styles';
 import { Question, TagT } from '../../types/types';
 import AnswerCountSpan from './AnswerCountSpan';
 import Tag from '../../ui/Tag';
@@ -24,6 +24,7 @@ function SummaryDiv({ question }: { question: Question }) {
     questionUserNickname,
     questionTitle,
     questionContent,
+    questionCount,
     tagList,
     questionCreated,
     questionUpdated,
@@ -44,7 +45,8 @@ function SummaryDiv({ question }: { question: Question }) {
   const goToQuestion = useMovePage(`/questions/${questionId}`);
   return (
     <Summarydiv>
-      <section className="w-[108px] flex gap-2 items-start justify-end mr-4 mb-1">
+      <section className="w-[108px] flex flex-col items-end gap-2 mr-4 mb-1">
+        <StaticSpan>{questionCount} Views</StaticSpan>
         <AnswerCountSpan answerCount={answerCount} />
       </section>
       <section className="w-[595px]">
