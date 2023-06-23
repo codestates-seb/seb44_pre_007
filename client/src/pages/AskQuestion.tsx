@@ -1,52 +1,52 @@
 import tw from 'tailwind-styled-components';
-import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useRef, useState } from 'react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import {
+  TitleSection, ProblemSection, EffortSection, TagsSection, ReviewSection,
+} from '../styles/askstyles';
+import { AskBtn } from '../styles/styles';
 import QuestionNotice from '../components/ask/QuestionNotice';
 import QuestionEditor from '../components/ask/QuestionEditor';
 import NextBtn from '../components/ask/NextBtn';
-import ReviewBtn from '../components/ask/ReviewBtn';
+import { PostQuestionData } from '../api/api';
 
-type QuestionData = {
-  questionTitle: string;
-  questionContent: string;
-  questionTag: string[] | null;
-};
-
-// TODO: 디자인 파일 분리, input창 컴포넌트화?
+// input창 컴포넌트화?
 const PostForm = tw.form`
   flex flex-col mb-12
 `;
 
-const TitleSection = tw.div`
-  flex w-full
-`;
-
-const ProblemSection = tw.div`
-  flex w-full mt-3
-`;
-
-const EffortSection = tw.div`
-  flex w-full mt-3
-`;
-
-const TagsSection = tw.div`
-  flex w-full mt-3
-`;
-
-const ReviewSection = tw.div`
-  flex w-full mt-3
+const DiscardBtn = tw.button`
+  p-[10.4px] bg-[rgba(0, 0, 0, 0)] text-[#C22E32] hover:bg-[#FDF2F2]
 `;
 
 function AskQuestion() {
-  const { id } = useParams() as { id: string };
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState('title');
   const [problem, setProblem] = useState<string>('');
   const [effort, setEffort] = useState<string>('');
+  const [tags, setTags] = useState<string[]>(['tag']);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
+  };
+  // TODO: 태그 등록 수정
+  const handleTagChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTags([e.target.value]);
+  };
+
+  const queryClient = useQueryClient();
+  const mutation = useMutation(PostQuestionData);
+
+  const HandleSubmitQuestion = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log('1111');
+    const contents = `${problem} \n${effort}`;
+    mutation.mutate({ title, contents, tags });
+  };
 
   return (
     <div className="bg-[#F8F9F9] w-full px-6 pb-6">
       <QuestionNotice />
-      <PostForm>
+      <PostForm onSubmit={HandleSubmitQuestion}>
         <TitleSection>
           <div className="bg-white w-9/12 p-6 border border-[#E3E6E8]">
             <div className="flex flex-col">
@@ -57,7 +57,7 @@ function AskQuestion() {
                 </div>
               </div>
               <div className="flex ps-relative">
-                <input id="title" name="title" type="text" maxLength={300} placeholder="e.g. Is there an R function for finding the index of and element in a vector?" className="border border-[#BABFC4] rounded-[3px] w-full my-[2px] p-2 text-[13px]" />
+                <input type="text" value={title} onChange={handleInputChange} maxLength={300} placeholder="e.g. Is there an R function for finding the index of and element in a vector?" className="border border-[#BABFC4] rounded-[3px] w-full my-[2px] p-2 text-[13px]" />
               </div>
             </div>
             <NextBtn />
@@ -106,9 +106,27 @@ function AskQuestion() {
           </div>
         </TagsSection>
         <ReviewSection>
-          {/* 드롭다운 추가 */}
-          <ReviewBtn />
+          <div className="bg-white w-9/12 p-6 border border-[#E3E6E8]">
+            <div className="flex flex-col">
+              <div className="flex flex-col my-[2px]">
+                <div className="fw-semibold">Review questions already on Stack Overflow to see if your question is a duplicate.</div>
+                <div className="text-xs">
+                  Clicking on these questions will open them in a new tab for you to review.
+                  Your progress will be saved so you can come back and continue.
+                </div>
+              </div>
+              <div className="flex py-3">
+                {/* TODO: 드롭다운 추가 */}
+              </div>
+            </div>
+            <AskBtn type="submit">Review your question</AskBtn>
+          </div>
         </ReviewSection>
+        <div className="w-full mt-3">
+          <div>
+            <DiscardBtn type="button">Discard draft</DiscardBtn>
+          </div>
+        </div>
       </PostForm>
     </div>
   );

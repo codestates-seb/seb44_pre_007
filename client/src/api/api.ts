@@ -39,3 +39,16 @@ export const DelAnswerData = async ({ id, answerId }: { id: string; answerId: st
   instance.delete(`/questions/${id}/${answerId}/edit`);
 
 export const DelQueData = async ({ id }: { id: string }) => instance.delete(`/questions/${id}`);
+
+export const PostQuestionData = async ({
+  title,
+  contents,
+  tags,
+}: {
+  title: string;
+  contents: string;
+  tags: string[];
+}) => {
+  console.log(title, contents, tags);
+  return instance.post('/questions/ask', { questionTitle: title, questionContent: contents, questionTag: tags });
+};
