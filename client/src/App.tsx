@@ -13,6 +13,7 @@ import Tags from './pages/Tags';
 import Mypage from './pages/Mypage';
 import Home from './pages/Home';
 import QuestionsLayout from './pages/QuestionsRoot';
+import AskQuestion from './pages/AskQuestion';
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
           {
             path: 'tagged/:questionTag',
             element: <Tags />,
+          },
+          {
+            path: 'ask',
+            element: <AskQuestion />,
           },
         ],
       },
