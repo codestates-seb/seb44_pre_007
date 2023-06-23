@@ -1,16 +1,22 @@
 package com.seb_pre_007.Server.question.service;
 
+import com.seb_pre_007.Server.answer.entity.Answer;
+import com.seb_pre_007.Server.answer.entity.AnswerVote;
+import com.seb_pre_007.Server.answer.repository.AnswerVoteRepository;
 import com.seb_pre_007.Server.exception.BusinessLogicException;
 import com.seb_pre_007.Server.exception.ExceptionCode;
 import com.seb_pre_007.Server.question.dto.QuestionPatchDto;
 import com.seb_pre_007.Server.question.dto.QuestionPostDto;
 import com.seb_pre_007.Server.question.entity.Question;
 import com.seb_pre_007.Server.question.entity.QuestionTag;
+import com.seb_pre_007.Server.question.entity.QuestionVote;
 import com.seb_pre_007.Server.question.repository.QuestionRepository;
+import com.seb_pre_007.Server.question.repository.QuestionVoteRepository;
 import com.seb_pre_007.Server.tag.entity.Tag;
 import com.seb_pre_007.Server.tag.service.TagService;
 import com.seb_pre_007.Server.user.entity.User;
 import com.seb_pre_007.Server.user.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,19 +29,15 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class QuestionService {
 
     private final QuestionRepository questionRepository;
     private final TagService tagService;
     private final  QuestionTagService questionTagService;
     private final UserService userService;
-
-    public QuestionService(QuestionRepository questionRepository, TagService tagService, QuestionTagService questionTagService, UserService userService) {
-        this.questionRepository = questionRepository;
-        this.tagService = tagService;
-        this.questionTagService = questionTagService;
-        this.userService = userService;
-    }
+    private final QuestionVoteRepository questionVoteRepository;
+    private final AnswerVoteRepository answerVoteRepository;
 
 
     /**
@@ -100,14 +102,26 @@ public class QuestionService {
     /**
      * 질문 상세 조회
      */
-    public Question findQuestion(long questionId) {
+    public Question findQuestion(long questionId, String userEmail) {
 
         Question findQuestion = findVerifiedQuestion(questionId); // 입력된 questionId로 질문 조회
 
         updateViewQuestions(findQuestion); // 질문 조회수 +1 업데이트
 
+        // 유저 정보 존재(로그인 상태)
+        if (userEmail != null) {
+            User findUser = userService.getUser(userEmail);
+            // 해당 유저의 Question에 대한 voteStatus를 findQuestion 에 세팅 ("LIKE"/"DISLIKE"/"NONE")
+            setQuestionVoteStatus(findUser, findQuestion);
+
+            for (Answer answer : findQuestion.getAnswerList()) {
+                setAnswerVoteStatus(findUser, answer);
+            }
+        }
+
         return findQuestion;
     }
+
 
     /**
      * 질문 수정
@@ -203,6 +217,29 @@ public class QuestionService {
     @Transactional
     public Question saveQuestion(Question question) {
         return questionRepository.save(question);
+    }
+
+    // Question 에 해당 유저의 QuestionVoteStatus 세팅
+    private void setQuestionVoteStatus(User findUser, Question findQuestion) {
+
+        Optional<QuestionVote> findQuestionVote = questionVoteRepository.findQuestionVoteByQuestionAndUser(findQuestion, findUser);
+
+        if (findQuestionVote.isPresent()) { // findQuestionVote 가 있을 때
+            findQuestion.setQuestionVoteStatus(findQuestionVote.get().getVoteType().toString());
+        } else { // findVote 가 없을 때
+            findQuestion.setQuestionVoteStatus(QuestionVote.VoteType.NONE.toString());
+        }
+    }
+
+    // Answer 에 해당 유저의 AnswerVoteStatus 세팅
+    private void setAnswerVoteStatus(User findUser, Answer answer) {
+        Optional<AnswerVote> findAnswerVote = answerVoteRepository.findAnswerVoteByAnswerAndUser(answer, findUser);
+
+        if (findAnswerVote.isPresent()) { // findVote 가 있을 때
+            answer.setAnswerVoteStatus(findAnswerVote.get().getVoteType().toString());
+        } else { // findVote 가 없을 때
+            answer.setAnswerVoteStatus(QuestionVote.VoteType.NONE.toString());
+        }
     }
 
 }

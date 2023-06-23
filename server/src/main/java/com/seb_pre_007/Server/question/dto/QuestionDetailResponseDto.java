@@ -58,6 +58,7 @@ public class QuestionDetailResponseDto {
 
     private int questionCount;
     private int questionVoteCount;
+    private String questionVoteStatus;
 
     @CreatedDate
     @DateTimeFormat(pattern = "yyyy-MM-dd/HH:mm:ss")

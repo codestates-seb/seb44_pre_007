@@ -36,6 +36,6 @@ public class QuestionVote {
 
     @Getter
     public enum VoteType {
-        LIKE, DISLIKE;
+        LIKE, DISLIKE, NONE;
     }
 }
