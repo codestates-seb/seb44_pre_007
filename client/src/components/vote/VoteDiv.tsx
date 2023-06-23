@@ -10,7 +10,7 @@ type VoteT = {
 };
 function VoteDiv({ isMine, VoteStatus, VoteCount, LikeCallback, DisLikeCallback }: VoteT) {
   return (
-    <div className="w-[45px] flex flex-col items-center justify-center">
+    <div className="w-[45px] flex flex-col items-center justify-start pt-4">
       {!isMine && (
         <>
           <VoteLikeBtn status={VoteStatus} callback={LikeCallback} isMine={isMine} />
