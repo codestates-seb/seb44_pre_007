@@ -1,11 +1,14 @@
 import { styled } from 'styled-components';
 import { useEffect, useRef, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 import Lock from '../public/Icons/SpotLock';
 import Search from '../public/Icons/SpotSearch';
 import 'animate.css';
 import StaticDiv from '../components/home/StaticDiv';
 import StackOverflow from '../public/Icons/StackOverflow';
 import ForTeams from '../public/Icons/ForTeams';
+import LeftSidebar from '../components/sidebar/LeftSidebar';
+import { leftSidebarDropdown } from '../recoil/auth/atom';
 
 const SpotDiv = styled.div`
   position: relative;
@@ -96,7 +99,7 @@ function Home() {
       content2: 'instances active every day',
     },
   ];
-
+  const showDropdown = useRecoilValue(leftSidebarDropdown);
   const [wordIdx, setWordIdx] = useState(0);
 
   const savedCallback = useRef<() => void>();
@@ -123,6 +126,7 @@ function Home() {
 
   return (
     <div className="flex flex-col">
+      <div className="absolute z-50 ml-9">{showDropdown && <LeftSidebar />}</div>
       <div className="flex flex-col relative items-center bg-blackDark w-full px-8 pt-8 pb-32 mx-15">
         <div className="flex gap-6 mb-7">
           <OrangeSpot className="bg-[#FEE3CD]">

@@ -9,3 +9,8 @@ export const userInfoState = atom<Omit<UserInfo, 'userPassword'>>({
     userEmail: '',
   },
 });
+
+export const leftSidebarDropdown = atom<boolean>({
+  key: 'dropdownState',
+  default: false,
+});
