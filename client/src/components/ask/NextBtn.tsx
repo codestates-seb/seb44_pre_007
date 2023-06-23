@@ -32,7 +32,7 @@ const StyledBtn = styled.button`
 
 function NextBtn() {
   return (
-    <StyledBtn>Next</StyledBtn>
+    <StyledBtn type="button">Next</StyledBtn>
   );
 }
 
