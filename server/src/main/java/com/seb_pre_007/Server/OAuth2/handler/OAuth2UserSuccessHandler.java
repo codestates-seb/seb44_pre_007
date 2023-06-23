@@ -99,8 +99,8 @@ public class OAuth2UserSuccessHandler extends SimpleUrlAuthenticationSuccessHand
         return UriComponentsBuilder
                 .newInstance()
                 .scheme("http")
-                .host("localhost")
-                .port(5173)
+                .host("stackoverflow007.s3-website.ap-northeast-2.amazonaws.com")
+//                .port(5173)
                 .queryParams(queryParams)
                 .build()
                 .toUri();
