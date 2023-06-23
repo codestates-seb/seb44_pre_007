@@ -2,6 +2,7 @@ import { styled } from 'styled-components';
 import tw from 'tailwind-styled-components';
 import Search from '../../public/Icons/SpotSearch';
 import Lock from '../../public/Icons/SpotLock';
+import SerchContentP from './SerchContentP';
 
 const Spot = styled.div`
   position: relative;
@@ -46,26 +47,23 @@ const OrangeSpot = styled(Spot)`
 `;
 
 const H2 = tw.h2`
-w-[315px] text-center text-blackDark mb-[19px]
+w-[315px] text-center text-blackDark
 `;
 
 const Btn = tw.button`
-text-white bg-main px-8 py-3 rounded-[3px]
+text-white bg-main px-8 py-3 rounded-[3px] h-[43px] flex justify-center items-center mt-2
 `;
 
 function SpotDiv() {
   return (
-    <div className="flex gap-6 mb-7">
+    <div className="flex gap-8 mb-7">
       <OrangeSpot className="bg-[#FEE3CD]">
         <div className="mb-4">
           <Search style={{ width: '40', height: '40' }} />
         </div>
         <H2>Find the best answer to your technical question, help others answer theirs</H2>
         <Btn type="button">Join the community</Btn>
-        <div className="flex gap-1">
-          <p className="text-[13px]">or</p>
-          <p className="text-[13px] border-b border-blackDark">search content</p>
-        </div>
+        <SerchContentP />
       </OrangeSpot>
       <BlueSpot className="bg-[#cde9fe]">
         <div className="mb-4">

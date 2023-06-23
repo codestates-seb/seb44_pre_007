@@ -2,6 +2,7 @@ import { styled } from 'styled-components';
 import tw from 'tailwind-styled-components';
 import StackOverflow from '../../public/Icons/StackOverflow';
 import ForTeams from '../../public/Icons/ForTeams';
+import SerchContentP from './SerchContentP';
 
 const Gradient = styled.div`
   display: flex;
@@ -21,7 +22,7 @@ const BlueGradient = styled(Gradient)`
 `;
 
 const Btn = tw.button`
-bg-bubg text-white w-fit h-fit px-3 py-6 flex justify-center items-center rounded-[3px]
+bg-bubg text-white w-fit h-fit p-3 flex justify-center items-center rounded-[3px]
 `;
 
 function GradientDiv() {
@@ -41,12 +42,10 @@ function GradientDiv() {
           A community-based space to find and contribute answers to technical challenges, and one of
           the most popular websites in the world.
         </p>
-        <button
-          type="button"
-          className="bg-main text-white w-fit h-[40px] px-3 py-8 flex justify-center items-center rounded-[3px]"
-        >
+        <Btn type="button" className="bg-main">
           Join the community
-        </button>
+        </Btn>
+        <SerchContentP />
       </Gradient>
       <BlueGradient>
         <ForTeams style={{ width: '190', height: '37' }} />
