@@ -1,26 +1,30 @@
 import { Outlet, useSearchParams } from 'react-router-dom';
+import { useState } from 'react';
 import Header from '../components/header/Header';
-import LeftSidebar from '../components/sidebar/LeftSidebar';
 import Footer from '../components/footer/Footer';
-import useIsLoggedIn from '../hooks/useIsLoggedIn';
-import Home from './Home';
+import LeftSidebar from '../components/sidebar/LeftSidebar';
 
 function Root() {
-  const isLoggedIn = useIsLoggedIn();
+  const [showDropdown, setShowDropdown] = useState(false);
   const [searchParams] = useSearchParams();
   const token = searchParams.get('access_token');
+  const handleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
+
   if (token) {
     localStorage.setItem('token', `Bearer ${token}`);
     window.location.href = `${import.meta.env.VITE_URL}questions`;
   }
   return (
     <>
-      {/* Todo 로그인 상태에 따라 아래 다르게 렌더링 */} <Header />
-      <div className="flex justify-center">
-        {/* {!isLoggedIn && <Home />} */}
-        <LeftSidebar />
-        <Outlet />
-      </div>
+      <Header handleDropdown={handleDropdown} />
+      {showDropdown && (
+        <div className="absolute z-50">
+          <LeftSidebar />
+        </div>
+      )}
+      <Outlet />
       <Footer />
     </>
   );
