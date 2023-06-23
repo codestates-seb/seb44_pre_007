@@ -26,10 +26,10 @@ mr-2 hover:text-primaryBlue cursor-pointer
 `;
 
 export default function Dropdown() {
-  const goToQuestion = useMovePage('/questions');
+  const goToMain = useMovePage('/');
   const handleLogout = () => {
     localStorage.removeItem('token');
-    goToQuestion();
+    goToMain();
   };
   return (
     <StyledDropdown>

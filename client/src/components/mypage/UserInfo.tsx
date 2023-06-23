@@ -1,3 +1,8 @@
+/* eslint-disable jsx-a11y/no-autofocus */
+/* eslint-disable @typescript-eslint/indent */
+/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable react/prop-types */
+/* eslint-disable no-console */
 /* eslint-disable no-confusing-arrow */
 import { useQuery } from '@tanstack/react-query';
 import { MdCake } from 'react-icons/md';
@@ -22,10 +27,11 @@ export default function UserInfo() {
     e.preventDefault();
     instance
       .patch('/users/edit', { userNickname: userInput })
-      .then((res) => window.location.reload())
+      .then(() => window.location.reload())
       .catch((error) => console.log(error));
   };
   const handleDelete = () => {
+    // eslint-disable-next-line no-alert
     const confirm = window.confirm('Are you sure you want to delete your profile?');
     if (confirm) {
       instance
