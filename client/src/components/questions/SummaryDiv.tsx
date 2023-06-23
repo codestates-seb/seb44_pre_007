@@ -18,6 +18,10 @@ const Content = styled(Ellipsis)`
   font-size: 13px;
 `;
 
+const TitleH3 = tw.div`
+pr-6 text-[17px] text-[#0063BF] cursor-pointer
+`;
+
 function SummaryDiv({ question }: { question: Question }) {
   const {
     questionId,
@@ -50,16 +54,10 @@ function SummaryDiv({ question }: { question: Question }) {
         <AnswerCountSpan answerCount={answerCount} />
       </section>
       <section className="w-[595px]">
-        <h3
-          role="presentation"
-          className="pr-6 text-[17px] text-[#0063BF] cursor-pointer"
-          onClick={goToQuestion}
-        >
+        <TitleH3 role="presentation" onClick={goToQuestion}>
           {questionTitle}
-        </h3>
-        <Content className="mb-2 text-[13px] text-[#3B4045]">
-          {htmlTagIgnore(questionContent)}
-        </Content>
+        </TitleH3>
+        <Content className="mb-2 text-[#3B4045]">{htmlTagIgnore(questionContent)}</Content>
         <div className="grid gap-1">
           <div className="flex gap-1">
             {tagList.map((tag: TagT) => (
