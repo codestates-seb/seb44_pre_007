@@ -69,31 +69,33 @@ function Home() {
   return (
     <FlexCol>
       <div className="absolute z-50 ml-9">{showDropdown && <LeftSidebar />}</div>
-      <FlexCol className="relative items-center bg-blackDark px-8 pt-8 pb-32 mx-15">
-        <SpotDiv />
-        <h1 className="py-16 text-center text-[30px] font-semibold text-white">
-          <div className="flex justify-center gap-2">
-            Every
-            <p className="text-main animate__animated animate__fadeInDown animate__slow animate__infinite">
-              {Words[wordIdx]}
-            </p>
-            has a
+      <div className="flex justify-center m-7">
+        <FlexCol className="relative items-center bg-blackDark w-[1300px] px-8 pt-8 pb-32 mx-15 rounded-xl">
+          <SpotDiv />
+          <h1 className="py-16 text-center text-[30px] font-semibold text-white">
+            <div className="flex justify-center gap-2">
+              Every
+              <p className="text-main animate__animated animate__fadeInDown animate__slow animate__infinite">
+                {Words[wordIdx]}
+              </p>
+              has a
+            </div>
+            tab open to Stack Overflow
+          </h1>
+          <span className="w-[63px] h-[8px] bg-blacklight rounded" />
+          <div className="relative flex text-[15px] text-white gap-2 pt-8 px-3 pb-16">
+            {StaticWords.map((word) => (
+              <StaticDiv
+                title={word.title}
+                key={word.title}
+                content1={word.content1}
+                content2={word.content2}
+              />
+            ))}
+            <GradientDiv />
           </div>
-          tab open to Stack Overflow
-        </h1>
-        <span className="w-[63px] h-[8px] bg-blacklight rounded" />
-        <div className="relative flex text-[15px] text-white gap-2 pt-8 px-3 pb-16">
-          {StaticWords.map((word) => (
-            <StaticDiv
-              title={word.title}
-              key={word.title}
-              content1={word.content1}
-              content2={word.content2}
-            />
-          ))}
-          <GradientDiv />
-        </div>
-      </FlexCol>
+        </FlexCol>
+      </div>
       <div className="h-[750px] bg-white" />
     </FlexCol>
   );
