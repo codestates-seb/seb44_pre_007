@@ -21,6 +21,7 @@ public class QuestionData {
     private LocalDateTime questionCreated;
     private LocalDateTime questionUpdated;
     private int questionCount;
+    private int questionVoteCount;
 
     private int answerCount;
     private List<TagDto> tagList;
