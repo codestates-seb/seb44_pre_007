@@ -90,9 +90,14 @@ public class QuestionController {
 
     // 질문 상세 조회
     @GetMapping("/{question-id}")
-    public ResponseEntity getQuestion(@PathVariable("question-id") @Positive long questionId) {
+    public ResponseEntity getQuestion(@PathVariable("question-id") @Positive long questionId,
+                                      Authentication authentication) {
 
-        Question question = questionService.findQuestion(questionId); // questionId를 통해 조회한 Question
+        String userEmail = null;
+        if (authentication != null) {
+            userEmail = authentication.getPrincipal().toString();
+        }
+        Question question = questionService.findQuestion(questionId, userEmail); // questionId를 통해 조회한 Question
 
         // Question -> QuestionResponseDto 로 변환 (start)
         QuestionData questionData = questionMapper.qeustionToQuestionData(question);
@@ -128,6 +133,5 @@ public class QuestionController {
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
 
 }

@@ -27,7 +27,7 @@ public class Question {
     @Column
     private String questionTitle;
 
-    @Column(columnDefinition = "LONGTEXT")
+    @Column(columnDefinition = "TEXT")
     private String questionContent;
 
     @Column
@@ -35,6 +35,11 @@ public class Question {
 
     @Column
     private int answerCount;
+
+    @Column
+    private int questionVoteCount;
+
+    private String questionVoteStatus;
 
     @CreatedDate
     @DateTimeFormat(pattern = "yyyy-MM-dd/HH:mm:ss")
@@ -49,10 +54,11 @@ public class Question {
     private User user;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
-    @BatchSize(size = 50)
+    @BatchSize(size = 100)
     private List<QuestionTag> questionTagList = new ArrayList<>();
 
     @OneToMany(mappedBy = "question")
+    @BatchSize(size = 100)
     private List<Answer> answerList= new ArrayList<>();
 
     // Question - QuestionTag 양방향 매핑 편의 메소드

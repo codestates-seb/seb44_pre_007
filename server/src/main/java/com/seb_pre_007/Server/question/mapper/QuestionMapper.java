@@ -34,6 +34,7 @@ public interface QuestionMapper {
                 .questionUpdated(question.getQuestionUpdated())
                 .questionCount(question.getQuestionCount())
                 .answerCount(question.getAnswerCount())
+                .questionVoteCount(question.getQuestionVoteCount())
                 .tagList(question.getQuestionTagList().stream()
                         .map(questionTag -> new TagDto(questionTag.getTag().getTagId(), questionTag.getTag().getTagName()))
                         .collect(Collectors.toList())
