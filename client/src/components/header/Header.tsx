@@ -1,5 +1,6 @@
 import tw from 'tailwind-styled-components';
 import { GiHamburgerMenu } from 'react-icons/gi';
+import { useLocation } from 'react-router-dom';
 import SearchBox from './SearchBox';
 import NavBar from './NavBar';
 import MainLogo from './MainLogo';
@@ -15,9 +16,10 @@ rounded-full hover:bg-gray-200 hover:text-gray-800 p-2 text-sm text-gray-500 tra
 `;
 
 export default function Header({ handleDropdown }: { handleDropdown: () => void }) {
+  const { pathname } = useLocation();
   return (
     <StyledHeader>
-      <GiHamburgerMenu onClick={handleDropdown} className="cursor-pointer" />
+      {pathname === '/' && <GiHamburgerMenu onClick={handleDropdown} className="cursor-pointer" />}
       <StyledWrapper>
         <MainLogo />
         <StyledMenuBtn>Products</StyledMenuBtn>

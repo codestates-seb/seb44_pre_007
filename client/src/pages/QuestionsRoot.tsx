@@ -9,7 +9,7 @@ function QuestionsLayout() {
     window.location.href = `${import.meta.env.VITE_URL}questions`;
   }
   return (
-    <div className="flex">
+    <div className="flex justify-center">
       <LeftSidebar />
       <Outlet />
     </div>
