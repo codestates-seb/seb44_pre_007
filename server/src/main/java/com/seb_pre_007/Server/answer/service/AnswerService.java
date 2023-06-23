@@ -79,4 +79,15 @@ public class AnswerService {
         answerRepository.delete(findanswer);
 
     }
+
+    public Answer findVerifiedAnswer(Long answerId) {
+        Optional<Answer> answer = answerRepository.findById(answerId);
+
+        return answer.orElseThrow(()->new BusinessLogicException(ExceptionCode.ANSWER_NOT_FOUND));
+    }
+
+    @Transactional
+    public Answer saveAnswer(Answer answer) {
+        return answerRepository.save(answer);
+    }
 }

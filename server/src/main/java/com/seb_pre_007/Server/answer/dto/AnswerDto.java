@@ -19,4 +19,6 @@ public class AnswerDto {
     private Long userId;
     //답변을 단 questionid
     private Long questionId;
+    private int answerVoteCount;
+    //답변 좋아요 숫자
 }
