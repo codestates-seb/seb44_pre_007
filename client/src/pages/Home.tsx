@@ -8,7 +8,7 @@ import StaticDiv from '../components/home/StaticDiv';
 import StackOverflow from '../public/Icons/StackOverflow';
 import ForTeams from '../public/Icons/ForTeams';
 import LeftSidebar from '../components/sidebar/LeftSidebar';
-import { leftSidebarDropdown } from '../recoil/auth/atom';
+import { leftSidebarDropdown } from '../recoil/atom';
 
 const SpotDiv = styled.div`
   position: relative;

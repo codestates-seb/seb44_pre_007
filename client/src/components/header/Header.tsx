@@ -5,7 +5,7 @@ import { useRecoilState } from 'recoil';
 import SearchBox from './SearchBox';
 import NavBar from './NavBar';
 import MainLogo from './MainLogo';
-import { leftSidebarDropdown } from '../../recoil/auth/atom';
+import { leftSidebarDropdown } from '../../recoil/atom';
 
 const StyledHeader = tw.header`
 sticky flex justify-center items-center w-full border-b z-50 bg-white
