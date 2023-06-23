@@ -11,50 +11,51 @@ import Login from './pages/Login';
 import AnswerEdit from './pages/AnswerEdit';
 import Tags from './pages/Tags';
 import Mypage from './pages/Mypage';
-import UserEdit from './pages/UserEdit';
+import Home from './pages/Home';
+import QuestionsLayout from './pages/QuestionsRoot';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
     children: [
+      { index: true, element: <Home /> },
       {
         path: 'questions',
-        element: <QuestionsPage />,
+        element: <QuestionsLayout />,
+        children: [
+          { index: true, element: <QuestionsPage /> },
+          {
+            path: ':id',
+            element: <QuestionPage />,
+          },
+          {
+            path: ':id/:answerId/edit',
+            element: <AnswerEdit />,
+          },
+          {
+            path: 'tagged/:questionTag',
+            element: <Tags />,
+          },
+        ],
       },
       {
-        path: 'questions/:id',
-        element: <QuestionPage />,
-      },
-      {
-        path: 'questions/:id/:answerId/edit',
-        element: <AnswerEdit />,
-      },
-      {
-        path: 'questions/tagged/:questionTag',
-        element: <Tags />,
-      },
-    ],
-  },
-  {
-    path: 'users',
-    element: <Users />,
-    children: [
-      {
-        path: 'signup',
-        element: <SignUp />,
-      },
-      {
-        path: 'login',
-        element: <Login />,
-      },
-      {
-        path: 'mypage',
-        element: <Mypage />,
-      },
-      {
-        path: 'edit',
-        element: <UserEdit />,
+        path: 'users',
+        element: <Users />,
+        children: [
+          {
+            path: 'signup',
+            element: <SignUp />,
+          },
+          {
+            path: 'login',
+            element: <Login />,
+          },
+          {
+            path: 'mypage',
+            element: <Mypage />,
+          },
+        ],
       },
     ],
   },

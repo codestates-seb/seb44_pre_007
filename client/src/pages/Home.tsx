@@ -123,7 +123,7 @@ function Home() {
 
   return (
     <div className="flex flex-col">
-      <div className="flex flex-col relative items-center bg-blackDark w-[1200px] px-8 pt-8 pb-32 mx-15 mt-12 rounded">
+      <div className="flex flex-col relative items-center bg-blackDark w-full px-8 pt-8 pb-32 mx-15">
         <div className="flex gap-6 mb-7">
           <OrangeSpot className="bg-[#FEE3CD]">
             <div className="mb-4">
