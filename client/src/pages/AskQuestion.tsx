@@ -20,7 +20,6 @@ const DiscardBtn = tw.button`
 `;
 
 function AskQuestion() {
-  const PreviewRef = useRef<HTMLDivElement>(null);
   const [title, setTitle] = useState('title');
   const [problem, setProblem] = useState<string>('');
   const [effort, setEffort] = useState<string>('');
@@ -35,17 +34,13 @@ function AskQuestion() {
   };
 
   const queryClient = useQueryClient();
-  const mutation = useMutation(PostQuestionData, {
-    onSuccess: () => queryClient.invalidateQueries(['question']),
-  });
+  const mutation = useMutation(PostQuestionData);
 
   const HandleSubmitQuestion = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (PreviewRef.current) {
-      if (!PreviewRef.current.innerText.trim().length) return;
-      const contents = `${problem} \n${effort}`;
-      mutation.mutate({ title, contents, tags });
-    }
+    console.log('1111');
+    const contents = `${problem} \n${effort}`;
+    mutation.mutate({ title, contents, tags });
   };
 
   return (

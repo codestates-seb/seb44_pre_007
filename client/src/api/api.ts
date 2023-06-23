@@ -48,4 +48,7 @@ export const PostQuestionData = async ({
   title: string;
   contents: string;
   tags: string[];
-}) => instance.post('/questions/ask', { questionTitle: title, qustionContent: contents, questionTag: tags });
+}) => {
+  console.log(title, contents, tags);
+  return instance.post('/questions/ask', { questionTitle: title, questionContent: contents, questionTag: tags });
+};
