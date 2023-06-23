@@ -4,7 +4,6 @@ import Tag from '../../ui/Tag';
 
 function LoginContainer() {
   const { questionTag } = useParams();
-  console.log(questionTag);
 
   return (
     <>
