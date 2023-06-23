@@ -29,9 +29,9 @@ export default function UserImg() {
   return (
     <a href="/users/mypage">
       {data.imgURL ? (
-        <img src={data.imgURL} alt="user" className="w-[25px] h-[25px] rounded" />
+        <img src={data.imgURL} alt="user" className="w-[128px] h-[128px] rounded" />
       ) : (
-        <FaUserCircle className="text-[25px] text-main" />
+        <FaUserCircle className="text-[128px] text-main" />
       )}
     </a>
   );
