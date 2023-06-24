@@ -12,6 +12,7 @@ import AnswerEdit from './pages/AnswerEdit';
 import Tags from './pages/Tags';
 import Mypage from './pages/Mypage';
 import Home from './pages/Home';
+import ErrorPage from './pages/Error';
 import QuestionsLayout from './pages/QuestionsRoot';
 import AskQuestion from './pages/AskQuestion';
 import { checkAuthLoader, tokenLoader } from './utils/auth';
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
     path: '/',
     element: <Root />,
     loader: tokenLoader,
+    errorElement: <ErrorPage />,
     children: [
       { index: true, element: <Home /> },
       {
