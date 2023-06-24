@@ -9,14 +9,12 @@ import { MdCake } from 'react-icons/md';
 import { BiPencil } from 'react-icons/bi';
 import { useState } from 'react';
 import { styled } from 'styled-components';
-import { useNavigate } from 'react-router-dom';
 import { GetUser, instance } from '../../api/api';
 import UserImg from './UserImg';
 
 export default function UserInfo() {
   const [isEditing, setIsEditing] = useState(false);
   const [userInput, setUserInput] = useState('');
-  const navigate = useNavigate();
   const handleEdit = () => {
     setIsEditing(!isEditing);
   };
@@ -29,19 +27,6 @@ export default function UserInfo() {
       .patch('/users/edit', { userNickname: userInput })
       .then(() => window.location.reload())
       .catch((error) => console.log(error));
-  };
-  const handleDelete = () => {
-    // eslint-disable-next-line no-alert
-    const confirm = window.confirm('Are you sure you want to delete your profile?');
-    if (confirm) {
-      instance
-        .delete('/users/delete')
-        .then(() => {
-          localStorage.removeItem('token');
-          navigate('/');
-        })
-        .catch((error) => console.log(error));
-    }
   };
   const { isLoading, data, error } = useQuery({
     queryKey: ['user'],
@@ -108,13 +93,6 @@ export default function UserInfo() {
             <MdCake className="mr-1" />
             Member for 90 days
           </div>
-          <button
-            type="button"
-            onClick={handleDelete}
-            className="mt-4 bg-red-600 text-white border border-transparent rounded py-1 px-6 hover:text-red-600 hover:bg-gray-100 hover:border-gray-400"
-          >
-            DELETE PROFILE
-          </button>
         </div>
       </div>
     </div>

@@ -93,6 +93,9 @@ export default function EmailLogin() {
             const token = res.headers.authorization;
             if (token) {
               localStorage.setItem('token', token);
+              const expiration = new Date();
+              expiration.setMinutes(expiration.getMinutes() + 30);
+              localStorage.setItem('expiration', expiration.toISOString());
             }
             navigate('/questions');
           }

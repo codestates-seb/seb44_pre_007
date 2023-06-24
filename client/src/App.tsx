@@ -14,11 +14,13 @@ import Mypage from './pages/Mypage';
 import Home from './pages/Home';
 import QuestionsLayout from './pages/QuestionsRoot';
 import AskQuestion from './pages/AskQuestion';
+import { checkAuthLoader, tokenLoader } from './utils/auth';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
+    loader: tokenLoader,
     children: [
       { index: true, element: <Home /> },
       {
@@ -33,6 +35,7 @@ const router = createBrowserRouter([
           {
             path: ':id/:answerId/edit',
             element: <AnswerEdit />,
+            loader: checkAuthLoader,
           },
           {
             path: 'tagged/:questionTag',
@@ -41,6 +44,7 @@ const router = createBrowserRouter([
           {
             path: 'ask',
             element: <AskQuestion />,
+            loader: checkAuthLoader,
           },
         ],
       },
@@ -59,6 +63,7 @@ const router = createBrowserRouter([
           {
             path: 'mypage',
             element: <Mypage />,
+            loader: checkAuthLoader,
           },
         ],
       },
