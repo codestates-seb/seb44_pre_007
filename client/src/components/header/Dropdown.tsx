@@ -29,6 +29,7 @@ export default function Dropdown() {
   const goToMain = useMovePage('/');
   const handleLogout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('expiration');
     goToMain();
   };
   return (

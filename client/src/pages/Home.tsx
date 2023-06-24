@@ -1,10 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { useRecoilValue } from 'recoil';
 import 'animate.css';
 import StaticDiv from '../components/home/StaticDiv';
-
-import LeftSidebar from '../components/sidebar/LeftSidebar';
-import { leftSidebarDropdown } from '../recoil/atom';
 import GradientDiv from '../components/home/GradientDiv';
 import SpotDiv from '../components/home/SpotDiv';
 import { FlexCol } from '../styles/styles';
@@ -41,7 +37,6 @@ function Home() {
     },
   ];
 
-  const showDropdown = useRecoilValue(leftSidebarDropdown);
   const [wordIdx, setWordIdx] = useState(0);
 
   const savedCallback = useRef<() => void>();
@@ -68,7 +63,6 @@ function Home() {
 
   return (
     <FlexCol>
-      <div className="absolute z-50 ml-9">{showDropdown && <LeftSidebar />}</div>
       <div className="flex justify-center m-7">
         <FlexCol className="relative items-center bg-blackDark w-[1300px] px-8 pt-8 pb-32 mx-15 rounded-xl">
           <SpotDiv />
