@@ -35,11 +35,16 @@ public class UserService {
         if(verifyExistEmail(user.getUserEmail())){
             throw new BusinessLogicException(ExceptionCode.USER_EXISTS);
         }
-        user.setUserPassword(user.getUserPassword()); // 필요한지?
 
-        // DB에 User Role 저장
-        List<String> roles = customAuthorityUtils.createRoles(user.getUserEmail());
-        user.setRoles(roles);
+        User deletedUser = findDeletedUser(user.getUserEmail());
+        if (deletedUser != null) { // 탈퇴했던 유저 재가입
+            setUserInfoOfDeletedUser(user, deletedUser);
+            user = deletedUser;
+        } else { // 새로 가입
+            // DB에 User Role 저장
+            List<String> roles = customAuthorityUtils.createRoles(user.getUserEmail());
+            user.setRoles(roles);
+        }
 
         User savedUser= userRepository.save(user);
 
@@ -78,7 +83,8 @@ public class UserService {
     @Transactional
     public void deleteUser(String userEmail) {
         User findUser = getUser(userEmail);
-        userRepository.delete(findUser);
+        findUser.setUserStatus(User.UserStatus.WITHDRAWAL);
+        userRepository.save(findUser);
     }
 
 
@@ -87,5 +93,19 @@ public class UserService {
 
         Optional<User> user= userRepository.findByUserEmail(userEmail);
         return user.isPresent();
+    }
+
+    // 탈퇴한 회원의 재가입인지 확인 -> 탈퇴상태 회원 리턴
+    private User findDeletedUser(String userEmail) {
+        return userRepository.findDeletedUserByUserEmail(userEmail);
+    }
+
+    // 삭제된 유저 정보의 userStatus -> WITHDRAWAL 로 변경, 그 외 정보 현재 가입 정보로 변경
+    private static void setUserInfoOfDeletedUser(User user, User deletedUser) {
+        deletedUser.setUserStatus(User.UserStatus.ACTIVE);
+        deletedUser.setUserNickname(user.getUserNickname());
+        deletedUser.setRoles(user.getRoles());
+        deletedUser.setUserPassword(user.getUserPassword());
+        deletedUser.setImgURL(user.getImgURL());
     }
 }

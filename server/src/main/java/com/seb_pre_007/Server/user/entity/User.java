@@ -35,6 +35,14 @@ public class User {
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<>();
 
+    @Column
+    @Enumerated(EnumType.STRING)
+    private UserStatus userStatus = UserStatus.ACTIVE;
+
+    public enum UserStatus {
+        ACTIVE, WITHDRAWAL
+    }
+
     public User(String email, String nickname, String imgURL) {
         this.userEmail = email;
         this.userNickname = nickname;
