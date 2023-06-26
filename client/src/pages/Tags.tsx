@@ -9,6 +9,7 @@ import Btn from '../ui/Btn';
 import SummaryDiv from '../components/questions/SummaryDiv';
 import { FetchTags } from '../api/api';
 import RightSidebar from '../components/sidebar/RightSidebar';
+import NoResult from '../components/questions/NoResult';
 
 function Tags() {
   const { questionTag } = useParams() as { questionTag: string };
@@ -50,6 +51,7 @@ function Tags() {
           </div>
         </section>
         <main className="w-full border-t border-brgray">
+          {!questions.length && <NoResult tag={questionTag} />}
           {!!questions.length &&
             questions.map((question: Question) => (
               <SummaryDiv key={question.questionId} question={question} />

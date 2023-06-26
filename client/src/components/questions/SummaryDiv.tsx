@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { styled } from 'styled-components';
-import tw from 'tailwind-styled-components';
 import { useEffect, useState } from 'react';
-import { Ellipsis, StaticSpan } from '../../styles/styles';
+// eslint-disable-next-line object-curly-newline
+import { Ellipsis, StaticSpan, Summarydiv, TitleH3 } from '../../styles/styles';
 import { Question, TagT } from '../../types/types';
 import AnswerCountSpan from './AnswerCountSpan';
 import Tag from '../../ui/Tag';
@@ -10,16 +10,8 @@ import useMovePage from '../../hooks/useMovePage';
 import formatingDate from '../../utils/formatingDate';
 import htmlTagIgnore from '../../utils/htmlTagIgnore';
 
-const Summarydiv = tw.div`
-p-4 flex border-b border-brgray
-`;
-
 const Content = styled(Ellipsis)`
   font-size: 13px;
-`;
-
-const TitleH3 = tw.div`
-pr-6 text-[17px] text-[#0063BF] cursor-pointer
 `;
 
 function SummaryDiv({ question }: { question: Question }) {
