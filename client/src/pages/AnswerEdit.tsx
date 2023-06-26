@@ -49,6 +49,7 @@ function AnswerEdit() {
   }, [data]);
 
   const goToQuePage = useMovePage(`/questions/${id}`);
+
   const HandleCancelAnswer = () => {
     if (window.confirm('이전 페이지로 돌아가시겠습니까?')) {
       goToQuePage();

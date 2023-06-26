@@ -1,12 +1,28 @@
 function Copyright() {
   return (
     <div className="flex flex-col w-1/4 text-[11px] text-footerText gap-44">
-      <ul className="flex gap-2">
-        <li>Blog</li>
-        <li>Facebook</li>
-        <li>Twitter</li>
-        <li>LinkedIn</li>
-        <li>Instagram</li>
+      <ul className="flex gap-2 flex-wrap">
+        <li>
+          <a href="https://github.com/JeanneLee57">JeanneLee57</a>
+        </li>
+        <li>
+          <a href="https://github.com/R-jisu">R-jisu</a>
+        </li>
+        <li>
+          <a href="https://github.com/atreeud12">atreeud12</a>
+        </li>
+        <li>
+          <a href="https://github.com/MignonSS">MignonSS</a>
+        </li>
+        <li>
+          <a href="https://github.com/BlancCarte">BlancCarte</a>
+        </li>
+        <li>
+          <a href="https://github.com/sonagi98">sonagi98</a>
+        </li>
+        <li>
+          <a href="https://github.com/HanJuYoung309">HanJuYoung309</a>
+        </li>
       </ul>
       <p>
         Site design / logo © 2023 Stack Exchange Inc; user contributions licensed under
