@@ -16,7 +16,7 @@ import ErrorPage from './pages/Error';
 import QuestionsLayout from './pages/QuestionsRoot';
 import AskQuestion from './pages/AskQuestion';
 import { checkAuthLoader, tokenLoader } from './utils/auth';
-import EditQuestion from './pages/editQuestion';
+import EditQuestion from './pages/EditQuestion';
 
 const router = createBrowserRouter([
   {
