@@ -88,7 +88,7 @@ function PageBtnDiv({ currentpage, LastPage, handleCurrentPage }: PageBtnPropT) 
       );
     }
 
-    if (centerBtn + 2 < lastPage && centerBtn < lastPage - 3) {
+    if (centerBtn + 2 < lastPage && centerBtn < lastPage - 2) {
       btn.push(
         <div className="flex" key={lastPage}>
           <p className="mx-2"> ... </p>
