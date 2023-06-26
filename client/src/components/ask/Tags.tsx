@@ -7,22 +7,26 @@ export default function Tags({
   tags,
   setTags,
   disabled,
+  edit,
 }: {
   tags: Set<string>;
   setTags: React.Dispatch<React.SetStateAction<Set<string>>>;
   disabled: boolean;
+  edit: boolean;
 }) {
   const [text, setText] = useState('');
-  const [inputSelected, setInputSelected] = useState(false);
+  const [inputSelected, setInputSelected] = useState(edit);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
   };
   const handleKeyUp = (e: React.KeyboardEvent<HTMLElement>) => {
     if (e.code === 'Space') {
       const newTag = text.trim();
-      setTags((prev) => new Set([...prev, newTag]));
-      setText('');
-      setInputSelected(true);
+      if (newTag !== '') {
+        setTags((prev) => new Set([...prev, newTag]));
+        setText('');
+        setInputSelected(true);
+      }
     }
   };
   const handleDelete = (e: React.MouseEvent) => {
@@ -63,7 +67,7 @@ export default function Tags({
             className="py-2 px-1 w-full text-[13px]"
             onChange={handleChange}
             onKeyUp={handleKeyUp}
-            autoFocus
+            autoFocus={!edit}
           />
         )}
       </div>

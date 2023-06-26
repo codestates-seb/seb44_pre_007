@@ -149,7 +149,7 @@ function AskQuestion() {
                 title={askDescription[3].title}
                 description={askDescription[3].description}
               />
-              <Tags disabled={step < 3} tags={tags} setTags={setTags} />
+              <Tags disabled={step < 3} tags={tags} setTags={setTags} edit={false} />
             </div>
             <NextBtn
               disabled={tags.size === 0}
