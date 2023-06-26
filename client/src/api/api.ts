@@ -62,6 +62,23 @@ export const PostQuestionData = async ({
     questionTag: tags,
   });
 
+export const PatchQuestionData = async ({
+  id,
+  title,
+  contents,
+  tags,
+}: {
+  id: string;
+  title: string;
+  contents: string;
+  tags: string[];
+}) =>
+  instance.patch(`/questions/${id}/edit`, {
+    questionTitle: title,
+    questionContent: contents,
+    questionTag: tags,
+  });
+
 export const PostQueVoteLike = async ({ id }: { id: string }) =>
   instance.post(`/questions/${id}/like`);
 
