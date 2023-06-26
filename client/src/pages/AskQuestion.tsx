@@ -1,5 +1,5 @@
 import tw from 'tailwind-styled-components';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -18,7 +18,6 @@ import Tags from '../components/ask/Tags';
 import useMovePage from '../hooks/useMovePage';
 import AskDescriptionDiv from '../components/ask/AskDescriptionDiv';
 
-// input창 컴포넌트화?
 const PostForm = tw.form`
   flex flex-col mb-12
 `;
