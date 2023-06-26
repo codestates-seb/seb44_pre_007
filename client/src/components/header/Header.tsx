@@ -29,23 +29,26 @@ export default function Header() {
     setShowDropdown(false);
   }, [location]);
   return (
-    <StyledHeader>
-      <div className="relative">
-        {showDropdown && (
-          <div className="absolute left-0 top-[55px]">
-            <LeftSidebar />
-          </div>
-        )}
-        {pathname === '/' && (
-          <GiHamburgerMenu onClick={handleDropdown} className="cursor-pointer mx-3" />
-        )}
-      </div>
-      <StyledWrapper>
-        <MainLogo />
-        <StyledMenuBtn>Products</StyledMenuBtn>
-        <SearchBox />
-        <NavBar />
-      </StyledWrapper>
-    </StyledHeader>
+    <div className="flex flex-col">
+      <div className="bg-main h-[3px]" />
+      <StyledHeader>
+        <div className="relative">
+          {showDropdown && (
+            <div className="absolute left-0 top-[55px]">
+              <LeftSidebar />
+            </div>
+          )}
+          {pathname === '/' && (
+            <GiHamburgerMenu onClick={handleDropdown} className="cursor-pointer mx-3" />
+          )}
+        </div>
+        <StyledWrapper>
+          <MainLogo />
+          <StyledMenuBtn>Products</StyledMenuBtn>
+          <SearchBox />
+          <NavBar />
+        </StyledWrapper>
+      </StyledHeader>
+    </div>
   );
 }
