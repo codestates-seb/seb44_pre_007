@@ -157,7 +157,9 @@ function EditQuestion() {
         </ReviewSection>
         <div className="w-full mt-3">
           <div>
-            <DiscardBtn type="button">Discard draft</DiscardBtn>
+            <DiscardBtn type="button" onClick={goToQue}>
+              Discard draft
+            </DiscardBtn>
           </div>
         </div>
       </PostForm>
