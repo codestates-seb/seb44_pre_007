@@ -26,82 +26,107 @@ function PageBtnDiv({ currentpage, LastPage, handleCurrentPage }: PageBtnPropT) 
     if (currentpage < 5) {
       const last = lastPage < 5 ? lastPage : 5;
       for (let index = 1; index <= last; index += 1) {
-        btn.push(
-          <PageBtn
-            key={index}
-            currentpage={currentpage}
-            index={index}
-            callback={handleMoveToPage}
-          />
-        );
+        btn.push({
+          key: index,
+          element: (
+            <PageBtn
+              key={index}
+              currentpage={currentpage}
+              index={index}
+              callback={handleMoveToPage}
+            />
+          ),
+        });
       }
     } else if (currentpage > lastPage - 4) {
       for (let index = lastPage - 4; index <= lastPage; index += 1) {
-        btn.push(
-          <PageBtn
-            key={index}
-            currentpage={currentpage}
-            index={index}
-            callback={handleMoveToPage}
-          />
-        );
+        btn.push({
+          key: index,
+          element: (
+            <PageBtn
+              key={index}
+              currentpage={currentpage}
+              index={index}
+              callback={handleMoveToPage}
+            />
+          ),
+        });
       }
     } else {
-      btn.push(
-        <PageBtn
-          key={centerBtn}
-          currentpage={currentpage}
-          index={centerBtn}
-          callback={handleMoveToPage}
-        />
-      );
+      btn.push({
+        key: centerBtn,
+        element: (
+          <PageBtn
+            key={centerBtn}
+            currentpage={currentpage}
+            index={centerBtn}
+            callback={handleMoveToPage}
+          />
+        ),
+      });
       for (let index = 1; index < 3; index += 1) {
         if (centerBtn + index <= lastPage) {
-          btn.push(
-            <PageBtn
-              key={centerBtn + index}
-              currentpage={currentpage}
-              index={centerBtn + index}
-              callback={handleMoveToPage}
-            />
-          );
+          btn.push({
+            key: centerBtn + index,
+            element: (
+              <PageBtn
+                key={centerBtn + index}
+                currentpage={currentpage}
+                index={centerBtn + index}
+                callback={handleMoveToPage}
+              />
+            ),
+          });
         }
         if (centerBtn - index > 0) {
-          btn.unshift(
-            <PageBtn
-              key={centerBtn - index}
-              currentpage={currentpage}
-              index={centerBtn - index}
-              callback={handleMoveToPage}
-            />
-          );
+          btn.unshift({
+            key: centerBtn - index,
+            element: (
+              <PageBtn
+                key={centerBtn - index}
+                currentpage={currentpage}
+                index={centerBtn - index}
+                callback={handleMoveToPage}
+              />
+            ),
+          });
         }
       }
     }
 
-    if (centerBtn - 2 > 1 && centerBtn > 4) {
-      btn.unshift(
-        <div className="flex" key={1}>
-          <PageBtn key={1} currentpage={currentpage} index={1} callback={handleMoveToPage} />
-          <p className="mx-2"> ... </p>
-        </div>
-      );
+    if (lastPage > 5) {
+      const existBtn = btn.map((el) => el.key);
+      // 처음 페이지로 가는 버튼 생성
+      if (!existBtn.find((el) => el === 1)) {
+        btn.unshift({
+          key: 1,
+          element: (
+            <div className="flex" key={1}>
+              <PageBtn key={1} currentpage={currentpage} index={1} callback={handleMoveToPage} />
+              <p className="mx-2"> ... </p>
+            </div>
+          ),
+        });
+      }
+      // 마지막 페이지로 가는 버튼 생성
+      if (!existBtn.find((el) => el === lastPage)) {
+        btn.push({
+          key: lastPage,
+          element: (
+            <div className="flex" key={lastPage}>
+              <p className="mx-2"> ... </p>
+              <PageBtn
+                key={lastPage}
+                currentpage={currentpage}
+                index={lastPage}
+                callback={handleMoveToPage}
+              />
+            </div>
+          ),
+        });
+      }
     }
-
-    if (centerBtn + 2 < lastPage && centerBtn < lastPage - 2) {
-      btn.push(
-        <div className="flex" key={lastPage}>
-          <p className="mx-2"> ... </p>
-          <PageBtn
-            key={lastPage}
-            currentpage={currentpage}
-            index={lastPage}
-            callback={handleMoveToPage}
-          />
-        </div>
-      );
-    }
-    return btn;
+    return btn.map((el) => el.element);
   };
   return (
     <div className="flex gap-1 my-5">
