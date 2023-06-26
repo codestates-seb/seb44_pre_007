@@ -6,7 +6,7 @@ function SummaryLoading() {
   for (let index = 0; index < LIMIT; index += 1) {
     const element = (
       <div className="flex p-4 justify-end animate-pulse">
-        <FlexCol className="w-[108px] gap-3 items-end gap-2 mr-4 mb-1">
+        <FlexCol className="w-[108px] items-end gap-2 mr-4 mb-1">
           <div className="bg-slate-200 w-[60px] h-3 rounded-md" />
           <div className="bg-slate-200 w-[60px] h-3 rounded-md" />
         </FlexCol>
