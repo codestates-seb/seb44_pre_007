@@ -1,6 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
-import tw from 'tailwind-styled-components';
 import { DelQueData, PostQueVoteDislike, PostQueVoteLike } from '../../api/api';
 import useMovePage from '../../hooks/useMovePage';
 import { ContentDiv } from '../../styles/styles';
