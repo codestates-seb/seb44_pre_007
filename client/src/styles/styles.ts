@@ -82,3 +82,10 @@ p-6 border-l border-brgray
 export const StaticSpan = tw.div`
 text-blacklight text-[13px] mt-1 w-fit"
 `;
+
+export const Summarydiv = tw.div`
+p-4 flex border-b border-brgray
+`;
+export const TitleH3 = tw.div`
+pr-6 text-[17px] text-[#0063BF] cursor-pointer
+`;

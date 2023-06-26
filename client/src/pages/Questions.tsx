@@ -12,6 +12,7 @@ import scrollToTop from '../utils/scrollToTop';
 import { PageT, Question } from '../types/types';
 import { MainWrapper } from '../styles/styles';
 import Btn from '../ui/Btn';
+import SummaryLoading from '../components/questions/SummaryLoading';
 
 function Questions() {
   const [currentpage, SetCurrentpage] = useState(1);
@@ -42,7 +43,6 @@ function Questions() {
     scrollToTop();
   }, [currentpage]);
 
-  if (isLoading) return <p>Loading ...</p>;
   if (error instanceof Error) return <p>`error has ocurred: {error.message}</p>;
 
   return (
@@ -60,6 +60,7 @@ function Questions() {
         </div>
       </section>
       <main className="w-full border-t border-brgray">
+        {isLoading && <SummaryLoading />}
         {!!questions.length &&
           questions.map((question: Question) => (
             <SummaryDiv key={question.questionId} question={question} />

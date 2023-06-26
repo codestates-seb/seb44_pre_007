@@ -9,6 +9,8 @@ import Btn from '../ui/Btn';
 import SummaryDiv from '../components/questions/SummaryDiv';
 import { FetchTags } from '../api/api';
 import RightSidebar from '../components/sidebar/RightSidebar';
+import NoResult from '../components/questions/NoResult';
+import LoadingDiv from '../components/questions/LoadingDiv';
 
 function Tags() {
   const { questionTag } = useParams() as { questionTag: string };
@@ -29,7 +31,6 @@ function Tags() {
     }
   }, [data]);
 
-  if (isLoading) return <p>Loading ...</p>;
   if (error instanceof Error) return <p>`error has ocurred: {error.message}</p>;
 
   return (
@@ -50,10 +51,12 @@ function Tags() {
           </div>
         </section>
         <main className="w-full border-t border-brgray">
+          {isLoading && <LoadingDiv />}
           {!!questions.length &&
             questions.map((question: Question) => (
               <SummaryDiv key={question.questionId} question={question} />
             ))}
+          {data?.data.pageInfo.totalElement === 0 && <NoResult tag={questionTag} />}
         </main>
       </div>
       <RightSidebar />
