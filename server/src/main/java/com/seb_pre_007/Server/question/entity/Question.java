@@ -61,6 +61,10 @@ public class Question {
     @BatchSize(size = 100)
     private List<Answer> answerList= new ArrayList<>();
 
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    @BatchSize(size = 100)
+    private List<QuestionVote> questionVoteList = new ArrayList<>();
+
     // Question - QuestionTag 양방향 매핑 편의 메소드
     public void addQuestionTag(QuestionTag questionTag) {
         // Question.questionTagList 에 파라미터로 전달받은 QuestionTag가 없을 경우에만 추가
