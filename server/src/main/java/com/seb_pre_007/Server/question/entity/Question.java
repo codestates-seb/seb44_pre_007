@@ -57,7 +57,7 @@ public class Question {
     @BatchSize(size = 100)
     private List<QuestionTag> questionTagList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     @BatchSize(size = 100)
     private List<Answer> answerList= new ArrayList<>();
 
