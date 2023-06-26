@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-autofocus */
 import { useState } from 'react';
 import { FiX } from 'react-icons/fi';
+import { TagSpan } from '../../styles/styles';
 
 export default function Tags({
   tags,
@@ -33,16 +34,13 @@ export default function Tags({
     <div className="flex flex-col ps-relative">
       <div className="flex items-center border border-[#BABFC4] rounded-[3px] w-full my-[2px] px-1 text-[13px]">
         {[...tags].map((tag) => (
-          <span
-            id={tag}
-            className="flex items-center rounded h-[30px] px-1 bg-paleBlue mx-1 text-mediumBlue"
-          >
+          <TagSpan id={tag}>
             {tag}
             <FiX
               className="ml-1 text-[14px] hover:text-paleBlue hover:bg-mediumBlue"
               onClick={handleDelete}
             />
-          </span>
+          </TagSpan>
         ))}
         {inputSelected || (
           <input
