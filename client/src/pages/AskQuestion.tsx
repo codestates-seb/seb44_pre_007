@@ -1,14 +1,20 @@
 import tw from 'tailwind-styled-components';
-import React, { useRef, useState } from 'react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import React, { useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
 import {
-  TitleSection, ProblemSection, EffortSection, TagsSection, ReviewSection,
+  TitleSection,
+  ProblemSection,
+  EffortSection,
+  TagsSection,
+  ReviewSection,
 } from '../styles/askstyles';
 import { AskBtn } from '../styles/styles';
 import QuestionNotice from '../components/ask/QuestionNotice';
 import QuestionEditor from '../components/ask/QuestionEditor';
 import NextBtn from '../components/ask/NextBtn';
 import { PostQuestionData } from '../api/api';
+import Tags from '../components/ask/Tags';
+import useMovePage from '../hooks/useMovePage';
 
 // input창 컴포넌트화?
 const PostForm = tw.form`
@@ -23,24 +29,24 @@ function AskQuestion() {
   const [title, setTitle] = useState('title');
   const [problem, setProblem] = useState<string>('');
   const [effort, setEffort] = useState<string>('');
-  const [tags, setTags] = useState<string[]>(['tag']);
+  const [tags, setTags] = useState<Set<string>>(new Set());
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
   // TODO: 태그 등록 수정
-  const handleTagChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTags([e.target.value]);
-  };
-
-  const queryClient = useQueryClient();
-  const mutation = useMutation(PostQuestionData);
-
+  const goToQue = useMovePage('/questions');
+  const mutation = useMutation(PostQuestionData, {
+    onSuccess(data) {
+      if (data.status === 201) {
+        goToQue();
+      }
+    },
+  });
   const HandleSubmitQuestion = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('1111');
     const contents = `${problem} \n${effort}`;
-    mutation.mutate({ title, contents, tags });
+    mutation.mutate({ title, contents, tags: [...tags] });
   };
 
   return (
@@ -57,7 +63,13 @@ function AskQuestion() {
                 </div>
               </div>
               <div className="flex ps-relative">
-                <input type="text" value={title} onChange={handleInputChange} maxLength={300} placeholder="e.g. Is there an R function for finding the index of and element in a vector?" className="border border-[#BABFC4] rounded-[3px] w-full my-[2px] p-2 text-[13px]" />
+                <input
+                  type="text"
+                  onChange={handleInputChange}
+                  maxLength={300}
+                  placeholder="e.g. Is there an R function for finding the index of and element in a vector?"
+                  className="border border-[#BABFC4] rounded-[3px] w-full my-[2px] p-2 text-[13px]"
+                />
               </div>
             </div>
             <NextBtn />
@@ -68,8 +80,8 @@ function AskQuestion() {
             <div className="flex flex-col my-[2px]">
               <div className="fw-semibold">What are the details of your problem?</div>
               <div className="text-xs">
-                Introduce the problem and expand on what you put in the title.
-                Minimum 20 characters.
+                Introduce the problem and expand on what you put in the title. Minimum 20
+                characters.
               </div>
             </div>
             <QuestionEditor text={problem} setText={setProblem} />
@@ -94,13 +106,11 @@ function AskQuestion() {
               <div className="flex flex-col my-[2px]">
                 <div className="fw-semibold">Tags</div>
                 <div className="text-xs">
-                  Add up to 5 tags to describe what your question is about.
-                  Start typing to see sugestions.
+                  Add up to 5 tags to describe what your question is about. Start typing to see
+                  sugestions.
                 </div>
               </div>
-              <div className="flex ps-relative">
-                <input type="text" placeholder="e.g. (swift spring postgresql)" className="border border-[#BABFC4] rounded-[3px] w-full my-[2px] p-2 text-[13px]" />
-              </div>
+              <Tags tags={tags} setTags={setTags} />
             </div>
             <NextBtn />
           </div>
@@ -109,15 +119,15 @@ function AskQuestion() {
           <div className="bg-white w-9/12 p-6 border border-[#E3E6E8]">
             <div className="flex flex-col">
               <div className="flex flex-col my-[2px]">
-                <div className="fw-semibold">Review questions already on Stack Overflow to see if your question is a duplicate.</div>
+                <div className="fw-semibold">
+                  Review questions already on Stack Overflow to see if your question is a duplicate.
+                </div>
                 <div className="text-xs">
-                  Clicking on these questions will open them in a new tab for you to review.
-                  Your progress will be saved so you can come back and continue.
+                  Clicking on these questions will open them in a new tab for you to review. Your
+                  progress will be saved so you can come back and continue.
                 </div>
               </div>
-              <div className="flex py-3">
-                {/* TODO: 드롭다운 추가 */}
-              </div>
+              <div className="flex py-3">{/* TODO: 드롭다운 추가 */}</div>
             </div>
             <AskBtn type="submit">Review your question</AskBtn>
           </div>

@@ -15,7 +15,10 @@ export const Ellipsis = styled.p`
 `;
 
 export const TagSpan = styled.span`
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+  margin: 0 4px;
   height: 24px;
   border: 1px solid rgba(0, 0, 0, 0);
   border-radius: 3px;
