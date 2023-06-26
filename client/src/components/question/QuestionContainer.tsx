@@ -8,15 +8,7 @@ import { QueT, TagT } from '../../types/types';
 import Tag from '../../ui/Tag';
 import ActionSpan from '../edit/ActionSpan';
 import DateDiv from '../DateDiv';
-import UpVote from '../../public/Icons/UpVote';
-import DownVote from '../../public/Icons/DownVote';
-import { VoteDisLikeBtn, VoteLikeBtn } from '../VoteBtn';
 import VoteDiv from '../vote/VoteDiv';
-
-const VoteButton = tw.button`
-border border-gray-400 flex justify-center items-center rounded-full p-2.5
-disabled:bg-gray-300
-`;
 
 function QuestionContainer({ data: QuestionData, user }: { data: QueT; user: string }) {
   const { id } = useParams() as { id: string };

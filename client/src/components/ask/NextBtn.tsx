@@ -14,7 +14,6 @@ const StyledBtn = styled.button`
   box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px 0px inset;
   box-sizing: border-box;
   color: white;
-  cursor: pointer;
   display: inline-block;
   font-size: 13px;
   font-stretch: 100%;
@@ -24,15 +23,20 @@ const StyledBtn = styled.button`
   outline-color: white;
   outline-style: none;
   outline-width: 0px;
-  &.disabled {
-    opacity: 0.5;
-    cursor: default;
-  }
 `;
 
-function NextBtn() {
+function NextBtn({ callback, disabled }: { callback: () => void; disabled: boolean }) {
   return (
-    <StyledBtn type="button">Next</StyledBtn>
+    <StyledBtn
+      className="disabled:bg-slate-400"
+      type="button"
+      onClick={() => {
+        callback();
+      }}
+      disabled={disabled}
+    >
+      Next
+    </StyledBtn>
   );
 }
 

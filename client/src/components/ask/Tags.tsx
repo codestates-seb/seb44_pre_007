@@ -6,9 +6,11 @@ import { TagSpan } from '../../styles/styles';
 export default function Tags({
   tags,
   setTags,
+  disabled,
 }: {
   tags: Set<string>;
   setTags: React.Dispatch<React.SetStateAction<Set<string>>>;
+  disabled: boolean;
 }) {
   const [text, setText] = useState('');
   const [inputSelected, setInputSelected] = useState(false);
@@ -30,11 +32,12 @@ export default function Tags({
     setTags(new Set(newTagsArr));
     if (newTagsArr.length === 0) setInputSelected(false);
   };
+
   return (
     <div className="flex flex-col ps-relative">
       <div className="flex items-center border border-[#BABFC4] rounded-[3px] w-full my-[2px] px-1 text-[13px]">
         {[...tags].map((tag) => (
-          <TagSpan id={tag}>
+          <TagSpan id={tag} key={tag}>
             {tag}
             <FiX
               className="ml-1 text-[14px] hover:text-paleBlue hover:bg-mediumBlue"
@@ -44,6 +47,7 @@ export default function Tags({
         ))}
         {inputSelected || (
           <input
+            disabled={disabled}
             type="text"
             value={text}
             placeholder="e.g. (swift spring postgresql)"

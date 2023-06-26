@@ -30,7 +30,7 @@ export const TagSpan = styled.span`
 
 export const AskBtn = tw.button`
 flex justify-center items-center text-[13px] rounded-[3px] text-white
-bg-bubg shadow-btn border-bubg border border-solid p-[10.4px]
+bg-bubg shadow-btn border-bubg border border-solid p-[10.4px] disabled:bg-gray-400
 `;
 
 export const SubTitle = tw.h2`
