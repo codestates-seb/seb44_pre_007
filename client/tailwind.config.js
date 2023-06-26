@@ -34,6 +34,8 @@ export default {
         buttonBorer: 'rgb(214, 217, 220)',
         footerTitle: '#BABFC4',
         footerText: '#9199A1',
+        paleBlue: '#E1ECF4',
+        mediumBlue: '#39739D',
       },
     },
   },
