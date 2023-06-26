@@ -24,6 +24,7 @@ function EditQuestion() {
   const [title, setTitle] = useState('');
   const [problem, setProblem] = useState<string>('');
   const [tags, setTags] = useState<Set<string>>(new Set());
+  const [step, setStep] = useState<number>(0);
   const questionId = useParams();
   const goToQue = useMovePage('/questions');
 
@@ -68,6 +69,10 @@ function EditQuestion() {
     });
   };
 
+  const HandleToStep = (stepNum: number) => {
+    setStep(stepNum + 1);
+  };
+
   return (
     <div className="bg-[#F8F9F9] w-full px-6 pb-6">
       <QuestionNotice />
@@ -92,7 +97,12 @@ function EditQuestion() {
                 />
               </div>
             </div>
-            <NextBtn />
+            <NextBtn
+              disabled={!title.trim().length}
+              callback={() => {
+                HandleToStep(0);
+              }}
+            />
           </div>
         </TitleSection>
         <ProblemSection>
@@ -100,8 +110,13 @@ function EditQuestion() {
             <div className="flex flex-col my-[2px]">
               <div className="fw-semibold">Body</div>
             </div>
-            <QuestionEditor text={problem} setText={setProblem} />
-            <NextBtn />
+            <QuestionEditor disabled={step < 1} text={problem} setText={setProblem} />
+            <NextBtn
+              disabled={!problem.trim().length}
+              callback={() => {
+                HandleToStep(1);
+              }}
+            />
           </div>
         </ProblemSection>
         <TagsSection>
@@ -114,9 +129,14 @@ function EditQuestion() {
                   sugestions.
                 </div>
               </div>
-              <Tags tags={tags} setTags={setTags} edit />
+              <Tags disabled={step < 2} tags={tags} setTags={setTags} edit />
             </div>
-            <NextBtn />
+            <NextBtn
+              disabled={tags.size === 0}
+              callback={() => {
+                HandleToStep(2);
+              }}
+            />
           </div>
         </TagsSection>
         <ReviewSection>
