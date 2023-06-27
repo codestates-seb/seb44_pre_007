@@ -4,7 +4,7 @@ import LoadingDiv from './LoadingDiv';
 function SummaryLoading() {
   const eleArr = [];
   for (let index = 0; index < LIMIT; index += 1) {
-    const element = <LoadingDiv />;
+    const element = <LoadingDiv key={index} />;
     eleArr.push(element);
   }
 

@@ -158,7 +158,7 @@ function AskQuestion() {
           </div>
         </TitleSection>
         <ProblemSection>
-          <div className="bg-white w-9/12 p-6 flex-col border border-[#E3E6E8]">
+          <div className="bg-white w-9/12 p-6 flex-col border border-[#E3E6E8]}">
             <AskDescriptionDiv
               title={askDescription[1].title}
               description={askDescription[1].description}
