@@ -47,7 +47,7 @@ public class Question {
 
 //    @LastModifiedDate
     @DateTimeFormat(pattern = "yyyy-MM-dd/HH:mm:ss")
-    private LocalDateTime questionUpdated;
+    private LocalDateTime questionUpdated = LocalDateTime.now();
 
     @ManyToOne
     @JoinColumn(name = "user_id")
