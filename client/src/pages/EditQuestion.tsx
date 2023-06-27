@@ -24,7 +24,7 @@ function EditQuestion() {
   const [title, setTitle] = useState('');
   const [problem, setProblem] = useState<string>('');
   const [tags, setTags] = useState<Set<string>>(new Set());
-  const [step, setStep] = useState<number>(0);
+  const [step, setStep] = useState<number>(3);
   const questionId = useParams();
   const goToQue = useMovePage('/questions');
 
