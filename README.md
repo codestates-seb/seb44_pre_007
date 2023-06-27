@@ -97,13 +97,13 @@ http://stackoverflow007.s3-website.ap-northeast-2.amazonaws.com/
 **사용자 요구사항 정의서**
 <BR>
 
-<img width="2781" alt="개발자 체크리스트" src="https://github.com/JeanneLee57/pre-readme/assets/122351417/1cd7050a-7da2-42e7-8113-d73c476a6c85">
+<img width="2781" alt="개발자 체크리스트" src="https://github.com/codestates-seb/seb44_pre_007/assets/122351417/4e9d9802-e812-444e-aaa2-637b52d65c14">
 
 <BR>
 
 **개발자 체크리스트**
 <BR>
-<img width="2781" alt="사용자 요구사항 정의서" src="github.com/codestates-seb/seb44_pre_007/assets/122351417/b1ae5f72-76ad-49d9-a84e-b66fbb7f665b">
+<img width="2781" alt="사용자 요구사항 정의서" src="https://github.com/codestates-seb/seb44_pre_007/assets/122351417/b1ae5f72-76ad-49d9-a84e-b66fbb7f665b">
 <BR>
 <BR>
 <BR>
