@@ -45,7 +45,7 @@ public class Question {
     @DateTimeFormat(pattern = "yyyy-MM-dd/HH:mm:ss")
     private LocalDateTime questionCreated;
 
-    @LastModifiedDate
+//    @LastModifiedDate
     @DateTimeFormat(pattern = "yyyy-MM-dd/HH:mm:ss")
     private LocalDateTime questionUpdated;
 

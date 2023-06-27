@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.Positive;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -149,9 +150,11 @@ public class QuestionService {
             setTagListToFindQuestion(questionPatchDto, findQuestion);
         }
 
+
         Optional.ofNullable(questionPatchDto.getQuestionTitle()).ifPresent(findQuestion::setQuestionTitle);
         Optional.ofNullable(questionPatchDto.getQuestionContent()).ifPresent(findQuestion::setQuestionContent);
 
+        findQuestion.setQuestionUpdated((LocalDateTime.now()));
         return questionRepository.save(findQuestion);
     }
 
