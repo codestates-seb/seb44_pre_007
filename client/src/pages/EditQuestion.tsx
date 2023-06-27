@@ -27,7 +27,7 @@ function EditQuestion() {
   const [step, setStep] = useState<number>(3);
   const questionId = useParams();
   const goToQue = useMovePage('/questions');
-  const BodyRef = useRef<any>(null);
+  const bodyRef = useRef<any>(null);
   const [problemDisabled, setProblemDisabled] = useState<boolean>(true);
   const [titleDisabled, setTitleDisabled] = useState<boolean>(true);
   const [tagsDisabled, setTagsDisabled] = useState<boolean>(true);
@@ -49,14 +49,16 @@ function EditQuestion() {
   }, [data]);
 
   useEffect(() => {
-    const {
-      current: { value },
-    } = BodyRef;
+    if (bodyRef.current) {
+      const {
+        current: { value },
+      } = bodyRef;
 
-    if (value === '' || value === '<p><br></p>' || value.length < 20) {
-      setProblemDisabled(true);
-    } else {
-      setProblemDisabled(false);
+      if (value === '' || value === '<p><br></p>' || value.length < 20) {
+        setProblemDisabled(true);
+      } else {
+        setProblemDisabled(false);
+      }
     }
   }, [problem]);
 
@@ -142,7 +144,7 @@ function EditQuestion() {
             <div className="flex flex-col my-[2px]">
               <div className="fw-semibold">Body</div>
             </div>
-            <QuestionEditor ref={BodyRef} disabled={step < 1} text={problem} setText={setProblem} />
+            <QuestionEditor ref={bodyRef} disabled={step < 1} text={problem} setText={setProblem} />
             <NextBtn
               disabled={problemDisabled}
               callback={() => {
