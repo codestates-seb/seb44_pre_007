@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.Positive;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -87,10 +88,11 @@ public class QuestionService {
         // List<QuestionTag> -> List<Question> 로 변환
         List<Question> questions = questionTagList.stream()
                 .map(findQuestionTag -> findQuestionTag.getQuestion())
+                .sorted(Comparator.comparing(Question::getQuestionCreated).reversed())
                 .collect(Collectors.toList());
 
         // 변환한 List<Question> 을 Page 로 생성
-        PageRequest pageRequest = PageRequest.of(page, limit, Sort.by("questionCreated").descending()); // Paging 조건 설정
+        PageRequest pageRequest = PageRequest.of(page, limit/*, Sort.by("questionCreated").descending()*/); // Paging 조건 설정 (페이지 생성 시 정렬 조건 안 먹힘)
         int start = (int) pageRequest.getOffset(); // 페이지 시작 데이터 위치
         int end = Math.min(start + pageRequest.getPageSize(), questions.size()); // 페이지의 마지막 데이터 위치
         Page<Question> questionPage = new PageImpl<>(questions.subList(start, end), pageRequest, questions.size()); // Paging 된 리스트로 생성
