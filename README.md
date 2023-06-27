@@ -86,7 +86,7 @@ http://stackoverflow007.s3-website.ap-northeast-2.amazonaws.com/
 
 ### 🪜 프로젝트 아키텍처
 
-<img width="2781" alt="Untitled (2)" src="https://github.com/JeanneLee57/pre-readme/assets/122351417/a15d7645-abcf-43cd-a5f7-09f4d1862191">
+<img width="2781" alt="Untitled (2)" src="https://github.com/codestates-seb/seb44_pre_007/assets/122351417/c3198a63-17c3-4900-ac2a-63165afd5466">
 <br >
 <div align="start">
 
