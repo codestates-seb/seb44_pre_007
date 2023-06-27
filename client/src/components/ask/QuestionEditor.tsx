@@ -1,5 +1,5 @@
 import ReactQuill from 'react-quill';
-import { forwardRef, useEffect } from 'react';
+import { forwardRef } from 'react';
 import CustomToolbar from './QuillCustomTool';
 
 const AnswerEditor = forwardRef(
@@ -47,7 +47,7 @@ const AnswerEditor = forwardRef(
         <ReactQuill
           ref={ref}
           readOnly={disabled}
-          className="h-[168px]"
+          className="h-[300px]"
           modules={modules}
           formats={formats}
           value={text}
