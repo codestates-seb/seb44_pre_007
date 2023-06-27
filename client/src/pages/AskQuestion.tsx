@@ -2,13 +2,8 @@ import tw from 'tailwind-styled-components';
 import React, { useEffect, useRef, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import {
-  TitleSection,
-  ProblemSection,
-  EffortSection,
-  TagsSection,
-  ReviewSection,
-} from '../styles/askstyles';
+// eslint-disable-next-line object-curly-newline
+import { TitleSection, ProblemSection, TagsSection, ReviewSection } from '../styles/askstyles';
 import { AskBtn } from '../styles/styles';
 import QuestionNotice from '../components/ask/QuestionNotice';
 import QuestionEditor from '../components/ask/QuestionEditor';
@@ -29,13 +24,10 @@ const DiscardBtn = tw.button`
 function AskQuestion() {
   const [title, setTitle] = useState('');
   const [problem, setProblem] = useState<string>('');
-  const [effort, setEffort] = useState<string>('');
   const [tags, setTags] = useState<Set<string>>(new Set());
   const [step, setStep] = useState<number>(0);
   const problemRef = useRef<any>(null);
-  const effortRef = useRef<any>(null);
   const [problemDisabled, setProblemDisabled] = useState<boolean>(true);
-  const [effortDisabled, setEffortDisabled] = useState<boolean>(true);
   const [titleDisabled, setTitleDisabled] = useState<boolean>(true);
   const [tagsDisabled, setTagsDisabled] = useState<boolean>(true);
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,7 +45,7 @@ function AskQuestion() {
   });
   const HandleSubmitQuestion = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const contents = `${problem} \n${effort}`;
+    const contents = `${problem}`;
     mutation.mutate({ title, contents, tags: [...tags] });
   };
 
@@ -63,14 +55,9 @@ function AskQuestion() {
       description: 'Be specific and imagine you&apos;re asking a question to another person.',
     },
     {
-      title: 'What are the details of your problem?',
+      title: 'What are the details of your problem ? What did you try and what were you expecting?',
       description:
         ' Introduce the problem and expand on what you put in the title. Minimum 20 characters.',
-    },
-    {
-      title: 'What did you try and what were you expecting?',
-      description:
-        ' Describe what you tried, what you expected to happen, and what actually resulted. Minimum 20 characters.',
     },
     {
       title: 'Tags',
@@ -101,24 +88,12 @@ function AskQuestion() {
       current: { value },
     } = problemRef;
 
-    if (value === '' || value === '<p><br></p>') {
+    if (value === '' || value === '<p><br></p>' || value.length < 20) {
       setProblemDisabled(true);
     } else {
       setProblemDisabled(false);
     }
   }, [problem]);
-
-  useEffect(() => {
-    const {
-      current: { value },
-    } = effortRef;
-
-    if (value === '' || value === '<p><br></p>') {
-      setEffortDisabled(true);
-    } else {
-      setEffortDisabled(false);
-    }
-  }, [effort]);
 
   useEffect(() => {
     if (tags.size < 1) {
@@ -177,38 +152,20 @@ function AskQuestion() {
             />
           </div>
         </ProblemSection>
-        <EffortSection>
-          <div className="bg-white w-9/12 p-6 flex-col border border-[#E3E6E8]">
-            <AskDescriptionDiv
-              title={askDescription[2].title}
-              description={askDescription[2].description}
-            />
-            <QuestionEditor ref={effortRef} disabled={step < 2} text={effort} setText={setEffort} />
-            <NextBtn
-              disabled={effortDisabled}
-              callback={() => {
-                HandleToStep(2);
-              }}
-            />
-          </div>
-        </EffortSection>
         <TagsSection>
           <div className="bg-white w-9/12 p-6 border border-[#E3E6E8]">
             <div className="flex flex-col">
               <AskDescriptionDiv
-                title={askDescription[3].title}
-                description={askDescription[3].description}
+                title={askDescription[2].title}
+                description={askDescription[2].description}
               />
-              <Tags disabled={step < 3} tags={tags} setTags={setTags} edit={false} />
+              <Tags disabled={step < 2} tags={tags} setTags={setTags} edit={false} />
             </div>
           </div>
         </TagsSection>
         <ReviewSection>
           <div className="bg-white w-9/12 p-6 border border-[#E3E6E8]">
-            <AskBtn
-              type="submit"
-              disabled={titleDisabled || problemDisabled || effortDisabled || tagsDisabled}
-            >
+            <AskBtn type="submit" disabled={titleDisabled || problemDisabled || tagsDisabled}>
               Review your question
             </AskBtn>
           </div>

@@ -1,6 +1,6 @@
 /* eslint-disable object-curly-newline */
 import tw from 'tailwind-styled-components';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { TitleSection, ProblemSection, TagsSection, ReviewSection } from '../styles/askstyles';
@@ -24,9 +24,13 @@ function EditQuestion() {
   const [title, setTitle] = useState('');
   const [problem, setProblem] = useState<string>('');
   const [tags, setTags] = useState<Set<string>>(new Set());
-  const [step, setStep] = useState<number>(0);
+  const [step, setStep] = useState<number>(3);
   const questionId = useParams();
   const goToQue = useMovePage('/questions');
+  const bodyRef = useRef<any>(null);
+  const [problemDisabled, setProblemDisabled] = useState<boolean>(true);
+  const [titleDisabled, setTitleDisabled] = useState<boolean>(true);
+  const [tagsDisabled, setTagsDisabled] = useState<boolean>(true);
 
   const { isLoading, data, error } = useQuery({
     queryKey: ['question'],
@@ -43,6 +47,36 @@ function EditQuestion() {
       setTags(new Set(tagsArr));
     }
   }, [data]);
+
+  useEffect(() => {
+    if (bodyRef.current) {
+      const {
+        current: { value },
+      } = bodyRef;
+
+      if (value === '' || value === '<p><br></p>' || value.length < 20) {
+        setProblemDisabled(true);
+      } else {
+        setProblemDisabled(false);
+      }
+    }
+  }, [problem]);
+
+  useEffect(() => {
+    if (!title.trim().length) {
+      setTitleDisabled(true);
+    } else {
+      setTitleDisabled(false);
+    }
+  }, [title]);
+
+  useEffect(() => {
+    if (tags.size < 1) {
+      setTagsDisabled(true);
+    } else {
+      setTagsDisabled(false);
+    }
+  }, [tags]);
 
   const mutation = useMutation(PatchQuestionData, {
     onSuccess(res) {
@@ -98,7 +132,7 @@ function EditQuestion() {
               </div>
             </div>
             <NextBtn
-              disabled={!title.trim().length}
+              disabled={titleDisabled}
               callback={() => {
                 HandleToStep(0);
               }}
@@ -110,9 +144,9 @@ function EditQuestion() {
             <div className="flex flex-col my-[2px]">
               <div className="fw-semibold">Body</div>
             </div>
-            <QuestionEditor disabled={step < 1} text={problem} setText={setProblem} />
+            <QuestionEditor ref={bodyRef} disabled={step < 1} text={problem} setText={setProblem} />
             <NextBtn
-              disabled={!problem.trim().length}
+              disabled={problemDisabled}
               callback={() => {
                 HandleToStep(1);
               }}
@@ -132,7 +166,7 @@ function EditQuestion() {
               <Tags disabled={step < 2} tags={tags} setTags={setTags} edit />
             </div>
             <NextBtn
-              disabled={tags.size === 0}
+              disabled={tagsDisabled}
               callback={() => {
                 HandleToStep(2);
               }}
@@ -152,7 +186,9 @@ function EditQuestion() {
                 </div>
               </div>
             </div>
-            <AskBtn type="submit">Review your question</AskBtn>
+            <AskBtn type="submit" disabled={problemDisabled || titleDisabled || tagsDisabled}>
+              Review your question
+            </AskBtn>
           </div>
         </ReviewSection>
         <div className="w-full mt-3">
