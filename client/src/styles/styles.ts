@@ -26,6 +26,7 @@ export const TagSpan = styled.span`
   font-size: 12px;
   color: rgb(44, 88, 119);
   cursor: pointer;
+  min-width: fit-content;
 `;
 
 export const AskBtn = tw.button`
