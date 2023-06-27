@@ -12,7 +12,7 @@ import java.util.TimeZone;
 @SpringBootApplication
 public class ServerApplication {
 
-	//로컬시간 설정 추가
+	//로컬시간 설정(Asia/Seoul) 추가
 	@PostConstruct
 	public void started(){
 		TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));
