@@ -1,5 +1,5 @@
 import tw from 'tailwind-styled-components';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -32,7 +32,12 @@ function AskQuestion() {
   const [effort, setEffort] = useState<string>('');
   const [tags, setTags] = useState<Set<string>>(new Set());
   const [step, setStep] = useState<number>(0);
-
+  const problemRef = useRef<any>(null);
+  const effortRef = useRef<any>(null);
+  const [problemDisabled, setProblemDisabled] = useState<boolean>(true);
+  const [effortDisabled, setEffortDisabled] = useState<boolean>(true);
+  const [titleDisabled, setTitleDisabled] = useState<boolean>(true);
+  const [tagsDisabled, setTagsDisabled] = useState<boolean>(true);
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
@@ -83,6 +88,46 @@ function AskQuestion() {
     setStep(stepNum + 1);
   };
 
+  useEffect(() => {
+    if (!title.trim().length) {
+      setTitleDisabled(true);
+    } else {
+      setTitleDisabled(false);
+    }
+  }, [title]);
+
+  useEffect(() => {
+    const {
+      current: { value },
+    } = problemRef;
+
+    if (value === '' || value === '<p><br></p>') {
+      setProblemDisabled(true);
+    } else {
+      setProblemDisabled(false);
+    }
+  }, [problem]);
+
+  useEffect(() => {
+    const {
+      current: { value },
+    } = effortRef;
+
+    if (value === '' || value === '<p><br></p>') {
+      setEffortDisabled(true);
+    } else {
+      setEffortDisabled(false);
+    }
+  }, [effort]);
+
+  useEffect(() => {
+    if (tags.size < 1) {
+      setTagsDisabled(true);
+    } else {
+      setTagsDisabled(false);
+    }
+  }, [tags]);
+
   return (
     <div className="bg-[#F8F9F9] w-full px-6 pb-6">
       <QuestionNotice />
@@ -105,7 +150,7 @@ function AskQuestion() {
               </div>
             </div>
             <NextBtn
-              disabled={!title.trim().length}
+              disabled={titleDisabled}
               callback={() => {
                 HandleToStep(0);
               }}
@@ -113,14 +158,19 @@ function AskQuestion() {
           </div>
         </TitleSection>
         <ProblemSection>
-          <div className="bg-white w-9/12 p-6 flex-col border border-[#E3E6E8]">
+          <div className="bg-white w-9/12 p-6 flex-col border border-[#E3E6E8]}">
             <AskDescriptionDiv
               title={askDescription[1].title}
               description={askDescription[1].description}
             />
-            <QuestionEditor disabled={step < 1} text={problem} setText={setProblem} />
+            <QuestionEditor
+              ref={problemRef}
+              disabled={step < 1}
+              text={problem}
+              setText={setProblem}
+            />
             <NextBtn
-              disabled={!problem.trim().length}
+              disabled={problemDisabled}
               callback={() => {
                 HandleToStep(1);
               }}
@@ -133,9 +183,9 @@ function AskQuestion() {
               title={askDescription[2].title}
               description={askDescription[2].description}
             />
-            <QuestionEditor disabled={step < 2} text={effort} setText={setEffort} />
+            <QuestionEditor ref={effortRef} disabled={step < 2} text={effort} setText={setEffort} />
             <NextBtn
-              disabled={!effort.trim().length}
+              disabled={effortDisabled}
               callback={() => {
                 HandleToStep(2);
               }}
@@ -151,17 +201,14 @@ function AskQuestion() {
               />
               <Tags disabled={step < 3} tags={tags} setTags={setTags} edit={false} />
             </div>
-            <NextBtn
-              disabled={tags.size === 0}
-              callback={() => {
-                HandleToStep(3);
-              }}
-            />
           </div>
         </TagsSection>
         <ReviewSection>
           <div className="bg-white w-9/12 p-6 border border-[#E3E6E8]">
-            <AskBtn type="submit" disabled={step < 4}>
+            <AskBtn
+              type="submit"
+              disabled={titleDisabled || problemDisabled || effortDisabled || tagsDisabled}
+            >
               Review your question
             </AskBtn>
           </div>
