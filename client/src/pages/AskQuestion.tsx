@@ -2,6 +2,7 @@ import tw from 'tailwind-styled-components';
 import React, { useEffect, useRef, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
+// eslint-disable-next-line object-curly-newline
 import { TitleSection, ProblemSection, TagsSection, ReviewSection } from '../styles/askstyles';
 import { AskBtn } from '../styles/styles';
 import QuestionNotice from '../components/ask/QuestionNotice';
