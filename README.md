@@ -11,7 +11,7 @@
 
 <br>
 <br>
-http://stackoverflow007.s3-website.ap-northeast-2.amazonaws.com/
+http://stackoverflow-007.s3-website.ap-northeast-2.amazonaws.com/
 <br>
 <br>
 <br>
@@ -68,12 +68,14 @@ http://stackoverflow007.s3-website.ap-northeast-2.amazonaws.com/
 
 # 📄 Pages
 
-<br /><image width="800" src="https://github.com/codestates-seb/seb44_pre_007/assets/122351417/53fbf280-fbd5-4eca-a06f-31b62a37aec6">
-<br /><image width="800" src="https://github.com/codestates-seb/seb44_pre_007/assets/122351417/4c12c232-b36c-4df4-8016-dc794bf56e4b">
-<br /><image width="800" src="https://github.com/codestates-seb/seb44_pre_007/assets/122351417/a8453eaa-81e3-4e5e-9320-4dd58653efcb">
-<br /><image width="800" src="https://github.com/codestates-seb/seb44_pre_007/assets/122351417/27460fd2-9dab-4b97-abd1-c5b48e25249d">
-<br /><image width="800" src="https://github.com/codestates-seb/seb44_pre_007/assets/122351417/137e78ff-47ef-4c9b-b803-8861caeae5dc">
-<br /><image width="800" src="https://github.com/codestates-seb/seb44_pre_007/assets/122351417/83276a47-037f-4398-9f0a-ae181c3bb1ce">
+<br /><image width="800" src="https://github.com/codestates-seb/seb44_pre_007/assets/122351417/15457046-4b3b-4b7f-937d-85d980631858">
+<br /><image width="800" src="https://github.com/codestates-seb/seb44_pre_007/assets/122351417/295c6903-81c4-4b59-93fa-0ff49c8aace4">
+<br /><image width="800" src="https://github.com/codestates-seb/seb44_pre_007/assets/122351417/73c6484a-5977-4126-b911-7bd6cccbf6c4">
+<br /><image width="800" src="https://github.com/codestates-seb/seb44_pre_007/assets/122351417/0c07f54c-b5de-4306-82c2-53d1c9fa49a1">
+<br /><image width="800" src="https://github.com/codestates-seb/seb44_pre_007/assets/122351417/32548b2b-e1d1-4d25-8e6c-3d47d7a89596">
+<br /><image width="800" src="https://github.com/codestates-seb/seb44_pre_007/assets/122351417/d33095e6-7a0d-4b26-8ace-5d9830529b6a">
+<br /><image width="800" src="https://github.com/codestates-seb/seb44_pre_007/assets/122351417/f5b3580b-2efe-4476-94a4-c767fdb79b59">
+
 
 <div align="center">
   
